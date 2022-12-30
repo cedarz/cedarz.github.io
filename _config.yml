@@ -151,6 +151,13 @@ theme_config:
     post_views_icon: fa fa-eye
 
 
+excerpt:
+  depth: 2
+  excerpt_excludes: []
+  more_excludes: []
+  hideWholePostExcerpts: true
+  
+
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
