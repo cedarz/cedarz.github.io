@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="人脸关键点使用Google的人脸检测工具MediaPipe来做人脸关键点的检测，根据Face Mesh Detection with Python and OpenCV安装并可视化关键点。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="利用人脸检测关键点简单分割合并操作">
+<meta property="og:url" content="http://example.com/2025/02/14/%E5%88%A9%E7%94%A8%E4%BA%BA%E8%84%B8%E6%A3%80%E6%B5%8B%E5%85%B3%E9%94%AE%E7%82%B9%E7%AE%80%E5%8D%95%E5%88%86%E5%89%B2%E5%90%88%E5%B9%B6%E6%93%8D%E4%BD%9C/index.html">
+<meta property="og:site_name" content="Integrator">
+<meta property="og:description" content="人脸关键点使用Google的人脸检测工具MediaPipe来做人脸关键点的检测，根据Face Mesh Detection with Python and OpenCV安装并可视化关键点。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-02-14T00:00:00.000Z">
+<meta property="article:modified_time" content="2025-02-14T09:48:56.344Z">
+<meta property="article:author" content="cedarz">
+<meta property="article:tag" content="opencv">
+<meta property="article:tag" content="python">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2025/02/14/%E5%88%A9%E7%94%A8%E4%BA%BA%E8%84%B8%E6%A3%80%E6%B5%8B%E5%85%B3%E9%94%AE%E7%82%B9%E7%AE%80%E5%8D%95%E5%88%86%E5%89%B2%E5%90%88%E5%B9%B6%E6%93%8D%E4%BD%9C/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>利用人脸检测关键点简单分割合并操作 | Integrator</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Integrator</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/02/14/%E5%88%A9%E7%94%A8%E4%BA%BA%E8%84%B8%E6%A3%80%E6%B5%8B%E5%85%B3%E9%94%AE%E7%82%B9%E7%AE%80%E5%8D%95%E5%88%86%E5%89%B2%E5%90%88%E5%B9%B6%E6%93%8D%E4%BD%9C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="cedarz">
+      <meta itemprop="description" content="活着就要继续前进">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Integrator">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          利用人脸检测关键点简单分割合并操作
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2025-02-14 00:00:00 / 修改时间：09:48:56" itemprop="dateCreated datePublished" datetime="2025-02-14T00:00:00+00:00">2025-02-14</time>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="人脸关键点"><a href="#人脸关键点" class="headerlink" title="人脸关键点"></a>人脸关键点</h1><p>使用Google的人脸检测工具MediaPipe来做人脸关键点的检测，根据<a target="_blank" rel="noopener" href="https://python.plainenglish.io/face-mesh-detection-with-python-and-opencv-complete-project-359d81d6a712">Face Mesh Detection with Python and OpenCV</a>安装并可视化关键点。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> mediapipe <span class="keyword">as</span> mp</span><br><span class="line"> </span><br><span class="line"><span class="comment">#Face Mesh</span></span><br><span class="line"> </span><br><span class="line">mp_face_mesh = mp.solutions.face_mesh</span><br><span class="line">face_mesh = mp_face_mesh.FaceMesh()</span><br><span class="line"> </span><br><span class="line"><span class="comment">#Image</span></span><br><span class="line"> </span><br><span class="line">image = cv2.imread(<span class="string">&quot;/home/python/OpenCV/faceMash/image1.jpg&quot;</span>)</span><br><span class="line">height, width, _ = image.shape</span><br><span class="line">rgb_image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)</span><br><span class="line"> </span><br><span class="line"><span class="comment">#Facial landmarks</span></span><br><span class="line">result = face_mesh.process(image)</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="keyword">for</span> facial_landmarks <span class="keyword">in</span> result.multi_face_landmarks:</span><br><span class="line">   <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="number">468</span>):</span><br><span class="line">      </span><br><span class="line">       pt1 = facial_landmarks.landmark[i]</span><br><span class="line">       x = <span class="built_in">int</span>(pt1.x * width)</span><br><span class="line">       y = <span class="built_in">int</span>(pt1.y * height)</span><br><span class="line">      </span><br><span class="line">       cv2.circle(image, (x,y), <span class="number">2</span>, (<span class="number">100</span>,<span class="number">100</span>,<span class="number">0</span>), -<span class="number">1</span>)</span><br><span class="line">       <span class="comment">#cv2.putText(image, str(i), (x,y), 0,1,(0,0,0))</span></span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">cv2.imshow(<span class="string">&quot;Face Mesh detection&quot;</span>, image)</span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://ai.google.dev/edge/mediapipe/solutions/vision/face_landmarker?hl=zh-cn">人脸特征点检测指南</a>给出了人脸关键点landmarks序列的序号分布，可以通过关键点的序号粗略圈出感兴趣范围。</p>
+<p>比如眉毛大致范围：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 左下角，逆时针</span><br><span class="line">left_eye = [46, 53, 52, 65, 55, 107, 66, 105, 63, 70]</span><br><span class="line"># 右下角，顺时针</span><br><span class="line">right_eye =  [276, 283, 282, 295, 285, 336, 296, 334, 293, 300]</span><br></pre></td></tr></table></figure>
+
+<h1 id="同样大小图片的同一范围做mask以及合并操作"><a href="#同样大小图片的同一范围做mask以及合并操作" class="headerlink" title="同样大小图片的同一范围做mask以及合并操作"></a>同样大小图片的同一范围做mask以及合并操作</h1><ol>
+<li>使用opencv的cv2.drawContours生成mask遮罩</li>
+<li>使用numpy的位操作<code>numpy.invert</code>、<code>numpy.bitwist_and</code>、<code>numpy.bitwist_or</code>，能够很方便的完成图片的分割、取反以及合并操作</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> mediapipe <span class="keyword">as</span> mp</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"> </span><br><span class="line"><span class="comment">#Face Mesh</span></span><br><span class="line"> </span><br><span class="line">mp_face_mesh = mp.solutions.face_mesh</span><br><span class="line">face_mesh = mp_face_mesh.FaceMesh()</span><br><span class="line"> </span><br><span class="line"><span class="comment">#Image</span></span><br><span class="line"> </span><br><span class="line">image = cv2.imread(<span class="string">&quot;faceinput.png&quot;</span>)</span><br><span class="line">height, width, _ = image.shape</span><br><span class="line">rgb_image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)</span><br><span class="line"> </span><br><span class="line"><span class="comment">#Facial landmarks</span></span><br><span class="line">result = face_mesh.process(image)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 左下角，逆时针</span></span><br><span class="line">left_eye = [<span class="number">46</span>, <span class="number">53</span>, <span class="number">52</span>, <span class="number">65</span>, <span class="number">55</span>, <span class="number">107</span>, <span class="number">66</span>, <span class="number">105</span>, <span class="number">63</span>, <span class="number">70</span>]</span><br><span class="line"><span class="comment"># 右下角，顺时针</span></span><br><span class="line">right_eye =  [<span class="number">276</span>, <span class="number">283</span>, <span class="number">282</span>, <span class="number">295</span>, <span class="number">285</span>, <span class="number">336</span>, <span class="number">296</span>, <span class="number">334</span>, <span class="number">293</span>, <span class="number">300</span>]</span><br><span class="line"></span><br><span class="line">left_pts = [[]]</span><br><span class="line">right_pts = [[]]</span><br><span class="line"><span class="keyword">for</span> facial_landmarks <span class="keyword">in</span> result.multi_face_landmarks:</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="number">468</span>):</span><br><span class="line">      </span><br><span class="line">        <span class="keyword">if</span> i <span class="keyword">in</span> right_eye <span class="keyword">or</span> i <span class="keyword">in</span> left_eye:</span><br><span class="line">            pt1 = facial_landmarks.landmark[i]</span><br><span class="line">            x = <span class="built_in">int</span>(pt1.x * width)</span><br><span class="line">            y = <span class="built_in">int</span>(pt1.y * height)</span><br><span class="line"></span><br><span class="line">            cv2.circle(image, (x,y), <span class="number">2</span>, (<span class="number">100</span>,<span class="number">100</span>,<span class="number">0</span>), -<span class="number">1</span>)</span><br><span class="line">            <span class="comment">#cv2.putText(image, str(i), (x,y), 0,1,(0,0,0))</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> left_eye:</span><br><span class="line">        pt1 = facial_landmarks.landmark[i]</span><br><span class="line">        x = <span class="built_in">int</span>(pt1.x * width)</span><br><span class="line">        y = <span class="built_in">int</span>(pt1.y * height)</span><br><span class="line">        left_pts[<span class="number">0</span>].append([x, y])</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> right_eye:</span><br><span class="line">        pt1 = facial_landmarks.landmark[i]</span><br><span class="line">        x = <span class="built_in">int</span>(pt1.x * width)</span><br><span class="line">        y = <span class="built_in">int</span>(pt1.y * height)</span><br><span class="line">        right_pts[<span class="number">0</span>].append([x, y])</span><br><span class="line"></span><br><span class="line">grayscaleImage = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)</span><br><span class="line">grayscaleImage = cv2.cvtColor(grayscaleImage, cv2.COLOR_GRAY2BGR)</span><br><span class="line">maskImage = np.zeros_like(image)</span><br><span class="line">cv2.drawContours(maskImage, np.array(left_pts), <span class="number">0</span>, (<span class="number">255</span>, <span class="number">255</span>, <span class="number">255</span>), -<span class="number">1</span>)</span><br><span class="line">cv2.drawContours(maskImage, np.array(right_pts), <span class="number">0</span>, (<span class="number">255</span>, <span class="number">255</span>, <span class="number">255</span>), -<span class="number">1</span>)</span><br><span class="line">extractedImage=np.bitwise_and(grayscaleImage, maskImage)</span><br><span class="line"></span><br><span class="line"><span class="comment"># gray image</span></span><br><span class="line"><span class="comment"># maskImage = np.zeros_like(grayscaleImage)</span></span><br><span class="line"><span class="comment"># cv2.drawContours(maskImage, np.array(left_pts), 0, 255, -1)</span></span><br><span class="line"><span class="comment"># cv2.drawContours(maskImage, np.array(right_pts), 0, 255, -1)</span></span><br><span class="line"><span class="comment"># extractedImage=np.bitwise_and(grayscaleImage, maskImage)</span></span><br><span class="line"></span><br><span class="line">invert_maskImage = np.invert(maskImage)</span><br><span class="line">other = cv2.imread(<span class="string">&quot;face2.png&quot;</span>)</span><br><span class="line"><span class="comment"># other_grayscaleImage = cv2.cvtColor(other, cv2.COLOR_BGR2GRAY)</span></span><br><span class="line">extractedOther = np.bitwise_and(other, invert_maskImage)</span><br><span class="line"></span><br><span class="line">res = np.bitwise_or(extractedImage, extractedOther)</span><br><span class="line"></span><br><span class="line"><span class="comment"># cv2.imwrite(&quot;res.png&quot;, res)</span></span><br><span class="line">cv2.imshow(<span class="string">&quot;Face Mesh detection&quot;</span>, extractedImage)</span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul>
+<li><a target="_blank" rel="noopener" href="https://python.plainenglish.io/face-mesh-detection-with-python-and-opencv-complete-project-359d81d6a712">Face Mesh Detection with Python and OpenCV — Complete Project</a></li>
+<li><a target="_blank" rel="noopener" href="https://ai.google.dev/edge/mediapipe/solutions/vision/face_landmarker?hl=zh-cn">人脸特征点检测指南</a></li>
+<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/15403580/extracting-a-subimage-in-shape-of-a-polygon">extracting a subimage in shape of a polygon</a></li>
+<li><a target="_blank" rel="noopener" href="https://numpy.org/doc/2.1/reference/routines.bitwise.html">Bit-wise operations</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/opencv/" rel="tag"># opencv</a>
+              <a href="/tags/python/" rel="tag"># python</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/12/24/%E6%B5%8B%E8%AF%95/" rel="prev" title="测试">
+      <i class="fa fa-chevron-left"></i> 测试
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%BA%E8%84%B8%E5%85%B3%E9%94%AE%E7%82%B9"><span class="nav-number">1.</span> <span class="nav-text">人脸关键点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%90%8C%E6%A0%B7%E5%A4%A7%E5%B0%8F%E5%9B%BE%E7%89%87%E7%9A%84%E5%90%8C%E4%B8%80%E8%8C%83%E5%9B%B4%E5%81%9Amask%E4%BB%A5%E5%8F%8A%E5%90%88%E5%B9%B6%E6%93%8D%E4%BD%9C"><span class="nav-number">2.</span> <span class="nav-text">同样大小图片的同一范围做mask以及合并操作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">3.</span> <span class="nav-text">参考</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">cedarz</p>
+  <div class="site-description" itemprop="description">活着就要继续前进</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">cedarz</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
