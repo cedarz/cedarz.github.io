@@ -1,6 +1,8 @@
 ---
 title: Hexo-Next搭建记录
 date: 2022-12-24 22:53:34
+categories:
+- Hexo-Next
 tags: 
 - Hexo
 - Next
