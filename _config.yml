@@ -96,6 +96,9 @@ ignore:
 
 # Extensions
 ## Plugins: https://hexo.io/plugins/
+plugins:
+  - hexo-reference
+
 ## Themes: https://hexo.io/themes/
 # theme: landscape
 theme: next
@@ -142,7 +145,7 @@ theme_config:
   # Show Views / Visitors of the website / page with busuanzi.
   # Get more information on http://ibruce.info/2015/04/04/busuanzi
   busuanzi_count:
-    enable: enacble
+    enable: false
     total_visitors: true
     total_visitors_icon: fa fa-user
     total_views: true
