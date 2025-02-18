@@ -92,7 +92,7 @@ jobs:
 ``` bash
 git clone https://github.com/next-theme/hexo-theme-next themes/next
 ```
-但是，我将hexo-theme-next作为submodule使用，则需要在GitHub Action配置文件中需要额外添加submoudle的配置，否则GitHub CD中不能正确下载主题，也就无法正确主页文件了。我在这一块花费了一些时间。
+但是，我将hexo-theme-next作为submodule使用，则需要在GitHub Action配置文件中需要额外添加submoudle的配置，否则GitHub CD中不能正确下载主题，也就无法正确生成主页文件了。我在这一块花费了一些时间。
 ``` yml
         with:
           submodules: true 
@@ -104,4 +104,4 @@ git clone https://github.com/next-theme/hexo-theme-next themes/next
 
 8. 结语
 > Hexo、NexT文档详尽，按照以上操作，恭喜你，你已经拥有一个属于自己的个人主页了。但是，要配置出一个更有逼格更符合个人审美要求的主页，就要多了解NexT的配置了。
-> 开启写作之旅吧～～
+> 查阅[Hexo writing](https://hexo.io/docs/writing)开启写作之旅吧～～
