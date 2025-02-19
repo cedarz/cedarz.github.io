@@ -44,7 +44,7 @@ OpenGL中compatibility和profile是两个不同的概念，设置了Forward comp
 
 这也解释了为啥`glLineWidth`在前向兼容模式线没作用了，不过是在硬件支持wideline的前提下。
 
-![glfw3-forward-compatibility](/images/glfw3-forward-compatibility.png) 图片来自[Backward and Forward Compatibilities](https://medium.com/@wangberlin2000/backward-and-forward-compatibilities-a71e52683627)
+![glfw3-forward-compatibility](../images/glfw3-forward-compatibility.png) 图片来自[Backward and Forward Compatibilities](https://medium.com/@wangberlin2000/backward-and-forward-compatibilities-a71e52683627)
 
 
 其他窗口系统也有类似的字段设置，比如WGL的`WGL_CONTEXT_FORWARD_COMPATIBLE_BIT_ARB`和`WGL_CONTEXT_CORE_PROFILE_BIT_ARB`，大同小异，都是映射到OpenGL上下文的相应配置。
