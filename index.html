@@ -162,7 +162,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2025/02/19/OpenGL%20Context%E5%88%9B%E5%BB%BA%E6%97%B6%E9%9C%80%E8%A6%81%E8%AE%BE%E7%BD%AE%E7%9A%84%E4%B8%80%E4%BA%9B%E5%AD%97%E6%AE%B5/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/02/19/OpenGL-Context%E5%88%9B%E5%BB%BA%E6%97%B6%E9%9C%80%E8%A6%81%E8%AE%BE%E7%BD%AE%E7%9A%84%E4%B8%80%E4%BA%9B%E5%AD%97%E6%AE%B5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -176,7 +176,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2025/02/19/OpenGL%20Context%E5%88%9B%E5%BB%BA%E6%97%B6%E9%9C%80%E8%A6%81%E8%AE%BE%E7%BD%AE%E7%9A%84%E4%B8%80%E4%BA%9B%E5%AD%97%E6%AE%B5/" class="post-title-link" itemprop="url">OpenGL Context创建时需要设置的一些字段</a>
+            <a href="/2025/02/19/OpenGL-Context%E5%88%9B%E5%BB%BA%E6%97%B6%E9%9C%80%E8%A6%81%E8%AE%BE%E7%BD%AE%E7%9A%84%E4%B8%80%E4%BA%9B%E5%AD%97%E6%AE%B5/" class="post-title-link" itemprop="url">OpenGL Context创建时需要设置的一些字段</a>
         </h2>
 
         <div class="post-meta">
@@ -187,7 +187,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2025-02-19 09:52:31 / 修改时间：15:00:50" itemprop="dateCreated datePublished" datetime="2025-02-19T09:52:31+00:00">2025-02-19</time>
+              <time title="创建时间：2025-02-19 09:52:31 / 修改时间：15:27:55" itemprop="dateCreated datePublished" datetime="2025-02-19T09:52:31+00:00">2025-02-19</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -219,7 +219,7 @@
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">glfwWindowHint</span>(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);</span><br><span class="line"><span class="comment">// glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GLFW_TRUE);</span></span><br><span class="line"><span class="built_in">glfwWindowHint</span>(GLFW_CONTEXT_VERSION_MAJOR, <span class="number">4</span>);</span><br><span class="line"><span class="built_in">glfwWindowHint</span>(GLFW_CONTEXT_VERSION_MINOR, <span class="number">6</span>);</span><br><span class="line"><span class="built_in">glfwWindowHint</span>(GLFW_SAMPLES, <span class="number">4</span>);</span><br><span class="line"><span class="built_in">glfwWindowHint</span>(GLFW_SCALE_TO_MONITOR, GLFW_TRUE);</span><br><span class="line"></span><br><span class="line">std::cout &lt;&lt; <span class="string">&quot;Vendor  &quot;</span> &lt;&lt; <span class="built_in">glGetString</span>(GL_VENDOR) &lt;&lt; std::endl;</span><br><span class="line">std::cout &lt;&lt; <span class="string">&quot;Render  &quot;</span> &lt;&lt; <span class="built_in">glGetString</span>(GL_RENDERER) &lt;&lt; std::endl;</span><br><span class="line">std::cout &lt;&lt; <span class="string">&quot;GL      &quot;</span> &lt;&lt; <span class="built_in">glGetString</span>(GL_VERSION) &lt;&lt; std::endl;</span><br><span class="line">std::cout &lt;&lt; <span class="string">&quot;GLSL    &quot;</span> &lt;&lt; <span class="built_in">glGetString</span>(GL_SHADING_LANGUAGE_VERSION) &lt;&lt; std::endl;</span><br><span class="line">GLint profile;</span><br><span class="line"><span class="built_in">glGetIntegerv</span>(GL_CONTEXT_PROFILE_MASK, &amp;profile);</span><br><span class="line">std::cout &lt;&lt; <span class="string">&quot;Profile &quot;</span> &lt;&lt; (profile &amp; GL_CONTEXT_CORE_PROFILE_BIT ? <span class="string">&quot;Core&quot;</span> : <span class="string">&quot;Compatibility&quot;</span>) &lt;&lt; std::endl;</span><br></pre></td></tr></table></figure>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2025/02/19/OpenGL%20Context%E5%88%9B%E5%BB%BA%E6%97%B6%E9%9C%80%E8%A6%81%E8%AE%BE%E7%BD%AE%E7%9A%84%E4%B8%80%E4%BA%9B%E5%AD%97%E6%AE%B5/#more" rel="contents">
+              <a class="btn" href="/2025/02/19/OpenGL-Context%E5%88%9B%E5%BB%BA%E6%97%B6%E9%9C%80%E8%A6%81%E8%AE%BE%E7%BD%AE%E7%9A%84%E4%B8%80%E4%BA%9B%E5%AD%97%E6%AE%B5/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -274,7 +274,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-02-19 15:00:50" itemprop="dateModified" datetime="2025-02-19T15:00:50+00:00">2025-02-19</time>
+                <time title="修改时间：2025-02-19 15:27:55" itemprop="dateModified" datetime="2025-02-19T15:27:55+00:00">2025-02-19</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -363,7 +363,7 @@ a:not(.btn)避免修改首页的”阅读全文”按钮的样式</li>
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-02-19 15:00:50" itemprop="dateModified" datetime="2025-02-19T15:00:50+00:00">2025-02-19</time>
+                <time title="修改时间：2025-02-19 15:27:55" itemprop="dateModified" datetime="2025-02-19T15:27:55+00:00">2025-02-19</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -564,7 +564,7 @@ a:not(.btn)避免修改首页的”阅读全文”按钮的样式</li>
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-02-19 15:00:50" itemprop="dateModified" datetime="2025-02-19T15:00:50+00:00">2025-02-19</time>
+                <time title="修改时间：2025-02-19 15:27:55" itemprop="dateModified" datetime="2025-02-19T15:27:55+00:00">2025-02-19</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -637,7 +637,7 @@ a:not(.btn)避免修改首页的”阅读全文”按钮的样式</li>
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-02-19 15:00:50" itemprop="dateModified" datetime="2025-02-19T15:00:50+00:00">2025-02-19</time>
+                <time title="修改时间：2025-02-19 15:27:55" itemprop="dateModified" datetime="2025-02-19T15:27:55+00:00">2025-02-19</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -727,7 +727,7 @@ a:not(.btn)避免修改首页的”阅读全文”按钮的样式</li>
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-02-19 15:00:50" itemprop="dateModified" datetime="2025-02-19T15:00:50+00:00">2025-02-19</time>
+                <time title="修改时间：2025-02-19 15:27:55" itemprop="dateModified" datetime="2025-02-19T15:27:55+00:00">2025-02-19</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -853,7 +853,7 @@ a:not(.btn)避免修改首页的”阅读全文”按钮的样式</li>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
