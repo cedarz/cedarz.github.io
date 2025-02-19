@@ -8,5 +8,4 @@ vendor/
 .DS_Store
 public/
 node_modules/
-db.json
 package-lock.json
