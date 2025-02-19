@@ -120,11 +120,6 @@
     <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
 
   </li>
-        <li class="menu-item menu-item-about">
-
-    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
-
-  </li>
         <li class="menu-item menu-item-tags">
 
     <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
@@ -133,6 +128,11 @@
         <li class="menu-item menu-item-categories">
 
     <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
 
   </li>
   </ul>
@@ -187,7 +187,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2025-02-19 09:52:31 / 修改时间：07:13:57" itemprop="dateCreated datePublished" datetime="2025-02-19T09:52:31+00:00">2025-02-19</time>
+              <time title="创建时间：2025-02-19 09:52:31 / 修改时间：07:39:04" itemprop="dateCreated datePublished" datetime="2025-02-19T09:52:31+00:00">2025-02-19</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -215,6 +215,8 @@
 
       
           <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>OpenGL目前的最新版本是2017年发布的4.6版本，OpenGL老矣也不会再有更新了。尽管OpenGL是一套简单易用的图形API，但是很明显它并没有紧跟图形技术发展的脉搏，不仅仅落后于同时代的DirectX，其自身标准的取舍也使其变的碎片化。模式和兼容性就是其中恶心的一点，本文便是记录GLFW3在创建OpenGL上下文时设置模式和兼容性所设置的一些字段。</p>
+<p>以前用GLFW3和OpenGL做一些demo时候，<code>glfwWindowHint</code>随意复制粘贴一下然后设置一下OpenGL Context的版本和Profile即可，并没有过多理会其他的字段的含义和差别。毕竟使用<code>Modern OpenGL</code>或者<code>Core Profile</code>的OpenGL，并不需要在意兼容模式下大量的固定管线API的功能。但是，当实际使用中涉及到了<code>glLineWidth</code>这种从上古时代OpenGL 2.0时期延续至今并在OpenGL 4.6中Deprecated的API，更骚气的是其能不能work还要取决于硬件能力和驱动实现，多重buff于一身，某些字段的设置开始变的微妙起来了。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">glfwWindowHint</span>(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);</span><br><span class="line"><span class="comment">// glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GLFW_TRUE);</span></span><br><span class="line"><span class="built_in">glfwWindowHint</span>(GLFW_CONTEXT_VERSION_MAJOR, <span class="number">4</span>);</span><br><span class="line"><span class="built_in">glfwWindowHint</span>(GLFW_CONTEXT_VERSION_MINOR, <span class="number">6</span>);</span><br><span class="line"><span class="built_in">glfwWindowHint</span>(GLFW_SAMPLES, <span class="number">4</span>);</span><br><span class="line"><span class="built_in">glfwWindowHint</span>(GLFW_SCALE_TO_MONITOR, GLFW_TRUE);</span><br><span class="line"></span><br><span class="line">std::cout &lt;&lt; <span class="string">&quot;Vendor  &quot;</span> &lt;&lt; <span class="built_in">glGetString</span>(GL_VENDOR) &lt;&lt; std::endl;</span><br><span class="line">std::cout &lt;&lt; <span class="string">&quot;Render  &quot;</span> &lt;&lt; <span class="built_in">glGetString</span>(GL_RENDERER) &lt;&lt; std::endl;</span><br><span class="line">std::cout &lt;&lt; <span class="string">&quot;GL      &quot;</span> &lt;&lt; <span class="built_in">glGetString</span>(GL_VERSION) &lt;&lt; std::endl;</span><br><span class="line">std::cout &lt;&lt; <span class="string">&quot;GLSL    &quot;</span> &lt;&lt; <span class="built_in">glGetString</span>(GL_SHADING_LANGUAGE_VERSION) &lt;&lt; std::endl;</span><br><span class="line">GLint profile;</span><br><span class="line"><span class="built_in">glGetIntegerv</span>(GL_CONTEXT_PROFILE_MASK, &amp;profile);</span><br><span class="line">std::cout &lt;&lt; <span class="string">&quot;Profile &quot;</span> &lt;&lt; (profile &amp; GL_CONTEXT_CORE_PROFILE_BIT ? <span class="string">&quot;Core&quot;</span> : <span class="string">&quot;Compatibility&quot;</span>) &lt;&lt; std::endl;</span><br></pre></td></tr></table></figure>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2025/02/19/OpenGL%20Context%E5%88%9B%E5%BB%BA%E6%97%B6%E9%9C%80%E8%A6%81%E8%AE%BE%E7%BD%AE%E7%9A%84%E4%B8%80%E4%BA%9B%E5%AD%97%E6%AE%B5/#more" rel="contents">
@@ -272,7 +274,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-02-19 07:13:57" itemprop="dateModified" datetime="2025-02-19T07:13:57+00:00">2025-02-19</time>
+                <time title="修改时间：2025-02-19 07:39:04" itemprop="dateModified" datetime="2025-02-19T07:39:04+00:00">2025-02-19</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -296,6 +298,14 @@
 
       
           <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>收录经过整合和验证的Hexo-Next配置方案，主要内容来自于网络技术文章，并给出出处，感谢网络大佬们的分享~</p>
+<ol>
+<li>修改超链接颜色</li>
+</ol>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blackchy.com/2019/09/30/2019-09-30-Hexo-Next-Link-Color/">Hexo Next 修改超链接颜色</a></li>
+<li><a target="_blank" rel="noopener" href="https://maoao530.github.io/2017/01/25/hexo-blog-seo/">Hexo Next博客优化</a><br>在.&#x2F;themes&#x2F;next&#x2F;source&#x2F;css&#x2F;_custom&#x2F;custom.styl里添加如下代码<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.post-body</span> <span class="selector-tag">a</span><span class="selector-pseudo">:not</span>(<span class="selector-class">.btn</span>)&#123;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#0593d3</span>;</span><br><span class="line">  <span class="attribute">border-bottom</span>: none;</span><br><span class="line">  &amp;<span class="selector-pseudo">:hover</span> &#123;</span><br><span class="line">    <span class="attribute">color</span>: <span class="number">#0477ab</span>;</span><br><span class="line">    <span class="attribute">text-decoration</span>: underline;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+a:not(.btn)避免修改首页的”阅读全文”按钮的样式</li>
+</ul>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2025/02/18/Hexo-Next%E6%A0%B7%E5%BC%8F%E7%BE%8E%E5%8C%96/#more" rel="contents">
@@ -353,7 +363,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-02-19 07:13:57" itemprop="dateModified" datetime="2025-02-19T07:13:57+00:00">2025-02-19</time>
+                <time title="修改时间：2025-02-19 07:39:04" itemprop="dateModified" datetime="2025-02-19T07:39:04+00:00">2025-02-19</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -380,7 +390,41 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="渲染API对于线渲染的支持"><a href="#渲染API对于线渲染的支持" class="headerlink" title="渲染API对于线渲染的支持"></a>渲染API对于线渲染的支持</h1>
+          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="渲染API对于线渲染的支持"><a href="#渲染API对于线渲染的支持" class="headerlink" title="渲染API对于线渲染的支持"></a>渲染API对于线渲染的支持</h1><table>
+<thead>
+<tr>
+<th></th>
+<th>wireframe</th>
+<th>line mode</th>
+<th>line width</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>OpenGL</td>
+<td>glPolygonMode(GL_FRONT_AND_BACK, GL_LINE)</td>
+<td>glDrawArrays: GL_LINES&#x2F;GL_LINE_STRIP&#x2F;GL_LINE_LOOP</td>
+<td>glLineWidth</td>
+</tr>
+<tr>
+<td>Vulkan</td>
+<td>VkPipelineRasterizationStateCreateInfo&#x2F;VK_POLYGON_MODE_LINE</td>
+<td>VkPipelineInputAssemblyStateCreateInfo: VK_PRIMITIVE_TOPOLOGY_LINE_LIST&#x2F;VK_PRIMITIVE_TOPOLOGY_LINE_STRIP</td>
+<td><a target="_blank" rel="noopener" href="https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetLineWidth.html">vkCmdSetLineWidth</a>, VkPipelineRasterizationStateCreateInfo::lineWidth</td>
+</tr>
+<tr>
+<td>DirectX 11</td>
+<td>D3D11_RASTERIZER_DESC&#x2F;D3D11_FILL_WIREFRAME</td>
+<td>IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_LINELIST)</td>
+<td></td>
+</tr>
+<tr>
+<td>DirectX 12</td>
+<td>D3D12_GRAPHICS_PIPELINE_STATE_DESC&#x2F;D3D12_FILL_WIREFRAME</td>
+<td>D3D12_GRAPHICS_PIPELINE_STATE_DESC&#x2F;D3D12_PRIMITIVE_TOPOLOGY_TYPE_LINE, IASetPrimitiveTopology(D3D12_PRIMITIVE_TOPOLOGY_LINELIST)</td>
+<td></td>
+</tr>
+</tbody></table>
+<p>glLineWidth的<a target="_blank" rel="noopener" href="https://registry.khronos.org/OpenGL-Refpages/gl4/html/glLineWidth.xhtml">文档</a>中说只保证宽度1的设置，其他宽度依赖硬件实现。</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2025/02/17/Render-line/#more" rel="contents">
@@ -461,7 +505,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="人脸关键点"><a href="#人脸关键点" class="headerlink" title="人脸关键点"></a>人脸关键点</h1>
+          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="人脸关键点"><a href="#人脸关键点" class="headerlink" title="人脸关键点"></a>人脸关键点</h1><p>使用Google的人脸检测工具MediaPipe来做人脸关键点的检测，可以按照<a target="_blank" rel="noopener" href="https://python.plainenglish.io/face-mesh-detection-with-python-and-opencv-complete-project-359d81d6a712">Face Mesh Detection with Python and OpenCV</a>的操作安装MediaPipe并可视化关键点。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> mediapipe <span class="keyword">as</span> mp</span><br><span class="line"> </span><br><span class="line"><span class="comment">#Face Mesh</span></span><br><span class="line"> </span><br><span class="line">mp_face_mesh = mp.solutions.face_mesh</span><br><span class="line">face_mesh = mp_face_mesh.FaceMesh()</span><br><span class="line"> </span><br><span class="line"><span class="comment">#Image</span></span><br><span class="line"> </span><br><span class="line">image = cv2.imread(<span class="string">&quot;/home/python/OpenCV/faceMash/image1.jpg&quot;</span>)</span><br><span class="line">height, width, _ = image.shape</span><br><span class="line">rgb_image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)</span><br><span class="line"> </span><br><span class="line"><span class="comment">#Facial landmarks</span></span><br><span class="line">result = face_mesh.process(image)</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="keyword">for</span> facial_landmarks <span class="keyword">in</span> result.multi_face_landmarks:</span><br><span class="line">   <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="number">468</span>):</span><br><span class="line">      </span><br><span class="line">       pt1 = facial_landmarks.landmark[i]</span><br><span class="line">       x = <span class="built_in">int</span>(pt1.x * width)</span><br><span class="line">       y = <span class="built_in">int</span>(pt1.y * height)</span><br><span class="line">      </span><br><span class="line">       cv2.circle(image, (x,y), <span class="number">2</span>, (<span class="number">100</span>,<span class="number">100</span>,<span class="number">0</span>), -<span class="number">1</span>)</span><br><span class="line">       <span class="comment">#cv2.putText(image, str(i), (x,y), 0,1,(0,0,0))</span></span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">cv2.imshow(<span class="string">&quot;Face Mesh detection&quot;</span>, image)</span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2025/02/13/%E5%88%A9%E7%94%A8%E4%BA%BA%E8%84%B8%E6%A3%80%E6%B5%8B%E5%85%B3%E9%94%AE%E7%82%B9%E7%AE%80%E5%8D%95%E5%88%86%E5%89%B2%E5%90%88%E5%B9%B6%E6%93%8D%E4%BD%9C/#more" rel="contents">
@@ -519,7 +564,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-02-19 07:13:57" itemprop="dateModified" datetime="2025-02-19T07:13:57+00:00">2025-02-19</time>
+                <time title="修改时间：2025-02-19 07:39:04" itemprop="dateModified" datetime="2025-02-19T07:39:04+00:00">2025-02-19</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -592,7 +637,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-02-19 07:13:57" itemprop="dateModified" datetime="2025-02-19T07:13:57+00:00">2025-02-19</time>
+                <time title="修改时间：2025-02-19 07:39:04" itemprop="dateModified" datetime="2025-02-19T07:39:04+00:00">2025-02-19</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -616,6 +661,15 @@
 
       
           <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>看到很多人的主页做的好看丝滑又专业，不免得想拥有一个自己的。最开始使用<a target="_blank" rel="noopener" href="https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll/about-github-pages-and-jekyll">Github Pages</a>的默认静态网页生成器<a target="_blank" rel="noopener" href="https://jekyllrb.com/">jekyll</a>搭建了一个，但是奈何觉得有些复杂和浮夸。搜索一番，发现<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/">Hexo</a>和<a target="_blank" rel="noopener" href="https://theme-next.js.org/">NexT Theme</a>使用广泛，而且找到了我想要的比较简洁的风格示例，比如<a target="_blank" rel="noopener" href="https://www.qtmuniao.com/">木鸟杂记</a>、<a target="_blank" rel="noopener" href="https://notes.iissnan.com/">IIssNan’s Notes</a>、<a target="_blank" rel="noopener" href="https://nightteam.github.io/">NightTeam</a>，在阅读官方文档和热情网友分享的文章（比如<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/20962496">如何在 GitHub 上写博客？</a>）中，在不懂得各种前端知识情况下，一步步搭建了一个机遇GitHub Pages + Hexo + NexT的个人主页。刚刚开始，对于Hexo一点儿也不熟悉，还有很多需要配置的地方，但是趁着热乎劲，把搭建的历程记录下来，为后来者以参考，为自己以作备忘。</p>
+<blockquote>
+<p>Note: 完工之后回头看，由于对相关背景知识不了解，胡乱查了很多，其实Hexo的官方文档才是最好的教学和参考，详尽而工整，是很好的技术文档范例，而且有中文版哟～</p>
+</blockquote>
+<ol>
+<li><p>个人主页的文件是以repo的形式托管在GitHub上的，所以第一步要创建一个名为 {username}.github.io的项目，按照<a target="_blank" rel="noopener" href="https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site">creating a github pages site</a>一步步操作即可。</p>
+</li>
+<li><p>安装Nodejs和Hexo, <a target="_blank" rel="noopener" href="https://hexo.io/docs/">Hexo Overview</a></p>
+</li>
+</ol>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2022/12/24/Hexo-Next%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95/#more" rel="contents">
@@ -673,7 +727,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-02-19 07:13:57" itemprop="dateModified" datetime="2025-02-19T07:13:57+00:00">2025-02-19</time>
+                <time title="修改时间：2025-02-19 07:39:04" itemprop="dateModified" datetime="2025-02-19T07:39:04+00:00">2025-02-19</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -697,6 +751,7 @@
 
       
           <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2022/12/24/hello-world/#more" rel="contents">
