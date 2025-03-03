@@ -3,8 +3,10 @@ title: Reversed-Z Depth Buffer
 date: 2025-02-28 15:53:26
 categories:
 - Computer Graphics
+- OpenGL
 tags: 
 - Computer Graphics
+- OpenGL
 ---
 
 # 参考
