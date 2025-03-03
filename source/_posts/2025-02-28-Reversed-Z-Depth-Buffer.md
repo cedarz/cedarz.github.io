@@ -9,6 +9,10 @@ tags:
 - OpenGL
 ---
 
+
+`D3DXMatrixPerspectiveFovRH ` [D3DXMatrixPerspectiveFovRH](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dxmatrixperspectivefovrh?redirectedfrom=MSDN)
+![](../images/2025-02-28-Reversed-Z-Depth-Buffer-001.png)
+
 # 参考
 - [Reversed-Z in OpenGL](https://nlguillemot.wordpress.com/2016/12/07/reversed-z-in-opengl/)
 - [glClipControl](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glClipControl.xhtml)
