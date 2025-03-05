@@ -11,7 +11,7 @@ tags:
 
 # Vulkan枚举值的字符串化
 
-`Vulkan`中的枚举值都做了很好的枚举类型管理，依然是C类型的枚举，具有全局符号可见；虽然不似`C++ enum class`有严格的命名空间访问机制，但是仍然具备相应的命名空间。这为`Vulkan`枚举值的字符串转换提供了方便，[`VulkanSDK`](https://vulkan.lunarg.com/sdk/home)的`vk_enum_string_helper.h`给出了官方实现。
+`Vulkan`中的枚举值做了很好的枚举类型管理，尽管还是是C类型的枚举，具有全局符号可见行；再尽管不似`C++ enum class`有严格的命名空间访问机制，但是仍然具备相应的枚举类型作为命名空间管理和访问。这为`Vulkan`枚举值的字符串转换提供了方便，可能这也是为何[`VulkanSDK`](https://vulkan.lunarg.com/sdk/home)给出了官方实现`vk_enum_string_helper.h`的原因。
 
 以`VkImageType`为例，
 ``` c
