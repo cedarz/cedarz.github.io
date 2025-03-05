@@ -1,6 +1,3 @@
-f = open("glcorearb.h")
-
-cnt = 0
 
 exts = ["ARB", "KHR", "AMD", "NV", "OVR", "APPLE", "EXT", "INTEL", "MESA",
     "VIEW",
@@ -42,6 +39,7 @@ header = """#pragma once
 """
 
 if __name__ == '__main__':
+    f = open("glcorearb.h")
 
     for line in f.readlines():
         if line.startswith("#define"):
