@@ -39,7 +39,7 @@ void main()
 
 > The compatibility OpenGL profile makes VAO object 0 a default object. The core OpenGL profile makes VAO object 0 not an object at all. So if VAO 0 is bound in the core profile, you should not call any function that modifies VAO state. This includes binding the GL_ELEMENT_ARRAY_BUFFER with glBindBuffer.[<sup>Vertex_Specification</sup>](https://www.khronos.org/opengl/wiki/Vertex_Specification#Vertex_Array_Object)
 
-所以，使用GL的`core profile`做`bufferless rendering`时，使用一个空的vao绑定一下，才能让`glDraw*`命令生效。
+所以，使用GL的`core profile`做`bufferless rendering`时，使用一个空的(dummy)vao绑定一下，才能让`glDraw*`命令生效。
 
 # 参考
 - [Bufferless rendering in OpenGL](https://trass3r.github.io/coding/2019/09/11/bufferless-rendering.html)

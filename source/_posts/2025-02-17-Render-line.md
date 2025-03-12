@@ -48,7 +48,7 @@ DX11/12都没有明确的API和数据结构支持wide line的渲染。只发现[
 
 **线宽算法**
 
-知道了线宽的单位是屏幕空间像素计量之后，使用`quad polygon`把线扩展成两个三角形的方法就比较明显了，也即不管以任何方法在屏幕空间把线段的两个顶点扩展成4个顶点，这个过程可以在CPU里计算，也可以在GPU的`VS`、`GS`等多中方法计算。如果在`VS`计算，输出的坐标是`clip space`裁剪空间坐标，而我们扩展顶点坐标是在屏幕空间，所以涉及坐标变换的具体实现了。
+知道了线宽的单位是屏幕空间像素计量之后，使用`quad polygon`把线扩展成两个三角形的方法就比较明显了，以任何方法在屏幕空间把线段的两个顶点扩展成4个顶点，这个过程可以在CPU里计算，也可以在GPU的`VS`、`GS`等顶点处理阶段计算。如果在顶点处理阶段完成，输出的坐标是`clip space`裁剪空间坐标，而我们扩展四边形的操作是在屏幕空间完成的，就涉及到坐标变换的具体实现了。
 
 `quad`的生成[算法](https://github.com/mhalber/Lines?tab=readme-ov-file#methods)如下：
 > 1. Transform line segment end points p and q to normalized device space. At this point we work in 2D space, regardless of whether original line was specified as 2D or 3D line.
@@ -58,6 +58,17 @@ DX11/12都没有明确的API和数据结构支持wide line的渲染。只发现[
 5. Create quad points a = p + n_a, b = p - n_a, c = q + n_b, d = q - n_b
 6. Move points a, b, c, d back to clip space and pass them down the rasterization pipeline
 
+**具体实现**
+
+根据[OpenGL Line Width](https://stackoverflow.com/questions/3484260/opengl-line-width)中[rabbid76](https://stackoverflow.com/users/5577765/rabbid76)的回答，整理了一套可以运行的代码示例，我是直接拖进`LearnOpenGL`运行的。运行结果如下：
+![line_width](../images/2025-02-17-Render-line/line_width.png)
+
+{% include_code line_width.cpp lang:cpp from:23 to:60 line_width.cpp %}
+
+点评一下：
+- 考虑了line_strip连接处的法线，利用连接处前后两个线段法线的平分线作为法线法向，并通过`cos`计算应该沿法线延申的长度；给顶点buffer多添加首点和末点，减少判断
+- 接近平行的两端线段，`cos`值接近于0，除法操作导致顶点沿着法线延伸的长度过大，需要处理一下，比如`max(dot(v_miter, nv_line), 0.8)`，可以缓解不能消除
+![line_width_defact](../images/2025-02-17-Render-line/defect.png)
 
 # 抗锯齿
 
@@ -66,6 +77,8 @@ DX11/12都没有明确的API和数据结构支持wide line的渲染。只发现[
 
 - [glDrawArrays](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glDrawArrays.xhtml)
 - [Line_width not working in Vulkan](https://stackoverflow.com/questions/44665007/line-width-not-working-in-vulkan)
+- [OpenGL Line Width](https://stackoverflow.com/questions/3484260/opengl-line-width)
+- [Drawing a line in modern OpenGL](https://stackoverflow.com/questions/60440682/drawing-a-line-in-modern-opengl)
 - [lines](https://github.com/mhalber/Lines)
 
 
