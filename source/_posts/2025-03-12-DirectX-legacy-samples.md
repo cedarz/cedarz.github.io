@@ -9,6 +9,7 @@ tags:
 - DirectX
 ---
 
+偶尔会遇到一些D3D的旧版本上古demo，
 
 ![nuget Microsoft.DXSDK.D3DX](../images/2025-03-12-DirectX-legacy-samples/nuget.png)
 
@@ -17,3 +18,5 @@ tags:
 [directx-sdk-legacy-samples](https://github.com/walbourn/directx-sdk-legacy-samples)
 
 [directx-sdk-samples](https://github.com/walbourn/directx-sdk-samples)
+
+[microsoft/DirectX-SDK-Samples](https://github.com/microsoft/DirectX-SDK-Samples)
