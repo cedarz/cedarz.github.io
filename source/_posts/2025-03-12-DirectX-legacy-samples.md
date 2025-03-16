@@ -12,7 +12,7 @@ tags:
 # 背景
 `DirectX SDK`自从`Windows 8 SDK`开始，是随着`Windows SDK`附带的，包含了各个历史版本的头文件、动态库和工具集，但是这些历史版本SDK的sample和辅助库D3DX9、D3DX10、D3DX11等就被丢弃了。
 
-偶尔会遇到一些D3D的旧版本上古demo，可能就使用了一些旧版本的辅助函数，比如在看SSS效果的时候使用的iryokudl大佬的[separable-sss](https://github.com/iryoku/separable-sss)，仅仅依赖`Windows SDK`附带的DX依赖没法正确跑起来。
+偶尔会遇到一些D3D的旧版本上古demo，可能就使用了一些旧版本的辅助函数，比如在看SSS效果的时候使用iryoku大佬的[separable-sss](https://github.com/iryoku/separable-sss)，仅仅依赖`Windows SDK`附带的DX依赖是没法正确跑起来。
 
 # 替代
 
