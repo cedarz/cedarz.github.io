@@ -1,6 +1,6 @@
 ---
-title: Reversed-Z Depth Buffer
-date: 2025-02-28 15:53:26
+title: Depth-Buffer-Precision
+date: 2025-03-28 09:21:10
 categories:
 - Computer Graphics
 - OpenGL
@@ -9,9 +9,17 @@ tags:
 - OpenGL
 ---
 
+# How near and far planes affet depth percision
+
+- [My openGL render depths are nearly the value of 1 why is that?](https://stackoverflow.com/questions/25755853/my-opengl-render-depths-are-nearly-the-value-of-1-why-is-that)
+- [depth buffer got by glReadPixels is always 1](https://stackoverflow.com/questions/16768090/depth-buffer-got-by-glreadpixels-is-always-1)
+- [How am I able to perform perspective projection without a near plane?](https://computergraphics.stackexchange.com/questions/5116/how-am-i-able-to-perform-perspective-projection-without-a-near-plane)
+
+
+# Reversed-Z Depth Buffer
 
 `D3DXMatrixPerspectiveFovRH ` [D3DXMatrixPerspectiveFovRH](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dxmatrixperspectivefovrh?redirectedfrom=MSDN)
-![](../images/2025-02-28-Reversed-Z-Depth-Buffer-001.png)
+![](../images/Depth-Buffer-Precision/Reversed-Z-Depth-Buffer-001.png)
 
 # 参考
 - [Reversed-Z in OpenGL](https://nlguillemot.wordpress.com/2016/12/07/reversed-z-in-opengl/)
