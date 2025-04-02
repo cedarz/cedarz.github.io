@@ -1,5 +1,5 @@
 ---
-title: Depth-Buffer-Precision
+title: Depth Buffer Precision
 date: 2025-03-28 09:21:10
 categories:
 - Computer Graphics
