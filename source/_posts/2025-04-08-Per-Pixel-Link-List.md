@@ -64,6 +64,7 @@ PPLL的实现需要三个数据结构：头结点指针Buffer、链表Node Buffe
 
 论文中明示了坑点：
 > The size of the node buffer must be large enough to handle all possible fragments, or there must be a scheme to handle overflow.
+
 > The creation of a node buffer can become an unreasonable burden on video memory requirements when render dimensions, the size of the node structure, and the number of fragments to store become large. For this reason it is important to be economical with those variables when circumstances allow it. For instance, the node structure can be optimized so its variables are stored in packed formats instead of floating-point vectors (fragment color in particular would benefit greatly from this approach).
 
 
