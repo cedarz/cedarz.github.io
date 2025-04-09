@@ -9,10 +9,10 @@ tags:
 - Rendering
 ---
 
-OpenGL 4.0和DirectX 11提供了原子操作(atomic operation），为GPU上并行创建链表数据结构提供了便利。基于此算法的`per-pixel link lists`可以应用到`order-independent transparency`，实现像素的程序化混合，实现顺序无关的半透明效果，避免了程序员在api层面对于略显无力的排序的折磨。
+OpenGL 4.0和DirectX 11提供了原子操作(atomic operation），为GPU上并行创建链表数据结构提供了便利。基于此算法的`per-pixel link lists`可以应用到`order independent transparency`，实现像素的程序化混合，实现顺序无关的半透明效果，避免了程序员在api层面对于略显无力的排序的折磨。
 
 
-# PPLL
+# Per-Pixel Link List
 
 PPLL的实现需要三个数据结构：头结点指针Buffer、链表Node Buffer、结点计数器。
 - 头结点指针Buffer：每个像素位置又一个链表，所以叫`per-pixel link lists`,头指针Buffer的大小是framebuffer的大小，存储的是头结点在Node Buffer中的位置，初始化为一个空符号，比如-1；
@@ -28,7 +28,7 @@ PPLL的实现需要三个数据结构：头结点指针Buffer、链表Node Buffe
 
 ![Per-Pixel-Link-List/PPLL](../images/Per-Pixel-Link-List/PPLL.png)
 
-# OIT
+# Order Independent Transparency
 
 每一个链表存储的是光栅化到该像素位置的所有片元数据，把这些片元按照顺序混合起来，叫做`resolve`操作，类似mutisample的resolve操作。
 
@@ -45,7 +45,7 @@ PPLL的实现需要三个数据结构：头结点指针Buffer、链表Node Buffe
 
 每个链表结点数比较有限，论文[Real-Time Concurrent Linked List Construction on the GPU](https://dl.acm.org/doi/10.1111/j.1467-8659.2010.01725.x)中推荐的是插入排序。
 
-在GLSL中实现插入排序时遇到了个经典问题，`uint`类型迭代变量递减到`-1`时候，wrap到`max uint`，循环退出失败然后显存访存越界，导致屏幕黑掉一下，然后程序crash掉，还会影响到其他程序窗口的显示；让驱动小小的震撼一下。
+在GLSL中实现插入排序时遇到了个经典问题，`uint`类型迭代变量递减到`-1`时候，warp到`max uint`，循环退出失败然后显存访存越界，导致屏幕黑掉一下，然后程序crash掉，还会影响到其他程序窗口的显示；让驱动小小的震撼一下。
 
 
 **Blend顺序**
@@ -71,7 +71,7 @@ PPLL的实现需要三个数据结构：头结点指针Buffer、链表Node Buffe
 - 增加node buffer的数量能够缓解，但是不能消除
 - 使用`packUnorm`/`unpackSnorm4x8`压缩color居然立竿见影，消除了问题，明明数量没有变化啊；难道是因为同样的数量，没压缩之前申请的内存超出了最大值，实际申请到的node数量其实少很多？？
 
-此处暂时没能验证，存疑--
+此处暂时没能验证，存疑~~
 
 # 渲染结果
 
@@ -85,5 +85,6 @@ PPLL的实现需要三个数据结构：头结点指针Buffer、链表Node Buffe
 - [【论文复现】Real-Time Concurrent Linked List Construction on the GPU](https://zhuanlan.zhihu.com/p/364762003)
 - [PPLL OIT实现](https://github.com/AngelMonica126/GraphicAlgorithm/blob/master/012_Real%20Time%20Concurrent%20Linked%20List%20Construction%20on%20the%20GPU/BlendPass_FS.glsl)
 - [How front-to-back blending works?](https://gamedev.stackexchange.com/questions/184285/how-front-to-back-blending-works)
+- [Integer overflow](https://en.wikipedia.org/wiki/Integer_overflow)
 - [packUnorm](https://registry.khronos.org/OpenGL-Refpages/gl4/html/packUnorm.xhtml)
 - [unpackSnorm4x8](https://registry.khronos.org/OpenGL-Refpages/gl4/html/unpackUnorm.xhtml)
