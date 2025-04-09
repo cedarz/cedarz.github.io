@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="/js/image-compare-viewer.min.css">
+<script src="/js/image-compare-viewer.min.js"></script>
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"darkpixel.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="OpenGL 4.0和DirectX 11提供了原子操作(atomic operation），为GPU上并行创建链表数据结构提供了便利。基于此算法的per-pixel link lists可以应用到order-independent transparency，实现像素的程序化混合，实现顺序无关的半透明效果，避免了程序员在api层面对于略显无力的排序的折磨。 PPLLPPLL的实现需要三个数据结构：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Per-Pixel Link List">
+<meta property="og:url" content="https://darkpixel.top/2025/04/08/Per-Pixel-Link-List/index.html">
+<meta property="og:site_name" content="Integrator">
+<meta property="og:description" content="OpenGL 4.0和DirectX 11提供了原子操作(atomic operation），为GPU上并行创建链表数据结构提供了便利。基于此算法的per-pixel link lists可以应用到order-independent transparency，实现像素的程序化混合，实现顺序无关的半透明效果，避免了程序员在api层面对于略显无力的排序的折磨。 PPLLPPLL的实现需要三个数据结构：">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://darkpixel.top/images/Per-Pixel-Link-List/PPLL.png">
+<meta property="og:image" content="https://darkpixel.top/images/Per-Pixel-Link-List/back-to-front.png">
+<meta property="og:image" content="https://darkpixel.top/images/Per-Pixel-Link-List/flickering.gif">
+<meta property="og:image" content="https://darkpixel.top/images/Per-Pixel-Link-List/hair.png">
+<meta property="article:published_time" content="2025-04-08T16:21:37.000Z">
+<meta property="article:modified_time" content="2025-04-09T07:58:36.060Z">
+<meta property="article:author" content="黑色像素">
+<meta property="article:tag" content="Computer Graphics">
+<meta property="article:tag" content="Rendering">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://darkpixel.top/images/Per-Pixel-Link-List/PPLL.png">
+
+<link rel="canonical" href="https://darkpixel.top/2025/04/08/Per-Pixel-Link-List/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Per-Pixel Link List | Integrator</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Integrator</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://darkpixel.top/2025/04/08/Per-Pixel-Link-List/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="黑色像素">
+      <meta itemprop="description" content="活着就要继续前进">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Integrator">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Per-Pixel Link List
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2025-04-08 16:21:37" itemprop="dateCreated datePublished" datetime="2025-04-08T16:21:37+00:00">2025-04-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2025-04-09 07:58:36" itemprop="dateModified" datetime="2025-04-09T07:58:36+00:00">2025-04-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Computer-Graphics/" itemprop="url" rel="index"><span itemprop="name">Computer Graphics</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Computer-Graphics/Rendering/" itemprop="url" rel="index"><span itemprop="name">Rendering</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>OpenGL 4.0和DirectX 11提供了原子操作(atomic operation），为GPU上并行创建链表数据结构提供了便利。基于此算法的<code>per-pixel link lists</code>可以应用到<code>order-independent transparency</code>，实现像素的程序化混合，实现顺序无关的半透明效果，避免了程序员在api层面对于略显无力的排序的折磨。</p>
+<h1 id="PPLL"><a href="#PPLL" class="headerlink" title="PPLL"></a>PPLL</h1><p>PPLL的实现需要三个数据结构：头结点指针Buffer、链表Node Buffer、结点计数器。</p>
+<ul>
+<li>头结点指针Buffer：每个像素位置又一个链表，所以叫<code>per-pixel link lists</code>,头指针Buffer的大小是framebuffer的大小，存储的是头结点在Node Buffer中的位置，初始化为一个空符号，比如-1；</li>
+<li>链表Node Buffer：存储所有结点数据，可以是任意数据，<code>next</code>字段是必需的，指向链表下一个结点；不需要初始化，只需要分配足够大小。</li>
+<li>结点计数器：用于分配下一个<code>Node Buffer</code>位置来存储数据，使用原子操作累加。初始化为0。</li>
+</ul>
+<p>三步：</p>
+<ol>
+<li>从Node Buffer中获取下一个空闲位置，使用原子加计数器操作<code>atomicCounterIncrement</code>实现，每个光栅化后的片元占用一个，这个步骤是所有线程都在抢占</li>
+<li>使用原子交换操作<code>imageAtomicExchange</code>，把新的位置写入到头结点指针Buffer作为新的头结点指针，并拿出旧的头节点指针。相当于每个新节点，都从链表的头部插入，这个步骤是所有线程都在抢占</li>
+<li>把新头节点数据写入到Node Buffer，旧头节点指针作为新头节点的<code>next</code>字段</li>
+</ol>
+<p>其实就是一个游标代替指针、数据存在全局大数组的链表的构造过程，描述的不好，一图胜千言：</p>
+<p><img src="/../images/Per-Pixel-Link-List/PPLL.png" alt="Per-Pixel-Link-List/PPLL"></p>
+<h1 id="OIT"><a href="#OIT" class="headerlink" title="OIT"></a>OIT</h1><p>每一个链表存储的是光栅化到该像素位置的所有片元数据，把这些片元按照顺序混合起来，叫做<code>resolve</code>操作，类似mutisample的resolve操作。</p>
+<p>也是三步，论文写的比较清楚：</p>
+<blockquote>
+<ol>
+<li>Render all opaque or background objects as usual, including depth testing.</li>
+<li>Render all objects with transparency, and – instead of writing to the render target – insert the fragment data into the per-pixel linked-list structure. Depth testing is still supported, so any fragments occluded by opaque elements in the previous step will be dropped.</li>
+<li>Resolve each linked list by first sorting and then traversing the list in sorted order for alpha blending. This is performed in a single shader pass using a full screen quad.</li>
+</ol>
+</blockquote>
+<p><strong>Note</strong></p>
+<ul>
+<li>渲染半透明物体构造PPLL时候，打开<code>depth test</code>，关闭<code>depth write</code></li>
+<li>渲染半透明物体的片元数据，通常深度测试是在<code>fragment shader</code>之后的<code>Per-Sample Processing</code>阶段，要在<code>fragment shader</code>中就拿到<code>depth test</code>的结果，需要用到<code>early depth test</code></li>
+</ul>
+<p><strong>像素排序</strong></p>
+<p>每个链表结点数比较有限，论文<a target="_blank" rel="noopener" href="https://dl.acm.org/doi/10.1111/j.1467-8659.2010.01725.x">Real-Time Concurrent Linked List Construction on the GPU</a>中推荐的是插入排序。</p>
+<p>在GLSL中实现插入排序时遇到了个经典问题，<code>uint</code>类型迭代变量递减到<code>-1</code>时候，wrap到<code>max uint</code>，循环退出失败然后显存访存越界，导致屏幕黑掉一下，然后程序crash掉，还会影响到其他程序窗口的显示；让驱动小小的震撼一下。</p>
+<p><strong>Blend顺序</strong></p>
+<p>比较常用而且简单的混合方式是back-to-front，PPLL也不例外。但是考虑的具体实现，需要考虑背景层。如果不透明物体的渲染结果，我们能够轻易的拿到其贴图，比如vulkan的swapchain的image，或者之前的渲染的都render-to-texture（这种情况下，渲染半透明时也要绑定同样的fbo，以利用不透明pass的深度结果做深度测试），就可以轻易的使用back-to-front方式做blend；如果不能拿到不透明pass的渲染结果，比如使用OpenGL而且都往default framebuffer上渲，那就得考虑一下front-to-back的blend方式了，<code>Dual Depth Peeling</code>是最先吃螃蟹的论文。</p>
+<p>但是论文描述里面比较费解，好像还有错误，看的头疼。可能未必是论文的问题，也许是我对SRC&#x2F;DST的理解有误。<code>glBlendFunc</code>的规范里面，DST是framebuffer上的，SRC是当前渲染，跟论文好像是反的。但是整体思路就是，从front到back的每一层，先预乘alpha，同时累积之前所有层的<code>1.0 - alpha</code>的乘积，把这俩相加，再加上之前成的blend结果。看图说话吧。</p>
+<p><img src="/../images/Per-Pixel-Link-List/back-to-front.png" alt="Per-Pixel-Link-List/back-to-front"></p>
+<p><strong>遇到的问题</strong></p>
+<ol>
+<li><code>uint</code>递减到-1导致内存越界问题</li>
+<li>窗口设置最大或者相机拉近时出现严重的闪烁<br><img src="/../images/Per-Pixel-Link-List/flickering.gif" alt="Per-Pixel-Link-List/flickering"></li>
+</ol>
+<p>论文中明示了坑点：</p>
+<blockquote>
+<p>The size of the node buffer must be large enough to handle all possible fragments, or there must be a scheme to handle overflow.<br>The creation of a node buffer can become an unreasonable burden on video memory requirements when render dimensions, the size of the node structure, and the number of fragments to store become large. For this reason it is important to be economical with those variables when circumstances allow it. For instance, the node structure can be optimized so its variables are stored in packed formats instead of floating-point vectors (fragment color in particular would benefit greatly from this approach).</p>
+</blockquote>
+<ul>
+<li>具体原因不清，可能因为分辨率增大或者渲染占据更大面积，导致片元数量增加，PPLL的node buffer和显存有限，导致部分片元缺失，闪烁中的白色应该就是背景的颜色</li>
+<li>增加node buffer的数量能够缓解，但是不能消除</li>
+<li>使用<code>packUnorm</code>&#x2F;<code>unpackSnorm4x8</code>压缩color居然立竿见影，消除了问题，明明数量没有变化啊；难道是因为同样的数量，没压缩之前申请的内存超出了最大值，实际申请到的node数量其实少很多？？</li>
+</ul>
+<p>此处暂时没能验证，存疑–</p>
+<h1 id="渲染结果"><a href="#渲染结果" class="headerlink" title="渲染结果"></a>渲染结果</h1><p>最后贴一张头发OIT半透明渲染的结果~</p>
+<p><img src="/../images/Per-Pixel-Link-List/hair.png" alt="Per-Pixel-Link-List/flickering"></p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul>
+<li><a target="_blank" rel="noopener" href="https://dl.acm.org/doi/10.1111/j.1467-8659.2010.01725.x">Real-Time Concurrent Linked List Construction on the GPU</a></li>
+<li><a target="_blank" rel="noopener" href="https://developer.download.nvidia.com/SDK/10/opengl/src/dual_depth_peeling/doc/DualDepthPeeling.pdf">Order Independent Transparency with Dual Depth Peeling</a></li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/364762003">【论文复现】Real-Time Concurrent Linked List Construction on the GPU</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/AngelMonica126/GraphicAlgorithm/blob/master/012_Real%20Time%20Concurrent%20Linked%20List%20Construction%20on%20the%20GPU/BlendPass_FS.glsl">PPLL OIT实现</a></li>
+<li><a target="_blank" rel="noopener" href="https://gamedev.stackexchange.com/questions/184285/how-front-to-back-blending-works">How front-to-back blending works?</a></li>
+<li><a target="_blank" rel="noopener" href="https://registry.khronos.org/OpenGL-Refpages/gl4/html/packUnorm.xhtml">packUnorm</a></li>
+<li><a target="_blank" rel="noopener" href="https://registry.khronos.org/OpenGL-Refpages/gl4/html/unpackUnorm.xhtml">unpackSnorm4x8</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Computer-Graphics/" rel="tag"># Computer Graphics</a>
+              <a href="/tags/Rendering/" rel="tag"># Rendering</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2025/04/01/CMake%E4%BD%BF%E7%94%A8%E9%80%9F%E6%8A%84%E6%8C%87%E5%8C%97/" rel="prev" title="CMake使用速抄指北">
+      <i class="fa fa-chevron-left"></i> CMake使用速抄指北
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#PPLL"><span class="nav-number">1.</span> <span class="nav-text">PPLL</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#OIT"><span class="nav-number">2.</span> <span class="nav-text">OIT</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B8%B2%E6%9F%93%E7%BB%93%E6%9E%9C"><span class="nav-number">3.</span> <span class="nav-text">渲染结果</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">黑色像素</p>
+  <div class="site-description" itemprop="description">活着就要继续前进</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">黑色像素</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
