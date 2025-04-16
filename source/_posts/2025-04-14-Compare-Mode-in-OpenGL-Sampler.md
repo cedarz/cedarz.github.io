@@ -36,6 +36,9 @@ glTextureParameteri(m_handle, GL_TEXTURE_COMPARE_FUNC, GL_LEQUAL);
 
 另外，如果`shadow sampler`设置了`linear filtering`，采样的结果实际在实现硬件的4采样PCF。
 
+附一张OpenGL的深度数据格式表：
+![Compare-Mode-in-OpenGL-Sampler/depth_format](../images/Compare-Mode-in-OpenGL-Sampler/depth_format.png)
+
 # 参考
 - [glspec46.core p.401](https://registry.khronos.org/OpenGL/specs/gl/glspec46.core.pdf)
 - [Shadow_samplers](https://www.khronos.org/opengl/wiki/Sampler_(GLSL)#Shadow_samplers)
