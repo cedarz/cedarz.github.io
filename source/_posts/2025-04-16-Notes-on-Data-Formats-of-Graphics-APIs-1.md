@@ -1,5 +1,5 @@
 ---
-title: Notes on Data Formats of Graphics APIs
+title: Notes on Data Formats of Graphics APIs(1)
 date: 2025-04-16 22:47:57
 categories:
 - Computer Graphics
@@ -43,6 +43,8 @@ D3D的文档写的也很清楚，而且Vulkan和DX的数据格式format enum都�
 
 
 # 参考
+- [Fixed Point Math](https://blarg.ca/2020/10/11/fixed-point-math)
+- [Fixed-Point Numbers](https://de.mathworks.com/help/simulink/ug/fixed-point-numbers.html)
 - [glVertexAttribPointer](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glVertexAttribPointer.xhtml)
 - [OpenGL Type](https://www.khronos.org/opengl/wiki/OpenGL_Type)
 - [**vertex description for color sent as VK_FORMAT_R8G8B8A8_UNORM but consumed as vec4**](https://github.com/ocornut/imgui/discussions/6049)
