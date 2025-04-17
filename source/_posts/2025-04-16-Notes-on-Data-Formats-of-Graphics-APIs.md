@@ -20,8 +20,7 @@ glVertexAttribPointer中描述，如果设置了归一化`normalized`，传入�
 
 > For glVertexAttribPointer, if normalized is set to GL_TRUE, it indicates that values stored in an integer format are to be mapped to the range [-1,1] (for signed values) or [0,1] (for unsigned values) when they are accessed and converted to floating point. Otherwise, values will be converted to floats directly without normalization. [<sup>glVertexAttribPointer</sup>](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glVertexAttribPointer.xhtml)
 
-OpenGL和Vulkan使用了同样的表述，毕竟来自同一家：
-如果`vertex attributes and pixel color or depth components`表达为整数，它们通常被认为是`normalized`。在使用前会转为浮点型，转换的算法很简单，可以参考OpenGL和Vulkan的手册。
+OpenGL和Vulkan使用了同样的表述，毕竟来自同一家：如果`vertex attributes and pixel color or depth components`使用整型来表示，它们通常被认为是`normalized`。在使用前会转为浮点型，转换的算法很简单，可以参考OpenGL和Vulkan的手册。
 > When generic vertex attributes and pixel color or depth components are repre
 sented as integers, they are often (but not always) considered to be normalized.
  Normalized integer values are treated specially when being converted to and from
