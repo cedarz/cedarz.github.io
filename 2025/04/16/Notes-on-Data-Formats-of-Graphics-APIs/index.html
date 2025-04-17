@@ -34,7 +34,7 @@
 <meta property="og:image" content="https://darkpixel.top/images/Notes-on-Data-Formats-of-Graphics-APIs/opengl_color_format.png">
 <meta property="og:image" content="https://darkpixel.top/images/Compare-Mode-in-OpenGL-Sampler/depth_format.png">
 <meta property="article:published_time" content="2025-04-16T22:47:57.000Z">
-<meta property="article:modified_time" content="2025-04-17T06:35:31.741Z">
+<meta property="article:modified_time" content="2025-04-17T06:49:53.573Z">
 <meta property="article:author" content="黑色像素">
 <meta property="article:tag" content="Computer Graphics">
 <meta property="article:tag" content="OpenGL">
@@ -204,7 +204,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-04-17 06:35:31" itemprop="dateModified" datetime="2025-04-17T06:35:31+00:00">2025-04-17</time>
+                <time title="修改时间：2025-04-17 06:49:53" itemprop="dateModified" datetime="2025-04-17T06:49:53+00:00">2025-04-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -241,7 +241,7 @@
 <blockquote>
 <p>For glVertexAttribPointer, if normalized is set to GL_TRUE, it indicates that values stored in an integer format are to be mapped to the range [-1,1] (for signed values) or [0,1] (for unsigned values) when they are accessed and converted to floating point. Otherwise, values will be converted to floats directly without normalization. <a target="_blank" rel="noopener" href="https://registry.khronos.org/OpenGL-Refpages/gl4/html/glVertexAttribPointer.xhtml"><sup>glVertexAttribPointer</sup></a></p>
 </blockquote>
-<p>OpenGL和Vulkan使用了同样的表述，毕竟来自同一家：<br>如果<code>vertex attributes and pixel color or depth components</code>表达为整数，它们通常被认为是<code>normalized</code>。在使用前会转为浮点型，转换的算法很简单，可以参考OpenGL和Vulkan的手册。</p>
+<p>OpenGL和Vulkan使用了同样的表述，毕竟来自同一家：如果<code>vertex attributes and pixel color or depth components</code>使用整型来表示，它们通常被认为是<code>normalized</code>。在使用前会转为浮点型，转换的算法很简单，可以参考OpenGL和Vulkan的手册。</p>
 <blockquote>
 <p>When generic vertex attributes and pixel color or depth components are repre<br>sented as integers, they are often (but not always) considered to be normalized.<br> Normalized integer values are treated specially when being converted to and from<br> floating-point values, and are usually referred to as <code>normalized fixed-point</code>. Such<br> values are always either signed or unsigned.<a target="_blank" rel="noopener" href="https://registry.khronos.org/OpenGL/specs/gl/glspec46.core.pdf"><sup>glspec46.core p47</sup></a> <a target="_blank" rel="noopener" href="https://docs.vulkan.org/spec/latest/chapters/fundamentals.html#fundamentals-fixedconv"><sup> Vulkan Fixed-Point Data Conversions</sup></a></p>
 </blockquote>
