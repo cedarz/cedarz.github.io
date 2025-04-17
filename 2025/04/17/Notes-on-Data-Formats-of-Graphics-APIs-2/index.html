@@ -23,25 +23,19 @@
     var CONFIG = {"hostname":"darkpixel.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="API是渲染里面最稀碎最脏的一块，砖搬的越多，问题重复遇到的可能性也越大；有些东西以前遇到过，现在又遇到了；有些以前很熟悉，现在又忘记了。虽然不一定是高明的东西，记录一下，下次再忘记可以翻一翻。古人云，“纸上得来终觉浅，好记性不如烂笔头”，诚不欺我。 今天就来记录一下，各种Graphics API里面，使用的数据格式对于定点数的处理。 数据格式这里主要记录两方面的使用，其一就是顶点数据，其二是纹理">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Notes on Data Formats of Graphics APIs">
-<meta property="og:url" content="https://darkpixel.top/2025/04/16/Notes-on-Data-Formats-of-Graphics-APIs/index.html">
+  <meta property="og:type" content="article">
+<meta property="og:title" content="Notes on Data Formats of Graphics APIs(2)">
+<meta property="og:url" content="https://darkpixel.top/2025/04/17/Notes-on-Data-Formats-of-Graphics-APIs-2/index.html">
 <meta property="og:site_name" content="Integrator">
-<meta property="og:description" content="API是渲染里面最稀碎最脏的一块，砖搬的越多，问题重复遇到的可能性也越大；有些东西以前遇到过，现在又遇到了；有些以前很熟悉，现在又忘记了。虽然不一定是高明的东西，记录一下，下次再忘记可以翻一翻。古人云，“纸上得来终觉浅，好记性不如烂笔头”，诚不欺我。 今天就来记录一下，各种Graphics API里面，使用的数据格式对于定点数的处理。 数据格式这里主要记录两方面的使用，其一就是顶点数据，其二是纹理">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://darkpixel.top/images/Notes-on-Data-Formats-of-Graphics-APIs/D3D11_Format.png">
-<meta property="og:image" content="https://darkpixel.top/images/Notes-on-Data-Formats-of-Graphics-APIs/opengl_color_format.png">
-<meta property="og:image" content="https://darkpixel.top/images/Compare-Mode-in-OpenGL-Sampler/depth_format.png">
-<meta property="article:published_time" content="2025-04-16T22:47:57.000Z">
-<meta property="article:modified_time" content="2025-04-17T06:57:51.589Z">
+<meta property="article:published_time" content="2025-04-17T17:55:45.000Z">
+<meta property="article:modified_time" content="2025-04-17T09:59:26.833Z">
 <meta property="article:author" content="黑色像素">
 <meta property="article:tag" content="Computer Graphics">
 <meta property="article:tag" content="OpenGL">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://darkpixel.top/images/Notes-on-Data-Formats-of-Graphics-APIs/D3D11_Format.png">
 
-<link rel="canonical" href="https://darkpixel.top/2025/04/16/Notes-on-Data-Formats-of-Graphics-APIs/">
+<link rel="canonical" href="https://darkpixel.top/2025/04/17/Notes-on-Data-Formats-of-Graphics-APIs-2/">
 
 
 <script id="page-configurations">
@@ -54,7 +48,7 @@
   };
 </script>
 
-  <title>Notes on Data Formats of Graphics APIs | Integrator</title>
+  <title>Notes on Data Formats of Graphics APIs(2) | Integrator</title>
   
 
 
@@ -174,7 +168,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://darkpixel.top/2025/04/16/Notes-on-Data-Formats-of-Graphics-APIs/">
+    <link itemprop="mainEntityOfPage" href="https://darkpixel.top/2025/04/17/Notes-on-Data-Formats-of-Graphics-APIs-2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -187,7 +181,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Notes on Data Formats of Graphics APIs
+          Notes on Data Formats of Graphics APIs(2)
         </h1>
 
         <div class="post-meta">
@@ -196,16 +190,10 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2025-04-16 22:47:57" itemprop="dateCreated datePublished" datetime="2025-04-16T22:47:57+00:00">2025-04-16</time>
+              <time title="创建时间：2025-04-17 17:55:45 / 修改时间：09:59:26" itemprop="dateCreated datePublished" datetime="2025-04-17T17:55:45+00:00">2025-04-17</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-04-17 06:57:51" itemprop="dateModified" datetime="2025-04-17T06:57:51+00:00">2025-04-17</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -231,38 +219,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>API是渲染里面最稀碎最脏的一块，砖搬的越多，问题重复遇到的可能性也越大；有些东西以前遇到过，现在又遇到了；有些以前很熟悉，现在又忘记了。虽然不一定是高明的东西，记录一下，下次再忘记可以翻一翻。古人云，“纸上得来终觉浅，好记性不如烂笔头”，诚不欺我。</p>
-<p>今天就来记录一下，各种Graphics API里面，使用的数据格式对于定点数的处理。</p>
-<p>数据格式这里主要记录两方面的使用，其一就是顶点数据，其二是纹理。</p>
-<p>glVertexAttribPointer中描述，如果设置了归一化<code>normalized</code>，传入的有符号整型被归一到[-1, 1]，无符号整型被归一到[0, 1]。</p>
-<blockquote>
-<p>For glVertexAttribPointer, specifies whether <code>fixed-point data</code> values should be normalized (GL_TRUE) or converted directly as fixed-point values (GL_FALSE) when they are accessed.</p>
-</blockquote>
-<blockquote>
-<p>For glVertexAttribPointer, if normalized is set to GL_TRUE, it indicates that values stored in an integer format are to be mapped to the range [-1,1] (for signed values) or [0,1] (for unsigned values) when they are accessed and converted to floating point. Otherwise, values will be converted to floats directly without normalization. <a target="_blank" rel="noopener" href="https://registry.khronos.org/OpenGL-Refpages/gl4/html/glVertexAttribPointer.xhtml"><sup>glVertexAttribPointer</sup></a></p>
-</blockquote>
-<p>OpenGL和Vulkan使用了同样的表述，毕竟来自同一家：如果<code>vertex attributes and pixel color or depth components</code>使用整型来表示，它们通常被认为是<code>normalized</code>。在使用前会转为浮点型，转换的算法很简单，可以参考OpenGL和Vulkan的手册。</p>
-<blockquote>
-<p>When generic vertex attributes and pixel color or depth components are repre<br>sented as integers, they are often (but not always) considered to be normalized.<br> Normalized integer values are treated specially when being converted to and from<br> floating-point values, and are usually referred to as <code>normalized fixed-point</code>. Such<br> values are always either signed or unsigned.<a target="_blank" rel="noopener" href="https://registry.khronos.org/OpenGL/specs/gl/glspec46.core.pdf"><sup>glspec46.core p47</sup></a> <a target="_blank" rel="noopener" href="https://docs.vulkan.org/spec/latest/chapters/fundamentals.html#fundamentals-fixedconv"><sup> Vulkan Fixed-Point Data Conversions</sup></a></p>
-</blockquote>
-<p>D3D的文档写的也很清楚，而且Vulkan和DX的数据格式format enum都比较明了一些，比如Vulkan的VK_FORMAT_D24_UNORM_S8_UINT、DX的DXGI_FORMAT_D24_UNORM_S8_UINT，和OpenGL的GL_DEPTH24_STENCIL8，对比一下，是不是要吐血。</p>
-<blockquote>
-<p>Depth&#x2F;stencil formats are considered opaque and need not be stored in the exact number of bits per texel or component ordering indicated by the format enum. However, implementations must not substitute a different depth or stencil precision than is described in the format (e.g. D16 must not be implemented as D24 or D32).<a target="_blank" rel="noopener" href="https://docs.vulkan.org/spec/latest/chapters/formats.html#formats-depth-stencil"><sup> Vulkan Depth&#x2F;Stencil Formats</sup></a></p>
-</blockquote>
-<p> <img src="/../images/Notes-on-Data-Formats-of-Graphics-APIs/D3D11_Format.png" alt="Notes-on-Data-Formats-of-Graphics-APIs/D3D11_Format"></p>
-<p>对于OpenGL中的corlor format和depth format，官方spec对于internal_format的描述表格里，记录了相应的解析方式；在表格说明里面，color format中无前缀的是<code>unsigned normalized fixed-point</code>，depth format中无前缀的是<code>fixed-point</code>，意思是有符号定点数，那么<code>GL_DEPTH_COMPONENT24</code>的范围就是[-1, 1]了？这还是我疑惑的一点，需要验证是不是可以直接写入负数到深度里。</p>
-<p><strong>sized internal color formats</strong><br>  <img src="/../images/Notes-on-Data-Formats-of-Graphics-APIs/opengl_color_format.png" alt="Notes-on-Data-Formats-of-Graphics-APIs/opengl_color_format"></p>
-<p><strong>sized internal depth and stencil formats</strong><br>  <img src="/../images/Compare-Mode-in-OpenGL-Sampler/depth_format.png" alt="Compare-Mode-in-OpenGL-Sampler/depth_format"></p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul>
-<li><a target="_blank" rel="noopener" href="https://registry.khronos.org/OpenGL-Refpages/gl4/html/glVertexAttribPointer.xhtml">glVertexAttribPointer</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.khronos.org/opengl/wiki/OpenGL_Type">OpenGL Type</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/ocornut/imgui/discussions/6049"><strong>vertex description for color sent as VK_FORMAT_R8G8B8A8_UNORM but consumed as vec4</strong></a></li>
-<li><a target="_blank" rel="noopener" href="https://docs.vulkan.org/spec/latest/chapters/formats.html#_identification_of_formats">Vulkan Identification of Formats</a></li>
-<li><a target="_blank" rel="noopener" href="https://microsoft.github.io/DirectX-Specs/d3d/archive/D3D11_3_FunctionalSpec.htm#3.2.3.1%20Terminology">Direct3D definition</a></li>
-<li><a target="_blank" rel="noopener" href="https://registry.khronos.org/OpenGL/specs/gl/glspec46.core.pdf">glspec46.core p47</a></li>
-<li><a target="_blank" rel="noopener" href="https://docs.vulkan.org/spec/latest/chapters/fundamentals.html#fundamentals-fixedconv">Vulkan Fixed-Point Data Conversions</a></li>
-</ul>
-
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css">
     </div>
 
     
@@ -281,8 +238,8 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2025/04/15/Graphics-Samples-Collections/" rel="prev" title="Graphics Samples Collections">
-      <i class="fa fa-chevron-left"></i> Graphics Samples Collections
+    <a href="/2025/04/16/Notes-on-Data-Formats-of-Graphics-APIs-1/" rel="prev" title="Notes on Data Formats of Graphics APIs(1)">
+      <i class="fa fa-chevron-left"></i> Notes on Data Formats of Graphics APIs(1)
     </a></div>
       <div class="post-nav-item"></div>
     </div>
@@ -343,7 +300,6 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">1.</span> <span class="nav-text">参考</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -357,7 +313,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">20</span>
+          <span class="site-state-item-count">21</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
