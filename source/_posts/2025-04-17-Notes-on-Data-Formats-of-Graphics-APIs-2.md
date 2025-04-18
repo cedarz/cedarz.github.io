@@ -32,7 +32,7 @@ void glTexImage2D(GLenum target,
 > **Note** Even if data is NULL, the format and type fields must be legal fields, or the entire call will fail with a GL_INVALID_ENUM error.[<sup>Texture_Storage</sup>](https://www.khronos.org/opengl/wiki/Texture_Storage)
 
 
-`glTexImage2D`做了两件事情，分配显存，并上传数据，所以需要格式的兼容，这个过程也被称作`Mutable Storage`。 还有一组`Immutable Storage`的分配方式，把`glTexImage2D`的分配显存和上传数据的两个过程分开了，如此，在某些情况下（比如Texture as RT），可以不关心`format/type`的设置了。
+`glTexImage2D`做了两件事情，分配显存，并上传数据，所以需要格式的兼容，这个显存分配过程也被称作`Mutable Storage`。 还有一组`Immutable Storage`的分配方式，把`glTexImage2D`的分配显存和上传数据的两个过程分开，如此，在某些情况下（比如Texture as RT），可以不关心`format/type`的设置了。
 ``` c++
 void glTexStorage2D( GLenum target​, GLint levels​, GLint internalformat​, GLsizei width​, GLsizei height​ );
 void glTexSubImage2D(GLenum target​, GLint level​, GLint xoffset​, GLint yoffset​, GLsizei width​, GLsizei height​, GLenum format​, GLenum type​, const GLvoid * data​);
