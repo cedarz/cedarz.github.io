@@ -32,7 +32,8 @@ D3D的文档写的也很清楚，而且Vulkan和DX的数据格式format enum都�
 
  ![Notes-on-Data-Formats-of-Graphics-APIs/D3D11_Format](../images/Notes-on-Data-Formats-of-Graphics-APIs/D3D11_Format.png)
 
-对于OpenGL中的corlor format和depth format，官方spec对于internal_format的描述表格里，记录了相应的解析方式；在表格说明里面，color format中无前缀的是`unsigned normalized fixed-point`，depth format中无前缀的是`fixed-point`，意思是有符号定点数，那么`GL_DEPTH_COMPONENT24`的范围就是[-1, 1]了？这还是我疑惑的一点，需要验证是不是可以直接写入负数到深度里。
+对于OpenGL中的corlor format和depth format，官方spec对于internal_format的描述表格里，记录了相应的解析方式；在表格说明里面，color format中无前缀的是`unsigned normalized fixed-point`，depth format中无前缀的是`fixed-point`，意思是有符号定点数，那么`GL_DEPTH_COMPONENT24`的范围就是[-1, 1]了？这也是我疑惑的一点，需要验证是不是可以直接写入负数到深度里。后续看到在[OpenGL Depth formats](https://www.khronos.org/opengl/wiki/Image_Format#Depth_formats)描述，深度是映射到[0, 1]。
+> The normalized integer versions work similar to normalized integers for color formats; they map the integer range onto the depth values [0, 1]
 
 **sized internal color formats**
   ![Notes-on-Data-Formats-of-Graphics-APIs/opengl_color_format](../images/Notes-on-Data-Formats-of-Graphics-APIs/opengl_color_format.png)
