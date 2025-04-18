@@ -53,7 +53,7 @@ void glTexSubImage2D(GLenum target​, GLint level​, GLint xoffset​, GLint y
 ![Notes-on-Data-Formats-of-Graphics-APIs/color_format_syntax](../images/Notes-on-Data-Formats-of-Graphics-APIs/color_format_syntax.jpeg)
 
 
-# Pixel Formats Cheatsheet
+# Pixel Formats Cheatsheets
 [es3.0 glTexImage2D Table 2. Sized Internal Formats](https://registry.khronos.org/OpenGL-Refpages/es3.0/html/glTexImage2D.xhtml)
 [gl_texture_format_util.hpp](https://gist.github.com/alexsr/034bb802ae43a1adb0863b735fda0ab9)
 [OpenGL image formats](https://gist.github.com/Kos/4739337)
@@ -65,5 +65,5 @@ void glTexSubImage2D(GLenum target​, GLint level​, GLint xoffset​, GLint y
 - [gl_texture_format_util.hpp](https://gist.github.com/alexsr/034bb802ae43a1adb0863b735fda0ab9)
 - [OpenGL image formats](https://gist.github.com/Kos/4739337)
 - [Difference between format and internalformat](https://stackoverflow.com/questions/34497195/difference-between-format-and-internalformat)
-- OpenGL formats Equivalent in Vulkan，[1](https://chromium.googlesource.com/external/github.com/KhronosGroup/OpenXR-SDK/+/9d9ae386adf791576a839ceb733cc577224b7985/external/include/vulkan/vk_format.h), [2](https://github.com/KhronosGroup/Vulkan-Samples-Deprecated/blob/master/external/include/vulkan/vk_format.h)
+- OpenGL formats Equivalent in Vulkan [<u>1</u>](https://chromium.googlesource.com/external/github.com/KhronosGroup/OpenXR-SDK/+/9d9ae386adf791576a839ceb733cc577224b7985/external/include/vulkan/vk_format.h) [<u>2</u>](https://github.com/KhronosGroup/Vulkan-Samples-Deprecated/blob/master/external/include/vulkan/vk_format.h)
 - [gl_format.h](https://github.com/KhronosGroup/Vulkan-Samples-Deprecated/blob/master/external/include/GL/gl_format.h)，可以参考一下，有错误，比如`GL_R32UI`对应`GL_RED`
