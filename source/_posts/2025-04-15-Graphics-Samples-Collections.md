@@ -29,3 +29,9 @@ tags:
 3. [Graphics and Compute Samples 2.0](https://docs.nvidia.com/gameworks/content/gameworkslibrary/graphicssamples/graphics_samples_v2_0.htm): [<u>Direct3D Samples</u>](https://docs.nvidia.com/gameworks/content/gameworkslibrary/graphicssamples/d3d_samples/direct3d_index.htm),[<u>OpenGL Samples</u>](https://docs.nvidia.com/gameworks/content/gameworkslibrary/graphicssamples/opengl_samples/opengl_index.htm)
 - [Documentation](https://docs.nvidia.com/gameworks/index.html#gameworkslibrary/graphicssamples/graphics_samples.htm)
 
+# Vendor SDK
+1. [PowerVR SDK](https://github.com/powervr-graphics/Native_SDK)
+> C++ cross-platform 3D graphics SDK. Includes demos & helper code (resource loading etc.) to speed up development of Vulkan, OpenGL ES 2.0 & 3.x applications
+> PVRVFrame is included as part of the PowerVR SDK and provides a set of desktop **emulation** libraries for OpenGL ES wrapping desktop OpenGL allowing deployment of OpenGL ES applications on desktop Windows, macOS, and Linux which can help to speed up development times and improve productivity.
+2. [SnapdragonStudios/adreno-gpu-opengl-es-code-sample-framework](https://github.com/SnapdragonStudios/adreno-gpu-opengl-es-code-sample-framework)
+> This repository contains an OpenGL ES Framework for game and graphics developers to get up and running quickly for creating sample content and rapid prototyping. It is designed to be easy to build and have the basic building blocks needed for creating an Android APK with OpenGL ES functionality including an input system, as well as other helper utilities for loading resources, etc. This Framework has been extracted from and is a subset of the Adreno GPU SDK.
