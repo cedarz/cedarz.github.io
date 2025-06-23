@@ -17,4 +17,6 @@ Radiance在胶平面上是连续函数，但是渲染的输出是离散的像素
 
 ## 7.1 Sampling Theory
 
-the Fourier transform of a shah function with period $T$ is another shah function with period $1/T$. This reciprocal relationship between periods is important to keep in mind: it means that if the samples are farther apart in the spatial domain, they are closer together in the frequency domain.
+the Fourier transform of a shah function with period$T$ is another shah function with period$1/T$. This reciprocal relationship between periods is important to keep in mind: it means that if the samples are farther apart in the spatial domain, they are closer together in the frequency domain.
+
+- Antialiasing Techniques

@@ -169,3 +169,6 @@ deploy:
   repo: git@github.com:cedarz/cedarz.github.io.git
   branch: master
 
+math:
+  engine: 'mathjax'
+
