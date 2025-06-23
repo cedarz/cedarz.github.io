@@ -25,8 +25,14 @@ jobs:
             ${{ runner.OS }}-npm-cache
       - name: Install Dependencies
         run: npm install
+      - name: Install pandoc
+        run: curl -s -L https://github.com/jgm/pandoc/releases/download/2.18/pandoc-2.18-linux-amd64.tar.gz | tar xvzf - -C $RUNNER_TOOL_CACHE/
       - name: Build
-        run: npm run build
+        run: |
+          # add pandoc to PATH
+          export PATH="$PATH:$RUNNER_TOOL_CACHE/pandoc-2.18/bin"
+          npm run build
+
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
