@@ -30,17 +30,17 @@
 <meta property="og:site_name" content="Integrator">
 <meta property="og:description" content="OpenGL 4.0和DirectX 11提供了原子操作(atomic operation），为GPU上并行创建链表数据结构提供了便利。基于此算法的per-pixel link lists可以应用到order independent transparency，实现像素的程序化混合，实现顺序无关的半透明效果，避免了程序员在api层面对于略显无力的排序的折磨。 Per-Pixel Link ListP">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://darkpixel.top/images/Per-Pixel-Link-List/PPLL.png">
-<meta property="og:image" content="https://darkpixel.top/images/Per-Pixel-Link-List/back-to-front.png">
-<meta property="og:image" content="https://darkpixel.top/images/Per-Pixel-Link-List/flickering.gif">
-<meta property="og:image" content="https://darkpixel.top/images/Per-Pixel-Link-List/hair.png">
+<meta property="og:image" content="https://darkpixel.top/2025/04/08/images/Per-Pixel-Link-List/PPLL.png">
+<meta property="og:image" content="https://darkpixel.top/2025/04/08/images/Per-Pixel-Link-List/back-to-front.png">
+<meta property="og:image" content="https://darkpixel.top/2025/04/08/images/Per-Pixel-Link-List/flickering.gif">
+<meta property="og:image" content="https://darkpixel.top/2025/04/08/images/Per-Pixel-Link-List/hair.png">
 <meta property="article:published_time" content="2025-04-08T16:21:37.000Z">
-<meta property="article:modified_time" content="2025-06-20T09:26:02.602Z">
+<meta property="article:modified_time" content="2025-06-23T04:26:45.933Z">
 <meta property="article:author" content="黑色像素">
 <meta property="article:tag" content="Computer Graphics">
 <meta property="article:tag" content="Rendering">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://darkpixel.top/images/Per-Pixel-Link-List/PPLL.png">
+<meta name="twitter:image" content="https://darkpixel.top/2025/04/08/images/Per-Pixel-Link-List/PPLL.png">
 
 <link rel="canonical" href="https://darkpixel.top/2025/04/08/Per-Pixel-Link-List/">
 
@@ -205,7 +205,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-06-20 09:26:02" itemprop="dateModified" datetime="2025-06-20T09:26:02+00:00">2025-06-20</time>
+                <time title="修改时间：2025-06-23 04:26:45" itemprop="dateModified" datetime="2025-06-23T04:26:45+00:00">2025-06-23</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -246,7 +246,7 @@
 <li>把新头节点数据写入到Node Buffer，旧头节点指针作为新头节点的<code>next</code>字段</li>
 </ol>
 <p>其实就是一个游标代替指针、数据存在全局大数组的链表的构造过程，描述的不好，一图胜千言：</p>
-<p><img src="/../images/Per-Pixel-Link-List/PPLL.png" alt="Per-Pixel-Link-List/PPLL"></p>
+<p><img src="../images/Per-Pixel-Link-List/PPLL.png" alt="Per-Pixel-Link-List/PPLL"></p>
 <h1 id="Order-Independent-Transparency"><a href="#Order-Independent-Transparency" class="headerlink" title="Order Independent Transparency"></a>Order Independent Transparency</h1><p>每一个链表存储的是光栅化到该像素位置的所有片元数据，把这些片元按照顺序混合起来，叫做<code>resolve</code>操作，类似mutisample的resolve操作。</p>
 <p>也是三步，论文写的比较清楚：</p>
 <blockquote>
@@ -266,28 +266,26 @@
 <p>在GLSL中实现插入排序时遇到了个经典问题，<code>uint</code>类型迭代变量递减到<code>-1</code>时候，warp到<code>max uint</code>，循环退出失败然后显存访存越界，导致屏幕黑掉一下，然后程序crash掉，还会影响到其他程序窗口的显示；让驱动小小的震撼一下。</p>
 <p><strong>Blend顺序</strong></p>
 <p>比较常用而且简单的混合方式是back-to-front，PPLL也不例外。但是考虑的具体实现，需要考虑背景层。如果不透明物体的渲染结果，我们能够轻易的拿到其贴图，比如vulkan的swapchain的image，或者之前的渲染的都render-to-texture（这种情况下，渲染半透明时也要绑定同样的fbo，以利用不透明pass的深度结果做深度测试），就可以轻易的使用back-to-front方式做blend；如果不能拿到不透明pass的渲染结果，比如使用OpenGL而且都往default framebuffer上渲，那就得考虑一下front-to-back的blend方式了，<code>Dual Depth Peeling</code>是最先吃螃蟹的论文。</p>
-<p>但是论文描述里面比较费解，好像还有错误，看的头疼。可能未必是论文的问题，也许是我对SRC&#x2F;DST的理解有误。<code>glBlendFunc</code>的规范里面，DST是framebuffer上的，SRC是当前渲染，跟论文好像是反的。但是整体思路就是，从front到back的每一层，先预乘alpha，同时累积之前所有层的<code>1.0 - alpha</code>的乘积，把这俩相加，再加上之前成的blend结果。看图说话吧。</p>
-<p><img src="/../images/Per-Pixel-Link-List/back-to-front.png" alt="Per-Pixel-Link-List/back-to-front"></p>
+<p>但是论文描述里面比较费解，好像还有错误，看的头疼。可能未必是论文的问题，也许是我对SRC/DST的理解有误。<code>glBlendFunc</code>的规范里面，DST是framebuffer上的，SRC是当前渲染，跟论文好像是反的。但是整体思路就是，从front到back的每一层，先预乘alpha，同时累积之前所有层的<code>1.0 - alpha</code>的乘积，把这俩相加，再加上之前成的blend结果。看图说话吧。</p>
+<p><img src="../images/Per-Pixel-Link-List/back-to-front.png" alt="Per-Pixel-Link-List/back-to-front"></p>
 <p><strong>遇到的问题</strong></p>
 <ol>
 <li><code>uint</code>递减到-1导致内存越界问题</li>
-<li>窗口设置最大或者相机拉近时出现严重的闪烁<br><img src="/../images/Per-Pixel-Link-List/flickering.gif" alt="Per-Pixel-Link-List/flickering"></li>
+<li>窗口设置最大或者相机拉近时出现严重的闪烁<br><img src="../images/Per-Pixel-Link-List/flickering.gif" alt="Per-Pixel-Link-List/flickering"></li>
 </ol>
 <p>论文中明示了坑点：</p>
 <blockquote>
 <p>The size of the node buffer must be large enough to handle all possible fragments, or there must be a scheme to handle overflow.</p>
-</blockquote>
-<blockquote>
 <p>The creation of a node buffer can become an unreasonable burden on video memory requirements when render dimensions, the size of the node structure, and the number of fragments to store become large. For this reason it is important to be economical with those variables when circumstances allow it. For instance, the node structure can be optimized so its variables are stored in packed formats instead of floating-point vectors (fragment color in particular would benefit greatly from this approach).</p>
 </blockquote>
 <ul>
 <li>具体原因不清，可能因为分辨率增大或者渲染占据更大面积，导致片元数量增加，PPLL的node buffer和显存有限，导致部分片元缺失，闪烁中的白色应该就是背景的颜色</li>
 <li>增加node buffer的数量能够缓解，但是不能消除</li>
-<li>使用<code>packUnorm</code>&#x2F;<code>unpackSnorm4x8</code>压缩color居然立竿见影，消除了问题，明明数量没有变化啊；难道是因为同样的数量，没压缩之前申请的内存超出了最大值，实际申请到的node数量其实少很多？？</li>
+<li>使用<code>packUnorm</code>/<code>unpackSnorm4x8</code>压缩color居然立竿见影，消除了问题，明明数量没有变化啊；难道是因为同样的数量，没压缩之前申请的内存超出了最大值，实际申请到的node数量其实少很多？？</li>
 </ul>
 <p>此处暂时没能验证，存疑~~</p>
 <h1 id="渲染结果"><a href="#渲染结果" class="headerlink" title="渲染结果"></a>渲染结果</h1><p>最后贴一张头发OIT半透明渲染的结果~</p>
-<p><img src="/../images/Per-Pixel-Link-List/hair.png" alt="Per-Pixel-Link-List/flickering"></p>
+<p><img src="../images/Per-Pixel-Link-List/hair.png" alt="Per-Pixel-Link-List/flickering"></p>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul>
 <li><a target="_blank" rel="noopener" href="https://dl.acm.org/doi/10.1111/j.1467-8659.2010.01725.x">Real-Time Concurrent Linked List Construction on the GPU</a></li>
 <li><a target="_blank" rel="noopener" href="https://developer.download.nvidia.com/SDK/10/opengl/src/dual_depth_peeling/doc/DualDepthPeeling.pdf">Order Independent Transparency with Dual Depth Peeling</a></li>
@@ -491,6 +489,8 @@
 
 
 
+
+  
 
   
 

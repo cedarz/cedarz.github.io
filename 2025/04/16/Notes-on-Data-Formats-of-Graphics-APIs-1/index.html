@@ -30,16 +30,16 @@
 <meta property="og:site_name" content="Integrator">
 <meta property="og:description" content="API是渲染里面最稀碎最脏的一块，砖搬的越多，问题重复遇到的可能性也越大；有些东西以前遇到过，现在又遇到了；有些以前很熟悉，现在又忘记了。虽然不一定是高明的东西，记录一下，下次再忘记可以翻一翻。古人云，“纸上得来终觉浅，好记性不如烂笔头”，诚不欺我。 今天就来记录一下，各种Graphics API里面，使用的数据格式对于定点数的处理。 数据格式这里主要记录两方面的使用，其一就是顶点数据，其二是纹理">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://darkpixel.top/images/Notes-on-Data-Formats-of-Graphics-APIs/D3D11_Format.png">
-<meta property="og:image" content="https://darkpixel.top/images/Notes-on-Data-Formats-of-Graphics-APIs/opengl_color_format.png">
-<meta property="og:image" content="https://darkpixel.top/images/Compare-Mode-in-OpenGL-Sampler/depth_format.png">
+<meta property="og:image" content="https://darkpixel.top/2025/04/16/images/Notes-on-Data-Formats-of-Graphics-APIs/D3D11_Format.png">
+<meta property="og:image" content="https://darkpixel.top/2025/04/16/images/Notes-on-Data-Formats-of-Graphics-APIs/opengl_color_format.png">
+<meta property="og:image" content="https://darkpixel.top/2025/04/16/images/Compare-Mode-in-OpenGL-Sampler/depth_format.png">
 <meta property="article:published_time" content="2025-04-16T22:47:57.000Z">
-<meta property="article:modified_time" content="2025-06-20T09:26:02.602Z">
+<meta property="article:modified_time" content="2025-06-23T04:26:45.934Z">
 <meta property="article:author" content="黑色像素">
 <meta property="article:tag" content="Computer Graphics">
 <meta property="article:tag" content="OpenGL">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://darkpixel.top/images/Notes-on-Data-Formats-of-Graphics-APIs/D3D11_Format.png">
+<meta name="twitter:image" content="https://darkpixel.top/2025/04/16/images/Notes-on-Data-Formats-of-Graphics-APIs/D3D11_Format.png">
 
 <link rel="canonical" href="https://darkpixel.top/2025/04/16/Notes-on-Data-Formats-of-Graphics-APIs-1/">
 
@@ -204,7 +204,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-06-20 09:26:02" itemprop="dateModified" datetime="2025-06-20T09:26:02+00:00">2025-06-20</time>
+                <time title="修改时间：2025-06-23 04:26:45" itemprop="dateModified" datetime="2025-06-23T04:26:45+00:00">2025-06-23</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -237,8 +237,6 @@
 <p>glVertexAttribPointer中描述，如果设置了归一化<code>normalized</code>，传入的有符号整型被归一到[-1, 1]，无符号整型被归一到[0, 1]。</p>
 <blockquote>
 <p>For glVertexAttribPointer, specifies whether <code>fixed-point data</code> values should be normalized (GL_TRUE) or converted directly as fixed-point values (GL_FALSE) when they are accessed.</p>
-</blockquote>
-<blockquote>
 <p>For glVertexAttribPointer, if normalized is set to GL_TRUE, it indicates that values stored in an integer format are to be mapped to the range [-1,1] (for signed values) or [0,1] (for unsigned values) when they are accessed and converted to floating point. Otherwise, values will be converted to floats directly without normalization. <a target="_blank" rel="noopener" href="https://registry.khronos.org/OpenGL-Refpages/gl4/html/glVertexAttribPointer.xhtml"><sup>glVertexAttribPointer</sup></a></p>
 </blockquote>
 <p>OpenGL和Vulkan使用了同样的表述，毕竟来自同一家：如果<code>vertex attributes and pixel color or depth components</code>使用整型来表示，它们通常被认为是<code>normalized</code>。在使用前会转为浮点型，转换的算法很简单，可以参考OpenGL和Vulkan的手册。</p>
@@ -247,15 +245,15 @@
 </blockquote>
 <p>D3D的文档写的也很清楚，而且Vulkan和DX的数据格式format enum都比较明了一些，比如Vulkan的VK_FORMAT_D24_UNORM_S8_UINT、DX的DXGI_FORMAT_D24_UNORM_S8_UINT，和OpenGL的GL_DEPTH24_STENCIL8，对比一下，是不是要吐血。</p>
 <blockquote>
-<p>Depth&#x2F;stencil formats are considered opaque and need not be stored in the exact number of bits per texel or component ordering indicated by the format enum. However, implementations must not substitute a different depth or stencil precision than is described in the format (e.g. D16 must not be implemented as D24 or D32).<a target="_blank" rel="noopener" href="https://docs.vulkan.org/spec/latest/chapters/formats.html#formats-depth-stencil"><sup> Vulkan Depth&#x2F;Stencil Formats</sup></a></p>
+<p>Depth/stencil formats are considered opaque and need not be stored in the exact number of bits per texel or component ordering indicated by the format enum. However, implementations must not substitute a different depth or stencil precision than is described in the format (e.g. D16 must not be implemented as D24 or D32).<a target="_blank" rel="noopener" href="https://docs.vulkan.org/spec/latest/chapters/formats.html#formats-depth-stencil"><sup> Vulkan Depth/Stencil Formats</sup></a></p>
 </blockquote>
-<p> <img src="/../images/Notes-on-Data-Formats-of-Graphics-APIs/D3D11_Format.png" alt="Notes-on-Data-Formats-of-Graphics-APIs/D3D11_Format"></p>
+<p> <img src="../images/Notes-on-Data-Formats-of-Graphics-APIs/D3D11_Format.png" alt="Notes-on-Data-Formats-of-Graphics-APIs/D3D11_Format"></p>
 <p>对于OpenGL中的corlor format和depth format，官方spec对于internal_format的描述表格里，记录了相应的解析方式；在表格说明里面，color format中无前缀的是<code>unsigned normalized fixed-point</code>，depth format中无前缀的是<code>fixed-point</code>，意思是有符号定点数，那么<code>GL_DEPTH_COMPONENT24</code>的范围就是[-1, 1]了？这也是我疑惑的一点，需要验证是不是可以直接写入负数到深度里。后续看到在<a target="_blank" rel="noopener" href="https://www.khronos.org/opengl/wiki/Image_Format#Depth_formats">OpenGL Depth formats</a>描述，深度是映射到[0, 1]。</p>
 <blockquote>
 <p>The normalized integer versions work similar to normalized integers for color formats; they map the integer range onto the depth values [0, 1]</p>
 </blockquote>
-<p><strong>sized internal color formats</strong><br>  <img src="/../images/Notes-on-Data-Formats-of-Graphics-APIs/opengl_color_format.png" alt="Notes-on-Data-Formats-of-Graphics-APIs/opengl_color_format"></p>
-<p><strong>sized internal depth and stencil formats</strong><br>  <img src="/../images/Compare-Mode-in-OpenGL-Sampler/depth_format.png" alt="Compare-Mode-in-OpenGL-Sampler/depth_format"></p>
+<p><strong>sized internal color formats</strong><br>  <img src="../images/Notes-on-Data-Formats-of-Graphics-APIs/opengl_color_format.png" alt="Notes-on-Data-Formats-of-Graphics-APIs/opengl_color_format"></p>
+<p><strong>sized internal depth and stencil formats</strong><br>  <img src="../images/Compare-Mode-in-OpenGL-Sampler/depth_format.png" alt="Compare-Mode-in-OpenGL-Sampler/depth_format"></p>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul>
 <li><a target="_blank" rel="noopener" href="https://blarg.ca/2020/10/11/fixed-point-math">Fixed Point Math</a></li>
 <li><a target="_blank" rel="noopener" href="https://de.mathworks.com/help/simulink/ug/fixed-point-numbers.html">Fixed-Point Numbers</a></li>
@@ -460,6 +458,8 @@
 
 
 
+
+  
 
   
 
