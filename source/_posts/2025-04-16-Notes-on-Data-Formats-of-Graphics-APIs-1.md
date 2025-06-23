@@ -30,16 +30,19 @@ sented as integers, they are often (but not always) considered to be normalized.
 D3D的文档写的也很清楚，而且Vulkan和DX的数据格式format enum都比较明了一些，比如Vulkan的VK_FORMAT_D24_UNORM_S8_UINT、DX的DXGI_FORMAT_D24_UNORM_S8_UINT，和OpenGL的GL_DEPTH24_STENCIL8，对比一下，是不是要吐血。
 > Depth/stencil formats are considered opaque and need not be stored in the exact number of bits per texel or component ordering indicated by the format enum. However, implementations must not substitute a different depth or stencil precision than is described in the format (e.g. D16 must not be implemented as D24 or D32).[<sup> Vulkan Depth/Stencil Formats</sup>](https://docs.vulkan.org/spec/latest/chapters/formats.html#formats-depth-stencil)
 
- ![Notes-on-Data-Formats-of-Graphics-APIs/D3D11_Format](../images/Notes-on-Data-Formats-of-Graphics-APIs/D3D11_Format.png)
+ <!-- ![Notes-on-Data-Formats-of-Graphics-APIs/D3D11_Format](../images/Notes-on-Data-Formats-of-Graphics-APIs/D3D11_Format.png) -->
+ {% img Notes-on-Data-Formats-of-Graphics-APIs/D3D11_Format /images/Notes-on-Data-Formats-of-Graphics-APIs/D3D11_Format.png %}
 
 对于OpenGL中的corlor format和depth format，官方spec对于internal_format的描述表格里，记录了相应的解析方式；在表格说明里面，color format中无前缀的是`unsigned normalized fixed-point`，depth format中无前缀的是`fixed-point`，意思是有符号定点数，那么`GL_DEPTH_COMPONENT24`的范围就是[-1, 1]了？这也是我疑惑的一点，需要验证是不是可以直接写入负数到深度里。后续看到在[OpenGL Depth formats](https://www.khronos.org/opengl/wiki/Image_Format#Depth_formats)描述，深度是映射到[0, 1]。
 > The normalized integer versions work similar to normalized integers for color formats; they map the integer range onto the depth values [0, 1]
 
 **sized internal color formats**
-  ![Notes-on-Data-Formats-of-Graphics-APIs/opengl_color_format](../images/Notes-on-Data-Formats-of-Graphics-APIs/opengl_color_format.png)
+  <!-- ![Notes-on-Data-Formats-of-Graphics-APIs/opengl_color_format](../images/Notes-on-Data-Formats-of-Graphics-APIs/opengl_color_format.png) -->
+  {% img Notes-on-Data-Formats-of-Graphics-APIs/opengl_color_format /images/Notes-on-Data-Formats-of-Graphics-APIs/opengl_color_format.png %}
 
 **sized internal depth and stencil formats**
-  ![Compare-Mode-in-OpenGL-Sampler/depth_format](../images/Compare-Mode-in-OpenGL-Sampler/depth_format.png)
+  <!-- ![Compare-Mode-in-OpenGL-Sampler/depth_format](../images/Compare-Mode-in-OpenGL-Sampler/depth_format.png) -->
+  {% img Compare-Mode-in-OpenGL-Sampler/depth_format /images/Compare-Mode-in-OpenGL-Sampler/depth_format.png %}
 
 
 

@@ -61,14 +61,16 @@ DX11/12都没有明确的API和数据结构支持wide line的渲染。只发现[
 **具体实现**
 
 根据[OpenGL Line Width](https://stackoverflow.com/questions/3484260/opengl-line-width)中[rabbid76](https://stackoverflow.com/users/5577765/rabbid76)的回答，整理了一套可以运行的代码示例，我是直接拖进`LearnOpenGL`运行的。运行结果如下：
-![line_width](../images/2025-02-17-Render-line/line_width.png)
+<!-- ![line_width](../images/2025-02-17-Render-line/line_width.png) -->
+{% img line_width /images/Render-line/line_width.png %}
 
 {% include_code line_width.cpp lang:cpp from:23 to:60 line_width.cpp %}
 
 点评一下：
 - 考虑了line_strip连接处的法线，利用连接处前后两个线段法线的平分线作为法线法向，并通过`cos`计算应该沿法线延申的长度；给顶点buffer多添加首点和末点，减少判断
 - 接近平行的两端线段，`cos`值接近于0，除法操作导致顶点沿着法线延伸的长度过大，需要处理一下，比如`max(dot(v_miter, nv_line), 0.8)`，可以缓解不能消除
-![line_width_defact](../images/2025-02-17-Render-line/defect.png)
+<!-- ![line_width_defect](../images/2025-02-17-Render-line/defect.png) -->
+{% img line_width_defect /images/Render-line/defect.png %}
 
 # 抗锯齿
 

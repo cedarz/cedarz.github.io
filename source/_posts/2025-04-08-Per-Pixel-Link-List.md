@@ -26,7 +26,8 @@ PPLL的实现需要三个数据结构：头结点指针Buffer、链表Node Buffe
 
 其实就是一个游标代替指针、数据存在全局大数组的链表的构造过程，描述的不好，一图胜千言：
 
-![Per-Pixel-Link-List/PPLL](../images/Per-Pixel-Link-List/PPLL.png)
+<!-- ![Per-Pixel-Link-List/PPLL](../images/Per-Pixel-Link-List/PPLL.png) -->
+{% img Per-Pixel-Link-List/PPLL /images/Per-Pixel-Link-List/PPLL.png %}
 
 # Order Independent Transparency
 
@@ -54,13 +55,15 @@ PPLL的实现需要三个数据结构：头结点指针Buffer、链表Node Buffe
 
 但是论文描述里面比较费解，好像还有错误，看的头疼。可能未必是论文的问题，也许是我对SRC/DST的理解有误。`glBlendFunc`的规范里面，DST是framebuffer上的，SRC是当前渲染，跟论文好像是反的。但是整体思路就是，从front到back的每一层，先预乘alpha，同时累积之前所有层的`1.0 - alpha`的乘积，把这俩相加，再加上之前成的blend结果。看图说话吧。
 
-![Per-Pixel-Link-List/back-to-front](../images/Per-Pixel-Link-List/back-to-front.png)
+<!-- ![Per-Pixel-Link-List/back-to-front](../images/Per-Pixel-Link-List/back-to-front.png) -->
+{% img Per-Pixel-Link-List/back-to-front /images/Per-Pixel-Link-List/back-to-front.png %}
 
 
 **遇到的问题**
 1. `uint`递减到-1导致内存越界问题
 2. 窗口设置最大或者相机拉近时出现严重的闪烁
-![Per-Pixel-Link-List/flickering](../images/Per-Pixel-Link-List/flickering.gif)
+<!-- ![Per-Pixel-Link-List/flickering](../images/Per-Pixel-Link-List/flickering.gif) -->
+{% img Per-Pixel-Link-List/flickering /images/Per-Pixel-Link-List/flickering.png %}
 
 论文中明示了坑点：
 > The size of the node buffer must be large enough to handle all possible fragments, or there must be a scheme to handle overflow.
@@ -78,7 +81,8 @@ PPLL的实现需要三个数据结构：头结点指针Buffer、链表Node Buffe
 
 最后贴一张头发OIT半透明渲染的结果~
 
-![Per-Pixel-Link-List/flickering](../images/Per-Pixel-Link-List/hair.png)
+<!-- ![Per-Pixel-Link-List/flickering](../images/Per-Pixel-Link-List/hair.png) -->
+{% img Per-Pixel-Link-List/hair /images/Per-Pixel-Link-List/hair.png %}
 
 # 参考
 - [Real-Time Concurrent Linked List Construction on the GPU](https://dl.acm.org/doi/10.1111/j.1467-8659.2010.01725.x)

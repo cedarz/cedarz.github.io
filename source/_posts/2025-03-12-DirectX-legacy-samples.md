@@ -27,7 +27,8 @@ walbourn大佬致力于历史版本的D3DX缺失后而不使用就版本redist�
 # nuget包管理
 
 是开源的包管理软件，`Visual Studio`自从`VS2012`开始集成，`Microsoft.DXSDK.D3D`就可以通过`NuGet`方便的安装使用。
-![nuget Microsoft.DXSDK.D3DX](../images/2025-03-12-DirectX-legacy-samples/nuget.png)
+<!-- ![nuget Microsoft.DXSDK.D3DX](../images/2025-03-12-DirectX-legacy-samples/nuget.png) -->
+{% img nuget Microsoft.DXSDK.D3DX /images/DirectX-legacy-samples/nuget.png %}
 
 # Legacy DirectX samples
 

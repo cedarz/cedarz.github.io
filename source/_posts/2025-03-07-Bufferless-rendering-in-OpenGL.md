@@ -26,7 +26,7 @@ void main()
 ```
 
 就是构造这么一个三角形：
-{% img fullscreentriangle /images/2025-03-07-Bufferless-rendering-in-OpenGL/fullscreentriangle.png 400 400 fullscreentriangle fullscreentriangle %}
+{% img fullscreentriangle /images/Bufferless-rendering-in-OpenGL/fullscreentriangle.png 400 400 fullscreentriangle fullscreentriangle %}
 
 # with or without VAO?
 

@@ -50,7 +50,8 @@ void glTexSubImage2D(GLenum target​, GLint level​, GLint xoffset​, GLint y
 
 另外，整型类型的Texture，不能设置为`linear filtering`即`GL_LINEAR`，只能设置为`GL_NEAREST`或者`GL_NEAREST_MIPMAP_NEAREST`。
 
-![Notes-on-Data-Formats-of-Graphics-APIs/color_format_syntax](../images/Notes-on-Data-Formats-of-Graphics-APIs/color_format_syntax.jpeg)
+<!-- ![Notes-on-Data-Formats-of-Graphics-APIs/color_format_syntax](../images/Notes-on-Data-Formats-of-Graphics-APIs/color_format_syntax.jpeg) -->
+{% img Notes-on-Data-Formats-of-Graphics-APIs/color_format_syntax /images/Notes-on-Data-Formats-of-Graphics-APIs/color_format_syntax.jpeg %}
 
 
 # Pixel Formats Cheatsheets

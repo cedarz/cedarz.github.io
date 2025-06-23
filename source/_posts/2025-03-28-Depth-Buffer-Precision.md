@@ -20,7 +20,8 @@ tags:
 # Reversed-Z Depth Buffer
 
 `D3DXMatrixPerspectiveFovRH ` [D3DXMatrixPerspectiveFovRH](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dxmatrixperspectivefovrh?redirectedfrom=MSDN)
-![](../images/Depth-Buffer-Precision/Reversed-Z-Depth-Buffer-001.png)
+<!-- ![](../images/Depth-Buffer-Precision/Reversed-Z-Depth-Buffer-001.png) -->
+{% img Depth-Buffer-Precision/Reversed-Z-Depth-Buffer-001 /images/Depth-Buffer-Precision/Reversed-Z-Depth-Buffer-001.png %}
 
 # 参考
 - [Reversed-Z in OpenGL](https://nlguillemot.wordpress.com/2016/12/07/reversed-z-in-opengl/)
