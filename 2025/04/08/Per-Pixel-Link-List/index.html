@@ -30,16 +30,17 @@
 <meta property="og:site_name" content="Integrator">
 <meta property="og:description" content="OpenGL 4.0和DirectX 11提供了原子操作(atomic operation），为GPU上并行创建链表数据结构提供了便利。基于此算法的per-pixel link lists可以应用到order independent transparency，实现像素的程序化混合，实现顺序无关的半透明效果，避免了程序员在api层面对于略显无力的排序的折磨。 Per-Pixel Link List">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://darkpixel.top/2025/04/08/images/Per-Pixel-Link-List/PPLL.png">
-<meta property="og:image" content="https://darkpixel.top/2025/04/08/images/Per-Pixel-Link-List/back-to-front.png">
-<meta property="og:image" content="https://darkpixel.top/2025/04/08/images/Per-Pixel-Link-List/hair.png">
+<meta property="og:image" content="https://darkpixel.top/images/Per-Pixel-Link-List/PPLL.png">
+<meta property="og:image" content="https://darkpixel.top/images/Per-Pixel-Link-List/back-to-front.png">
+<meta property="og:image" content="https://darkpixel.top/images/Per-Pixel-Link-List/flickering.png">
+<meta property="og:image" content="https://darkpixel.top/images/Per-Pixel-Link-List/hair.png">
 <meta property="article:published_time" content="2025-04-08T16:21:37.000Z">
-<meta property="article:modified_time" content="2025-06-23T06:18:03.978Z">
+<meta property="article:modified_time" content="2025-06-23T07:23:50.378Z">
 <meta property="article:author" content="黑色像素">
 <meta property="article:tag" content="Computer Graphics">
 <meta property="article:tag" content="Rendering">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://darkpixel.top/2025/04/08/images/Per-Pixel-Link-List/PPLL.png">
+<meta name="twitter:image" content="https://darkpixel.top/images/Per-Pixel-Link-List/PPLL.png">
 
 <link rel="canonical" href="https://darkpixel.top/2025/04/08/Per-Pixel-Link-List/">
 
@@ -204,7 +205,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-06-23 06:18:03" itemprop="dateModified" datetime="2025-06-23T06:18:03+00:00">2025-06-23</time>
+                <time title="修改时间：2025-06-23 07:23:50" itemprop="dateModified" datetime="2025-06-23T07:23:50+00:00">2025-06-23</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -248,11 +249,8 @@ Buffer中获取下一个空闲位置，使用原子加计数器操作<code>atomi
 3. 把新头节点数据写入到Node
 Buffer，旧头节点指针作为新头节点的<code>next</code>字段</p>
 <p>其实就是一个游标代替指针、数据存在全局大数组的链表的构造过程，描述的不好，一图胜千言：</p>
-<figure>
-<img src="../images/Per-Pixel-Link-List/PPLL.png"
-alt="Per-Pixel-Link-List/PPLL" />
-<figcaption aria-hidden="true">Per-Pixel-Link-List/PPLL</figcaption>
-</figure>
+<!-- ![Per-Pixel-Link-List/PPLL](../images/Per-Pixel-Link-List/PPLL.png) -->
+<img src="/images/Per-Pixel-Link-List/PPLL.png" class="Per-Pixel-Link-List&#x2F;PPLL">
 <h1 id="order-independent-transparency">Order Independent
 Transparency</h1>
 <p>每一个链表存储的是光栅化到该像素位置的所有片元数据，把这些片元按照顺序混合起来，叫做<code>resolve</code>操作，类似mutisample的resolve操作。</p>
@@ -279,17 +277,13 @@ GPU</a>中推荐的是插入排序。</p>
 <p>比较常用而且简单的混合方式是back-to-front，PPLL也不例外。但是考虑的具体实现，需要考虑背景层。如果不透明物体的渲染结果，我们能够轻易的拿到其贴图，比如vulkan的swapchain的image，或者之前的渲染的都render-to-texture（这种情况下，渲染半透明时也要绑定同样的fbo，以利用不透明pass的深度结果做深度测试），就可以轻易的使用back-to-front方式做blend；如果不能拿到不透明pass的渲染结果，比如使用OpenGL而且都往default
 framebuffer上渲，那就得考虑一下front-to-back的blend方式了，<code>Dual Depth Peeling</code>是最先吃螃蟹的论文。</p>
 <p>但是论文描述里面比较费解，好像还有错误，看的头疼。可能未必是论文的问题，也许是我对SRC/DST的理解有误。<code>glBlendFunc</code>的规范里面，DST是framebuffer上的，SRC是当前渲染，跟论文好像是反的。但是整体思路就是，从front到back的每一层，先预乘alpha，同时累积之前所有层的<code>1.0 - alpha</code>的乘积，把这俩相加，再加上之前成的blend结果。看图说话吧。</p>
-<figure>
-<img src="../images/Per-Pixel-Link-List/back-to-front.png"
-alt="Per-Pixel-Link-List/back-to-front" />
-<figcaption
-aria-hidden="true">Per-Pixel-Link-List/back-to-front</figcaption>
-</figure>
+<!-- ![Per-Pixel-Link-List/back-to-front](../images/Per-Pixel-Link-List/back-to-front.png) -->
+<img src="/images/Per-Pixel-Link-List/back-to-front.png" class="Per-Pixel-Link-List&#x2F;back-to-front">
 <p><strong>遇到的问题</strong> 1.
 <code>uint</code>递减到-1导致内存越界问题 2.
-窗口设置最大或者相机拉近时出现严重的闪烁 <img
-src="../images/Per-Pixel-Link-List/flickering.gif"
-alt="Per-Pixel-Link-List/flickering" /></p>
+窗口设置最大或者相机拉近时出现严重的闪烁
+<!-- ![Per-Pixel-Link-List/flickering](../images/Per-Pixel-Link-List/flickering.gif) -->
+<img src="/images/Per-Pixel-Link-List/flickering.png" class="Per-Pixel-Link-List&#x2F;flickering"></p>
 <p>论文中明示了坑点： &gt; The size of the node buffer must be large
 enough to handle all possible fragments, or there must be a scheme to
 handle overflow.</p>
@@ -312,12 +306,8 @@ buffer和显存有限，导致部分片元缺失，闪烁中的白色应该就�
 <p>此处暂时没能验证，存疑~~</p>
 <h1 id="渲染结果">渲染结果</h1>
 <p>最后贴一张头发OIT半透明渲染的结果~</p>
-<figure>
-<img src="../images/Per-Pixel-Link-List/hair.png"
-alt="Per-Pixel-Link-List/flickering" />
-<figcaption
-aria-hidden="true">Per-Pixel-Link-List/flickering</figcaption>
-</figure>
+<!-- ![Per-Pixel-Link-List/flickering](../images/Per-Pixel-Link-List/hair.png) -->
+<img src="/images/Per-Pixel-Link-List/hair.png" class="Per-Pixel-Link-List&#x2F;hair">
 <h1 id="参考">参考</h1>
 <ul>
 <li><a
