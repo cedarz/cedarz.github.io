@@ -196,7 +196,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-06-23 04:26:45" itemprop="dateModified" datetime="2025-06-23T04:26:45+00:00">2025-06-23</time>
+                <time title="修改时间：2025-06-23 06:09:16" itemprop="dateModified" datetime="2025-06-23T06:09:16+00:00">2025-06-23</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -219,8 +219,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="7-Sampling-and-Reconstruction"><a href="#7-Sampling-and-Reconstruction" class="headerlink" title="7. Sampling and Reconstruction"></a>7. Sampling and Reconstruction</h1><p>Radiance在胶平面上是连续函数，但是渲染的输出是离散的像素。</p>
-<p> But what happens when we need the value of s signal at a location that we didn’t sample at?  In such cases, we can use a process known as reconstruction to derive an approximation of the original continuous function. With this approximation we can then discretely sample its values at a new set of sample points, which is referred to as resampling.<br><a target="_blank" rel="noopener" href="https://therealmjp.github.io/posts/signal-processing-primer/">signal processing primer</a></p>
+          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="sampling-and-reconstruction">7. Sampling and Reconstruction</h1>
+<p>Radiance在胶平面上是连续函数，但是渲染的输出是离散的像素。</p>
+<p>But what happens when we need the value of s signal at a location
+that we didn’t sample at? In such cases, we can use a process known as
+reconstruction to derive an approximation of the original continuous
+function. With this approximation we can then discretely sample its
+values at a new set of sample points, which is referred to as
+resampling. <a target="_blank" rel="noopener" href="https://therealmjp.github.io/posts/signal-processing-primer/">signal
+processing primer</a></p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2025/06/19/PBR-Reading-Notes/#more" rel="contents">
@@ -278,7 +285,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-06-23 04:26:45" itemprop="dateModified" datetime="2025-06-23T04:26:45+00:00">2025-06-23</time>
+                <time title="修改时间：2025-06-23 06:09:16" itemprop="dateModified" datetime="2025-06-23T06:09:16+00:00">2025-06-23</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -302,7 +309,8 @@
 
       
           <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>谨以此篇post记录自己日常中无能愤怒的瞬间，并时常更新温故，提醒自己如何面对这个嘈杂且充满噪声的世界。</p>
-<h1 id="狂怒瞬间"><a href="#狂怒瞬间" class="headerlink" title="狂怒瞬间"></a>狂怒瞬间</h1><ul>
+<h1 id="狂怒瞬间">狂怒瞬间</h1>
+<ul>
 <li>骑车路上经常遇到各种奇形怪状占住车道的机动车辆，有的横在车道上，有的堵死一个方向（双向两车道），有的骑在车道线上占影响两个车道，这些人中绝少打双闪的，就是纯堵死，每次遇到这类“人群”，我都要在心理或者口头上骂上一句“煞笔”。</li>
 </ul>
           <!--noindex-->
@@ -362,7 +370,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-06-23 04:26:45" itemprop="dateModified" datetime="2025-06-23T04:26:45+00:00">2025-06-23</time>
+                <time title="修改时间：2025-06-23 06:09:16" itemprop="dateModified" datetime="2025-06-23T06:09:16+00:00">2025-06-23</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -389,7 +397,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="Pixel-Data-Internal-Format"><a href="#Pixel-Data-Internal-Format" class="headerlink" title="Pixel Data Internal Format"></a>Pixel Data Internal Format</h1><p>看一下<code>glTexImage2D</code>的函数签名，有三个参数比较费解，分别是<code>internalformat</code>、<code>format</code>和<code>type</code>。这三个参数相互配合，共同决定了OpenGL Texture数据的在GPU上的格式以及内存数据从CPU-〉GPU上传过程中如何被‘解析’。<br></p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">glTexImage2D</span><span class="params">(GLenum target,</span></span></span><br><span class="line"><span class="params"><span class="function"> 	GLint level,</span></span></span><br><span class="line"><span class="params"><span class="function"> 	GLint internalformat,</span></span></span><br><span class="line"><span class="params"><span class="function"> 	GLsizei width,</span></span></span><br><span class="line"><span class="params"><span class="function"> 	GLsizei height,</span></span></span><br><span class="line"><span class="params"><span class="function"> 	GLint border,</span></span></span><br><span class="line"><span class="params"><span class="function"> 	GLenum format,</span></span></span><br><span class="line"><span class="params"><span class="function"> 	GLenum type,</span></span></span><br><span class="line"><span class="params"><span class="function"> 	<span class="type">const</span> <span class="type">void</span> * data)</span></span>;</span><br></pre></td></tr></table></figure>
+          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="pixel-data-internal-format">Pixel Data Internal Format</h1>
+<p>看一下<code>glTexImage2D</code>的函数签名，有三个参数比较费解，分别是<code>internalformat</code>、<code>format</code>和<code>type</code>。这三个参数相互配合，共同决定了OpenGL
+Texture数据的在GPU上的格式以及内存数据从CPU-〉GPU上传过程中如何被‘解析’。
+</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">glTexImage2D</span><span class="params">(GLenum target,</span></span></span><br><span class="line"><span class="params"><span class="function"> 	GLint level,</span></span></span><br><span class="line"><span class="params"><span class="function"> 	GLint internalformat,</span></span></span><br><span class="line"><span class="params"><span class="function"> 	GLsizei width,</span></span></span><br><span class="line"><span class="params"><span class="function"> 	GLsizei height,</span></span></span><br><span class="line"><span class="params"><span class="function"> 	GLint border,</span></span></span><br><span class="line"><span class="params"><span class="function"> 	GLenum format,</span></span></span><br><span class="line"><span class="params"><span class="function"> 	GLenum type,</span></span></span><br><span class="line"><span class="params"><span class="function"> 	<span class="type">const</span> <span class="type">void</span> * data)</span></span>;</span><br></pre></td></tr></table></figure>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2025/04/17/Notes-on-Data-Formats-of-Graphics-APIs-2/#more" rel="contents">
@@ -447,7 +458,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-06-23 04:26:45" itemprop="dateModified" datetime="2025-06-23T04:26:45+00:00">2025-06-23</time>
+                <time title="修改时间：2025-06-23 06:09:16" itemprop="dateModified" datetime="2025-06-23T06:09:16+00:00">2025-06-23</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -475,7 +486,8 @@
 
       
           <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>API是渲染里面最稀碎最脏的一块，砖搬的越多，问题重复遇到的可能性也越大；有些东西以前遇到过，现在又遇到了；有些以前很熟悉，现在又忘记了。虽然不一定是高明的东西，记录一下，下次再忘记可以翻一翻。古人云，“纸上得来终觉浅，好记性不如烂笔头”，诚不欺我。</p>
-<p>今天就来记录一下，各种Graphics API里面，使用的数据格式对于定点数的处理。</p>
+<p>今天就来记录一下，各种Graphics
+API里面，使用的数据格式对于定点数的处理。</p>
 <p>数据格式这里主要记录两方面的使用，其一就是顶点数据，其二是纹理。</p>
           <!--noindex-->
             <div class="post-button">
@@ -534,7 +546,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-06-23 04:26:45" itemprop="dateModified" datetime="2025-06-23T04:26:45+00:00">2025-06-23</time>
+                <time title="修改时间：2025-06-23 06:09:16" itemprop="dateModified" datetime="2025-06-23T06:09:16+00:00">2025-06-23</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -562,11 +574,17 @@
 
       
           <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>网络链接，常常失效，很多大公司亦是如此。好些前两年很容易访问到的链接，忽然就失了踪迹。再者，有些资源，不收藏一下，难受。</p>
-<h1 id="Nvidia-Legacy-OpenGL-SDK-samples"><a href="#Nvidia-Legacy-OpenGL-SDK-samples" class="headerlink" title="Nvidia Legacy OpenGL SDK samples"></a>Nvidia Legacy OpenGL SDK samples</h1><ol>
-<li><a target="_blank" rel="noopener" href="https://github.com/ahcox/NVIDIA-GameWorks-Graphics-Samples-GL4-GLES2-GLES3-Vulkan-SDK-3-16-August-2017-36-Commits">NVIDIA GameWorks Graphics Samples</a>，by ahcox<blockquote>
-<p>The GameWorks Graphics Samples pack is a resource for cross-platform Vulkan, OpenGL 4 (GL4) and OpenGL ES 2 and 3 (ES2 and ES3) development, targeting Android and Windows (and soon, will again support Linux x86/x64 and Linux for Tegra). It is an expansion and continuation of the longstanding OpenGL Graphics and Compute Samples, adding full support for and samples of the Vulkan 3D API. <a target="_blank" rel="noopener" href="https://ahcox.github.io/NVIDIA-GameWorks-Graphics-Samples-GL4-GLES2-GLES3-Vulkan-SDK-3-16-August-2017-36-Commits/"><sup>mirror</sup></a></p>
-</blockquote>
-</li>
+<h1 id="nvidia-legacy-opengl-sdk-samples">Nvidia Legacy OpenGL SDK
+samples</h1>
+<ol type="1">
+<li><a target="_blank" rel="noopener" href="https://github.com/ahcox/NVIDIA-GameWorks-Graphics-Samples-GL4-GLES2-GLES3-Vulkan-SDK-3-16-August-2017-36-Commits">NVIDIA
+GameWorks Graphics Samples</a>，by ahcox &gt; The GameWorks Graphics
+Samples pack is a resource for cross-platform Vulkan, OpenGL 4 (GL4) and
+OpenGL ES 2 and 3 (ES2 and ES3) development, targeting Android and
+Windows (and soon, will again support Linux x86/x64 and Linux for
+Tegra). It is an expansion and continuation of the longstanding OpenGL
+Graphics and Compute Samples, adding full support for and samples of the
+Vulkan 3D API. <a target="_blank" rel="noopener" href="https://ahcox.github.io/NVIDIA-GameWorks-Graphics-Samples-GL4-GLES2-GLES3-Vulkan-SDK-3-16-August-2017-36-Commits/"><sup>mirror</sup></a></li>
 </ol>
           <!--noindex-->
             <div class="post-button">
@@ -625,7 +643,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-06-23 04:26:45" itemprop="dateModified" datetime="2025-06-23T04:26:45+00:00">2025-06-23</time>
+                <time title="修改时间：2025-06-23 06:09:16" itemprop="dateModified" datetime="2025-06-23T06:09:16+00:00">2025-06-23</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -653,7 +671,11 @@
 
       
           <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>OpenGL虽然简单，但是问题也是公认的多，不同驱动实现的表现可能差异很大，导致同样的OpenGL的代码，在一台机器上正常执行，在另外一台机器上表现异常。</p>
-<p>我这就遇到一个，采样<code>GL_DEPTH_COMPONENT</code>类型的depth texture，全屏显示到窗口。同样是GL4.6 core profile的上下文，在RTX4080上没问题，但是在笔记本ThinkPad P50（显卡NVIDIA Quadro M1000M）上结果全白色（1.0），当然P50确实太老了，10年老机了，妥妥的电子垃圾了。</p>
+<p>我这就遇到一个，采样<code>GL_DEPTH_COMPONENT</code>类型的depth
+texture，全屏显示到窗口。同样是GL4.6 core
+profile的上下文，在RTX4080上没问题，但是在笔记本ThinkPad P50（显卡NVIDIA
+Quadro
+M1000M）上结果全白色（1.0），当然P50确实太老了，10年老机了，妥妥的电子垃圾了。</p>
 <p>可是，奈何啊，“同样是生活一起的两口子，做人的差别咋这么大咧？”。</p>
           <!--noindex-->
             <div class="post-button">
@@ -712,7 +734,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-06-23 04:26:45" itemprop="dateModified" datetime="2025-06-23T04:26:45+00:00">2025-06-23</time>
+                <time title="修改时间：2025-06-23 06:09:16" itemprop="dateModified" datetime="2025-06-23T06:09:16+00:00">2025-06-23</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -739,8 +761,16 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>OpenGL 4.0和DirectX 11提供了原子操作(atomic operation），为GPU上并行创建链表数据结构提供了便利。基于此算法的<code>per-pixel link lists</code>可以应用到<code>order independent transparency</code>，实现像素的程序化混合，实现顺序无关的半透明效果，避免了程序员在api层面对于略显无力的排序的折磨。</p>
-<h1 id="Per-Pixel-Link-List"><a href="#Per-Pixel-Link-List" class="headerlink" title="Per-Pixel Link List"></a>Per-Pixel Link List</h1><p>PPLL的实现需要三个数据结构：头结点指针Buffer、链表Node Buffer、结点计数器。</p>
+          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>OpenGL 4.0和DirectX 11提供了原子操作(atomic
+operation），为GPU上并行创建链表数据结构提供了便利。基于此算法的<code>per-pixel link lists</code>可以应用到<code>order independent transparency</code>，实现像素的程序化混合，实现顺序无关的半透明效果，避免了程序员在api层面对于略显无力的排序的折磨。</p>
+<h1 id="per-pixel-link-list">Per-Pixel Link List</h1>
+<p>PPLL的实现需要三个数据结构：头结点指针Buffer、链表Node
+Buffer、结点计数器。 -
+头结点指针Buffer：每个像素位置又一个链表，所以叫<code>per-pixel link lists</code>,头指针Buffer的大小是framebuffer的大小，存储的是头结点在Node
+Buffer中的位置，初始化为一个空符号，比如-1； - 链表Node
+Buffer：存储所有结点数据，可以是任意数据，<code>next</code>字段是必需的，指向链表下一个结点；不需要初始化，只需要分配足够大小。
+-
+结点计数器：用于分配下一个<code>Node Buffer</code>位置来存储数据，使用原子操作累加。初始化为0。</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2025/04/08/Per-Pixel-Link-List/#more" rel="contents">
@@ -798,7 +828,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-06-23 04:26:45" itemprop="dateModified" datetime="2025-06-23T04:26:45+00:00">2025-06-23</time>
+                <time title="修改时间：2025-06-23 06:09:16" itemprop="dateModified" datetime="2025-06-23T06:09:16+00:00">2025-06-23</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -821,8 +851,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="设置生成目标的输出目录"><a href="#设置生成目标的输出目录" class="headerlink" title="设置生成目标的输出目录"></a>设置生成目标的输出目录</h2><figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">set(CMAKE_RUNTIME_OUTPUT_DIRECTORY $&#123;CMAKE_BINARY_DIR&#125;/<span class="variable">$&lt;</span>CONFIG&gt;)</span><br><span class="line">set(CMAKE_LIBRARY_OUTPUT_DIRECTORY $&#123;CMAKE_BINARY_DIR&#125;/<span class="variable">$&lt;</span>CONFIG&gt;)</span><br></pre></td></tr></table></figure>
-<p><strong>Note</strong> <code>$&lt;CONFIG&gt;</code>应该在VS下才起作用</p>
+          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="设置生成目标的输出目录">设置生成目标的输出目录</h2>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">set(CMAKE_RUNTIME_OUTPUT_DIRECTORY $&#123;CMAKE_BINARY_DIR&#125;/<span class="variable">$&lt;</span>CONFIG&gt;)</span><br><span class="line">set(CMAKE_LIBRARY_OUTPUT_DIRECTORY $&#123;CMAKE_BINARY_DIR&#125;/<span class="variable">$&lt;</span>CONFIG&gt;)</span><br></pre></td></tr></table></figure>
+<p><strong>Note</strong>
+<code>$&lt;CONFIG&gt;</code>应该在VS下才起作用</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2025/04/01/CMake%E4%BD%BF%E7%94%A8%E9%80%9F%E6%8A%84%E6%8C%87%E5%8C%97/#more" rel="contents">
@@ -880,7 +912,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-06-23 04:26:45" itemprop="dateModified" datetime="2025-06-23T04:26:45+00:00">2025-06-23</time>
+                <time title="修改时间：2025-06-23 06:09:16" itemprop="dateModified" datetime="2025-06-23T06:09:16+00:00">2025-06-23</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -907,13 +939,20 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="How-near-and-far-planes-affet-depth-percision"><a href="#How-near-and-far-planes-affet-depth-percision" class="headerlink" title="How near and far planes affet depth percision"></a>How near and far planes affet depth percision</h1><ul>
-<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/25755853/my-opengl-render-depths-are-nearly-the-value-of-1-why-is-that">My openGL render depths are nearly the value of 1 why is that?</a></li>
-<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/16768090/depth-buffer-got-by-glreadpixels-is-always-1">depth buffer got by glReadPixels is always 1</a></li>
-<li><a target="_blank" rel="noopener" href="https://computergraphics.stackexchange.com/questions/5116/how-am-i-able-to-perform-perspective-projection-without-a-near-plane">How am I able to perform perspective projection without a near plane?</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.opengl.org/archives/resources/faq/technical/depthbuffer.htm#dept0045">Why is my depth buffer precision so poor?</a></li>
+          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="how-near-and-far-planes-affet-depth-percision">How near and far
+planes affet depth percision</h1>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/25755853/my-opengl-render-depths-are-nearly-the-value-of-1-why-is-that">My
+openGL render depths are nearly the value of 1 why is that?</a></li>
+<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/16768090/depth-buffer-got-by-glreadpixels-is-always-1">depth
+buffer got by glReadPixels is always 1</a></li>
+<li><a target="_blank" rel="noopener" href="https://computergraphics.stackexchange.com/questions/5116/how-am-i-able-to-perform-perspective-projection-without-a-near-plane">How
+am I able to perform perspective projection without a near
+plane?</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.opengl.org/archives/resources/faq/technical/depthbuffer.htm#dept0045">Why
+is my depth buffer precision so poor?</a></li>
 </ul>
-<h1 id="Reversed-Z-Depth-Buffer"><a href="#Reversed-Z-Depth-Buffer" class="headerlink" title="Reversed-Z Depth Buffer"></a>Reversed-Z Depth Buffer</h1>
+<h1 id="reversed-z-depth-buffer">Reversed-Z Depth Buffer</h1>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2025/03/28/Depth-Buffer-Precision/#more" rel="contents">
@@ -971,7 +1010,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-06-23 04:26:45" itemprop="dateModified" datetime="2025-06-23T04:26:45+00:00">2025-06-23</time>
+                <time title="修改时间：2025-06-23 06:09:16" itemprop="dateModified" datetime="2025-06-23T06:09:16+00:00">2025-06-23</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -999,17 +1038,39 @@
 
       
           <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><blockquote>
-<p>I don’t know of any game engines where they attribute real-world units to lighting and material values, since those kinds of things tend to be driven more by the appearance than the physical correctness. The relative intensities of, say, a candle and a 100W light bulb are probably more important than the absolute values.<a href=""><sup>Lighting: The Rendering Equation</sup></a></p>
+<p>I don’t know of any game engines where they attribute real-world
+units to lighting and material values, since those kinds of things tend
+to be driven more by the appearance than the physical correctness. The
+relative intensities of, say, a candle and a 100W light bulb are
+probably more important than the absolute values.<a
+href=""><sup>Lighting: The Rendering Equation</sup></a></p>
 </blockquote>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/34563197/what-units-should-i-use-for-lighting-in-a-3d-rendering-engine">What units should I use for lighting in a 3D rendering engine?</a></li>
-<li><a target="_blank" rel="noopener" href="https://media.contentapi.ea.com/content/dam/eacom/frostbite/files/course-notes-moving-frostbite-to-pbr-v2.pdf">Moving Frostbite to Physically Based Rendering 2.0</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.realtimerendering.com/blog/physical-units-for-lights/">Physical Units for Lights</a></li>
-<li><a target="_blank" rel="noopener" href="https://dev.epicgames.com/documentation/en-us/unreal-engine/physical-lighting-units?application_version=4.27">Physical Lighting Units</a></li>
-<li><a target="_blank" rel="noopener" href="https://google.github.io/filament/Filament.md.html#lighting/units">Filament lighting/units</a></li>
-<li><a target="_blank" rel="noopener" href="https://docs.unity3d.com/Packages/com.unity.render-pipelines.high-definition@17.2/manual/Physical-Light-Units.html">Understand physical light units</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.rorydriscoll.com/2008/08/24/lighting-the-rendering-equation/">Lighting: The Rendering Equation</a></li>
-<li><a target="_blank" rel="noopener" href="https://blendergrid.com/learn/articles/cycles-physically-correct-brightness">Using Physically Correct Brightness in Cycles</a>, <a target="_blank" rel="noopener" href="https://docs.blender.org/manual/en/4.5/render/shader_nodes/shader/emission.html">emission</a></li>
+<li><a
+target="_blank" rel="noopener" href="https://stackoverflow.com/questions/34563197/what-units-should-i-use-for-lighting-in-a-3d-rendering-engine">What
+units should I use for lighting in a 3D rendering engine?</a></li>
+<li><a
+target="_blank" rel="noopener" href="https://media.contentapi.ea.com/content/dam/eacom/frostbite/files/course-notes-moving-frostbite-to-pbr-v2.pdf">Moving
+Frostbite to Physically Based Rendering 2.0</a></li>
+<li><a
+target="_blank" rel="noopener" href="https://www.realtimerendering.com/blog/physical-units-for-lights/">Physical
+Units for Lights</a></li>
+<li><a
+target="_blank" rel="noopener" href="https://dev.epicgames.com/documentation/en-us/unreal-engine/physical-lighting-units?application_version=4.27">Physical
+Lighting Units</a></li>
+<li><a
+target="_blank" rel="noopener" href="https://google.github.io/filament/Filament.md.html#lighting/units">Filament
+lighting/units</a></li>
+<li><a
+target="_blank" rel="noopener" href="https://docs.unity3d.com/Packages/com.unity.render-pipelines.high-definition@17.2/manual/Physical-Light-Units.html">Understand
+physical light units</a></li>
+<li><a
+target="_blank" rel="noopener" href="https://www.rorydriscoll.com/2008/08/24/lighting-the-rendering-equation/">Lighting:
+The Rendering Equation</a></li>
+<li><a
+target="_blank" rel="noopener" href="https://blendergrid.com/learn/articles/cycles-physically-correct-brightness">Using
+Physically Correct Brightness in Cycles</a>, <a
+target="_blank" rel="noopener" href="https://docs.blender.org/manual/en/4.5/render/shader_nodes/shader/emission.html">emission</a></li>
 </ul>
 
       

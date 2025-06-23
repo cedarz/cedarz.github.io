@@ -23,21 +23,19 @@
     var CONFIG = {"hostname":"darkpixel.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="Pixel Data Internal Format看一下glTexImage2D的函数签名，有三个参数比较费解，分别是internalformat、format和type。这三个参数相互配合，共同决定了OpenGL Texture数据的在GPU上的格式以及内存数据从CPU-〉GPU上传过程中如何被‘解析’。123456789void glTexImage2D(GLenum target, 	GL">
+  <meta name="description" content="Pixel Data Internal Format 看一下glTexImage2D的函数签名，有三个参数比较费解，分别是internalformat、format和type。这三个参数相互配合，共同决定了OpenGL Texture数据的在GPU上的格式以及内存数据从CPU-〉GPU上传过程中如何被‘解析’。 123456789void glTexImage2D(GLenum target,">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Notes on Data Formats of Graphics APIs(2)">
 <meta property="og:url" content="https://darkpixel.top/2025/04/17/Notes-on-Data-Formats-of-Graphics-APIs-2/index.html">
 <meta property="og:site_name" content="Integrator">
-<meta property="og:description" content="Pixel Data Internal Format看一下glTexImage2D的函数签名，有三个参数比较费解，分别是internalformat、format和type。这三个参数相互配合，共同决定了OpenGL Texture数据的在GPU上的格式以及内存数据从CPU-〉GPU上传过程中如何被‘解析’。123456789void glTexImage2D(GLenum target, 	GL">
+<meta property="og:description" content="Pixel Data Internal Format 看一下glTexImage2D的函数签名，有三个参数比较费解，分别是internalformat、format和type。这三个参数相互配合，共同决定了OpenGL Texture数据的在GPU上的格式以及内存数据从CPU-〉GPU上传过程中如何被‘解析’。 123456789void glTexImage2D(GLenum target,">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://darkpixel.top/2025/04/17/images/Notes-on-Data-Formats-of-Graphics-APIs/color_format_syntax.jpeg">
 <meta property="article:published_time" content="2025-04-17T17:55:45.000Z">
-<meta property="article:modified_time" content="2025-06-23T04:26:45.934Z">
+<meta property="article:modified_time" content="2025-06-23T06:09:16.842Z">
 <meta property="article:author" content="黑色像素">
 <meta property="article:tag" content="Computer Graphics">
 <meta property="article:tag" content="OpenGL">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://darkpixel.top/2025/04/17/images/Notes-on-Data-Formats-of-Graphics-APIs/color_format_syntax.jpeg">
 
 <link rel="canonical" href="https://darkpixel.top/2025/04/17/Notes-on-Data-Formats-of-Graphics-APIs-2/">
 
@@ -202,7 +200,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-06-23 04:26:45" itemprop="dateModified" datetime="2025-06-23T04:26:45+00:00">2025-06-23</time>
+                <time title="修改时间：2025-06-23 06:09:16" itemprop="dateModified" datetime="2025-06-23T06:09:16+00:00">2025-06-23</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -229,32 +227,76 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="Pixel-Data-Internal-Format"><a href="#Pixel-Data-Internal-Format" class="headerlink" title="Pixel Data Internal Format"></a>Pixel Data Internal Format</h1><p>看一下<code>glTexImage2D</code>的函数签名，有三个参数比较费解，分别是<code>internalformat</code>、<code>format</code>和<code>type</code>。这三个参数相互配合，共同决定了OpenGL Texture数据的在GPU上的格式以及内存数据从CPU-〉GPU上传过程中如何被‘解析’。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">glTexImage2D</span><span class="params">(GLenum target,</span></span></span><br><span class="line"><span class="params"><span class="function"> 	GLint level,</span></span></span><br><span class="line"><span class="params"><span class="function"> 	GLint internalformat,</span></span></span><br><span class="line"><span class="params"><span class="function"> 	GLsizei width,</span></span></span><br><span class="line"><span class="params"><span class="function"> 	GLsizei height,</span></span></span><br><span class="line"><span class="params"><span class="function"> 	GLint border,</span></span></span><br><span class="line"><span class="params"><span class="function"> 	GLenum format,</span></span></span><br><span class="line"><span class="params"><span class="function"> 	GLenum type,</span></span></span><br><span class="line"><span class="params"><span class="function"> 	<span class="type">const</span> <span class="type">void</span> * data)</span></span>;</span><br></pre></td></tr></table></figure><br><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/34497195/difference-between-format-and-internalformat">Difference between format and internalformat</a>中说的很直截了当，<code>internalFormat</code>决定GPU，<code>format/type</code>决定CPU数据。</p>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="pixel-data-internal-format">Pixel Data Internal Format</h1>
+<p>看一下<code>glTexImage2D</code>的函数签名，有三个参数比较费解，分别是<code>internalformat</code>、<code>format</code>和<code>type</code>。这三个参数相互配合，共同决定了OpenGL
+Texture数据的在GPU上的格式以及内存数据从CPU-〉GPU上传过程中如何被‘解析’。
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">glTexImage2D</span><span class="params">(GLenum target,</span></span></span><br><span class="line"><span class="params"><span class="function"> 	GLint level,</span></span></span><br><span class="line"><span class="params"><span class="function"> 	GLint internalformat,</span></span></span><br><span class="line"><span class="params"><span class="function"> 	GLsizei width,</span></span></span><br><span class="line"><span class="params"><span class="function"> 	GLsizei height,</span></span></span><br><span class="line"><span class="params"><span class="function"> 	GLint border,</span></span></span><br><span class="line"><span class="params"><span class="function"> 	GLenum format,</span></span></span><br><span class="line"><span class="params"><span class="function"> 	GLenum type,</span></span></span><br><span class="line"><span class="params"><span class="function"> 	<span class="type">const</span> <span class="type">void</span> * data)</span></span>;</span><br></pre></td></tr></table></figure> <a
+target="_blank" rel="noopener" href="https://stackoverflow.com/questions/34497195/difference-between-format-and-internalformat">Difference
+between format and
+internalformat</a>中说的很直截了当，<code>internalFormat</code>决定GPU，<code>format/type</code>决定CPU数据。
+&gt; The <code>format</code> (7th argument), together with the
+<code>type</code> argument, describes the data you pass in as the last
+argument. So the <code>format/type</code> combination defines the memory
+layout of the data you pass in. &gt; <code>internalFormat</code> (2nd
+argument) defines the format that OpenGL should use to store the data
+internally.</p>
+<p>这个描述是否让你觉得，如果<code>data</code>参数为null，<code>format/type</code>就不需要设置，或者随意设置了，答案是否定的。
+对于<code>glTexImage2D</code>来说，不管<code>data</code>参数是否为null，<code>internalFormat</code>和<code>format/type</code>一定要是兼容的组合。</p>
 <blockquote>
-<p>The <code>format</code> (7th argument), together with the <code>type</code> argument, describes the data you pass in as the last argument. So the <code>format/type</code> combination defines the memory layout of the data you pass in.<br><code>internalFormat</code> (2nd argument) defines the format that OpenGL should use to store the data internally.</p>
+<p><strong>Note</strong> Even if data is NULL, the format and type
+fields must be legal fields, or the entire call will fail with a
+GL_INVALID_ENUM error.<a
+target="_blank" rel="noopener" href="https://www.khronos.org/opengl/wiki/Texture_Storage"><sup>Texture_Storage</sup></a></p>
 </blockquote>
-<p>这个描述是否让你觉得，如果<code>data</code>参数为null，<code>format/type</code>就不需要设置，或者随意设置了，答案是否定的。 对于<code>glTexImage2D</code>来说，不管<code>data</code>参数是否为null，<code>internalFormat</code>和<code>format/type</code>一定要是兼容的组合。</p>
-<blockquote>
-<p><strong>Note</strong> Even if data is NULL, the format and type fields must be legal fields, or the entire call will fail with a GL_INVALID_ENUM error.<a target="_blank" rel="noopener" href="https://www.khronos.org/opengl/wiki/Texture_Storage"><sup>Texture_Storage</sup></a></p>
-</blockquote>
-<p><code>glTexImage2D</code>做了两件事情，分配显存，并上传数据，所以需要格式的兼容，这个显存分配过程也被称作<code>Mutable Storage</code>。 还有一组<code>Immutable Storage</code>的分配方式，把<code>glTexImage2D</code>的分配显存和上传数据的两个过程分开，如此，在某些情况下（比如Texture as RT），可以不关心<code>format/type</code>的设置了。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">glTexStorage2D</span><span class="params">( GLenum target​, GLint levels​, GLint internalformat​, GLsizei width​, GLsizei height​ )</span></span>;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">glTexSubImage2D</span><span class="params">(GLenum target​, GLint level​, GLint xoffset​, GLint yoffset​, GLsizei width​, GLsizei height​, GLenum format​, GLenum type​, <span class="type">const</span> GLvoid * data​)</span></span>;</span><br></pre></td></tr></table></figure></p>
-<h1 id="Pixel-Data格式的兼容"><a href="#Pixel-Data格式的兼容" class="headerlink" title="Pixel Data格式的兼容"></a>Pixel Data格式的兼容</h1><p><code>internalFormat</code>和<code>format/type</code>，首先确定<code>internalFormat</code>，然后根据实际情况确定与其兼容的<code>format/type</code>，类型的兼容只是最低要求，如果没有正确设置这三个参数，数据在上传的时候，会有类型转换，那你精心组织的数据，可能就要以其他面目呈现给GL了。</p>
+<p><code>glTexImage2D</code>做了两件事情，分配显存，并上传数据，所以需要格式的兼容，这个显存分配过程也被称作<code>Mutable Storage</code>。
+还有一组<code>Immutable Storage</code>的分配方式，把<code>glTexImage2D</code>的分配显存和上传数据的两个过程分开，如此，在某些情况下（比如Texture
+as RT），可以不关心<code>format/type</code>的设置了。 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">glTexStorage2D</span><span class="params">( GLenum target​, GLint levels​, GLint internalformat​, GLsizei width​, GLsizei height​ )</span></span>;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">glTexSubImage2D</span><span class="params">(GLenum target​, GLint level​, GLint xoffset​, GLint yoffset​, GLsizei width​, GLsizei height​, GLenum format​, GLenum type​, <span class="type">const</span> GLvoid * data​)</span></span>;</span><br></pre></td></tr></table></figure></p>
+<h1 id="pixel-data格式的兼容">Pixel Data格式的兼容</h1>
+<p><code>internalFormat</code>和<code>format/type</code>，首先确定<code>internalFormat</code>，然后根据实际情况确定与其兼容的<code>format/type</code>，类型的兼容只是最低要求，如果没有正确设置这三个参数，数据在上传的时候，会有类型转换，那你精心组织的数据，可能就要以其他面目呈现给GL了。</p>
 <p>举个例子：参考下面的格式语法，如果你想要4通道每个通道都是浮点型的格式，设置<code>internalFormat</code>为<code>GL_RGBA</code>，<code>format/type</code>为<code>GL_RGBA/GL_FLOAT</code>。<code>GL_RGBA</code>表示<code>unsigned normalized integer format</code>，且每格通道8位，也就是8位无符号归一化整型，如此，<code>GL_FLOAT</code>则会类型转换到<code>8 bit unsigned normalized integer</code>。</p>
-<p>再举个例子：<code>internalFormat</code>为<code>GL_R32UI</code>、<code>type</code>就是<code>GL_UNSIGNED_INT</code>了，那么<code>format</code>就决定了数据初始化了，如果是<code>GL_RED</code>,会把输入作为定点数归一化到[0, 1], 正确的格式应该是<code>GL_RED_INTEGER</code>。</p>
-<blockquote>
-<p>GL_RED<br>    Each element is a single red component. For fixed point normalized components, the GL converts it to floating point, clamps to the range [0,1], and assembles it into an RGBA element by attaching 0.0 for green and blue, and 1.0 for alpha.<a target="_blank" rel="noopener" href="https://registry.khronos.org/OpenGL-Refpages/es3.0/html/glTexImage2D.xhtml"><sup>es3.0 glTexImage2D</sup></a></p>
-</blockquote>
+<p>再举个例子：<code>internalFormat</code>为<code>GL_R32UI</code>、<code>type</code>就是<code>GL_UNSIGNED_INT</code>了，那么<code>format</code>就决定了数据初始化了，如果是<code>GL_RED</code>,会把输入作为定点数归一化到[0,
+1], 正确的格式应该是<code>GL_RED_INTEGER</code>。 &gt; GL_RED &gt; Each
+element is a single red component. For fixed point normalized
+components, the GL converts it to floating point, clamps to the range
+[0,1], and assembles it into an RGBA element by attaching 0.0 for green
+and blue, and 1.0 for alpha.<a
+target="_blank" rel="noopener" href="https://registry.khronos.org/OpenGL-Refpages/es3.0/html/glTexImage2D.xhtml"><sup>es3.0
+glTexImage2D</sup></a></p>
 <p>另外，整型类型的Texture，不能设置为<code>linear filtering</code>即<code>GL_LINEAR</code>，只能设置为<code>GL_NEAREST</code>或者<code>GL_NEAREST_MIPMAP_NEAREST</code>。</p>
-<p><img src="../images/Notes-on-Data-Formats-of-Graphics-APIs/color_format_syntax.jpeg" alt="Notes-on-Data-Formats-of-Graphics-APIs/color_format_syntax"></p>
-<h1 id="Pixel-Formats-Cheatsheets"><a href="#Pixel-Formats-Cheatsheets" class="headerlink" title="Pixel Formats Cheatsheets"></a>Pixel Formats Cheatsheets</h1><p><a target="_blank" rel="noopener" href="https://registry.khronos.org/OpenGL-Refpages/es3.0/html/glTexImage2D.xhtml">es3.0 glTexImage2D Table 2. Sized Internal Formats</a><br><a target="_blank" rel="noopener" href="https://gist.github.com/alexsr/034bb802ae43a1adb0863b735fda0ab9">gl_texture_format_util.hpp</a><br><a target="_blank" rel="noopener" href="https://gist.github.com/Kos/4739337">OpenGL image formats</a></p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul>
-<li><a target="_blank" rel="noopener" href="https://www.khronos.org/opengl/wiki/Image_Format#Color_formats">Color Formats</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.khronos.org/opengl/wiki/Normalized_Integer">Normalized_Integer</a></li>
-<li><a target="_blank" rel="noopener" href="https://gist.github.com/alexsr/034bb802ae43a1adb0863b735fda0ab9">gl_texture_format_util.hpp</a></li>
-<li><a target="_blank" rel="noopener" href="https://gist.github.com/Kos/4739337">OpenGL image formats</a></li>
-<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/34497195/difference-between-format-and-internalformat">Difference between format and internalformat</a></li>
-<li>OpenGL formats Equivalent in Vulkan <a target="_blank" rel="noopener" href="https://chromium.googlesource.com/external/github.com/KhronosGroup/OpenXR-SDK/+/9d9ae386adf791576a839ceb733cc577224b7985/external/include/vulkan/vk_format.h"><u>1</u></a> <a target="_blank" rel="noopener" href="https://github.com/KhronosGroup/Vulkan-Samples-Deprecated/blob/master/external/include/vulkan/vk_format.h"><u>2</u></a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/KhronosGroup/Vulkan-Samples-Deprecated/blob/master/external/include/GL/gl_format.h">gl_format.h</a>，可以参考一下，有错误，比如<code>GL_R32UI</code>对应<code>GL_RED</code></li>
+<figure>
+<img
+src="../images/Notes-on-Data-Formats-of-Graphics-APIs/color_format_syntax.jpeg"
+alt="Notes-on-Data-Formats-of-Graphics-APIs/color_format_syntax" />
+<figcaption
+aria-hidden="true">Notes-on-Data-Formats-of-Graphics-APIs/color_format_syntax</figcaption>
+</figure>
+<h1 id="pixel-formats-cheatsheets">Pixel Formats Cheatsheets</h1>
+<p><a
+target="_blank" rel="noopener" href="https://registry.khronos.org/OpenGL-Refpages/es3.0/html/glTexImage2D.xhtml">es3.0
+glTexImage2D Table 2. Sized Internal Formats</a> <a
+target="_blank" rel="noopener" href="https://gist.github.com/alexsr/034bb802ae43a1adb0863b735fda0ab9">gl_texture_format_util.hpp</a>
+<a target="_blank" rel="noopener" href="https://gist.github.com/Kos/4739337">OpenGL image
+formats</a></p>
+<h1 id="参考">参考</h1>
+<ul>
+<li><a
+target="_blank" rel="noopener" href="https://www.khronos.org/opengl/wiki/Image_Format#Color_formats">Color
+Formats</a></li>
+<li><a
+target="_blank" rel="noopener" href="https://www.khronos.org/opengl/wiki/Normalized_Integer">Normalized_Integer</a></li>
+<li><a
+target="_blank" rel="noopener" href="https://gist.github.com/alexsr/034bb802ae43a1adb0863b735fda0ab9">gl_texture_format_util.hpp</a></li>
+<li><a target="_blank" rel="noopener" href="https://gist.github.com/Kos/4739337">OpenGL image
+formats</a></li>
+<li><a
+target="_blank" rel="noopener" href="https://stackoverflow.com/questions/34497195/difference-between-format-and-internalformat">Difference
+between format and internalformat</a></li>
+<li>OpenGL formats Equivalent in Vulkan <a
+target="_blank" rel="noopener" href="https://chromium.googlesource.com/external/github.com/KhronosGroup/OpenXR-SDK/+/9d9ae386adf791576a839ceb733cc577224b7985/external/include/vulkan/vk_format.h"><u>1</u></a>
+<a
+target="_blank" rel="noopener" href="https://github.com/KhronosGroup/Vulkan-Samples-Deprecated/blob/master/external/include/vulkan/vk_format.h"><u>2</u></a></li>
+<li><a
+target="_blank" rel="noopener" href="https://github.com/KhronosGroup/Vulkan-Samples-Deprecated/blob/master/external/include/GL/gl_format.h">gl_format.h</a>，可以参考一下，有错误，比如<code>GL_R32UI</code>对应<code>GL_RED</code></li>
 </ul>
 
     </div>
@@ -340,7 +382,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Pixel-Data-Internal-Format"><span class="nav-number">1.</span> <span class="nav-text">Pixel Data Internal Format</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Pixel-Data%E6%A0%BC%E5%BC%8F%E7%9A%84%E5%85%BC%E5%AE%B9"><span class="nav-number">2.</span> <span class="nav-text">Pixel Data格式的兼容</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Pixel-Formats-Cheatsheets"><span class="nav-number">3.</span> <span class="nav-text">Pixel Formats Cheatsheets</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#pixel-data-internal-format"><span class="nav-number">1.</span> <span class="nav-text">Pixel Data Internal Format</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#pixel-data%E6%A0%BC%E5%BC%8F%E7%9A%84%E5%85%BC%E5%AE%B9"><span class="nav-number">2.</span> <span class="nav-text">Pixel Data格式的兼容</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#pixel-formats-cheatsheets"><span class="nav-number">3.</span> <span class="nav-text">Pixel Formats Cheatsheets</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

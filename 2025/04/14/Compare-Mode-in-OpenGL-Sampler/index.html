@@ -30,14 +30,12 @@
 <meta property="og:site_name" content="Integrator">
 <meta property="og:description" content="OpenGL虽然简单，但是问题也是公认的多，不同驱动实现的表现可能差异很大，导致同样的OpenGL的代码，在一台机器上正常执行，在另外一台机器上表现异常。 我这就遇到一个，采样GL_DEPTH_COMPONENT类型的depth texture，全屏显示到窗口。同样是GL4.6 core profile的上下文，在RTX4080上没问题，但是在笔记本ThinkPad P50（显卡NVIDIA Qu">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://darkpixel.top/2025/04/14/images/Compare-Mode-in-OpenGL-Sampler/depth_format.png">
 <meta property="article:published_time" content="2025-04-14T10:41:15.000Z">
-<meta property="article:modified_time" content="2025-06-23T04:26:45.934Z">
+<meta property="article:modified_time" content="2025-06-23T06:09:16.842Z">
 <meta property="article:author" content="黑色像素">
 <meta property="article:tag" content="Computer Graphics">
 <meta property="article:tag" content="OpenGL">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://darkpixel.top/2025/04/14/images/Compare-Mode-in-OpenGL-Sampler/depth_format.png">
 
 <link rel="canonical" href="https://darkpixel.top/2025/04/14/Compare-Mode-in-OpenGL-Sampler/">
 
@@ -202,7 +200,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-06-23 04:26:45" itemprop="dateModified" datetime="2025-06-23T04:26:45+00:00">2025-06-23</time>
+                <time title="修改时间：2025-06-23 06:09:16" itemprop="dateModified" datetime="2025-06-23T06:09:16+00:00">2025-06-23</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -230,25 +228,58 @@
 
       
         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>OpenGL虽然简单，但是问题也是公认的多，不同驱动实现的表现可能差异很大，导致同样的OpenGL的代码，在一台机器上正常执行，在另外一台机器上表现异常。</p>
-<p>我这就遇到一个，采样<code>GL_DEPTH_COMPONENT</code>类型的depth texture，全屏显示到窗口。同样是GL4.6 core profile的上下文，在RTX4080上没问题，但是在笔记本ThinkPad P50（显卡NVIDIA Quadro M1000M）上结果全白色（1.0），当然P50确实太老了，10年老机了，妥妥的电子垃圾了。</p>
+<p>我这就遇到一个，采样<code>GL_DEPTH_COMPONENT</code>类型的depth
+texture，全屏显示到窗口。同样是GL4.6 core
+profile的上下文，在RTX4080上没问题，但是在笔记本ThinkPad P50（显卡NVIDIA
+Quadro
+M1000M）上结果全白色（1.0），当然P50确实太老了，10年老机了，妥妥的电子垃圾了。</p>
 <p>可是，奈何啊，“同样是生活一起的两口子，做人的差别咋这么大咧？”。</p>
 <p>最后查到，还是代码的问题，我使用的Texture的封装代码是直接复制网上的，没有注意相关的设置细节；另外，虽然我对OpenGL比较熟悉，但是还是有很多细节问题没怎么用过。现在的很多系统都在拥抱更现代的渲染API，OpenGL不仅落后于同时代的同侪，更落后于历史的车轮，可是还是有很多古老的系统因为跨平台的考虑在使用OpenGL，吐槽归吐槽，这砖该搬还得搬啊。</p>
 <p>书归正传，回到正题。</p>
-<h1 id="Depth-Texture的比较模式"><a href="#Depth-Texture的比较模式" class="headerlink" title="Depth Texture的比较模式"></a>Depth Texture的比较模式</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">glTextureParameteri</span>(m_handle, GL_TEXTURE_COMPARE_MODE, GL_COMPARE_REF_TO_TEXTURE);</span><br><span class="line"><span class="built_in">glTextureParameteri</span>(m_handle, GL_TEXTURE_COMPARE_FUNC, GL_LEQUAL);</span><br></pre></td></tr></table></figure>
+<h1 id="depth-texture的比较模式">Depth Texture的比较模式</h1>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">glTextureParameteri</span>(m_handle, GL_TEXTURE_COMPARE_MODE, GL_COMPARE_REF_TO_TEXTURE);</span><br><span class="line"><span class="built_in">glTextureParameteri</span>(m_handle, GL_TEXTURE_COMPARE_FUNC, GL_LEQUAL);</span><br></pre></td></tr></table></figure>
 <p>深度贴图，有两种采样方法。一种是作为普通贴图<code>normal texture</code>，采样深度值；另一种作为阴影贴图<code>shadow sampler</code>，使用时必须设置比较模式。在GLSL中，这两种采样方式分别对应sampler2D<code>和</code>sampler2DShadow`。如果混着使用，采样结果是未定义未定义行为。显然，我在两个显卡上跑，得到不同的结果，就是未定义行为在作怪。</p>
 <blockquote>
-<p>Attempting to use a texture without comparison with a shadow sampler, or vice-versa, will result in an error upon rendering. <a target="_blank" rel="noopener" href="https://www.khronos.org/opengl/wiki/sampler_Object#Comparison_mode"><sup>Sampler Object Comparison Mode</sup></a></p>
-<p> the results of a texture lookup are undefined if any of the following conditions are true:<br> • Thesampler used in a texture lookup function is not one of the shadow sampler types, the texture object’s base internal format is DEPTH_COMPONENT or DEPTH_STENCIL, and the TEXTURE_COMPARE_MODE is not NONE.<br> • The sampler used in a texture lookup function is one of the shadow sampler types, the texture object’s base internal format is DEPTH_COMPONENT or DEPTH_STENCIL, and the TEXTURE_COMPARE_MODE is NONE.<a target="_blank" rel="noopener" href="https://registry.khronos.org/OpenGL/specs/gl/glspec46.core.pdf"><sup>glspec46.core p.401</sup></a></p>
+<p>Attempting to use a texture without comparison with a shadow sampler,
+or vice-versa, will result in an error upon rendering. <a
+target="_blank" rel="noopener" href="https://www.khronos.org/opengl/wiki/sampler_Object#Comparison_mode"><sup>Sampler
+Object Comparison Mode</sup></a></p>
+</blockquote>
+<blockquote>
+<p>the results of a texture lookup are undefined if any of the following
+conditions are true: • Thesampler used in a texture lookup function is
+not one of the shadow sampler types, the texture object’s base internal
+format is DEPTH_COMPONENT or DEPTH_STENCIL, and the TEXTURE_COMPARE_MODE
+is not NONE. • The sampler used in a texture lookup function is one of
+the shadow sampler types, the texture object’s base internal format is
+DEPTH_COMPONENT or DEPTH_STENCIL, and the TEXTURE_COMPARE_MODE is
+NONE.<a
+target="_blank" rel="noopener" href="https://registry.khronos.org/OpenGL/specs/gl/glspec46.core.pdf"><sup>glspec46.core
+p.401</sup></a></p>
 </blockquote>
 <p>另外，如果<code>shadow sampler</code>设置了<code>linear filtering</code>，采样的结果实际在实现硬件的4采样PCF。</p>
-<p>附一张OpenGL的深度数据格式表：<br><img src="../images/Compare-Mode-in-OpenGL-Sampler/depth_format.png" alt="Compare-Mode-in-OpenGL-Sampler/depth_format"></p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul>
-<li><a target="_blank" rel="noopener" href="https://registry.khronos.org/OpenGL/specs/gl/glspec46.core.pdf">glspec46.core p.401</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.khronos.org/opengl/wiki/Sampler_(GLSL">Shadow_samplers</a>#Shadow_samplers)</li>
-<li><a target="_blank" rel="noopener" href="https://www.khronos.org/opengl/wiki/sampler_Object#Comparison_mode">Sampler Object Comparison Mode</a></li>
-<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/22919583/opengl-framebuffer-depth-texture-not-working">opengl framebuffer depth texture not working</a></li>
-<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/22419682/glsl-sampler2dshadow-and-shadow2d-clarification/22426507#22426507">glsl sampler2DShadow and shadow2D clarification</a></li>
-<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/19516538/opengl-shadow-acne-when-using-shadow2d">Opengl shadow acne when using shadow2D</a></li>
+<p>附一张OpenGL的深度数据格式表： <img
+src="../images/Compare-Mode-in-OpenGL-Sampler/depth_format.png"
+alt="Compare-Mode-in-OpenGL-Sampler/depth_format" /></p>
+<h1 id="参考">参考</h1>
+<ul>
+<li><a
+target="_blank" rel="noopener" href="https://registry.khronos.org/OpenGL/specs/gl/glspec46.core.pdf">glspec46.core
+p.401</a></li>
+<li><a
+target="_blank" rel="noopener" href="https://www.khronos.org/opengl/wiki/Sampler_(GLSL)#Shadow_samplers">Shadow_samplers</a></li>
+<li><a
+target="_blank" rel="noopener" href="https://www.khronos.org/opengl/wiki/sampler_Object#Comparison_mode">Sampler
+Object Comparison Mode</a></li>
+<li><a
+target="_blank" rel="noopener" href="https://stackoverflow.com/questions/22919583/opengl-framebuffer-depth-texture-not-working">opengl
+framebuffer depth texture not working</a></li>
+<li><a
+target="_blank" rel="noopener" href="https://stackoverflow.com/questions/22419682/glsl-sampler2dshadow-and-shadow2d-clarification/22426507#22426507">glsl
+sampler2DShadow and shadow2D clarification</a></li>
+<li><a
+target="_blank" rel="noopener" href="https://stackoverflow.com/questions/19516538/opengl-shadow-acne-when-using-shadow2d">Opengl
+shadow acne when using shadow2D</a></li>
 </ul>
 
     </div>
@@ -334,7 +365,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Depth-Texture%E7%9A%84%E6%AF%94%E8%BE%83%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.</span> <span class="nav-text">Depth Texture的比较模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">2.</span> <span class="nav-text">参考</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#depth-texture%E7%9A%84%E6%AF%94%E8%BE%83%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.</span> <span class="nav-text">Depth Texture的比较模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">2.</span> <span class="nav-text">参考</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
