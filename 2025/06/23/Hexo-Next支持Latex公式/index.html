@@ -23,23 +23,20 @@
     var CONFIG = {"hostname":"darkpixel.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="OpenGL虽然简单，但是问题也是公认的多，不同驱动实现的表现可能差异很大，导致同样的OpenGL的代码，在一台机器上正常执行，在另外一台机器上表现异常。 我这就遇到一个，采样GL_DEPTH_COMPONENT类型的depth texture，全屏显示到窗口。同样是GL4.6 core profile的上下文，在RTX4080上没问题，但是在笔记本ThinkPad P50（显卡NVIDIA Qu">
+  <meta name="description" content="书接Hexo-Next样式美化，本篇记录hexo-next组合对于LaTeX公式的支持。 Latex渲染插件配置 具体的在theme-next Math docs中写的很清楚，有MathJax和Katex两种公式渲染方式。这里经过实际操作，选择MathJax。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Compare Mode in OpenGL Sampler">
-<meta property="og:url" content="https://darkpixel.top/2025/04/14/Compare-Mode-in-OpenGL-Sampler/index.html">
+<meta property="og:title" content="Hexo-Next支持Latex公式">
+<meta property="og:url" content="https://darkpixel.top/2025/06/23/Hexo-Next%E6%94%AF%E6%8C%81Latex%E5%85%AC%E5%BC%8F/index.html">
 <meta property="og:site_name" content="Integrator">
-<meta property="og:description" content="OpenGL虽然简单，但是问题也是公认的多，不同驱动实现的表现可能差异很大，导致同样的OpenGL的代码，在一台机器上正常执行，在另外一台机器上表现异常。 我这就遇到一个，采样GL_DEPTH_COMPONENT类型的depth texture，全屏显示到窗口。同样是GL4.6 core profile的上下文，在RTX4080上没问题，但是在笔记本ThinkPad P50（显卡NVIDIA Qu">
+<meta property="og:description" content="书接Hexo-Next样式美化，本篇记录hexo-next组合对于LaTeX公式的支持。 Latex渲染插件配置 具体的在theme-next Math docs中写的很清楚，有MathJax和Katex两种公式渲染方式。这里经过实际操作，选择MathJax。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://darkpixel.top/images/Compare-Mode-in-OpenGL-Sampler/depth_format.png">
-<meta property="article:published_time" content="2025-04-14T10:41:15.000Z">
+<meta property="article:published_time" content="2025-06-23T15:45:48.000Z">
 <meta property="article:modified_time" content="2025-06-23T08:40:40.181Z">
 <meta property="article:author" content="黑色像素">
-<meta property="article:tag" content="Computer Graphics">
-<meta property="article:tag" content="OpenGL">
+<meta property="article:tag" content="Hexo-Next">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://darkpixel.top/images/Compare-Mode-in-OpenGL-Sampler/depth_format.png">
 
-<link rel="canonical" href="https://darkpixel.top/2025/04/14/Compare-Mode-in-OpenGL-Sampler/">
+<link rel="canonical" href="https://darkpixel.top/2025/06/23/Hexo-Next%E6%94%AF%E6%8C%81Latex%E5%85%AC%E5%BC%8F/">
 
 
 <script id="page-configurations">
@@ -52,7 +49,7 @@
   };
 </script>
 
-  <title>Compare Mode in OpenGL Sampler | Integrator</title>
+  <title>Hexo-Next支持Latex公式 | Integrator</title>
   
 
 
@@ -172,7 +169,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://darkpixel.top/2025/04/14/Compare-Mode-in-OpenGL-Sampler/">
+    <link itemprop="mainEntityOfPage" href="https://darkpixel.top/2025/06/23/Hexo-Next%E6%94%AF%E6%8C%81Latex%E5%85%AC%E5%BC%8F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -185,7 +182,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Compare Mode in OpenGL Sampler
+          Hexo-Next支持Latex公式
         </h1>
 
         <div class="post-meta">
@@ -194,27 +191,17 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2025-04-14 10:41:15" itemprop="dateCreated datePublished" datetime="2025-04-14T10:41:15+00:00">2025-04-14</time>
+              <time title="创建时间：2025-06-23 15:45:48 / 修改时间：08:40:40" itemprop="dateCreated datePublished" datetime="2025-06-23T15:45:48+00:00">2025-06-23</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-06-23 08:40:40" itemprop="dateModified" datetime="2025-06-23T08:40:40+00:00">2025-06-23</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Computer-Graphics/" itemprop="url" rel="index"><span itemprop="name">Computer Graphics</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Computer-Graphics/OpenGL/" itemprop="url" rel="index"><span itemprop="name">OpenGL</span></a>
+                  <a href="/categories/Hexo-Next/" itemprop="url" rel="index"><span itemprop="name">Hexo-Next</span></a>
                 </span>
             </span>
 
@@ -229,60 +216,40 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>OpenGL虽然简单，但是问题也是公认的多，不同驱动实现的表现可能差异很大，导致同样的OpenGL的代码，在一台机器上正常执行，在另外一台机器上表现异常。</p>
-<p>我这就遇到一个，采样<code>GL_DEPTH_COMPONENT</code>类型的depth
-texture，全屏显示到窗口。同样是GL4.6 core
-profile的上下文，在RTX4080上没问题，但是在笔记本ThinkPad P50（显卡NVIDIA
-Quadro
-M1000M）上结果全白色（1.0），当然P50确实太老了，10年老机了，妥妥的电子垃圾了。</p>
-<p>可是，奈何啊，“同样是生活一起的两口子，做人的差别咋这么大咧？”。</p>
-<p>最后查到，还是代码的问题，我使用的Texture的封装代码是直接复制网上的，没有注意相关的设置细节；另外，虽然我对OpenGL比较熟悉，但是还是有很多细节问题没怎么用过。现在的很多系统都在拥抱更现代的渲染API，OpenGL不仅落后于同时代的同侪，更落后于历史的车轮，可是还是有很多古老的系统因为跨平台的考虑在使用OpenGL，吐槽归吐槽，这砖该搬还得搬啊。</p>
-<p>书归正传，回到正题。</p>
-<h1 id="depth-texture的比较模式">Depth Texture的比较模式</h1>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">glTextureParameteri</span>(m_handle, GL_TEXTURE_COMPARE_MODE, GL_COMPARE_REF_TO_TEXTURE);</span><br><span class="line"><span class="built_in">glTextureParameteri</span>(m_handle, GL_TEXTURE_COMPARE_FUNC, GL_LEQUAL);</span><br></pre></td></tr></table></figure>
-<p>深度贴图，有两种采样方法。一种是作为普通贴图<code>normal texture</code>，采样深度值；另一种作为阴影贴图<code>shadow sampler</code>，使用时必须设置比较模式。在GLSL中，这两种采样方式分别对应sampler2D<code>和</code>sampler2DShadow`。如果混着使用，采样结果是未定义未定义行为。显然，我在两个显卡上跑，得到不同的结果，就是未定义行为在作怪。</p>
-<blockquote>
-<p>Attempting to use a texture without comparison with a shadow sampler,
-or vice-versa, will result in an error upon rendering. <a
-target="_blank" rel="noopener" href="https://www.khronos.org/opengl/wiki/sampler_Object#Comparison_mode"><sup>Sampler
-Object Comparison Mode</sup></a></p>
-</blockquote>
-<blockquote>
-<p>the results of a texture lookup are undefined if any of the following
-conditions are true: • Thesampler used in a texture lookup function is
-not one of the shadow sampler types, the texture object’s base internal
-format is DEPTH_COMPONENT or DEPTH_STENCIL, and the TEXTURE_COMPARE_MODE
-is not NONE. • The sampler used in a texture lookup function is one of
-the shadow sampler types, the texture object’s base internal format is
-DEPTH_COMPONENT or DEPTH_STENCIL, and the TEXTURE_COMPARE_MODE is
-NONE.<a
-target="_blank" rel="noopener" href="https://registry.khronos.org/OpenGL/specs/gl/glspec46.core.pdf"><sup>glspec46.core
-p.401</sup></a></p>
-</blockquote>
-<p>另外，如果<code>shadow sampler</code>设置了<code>linear filtering</code>，采样的结果实际在实现硬件的4采样PCF。</p>
-<p>附一张OpenGL的深度数据格式表：
-<!-- ![Compare-Mode-in-OpenGL-Sampler/depth_format](../images/Compare-Mode-in-OpenGL-Sampler/depth_format.png) -->
-<img src="/images/Compare-Mode-in-OpenGL-Sampler/depth_format.png" class="Compare-Mode-in-OpenGL-Sampler&#x2F;depth_format"></p>
-<h1 id="参考">参考</h1>
-<ul>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>书接<a href="/2025/02/18/Hexo-Next%E6%A0%B7%E5%BC%8F%E7%BE%8E%E5%8C%96/" title="Hexo-Next样式美化">Hexo-Next样式美化</a>，本篇记录hexo-next组合对于<span
+class="math inline"><em>L</em><em>a</em><em>T</em><em>e</em><em>X</em></span>公式的支持。</p>
+<h2 id="latex渲染插件配置">Latex渲染插件配置</h2>
+<p>具体的在<a
+target="_blank" rel="noopener" href="https://github.com/theme-next/hexo-theme-next/blob/master/docs/MATH.md">theme-next
+Math
+docs</a>中写的很清楚，有MathJax和Katex两种公式渲染方式。这里经过实际操作，选择MathJax。</p>
+<ol type="1">
+<li><p>安装hexo-renderer-pandoc，也尝试过hexo-renderer-kramed，但是没效果，具体愿意没有细察
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm uninstall hexo-renderer-marked</span><br><span class="line">npm install hexo-renderer-pandoc <span class="comment"># or hexo-renderer-kramed</span></span><br></pre></td></tr></table></figure></p></li>
+<li><p>配置<code>next/_config.yml</code>, 打开<code>mathjax</code>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">math:</span></span><br><span class="line">  <span class="attr">per_page:</span> <span class="literal">false</span></span><br><span class="line">  <span class="attr">mathjax:</span></span><br><span class="line">    <span class="attr">enable:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure></p></li>
+<li><p>CDN <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">vendors:</span></span><br><span class="line">  <span class="comment"># MathJax</span></span><br><span class="line">  <span class="attr">mathjax:</span> <span class="string">//cdn.jsdelivr.net/npm/mathjs@14.5.2/lib/browser/math.min.js</span></span><br></pre></td></tr></table></figure></p></li>
+<li><p>生成，需要clean <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo clean &amp;&amp; hexo g</span><br><span class="line"><span class="comment"># or hexo clean &amp;&amp; hexo s</span></span><br></pre></td></tr></table></figure></p></li>
+<li><p>示例</p>
+<p><span
+class="math display"><em>e</em> = <em>m</em><em>c</em><sup>2</sup></span></p></li>
+</ol>
+<h2 id="github-ci">Github CI</h2>
+<p>hexo-renderer-pandoc依赖pandoc工具，在ci的环境中，需要系统安装了pandoc。在<a href="/2022/12/24/Hexo-Next%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95/" title="Hexo-Next搭建记录">Hexo-Next搭建记录</a>中ci脚本的基础上，修改相应的步骤。要是我自己写，可能要费点劲，还好有大佬做了相关的工作，<a
+target="_blank" rel="noopener" href="https://cateaf.com/2022/04/12/switching-to-github-actions/">Github
+Actions部署安装pandoc</a>，拿来主义了，感谢分享。</p>
+<ol type="1">
+<li><p>添加安装pandoc的步骤 <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Install</span> <span class="string">pandoc</span></span><br><span class="line">  <span class="attr">run:</span> <span class="string">curl</span> <span class="string">-s</span> <span class="string">-L</span> <span class="string">https://github.com/jgm/pandoc/releases/download/2.18/pandoc-2.18-linux-amd64.tar.gz</span> <span class="string">|</span> <span class="string">tar</span> <span class="string">xvzf</span> <span class="bullet">-</span> <span class="string">-C</span> <span class="string">$RUNNER_TOOL_CACHE/</span></span><br></pre></td></tr></table></figure></p></li>
+<li><p>生成步骤中，把pandoc的路径加入到环境变量 <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Build</span></span><br><span class="line">  <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line"><span class="string">    # add pandoc to PATH</span></span><br><span class="line"><span class="string">    export PATH=&quot;$PATH:$RUNNER_TOOL_CACHE/pandoc-2.18/bin&quot;</span></span><br><span class="line"><span class="string">    npm run build</span></span><br></pre></td></tr></table></figure></p></li>
+</ol>
+<h2 id="参考">参考</h2>
+<ol type="1">
 <li><a
-target="_blank" rel="noopener" href="https://registry.khronos.org/OpenGL/specs/gl/glspec46.core.pdf">glspec46.core
-p.401</a></li>
+target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/381508379">Hexo显示latex公式</a></li>
 <li><a
-target="_blank" rel="noopener" href="https://www.khronos.org/opengl/wiki/Sampler_(GLSL)#Shadow_samplers">Shadow_samplers</a></li>
-<li><a
-target="_blank" rel="noopener" href="https://www.khronos.org/opengl/wiki/sampler_Object#Comparison_mode">Sampler
-Object Comparison Mode</a></li>
-<li><a
-target="_blank" rel="noopener" href="https://stackoverflow.com/questions/22919583/opengl-framebuffer-depth-texture-not-working">opengl
-framebuffer depth texture not working</a></li>
-<li><a
-target="_blank" rel="noopener" href="https://stackoverflow.com/questions/22419682/glsl-sampler2dshadow-and-shadow2d-clarification/22426507#22426507">glsl
-sampler2DShadow and shadow2D clarification</a></li>
-<li><a
-target="_blank" rel="noopener" href="https://stackoverflow.com/questions/19516538/opengl-shadow-acne-when-using-shadow2d">Opengl
-shadow acne when using shadow2D</a></li>
-</ul>
+target="_blank" rel="noopener" href="https://cateaf.com/2022/04/12/switching-to-github-actions/">Github
+Actions部署安装pandoc</a></li>
+</ol>
 
     </div>
 
@@ -292,8 +259,7 @@ shadow acne when using shadow2D</a></li>
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/Computer-Graphics/" rel="tag"># Computer Graphics</a>
-              <a href="/tags/OpenGL/" rel="tag"># OpenGL</a>
+              <a href="/tags/Hexo-Next/" rel="tag"># Hexo-Next</a>
           </div>
 
         
@@ -302,13 +268,10 @@ shadow acne when using shadow2D</a></li>
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2025/04/08/Per-Pixel-Link-List/" rel="prev" title="Per-Pixel Link List">
-      <i class="fa fa-chevron-left"></i> Per-Pixel Link List
+    <a href="/2025/06/19/PBR-Reading-Notes/" rel="prev" title="PBR Reading Notes">
+      <i class="fa fa-chevron-left"></i> PBR Reading Notes
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2025/04/15/Graphics-Samples-Collections/" rel="next" title="Graphics Samples Collections">
-      Graphics Samples Collections <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -367,7 +330,7 @@ shadow acne when using shadow2D</a></li>
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#depth-texture%E7%9A%84%E6%AF%94%E8%BE%83%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.</span> <span class="nav-text">Depth Texture的比较模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">2.</span> <span class="nav-text">参考</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#latex%E6%B8%B2%E6%9F%93%E6%8F%92%E4%BB%B6%E9%85%8D%E7%BD%AE"><span class="nav-number">1.</span> <span class="nav-text">Latex渲染插件配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#github-ci"><span class="nav-number">2.</span> <span class="nav-text">Github CI</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">3.</span> <span class="nav-text">参考</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
