@@ -23,15 +23,15 @@
     var CONFIG = {"hostname":"darkpixel.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="书接Hexo-Next样式美化，本篇记录hexo-next组合对于\(LaTeX\)公式的支持。 Latex渲染插件配置 具体的在theme-next Math docs中写的很清楚，有MathJax和Katex两种公式渲染方式。这里经过实际操作，选择MathJax。">
+  <meta name="description" content="书接Hexo-Next样式美化，本篇记录hexo-next组合对于公式的支持。 Latex渲染插件配置 具体的在theme-next Math docs中写的很清楚，有MathJax和Katex两种公式渲染方式。这里经过实际操作，选择MathJax。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hexo-Next支持Latex公式">
 <meta property="og:url" content="https://darkpixel.top/2025/06/23/Hexo-Next%E6%94%AF%E6%8C%81Latex%E5%85%AC%E5%BC%8F/index.html">
 <meta property="og:site_name" content="Integrator">
-<meta property="og:description" content="书接Hexo-Next样式美化，本篇记录hexo-next组合对于\(LaTeX\)公式的支持。 Latex渲染插件配置 具体的在theme-next Math docs中写的很清楚，有MathJax和Katex两种公式渲染方式。这里经过实际操作，选择MathJax。">
+<meta property="og:description" content="书接Hexo-Next样式美化，本篇记录hexo-next组合对于公式的支持。 Latex渲染插件配置 具体的在theme-next Math docs中写的很清楚，有MathJax和Katex两种公式渲染方式。这里经过实际操作，选择MathJax。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-06-23T15:45:48.000Z">
-<meta property="article:modified_time" content="2025-06-24T03:05:36.693Z">
+<meta property="article:modified_time" content="2025-06-24T03:15:55.825Z">
 <meta property="article:author" content="黑色像素">
 <meta property="article:tag" content="Hexo-Next">
 <meta name="twitter:card" content="summary">
@@ -80,7 +80,119 @@
   </style>
 </noscript>
 
-</head>
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
   <div class="container use-motion">
@@ -199,7 +311,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-06-24 03:05:36" itemprop="dateModified" datetime="2025-06-24T03:05:36+00:00">2025-06-24</time>
+                <time title="修改时间：2025-06-24 03:15:55" itemprop="dateModified" datetime="2025-06-24T03:15:55+00:00">2025-06-24</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -222,11 +334,9 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>书接<a href="/2025/02/18/Hexo-Next%E6%A0%B7%E5%BC%8F%E7%BE%8E%E5%8C%96/" title="Hexo-Next样式美化">Hexo-Next样式美化</a>，本篇记录hexo-next组合对于<span
-class="math inline">\(LaTeX\)</span>公式的支持。</p>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>书接<a href="/2025/02/18/Hexo-Next%E6%A0%B7%E5%BC%8F%E7%BE%8E%E5%8C%96/" title="Hexo-Next样式美化">Hexo-Next样式美化</a>，本篇记录hexo-next组合对于<span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.025ex;" xmlns="http://www.w3.org/2000/svg" width="7.312ex" height="1.57ex" role="img" focusable="false" viewBox="0 -683 3232 694"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D43F" d="M228 637Q194 637 192 641Q191 643 191 649Q191 673 202 682Q204 683 217 683Q271 680 344 680Q485 680 506 683H518Q524 677 524 674T522 656Q517 641 513 637H475Q406 636 394 628Q387 624 380 600T313 336Q297 271 279 198T252 88L243 52Q243 48 252 48T311 46H328Q360 46 379 47T428 54T478 72T522 106T564 161Q580 191 594 228T611 270Q616 273 628 273H641Q647 264 647 262T627 203T583 83T557 9Q555 4 553 3T537 0T494 -1Q483 -1 418 -1T294 0H116Q32 0 32 10Q32 17 34 24Q39 43 44 45Q48 46 59 46H65Q92 46 125 49Q139 52 144 61Q147 65 216 339T285 628Q285 635 228 637Z"></path></g><g data-mml-node="mi" transform="translate(681,0)"><path data-c="1D44E" d="M33 157Q33 258 109 349T280 441Q331 441 370 392Q386 422 416 422Q429 422 439 414T449 394Q449 381 412 234T374 68Q374 43 381 35T402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487Q506 153 506 144Q506 138 501 117T481 63T449 13Q436 0 417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157ZM351 328Q351 334 346 350T323 385T277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q217 26 254 59T298 110Q300 114 325 217T351 328Z"></path></g><g data-mml-node="mi" transform="translate(1210,0)"><path data-c="1D447" d="M40 437Q21 437 21 445Q21 450 37 501T71 602L88 651Q93 669 101 677H569H659Q691 677 697 676T704 667Q704 661 687 553T668 444Q668 437 649 437Q640 437 637 437T631 442L629 445Q629 451 635 490T641 551Q641 586 628 604T573 629Q568 630 515 631Q469 631 457 630T439 622Q438 621 368 343T298 60Q298 48 386 46Q418 46 427 45T436 36Q436 31 433 22Q429 4 424 1L422 0Q419 0 415 0Q410 0 363 1T228 2Q99 2 64 0H49Q43 6 43 9T45 27Q49 40 55 46H83H94Q174 46 189 55Q190 56 191 56Q196 59 201 76T241 233Q258 301 269 344Q339 619 339 625Q339 630 310 630H279Q212 630 191 624Q146 614 121 583T67 467Q60 445 57 441T43 437H40Z"></path></g><g data-mml-node="mi" transform="translate(1914,0)"><path data-c="1D452" d="M39 168Q39 225 58 272T107 350T174 402T244 433T307 442H310Q355 442 388 420T421 355Q421 265 310 237Q261 224 176 223Q139 223 138 221Q138 219 132 186T125 128Q125 81 146 54T209 26T302 45T394 111Q403 121 406 121Q410 121 419 112T429 98T420 82T390 55T344 24T281 -1T205 -11Q126 -11 83 42T39 168ZM373 353Q367 405 305 405Q272 405 244 391T199 357T170 316T154 280T149 261Q149 260 169 260Q282 260 327 284T373 353Z"></path></g><g data-mml-node="mi" transform="translate(2380,0)"><path data-c="1D44B" d="M42 0H40Q26 0 26 11Q26 15 29 27Q33 41 36 43T55 46Q141 49 190 98Q200 108 306 224T411 342Q302 620 297 625Q288 636 234 637H206Q200 643 200 645T202 664Q206 677 212 683H226Q260 681 347 681Q380 681 408 681T453 682T473 682Q490 682 490 671Q490 670 488 658Q484 643 481 640T465 637Q434 634 411 620L488 426L541 485Q646 598 646 610Q646 628 622 635Q617 635 609 637Q594 637 594 648Q594 650 596 664Q600 677 606 683H618Q619 683 643 683T697 681T738 680Q828 680 837 683H845Q852 676 852 672Q850 647 840 637H824Q790 636 763 628T722 611T698 593L687 584Q687 585 592 480L505 384Q505 383 536 304T601 142T638 56Q648 47 699 46Q734 46 734 37Q734 35 732 23Q728 7 725 4T711 1Q708 1 678 1T589 2Q528 2 496 2T461 1Q444 1 444 10Q444 11 446 25Q448 35 450 39T455 44T464 46T480 47T506 54Q523 62 523 64Q522 64 476 181L429 299Q241 95 236 84Q232 76 232 72Q232 53 261 47Q262 47 267 47T273 46Q276 46 277 46T280 45T283 42T284 35Q284 26 282 19Q279 6 276 4T261 1Q258 1 243 1T201 2T142 2Q64 2 42 0Z"></path></g></g></g></svg></mjx-container></span>公式的支持。</p>
 <h2 id="latex渲染插件配置">Latex渲染插件配置</h2>
-<p>具体的在<a
-target="_blank" rel="noopener" href="https://github.com/theme-next/hexo-theme-next/blob/master/docs/MATH.md">theme-next
+<p>具体的在<a target="_blank" rel="noopener" href="https://github.com/theme-next/hexo-theme-next/blob/master/docs/MATH.md">theme-next
 Math
 docs</a>中写的很清楚，有MathJax和Katex两种公式渲染方式。这里经过实际操作，选择MathJax。</p>
 <ol type="1">
@@ -235,41 +345,33 @@ docs</a>中写的很清楚，有MathJax和Katex两种公式渲染方式。这里
 <li><p>配置<code>next/_config.yml</code>, 打开<code>mathjax</code>
 <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">math:</span></span><br><span class="line">  <span class="attr">per_page:</span> <span class="literal">false</span></span><br><span class="line">  <span class="attr">mathjax:</span></span><br><span class="line">    <span class="attr">enable:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure></p></li>
 <li><p>配置’hexo/_config.yml’ pandoc参数 <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># config of hexo-renderer-pandoc</span></span><br><span class="line"><span class="attr">pandoc:</span></span><br><span class="line">  <span class="attr">args:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--mathjax</span> <span class="comment"># a must arg</span></span><br><span class="line">    <span class="comment"># - --webtex # with it, each equation be in one line</span></span><br><span class="line">    <span class="comment"># - --standalone  # $...$ become \(\), but affect html style</span></span><br></pre></td></tr></table></figure> mathjax参数
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">mathjax:</span></span><br><span class="line">  <span class="attr">tags:</span> <span class="string">none</span> <span class="comment"># or &#x27;ams&#x27; or &#x27;all&#x27;</span></span><br><span class="line">  <span class="attr">single_dollars:</span> <span class="literal">true</span> <span class="comment"># enable single dollar signs as in-line math delimiters</span></span><br><span class="line">  <span class="attr">cjk_width:</span> <span class="number">0.9</span> <span class="comment"># relative CJK char width</span></span><br><span class="line">  <span class="attr">normal_width:</span> <span class="number">0.6</span> <span class="comment"># relative normal (monospace) width</span></span><br><span class="line">  <span class="attr">append_css:</span> <span class="literal">true</span> <span class="comment"># add CSS to pages rendered by MathJax</span></span><br><span class="line">  <span class="attr">every_page:</span> <span class="literal">false</span> <span class="comment"># if true, every page will be rendered by MathJax regardless the `mathjax` setting in Front-matter</span></span><br><span class="line">  <span class="attr">packages:</span> <span class="comment"># extra packages to load</span></span><br><span class="line">  <span class="attr">extension_options:</span> &#123;&#125;</span><br></pre></td></tr></table></figure></p></li>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">mathjax:</span></span><br><span class="line">  <span class="attr">tags:</span> <span class="string">none</span> <span class="comment"># or 'ams' or 'all'</span></span><br><span class="line">  <span class="attr">single_dollars:</span> <span class="literal">true</span> <span class="comment"># enable single dollar signs as in-line math delimiters</span></span><br><span class="line">  <span class="attr">cjk_width:</span> <span class="number">0.9</span> <span class="comment"># relative CJK char width</span></span><br><span class="line">  <span class="attr">normal_width:</span> <span class="number">0.6</span> <span class="comment"># relative normal (monospace) width</span></span><br><span class="line">  <span class="attr">append_css:</span> <span class="literal">true</span> <span class="comment"># add CSS to pages rendered by MathJax</span></span><br><span class="line">  <span class="attr">every_page:</span> <span class="literal">false</span> <span class="comment"># if true, every page will be rendered by MathJax regardless the `mathjax` setting in Front-matter</span></span><br><span class="line">  <span class="attr">packages:</span> <span class="comment"># extra packages to load</span></span><br><span class="line">  <span class="attr">extension_options:</span> {}</span><br></pre></td></tr></table></figure> <strong>Note</strong>
+这里<code>every_page: false</code>，需要在文件头添加<code>mathjax: true</code></p></li>
 <li><p>CDN <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">vendors:</span></span><br><span class="line">  <span class="comment"># MathJax</span></span><br><span class="line">  <span class="attr">mathjax:</span> <span class="string">//cdn.jsdelivr.net/npm/mathjs@14.5.2/lib/browser/math.min.js</span></span><br></pre></td></tr></table></figure></p></li>
 <li><p>生成，需要clean <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo clean &amp;&amp; hexo g</span><br><span class="line"><span class="comment"># or hexo clean &amp;&amp; hexo s</span></span><br></pre></td></tr></table></figure></p></li>
 <li><p>示例</p>
-<p><span class="math display">\[\begin{equation}\label{eq1}
-e=mc^2
-\end{equation}\]</span></p></li>
+<p><span class="math display"><mjx-container class="MathJax" jax="SVG" display="true"><svg style="vertical-align: -0.186ex;" xmlns="http://www.w3.org/2000/svg" width="8.025ex" height="2.185ex" role="img" focusable="false" viewBox="0 -883.9 3547.1 965.9"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D452" d="M39 168Q39 225 58 272T107 350T174 402T244 433T307 442H310Q355 442 388 420T421 355Q421 265 310 237Q261 224 176 223Q139 223 138 221Q138 219 132 186T125 128Q125 81 146 54T209 26T302 45T394 111Q403 121 406 121Q410 121 419 112T429 98T420 82T390 55T344 24T281 -1T205 -11Q126 -11 83 42T39 168ZM373 353Q367 405 305 405Q272 405 244 391T199 357T170 316T154 280T149 261Q149 260 169 260Q282 260 327 284T373 353Z"></path></g><g data-mml-node="mo" transform="translate(743.8,0)"><path data-c="3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path></g><g data-mml-node="mi" transform="translate(1799.6,0)"><path data-c="1D45A" d="M21 287Q22 293 24 303T36 341T56 388T88 425T132 442T175 435T205 417T221 395T229 376L231 369Q231 367 232 367L243 378Q303 442 384 442Q401 442 415 440T441 433T460 423T475 411T485 398T493 385T497 373T500 364T502 357L510 367Q573 442 659 442Q713 442 746 415T780 336Q780 285 742 178T704 50Q705 36 709 31T724 26Q752 26 776 56T815 138Q818 149 821 151T837 153Q857 153 857 145Q857 144 853 130Q845 101 831 73T785 17T716 -10Q669 -10 648 17T627 73Q627 92 663 193T700 345Q700 404 656 404H651Q565 404 506 303L499 291L466 157Q433 26 428 16Q415 -11 385 -11Q372 -11 364 -4T353 8T350 18Q350 29 384 161L420 307Q423 322 423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 181Q151 335 151 342Q154 357 154 369Q154 405 129 405Q107 405 92 377T69 316T57 280Q55 278 41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="msup" transform="translate(2677.6,0)"><g data-mml-node="mi"><path data-c="1D450" d="M34 159Q34 268 120 355T306 442Q362 442 394 418T427 355Q427 326 408 306T360 285Q341 285 330 295T319 325T330 359T352 380T366 386H367Q367 388 361 392T340 400T306 404Q276 404 249 390Q228 381 206 359Q162 315 142 235T121 119Q121 73 147 50Q169 26 205 26H209Q321 26 394 111Q403 121 406 121Q410 121 419 112T429 98T420 83T391 55T346 25T282 0T202 -11Q127 -11 81 37T34 159Z"></path></g><g data-mml-node="mn" transform="translate(466,413) scale(0.707)"><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path></g></g></g></g></svg></mjx-container></span></p></li>
 </ol>
 <h2 id="github-ci">Github CI</h2>
-<p>hexo-renderer-pandoc依赖pandoc工具，在ci的环境中，需要系统安装了pandoc。在<a href="/2022/12/24/Hexo-Next%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95/" title="Hexo-Next搭建记录">Hexo-Next搭建记录</a>中ci脚本的基础上，修改相应的步骤。要是我自己写，可能要费点劲，还好有大佬做了相关的工作，<a
-target="_blank" rel="noopener" href="https://cateaf.com/2022/04/12/switching-to-github-actions/">Github
+<p>hexo-renderer-pandoc依赖pandoc工具，在ci的环境中，需要系统安装了pandoc。在<a href="/2022/12/24/Hexo-Next%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95/" title="Hexo-Next搭建记录">Hexo-Next搭建记录</a>中ci脚本的基础上，修改相应的步骤。要是我自己写，可能要费点劲，还好有大佬做了相关的工作，<a target="_blank" rel="noopener" href="https://cateaf.com/2022/04/12/switching-to-github-actions/">Github
 Actions部署安装pandoc</a>，拿来主义了，感谢分享。</p>
 <ol type="1">
 <li><p>添加安装pandoc的步骤 <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Install</span> <span class="string">pandoc</span></span><br><span class="line">  <span class="attr">run:</span> <span class="string">curl</span> <span class="string">-s</span> <span class="string">-L</span> <span class="string">https://github.com/jgm/pandoc/releases/download/2.18/pandoc-2.18-linux-amd64.tar.gz</span> <span class="string">|</span> <span class="string">tar</span> <span class="string">xvzf</span> <span class="bullet">-</span> <span class="string">-C</span> <span class="string">$RUNNER_TOOL_CACHE/</span></span><br></pre></td></tr></table></figure></p></li>
-<li><p>生成步骤中，把pandoc的路径加入到环境变量 <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Build</span></span><br><span class="line">  <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line"><span class="string">    # add pandoc to PATH</span></span><br><span class="line"><span class="string">    export PATH=&quot;$PATH:$RUNNER_TOOL_CACHE/pandoc-2.18/bin&quot;</span></span><br><span class="line"><span class="string">    npm run build</span></span><br></pre></td></tr></table></figure></p></li>
+<li><p>生成步骤中，把pandoc的路径加入到环境变量 <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Build</span></span><br><span class="line">  <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line"><span class="string">    # add pandoc to PATH</span></span><br><span class="line"><span class="string">    export PATH="$PATH:$RUNNER_TOOL_CACHE/pandoc-2.18/bin"</span></span><br><span class="line"><span class="string">    npm run build</span></span><br></pre></td></tr></table></figure></p></li>
 </ol>
 <h2 id="参考">参考</h2>
 <ol type="1">
-<li><a
-target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/381508379">Hexo显示latex公式</a></li>
-<li><a
-target="_blank" rel="noopener" href="https://blog.barku.re/2024/04/20/彻底解决-Hexo-的数学公式渲染问题/">彻底解决-Hexo-的数学公式渲染问题</a></li>
-<li><a
-target="_blank" rel="noopener" href="https://github.com/next-theme/hexo-filter-mathjax?tab=readme-ov-file#options">hexo-filter-mathjax
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/381508379">Hexo显示latex公式</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.barku.re/2024/04/20/彻底解决-Hexo-的数学公式渲染问题/">彻底解决-Hexo-的数学公式渲染问题</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/next-theme/hexo-filter-mathjax?tab=readme-ov-file#options">hexo-filter-mathjax
 options</a></li>
-<li><a
-target="_blank" rel="noopener" href="https://theme-next.js.org/docs/third-party-services/math-equations">Math
+<li><a target="_blank" rel="noopener" href="https://theme-next.js.org/docs/third-party-services/math-equations">Math
 Equations配置</a></li>
-<li><a
-target="_blank" rel="noopener" href="https://stackoverflow.com/questions/37533412/md-with-latex-to-html-with-mathjax-with-pandoc">MD
+<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/37533412/md-with-latex-to-html-with-mathjax-with-pandoc">MD
 with Latex to HTML with MathJax with Pandoc</a></li>
 <li><a target="_blank" rel="noopener" href="https://github.com/jgm/pandoc/issues/7771">Could not
 convert TeX math </a></li>
-<li><a
-target="_blank" rel="noopener" href="https://cateaf.com/2022/04/12/switching-to-github-actions/">Github
+<li><a target="_blank" rel="noopener" href="https://cateaf.com/2022/04/12/switching-to-github-actions/">Github
 Actions部署安装pandoc</a></li>
 </ol>
 
@@ -465,6 +567,59 @@ Actions部署安装pandoc</a></li>
   
 
   
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjs@14.5.2/lib/browser/math.min.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
 
   
 
