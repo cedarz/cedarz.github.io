@@ -20,8 +20,13 @@ Radiance在胶平面上是连续函数，但是渲染的输出是离散的像素
 
 the Fourier transform of a shah function with period $T$ is another shah function with period $1/T$. This reciprocal relationship between periods is important to keep in mind: it means that if the samples are farther apart in the spatial domain, they are closer together in the frequency domain.
 
-- Antialiasing Techniques
+### 7.1.4 Antialiasing Techniques
 
 **NonUniform Sampling**
 以前是在整数倍周期位置采样，现在在整数倍附近$\frac{1}{2}$周期的位置随机选择一个采样点。
   $$\sum_{i=-\infty}^{\infty}\delta(x-(i+\frac{1}{2}-\xi)T)$$
+
+### 7.1.7 Understanding Pixels
+
+1. Pixel是图像函数上的采样点，并不关联面积的概念。
+2. 图像定义再离散坐标$(x,y)$上，采样函数定义在连续浮点型坐标$(x,y)$位置上, 它们之间的映射可以通过对连续
