@@ -17,6 +17,7 @@ tags:
 ```sh
 npm uninstall hexo-renderer-marked
 npm install hexo-renderer-pandoc # or hexo-renderer-kramed
+npm install hexo-filter-mathjax
 ```
 
 2. 配置`next/_config.yml`, 打开`mathjax`
@@ -27,14 +28,27 @@ math:
     enable: true
 ```
 
-3. 配置
+3. 配置'hexo/_config.yml'
+pandoc参数
 ```yml
 # config of hexo-renderer-pandoc
 pandoc:
   args:
     - --mathjax # a must arg
     # - --webtex # with it, each equation be in one line
-    - --standalone  # $...$ become \(\)
+    # - --standalone  # $...$ become \(\), but affect html style
+```
+mathjax参数
+``` yml
+mathjax:
+  tags: none # or 'ams' or 'all'
+  single_dollars: true # enable single dollar signs as in-line math delimiters
+  cjk_width: 0.9 # relative CJK char width
+  normal_width: 0.6 # relative normal (monospace) width
+  append_css: true # add CSS to pages rendered by MathJax
+  every_page: false # if true, every page will be rendered by MathJax regardless the `mathjax` setting in Front-matter
+  packages: # extra packages to load
+  extension_options: {}
 ```
 
 4. CDN
@@ -78,7 +92,9 @@ hexo-renderer-pandoc依赖pandoc工具，在ci的环境中，需要系统安装�
 
 ## 参考
 1. [Hexo显示latex公式](https://zhuanlan.zhihu.com/p/381508379)
-2. [Math Equations配置](https://theme-next.js.org/docs/third-party-services/math-equations)
-3. [MD with Latex to HTML with MathJax with Pandoc](https://stackoverflow.com/questions/37533412/md-with-latex-to-html-with-mathjax-with-pandoc)
-4. [Could not convert TeX math \frac](https://github.com/jgm/pandoc/issues/7771)
-5. [Github Actions部署安装pandoc](https://cateaf.com/2022/04/12/switching-to-github-actions/)
+2. [彻底解决-Hexo-的数学公式渲染问题](https://blog.barku.re/2024/04/20/彻底解决-Hexo-的数学公式渲染问题/) 
+3. [hexo-filter-mathjax options](https://github.com/next-theme/hexo-filter-mathjax?tab=readme-ov-file#options)
+4. [Math Equations配置](https://theme-next.js.org/docs/third-party-services/math-equations)
+5. [MD with Latex to HTML with MathJax with Pandoc](https://stackoverflow.com/questions/37533412/md-with-latex-to-html-with-mathjax-with-pandoc)
+6. [Could not convert TeX math \frac](https://github.com/jgm/pandoc/issues/7771)
+7. [Github Actions部署安装pandoc](https://cateaf.com/2022/04/12/switching-to-github-actions/)
