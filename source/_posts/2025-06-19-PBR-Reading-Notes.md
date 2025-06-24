@@ -23,4 +23,4 @@ the Fourier transform of a shah function with period $T$ is another shah functio
 
 **NonUniform Sampling**
 以前是在整数倍周期位置采样，现在在整数倍附近$\frac{1}{2}$周期的位置随机选择一个采样点。
-  $\sum_{i=-\infty}^{\infty} \delta(x - (i + \frac{1}{2} - \xi)T)$
+  $$\sum_{i=-\infty}^{\infty}\delta(x-(i+\frac{1}{2}-\xi)T)$$

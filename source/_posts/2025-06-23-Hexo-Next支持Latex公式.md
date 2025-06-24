@@ -27,20 +27,30 @@ math:
     enable: true
 ```
 
-3. CDN
+3. 配置
+```yml
+# config of hexo-renderer-pandoc
+pandoc:
+  args:
+    - --mathjax # a must arg
+    # - --webtex # with it, each equation be in one line
+    - --standalone  # $...$ become \(\)
+```
+
+4. CDN
 ``` yml
 vendors:
   # MathJax
   mathjax: //cdn.jsdelivr.net/npm/mathjs@14.5.2/lib/browser/math.min.js
 ```
    
-4. 生成，需要clean
+5. 生成，需要clean
 ```sh
 hexo clean && hexo g
 # or hexo clean && hexo s
 ```
 
-5. 示例
+6. 示例
 
     $$\begin{equation}\label{eq1}
     e=mc^2
@@ -68,4 +78,7 @@ hexo-renderer-pandoc依赖pandoc工具，在ci的环境中，需要系统安装�
 
 ## 参考
 1. [Hexo显示latex公式](https://zhuanlan.zhihu.com/p/381508379)
-2. [Github Actions部署安装pandoc](https://cateaf.com/2022/04/12/switching-to-github-actions/)
+2. [Math Equations配置](https://theme-next.js.org/docs/third-party-services/math-equations)
+3. [MD with Latex to HTML with MathJax with Pandoc](https://stackoverflow.com/questions/37533412/md-with-latex-to-html-with-mathjax-with-pandoc)
+4. [Could not convert TeX math \frac](https://github.com/jgm/pandoc/issues/7771)
+5. [Github Actions部署安装pandoc](https://cateaf.com/2022/04/12/switching-to-github-actions/)

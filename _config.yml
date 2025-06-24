@@ -172,3 +172,10 @@ deploy:
 math:
   engine: 'mathjax'
 
+# config of hexo-renderer-pandoc
+pandoc:
+  args:
+    - --mathjax
+    # - --webtex
+    - --standalone
+
