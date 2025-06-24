@@ -1,6 +1,7 @@
 ---
 title: PBR Reading Notes
 date: 2025-06-19 10:27:45
+mathjax: true
 categories:
 - Reading Notes
 tags: 

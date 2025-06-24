@@ -1,6 +1,7 @@
 ---
 title: Hexo-Next支持Latex公式
 date: 2025-06-23 15:45:48
+mathjax: true
 categories:
 - Hexo-Next
 tags: 
@@ -50,6 +51,7 @@ mathjax:
   packages: # extra packages to load
   extension_options: {}
 ```
+**Note** 这里`every_page: false`，需要在文件头添加`mathjax: true`
 
 4. CDN
 ``` yml
