@@ -188,10 +188,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2025-06-23 15:45:48 / 修改时间：09:52:19" itemprop="dateCreated datePublished" datetime="2025-06-23T15:45:48+00:00">2025-06-23</time>
+              <time title="创建时间：2025-06-23 15:45:48" itemprop="dateCreated datePublished" datetime="2025-06-23T15:45:48+00:00">2025-06-23</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2025-06-24 01:54:20" itemprop="dateModified" datetime="2025-06-24T01:54:20+00:00">2025-06-24</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -213,19 +219,216 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>书接<a href="/2025/02/18/Hexo-Next%E6%A0%B7%E5%BC%8F%E7%BE%8E%E5%8C%96/" title="Hexo-Next样式美化">Hexo-Next样式美化</a>，本篇记录hexo-next组合对于<span class="math inline"><em>L</em><em>a</em><em>T</em><em>e</em><em>X</em></span>公式的支持。</p>
+          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>dummy</title>
+  <style>
+    html {
+      line-height: 1.5;
+      font-family: Georgia, serif;
+      font-size: 20px;
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 1em;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+      font-size: 85%;
+      margin: 0;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <script
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"
+  type="text/javascript"></script>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<p>书接<a href="/2025/02/18/Hexo-Next%E6%A0%B7%E5%BC%8F%E7%BE%8E%E5%8C%96/" title="Hexo-Next样式美化">Hexo-Next样式美化</a>，本篇记录hexo-next组合对于<span
+class="math inline">\(LaTeX\)</span>公式的支持。</p>
 <h2 id="latex渲染插件配置">Latex渲染插件配置</h2>
-<p>具体的在<a target="_blank" rel="noopener" href="https://github.com/theme-next/hexo-theme-next/blob/master/docs/MATH.md">theme-next
+<p>具体的在<a
+target="_blank" rel="noopener" href="https://github.com/theme-next/hexo-theme-next/blob/master/docs/MATH.md">theme-next
 Math
 docs</a>中写的很清楚，有MathJax和Katex两种公式渲染方式。这里经过实际操作，选择MathJax。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2025/06/23/Hexo-Next%E6%94%AF%E6%8C%81Latex%E5%85%AC%E5%BC%8F/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+<ol type="1">
+<li><p>安装hexo-renderer-pandoc，也尝试过hexo-renderer-kramed，但是没效果，具体愿意没有细察
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm uninstall hexo-renderer-marked</span><br><span class="line">npm install hexo-renderer-pandoc <span class="comment"># or hexo-renderer-kramed</span></span><br></pre></td></tr></table></figure></p></li>
+<li><p>配置<code>next/_config.yml</code>, 打开<code>mathjax</code>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">math:</span></span><br><span class="line">  <span class="attr">per_page:</span> <span class="literal">false</span></span><br><span class="line">  <span class="attr">mathjax:</span></span><br><span class="line">    <span class="attr">enable:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure></p></li>
+<li><p>配置 <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># config of hexo-renderer-pandoc</span></span><br><span class="line"><span class="attr">pandoc:</span></span><br><span class="line">  <span class="attr">args:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--mathjax</span> <span class="comment"># a must arg</span></span><br><span class="line">    <span class="comment"># - --webtex # with it, each equation be in one line</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--standalone</span>  <span class="comment"># $...$ become \(\)</span></span><br></pre></td></tr></table></figure></p></li>
+<li><p>CDN <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">vendors:</span></span><br><span class="line">  <span class="comment"># MathJax</span></span><br><span class="line">  <span class="attr">mathjax:</span> <span class="string">//cdn.jsdelivr.net/npm/mathjs@14.5.2/lib/browser/math.min.js</span></span><br></pre></td></tr></table></figure></p></li>
+<li><p>生成，需要clean <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo clean &amp;&amp; hexo g</span><br><span class="line"><span class="comment"># or hexo clean &amp;&amp; hexo s</span></span><br></pre></td></tr></table></figure></p></li>
+<li><p>示例</p>
+<p><span class="math display">\[\begin{equation}\label{eq1}
+e=mc^2
+\end{equation}\]</span></p></li>
+</ol>
+<h2 id="github-ci">Github CI</h2>
+<p>hexo-renderer-pandoc依赖pandoc工具，在ci的环境中，需要系统安装了pandoc。在<a href="/2022/12/24/Hexo-Next%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95/" title="Hexo-Next搭建记录">Hexo-Next搭建记录</a>中ci脚本的基础上，修改相应的步骤。要是我自己写，可能要费点劲，还好有大佬做了相关的工作，<a
+target="_blank" rel="noopener" href="https://cateaf.com/2022/04/12/switching-to-github-actions/">Github
+Actions部署安装pandoc</a>，拿来主义了，感谢分享。</p>
+<ol type="1">
+<li><p>添加安装pandoc的步骤 <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Install</span> <span class="string">pandoc</span></span><br><span class="line">  <span class="attr">run:</span> <span class="string">curl</span> <span class="string">-s</span> <span class="string">-L</span> <span class="string">https://github.com/jgm/pandoc/releases/download/2.18/pandoc-2.18-linux-amd64.tar.gz</span> <span class="string">|</span> <span class="string">tar</span> <span class="string">xvzf</span> <span class="bullet">-</span> <span class="string">-C</span> <span class="string">$RUNNER_TOOL_CACHE/</span></span><br></pre></td></tr></table></figure></p></li>
+<li><p>生成步骤中，把pandoc的路径加入到环境变量 <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Build</span></span><br><span class="line">  <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line"><span class="string">    # add pandoc to PATH</span></span><br><span class="line"><span class="string">    export PATH=&quot;$PATH:$RUNNER_TOOL_CACHE/pandoc-2.18/bin&quot;</span></span><br><span class="line"><span class="string">    npm run build</span></span><br></pre></td></tr></table></figure></p></li>
+</ol>
+<h2 id="参考">参考</h2>
+<ol type="1">
+<li><a
+target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/381508379">Hexo显示latex公式</a></li>
+<li><a
+target="_blank" rel="noopener" href="https://theme-next.js.org/docs/third-party-services/math-equations">Math
+Equations配置</a></li>
+<li><a
+target="_blank" rel="noopener" href="https://stackoverflow.com/questions/37533412/md-with-latex-to-html-with-mathjax-with-pandoc">MD
+with Latex to HTML with MathJax with Pandoc</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/jgm/pandoc/issues/7771">Could not
+convert TeX math </a></li>
+<li><a
+target="_blank" rel="noopener" href="https://cateaf.com/2022/04/12/switching-to-github-actions/">Github
+Actions部署安装pandoc</a></li>
+</ol>
+</body>
+</html>
+
       
     </div>
 
@@ -275,7 +478,7 @@ docs</a>中写的很清楚，有MathJax和Katex两种公式渲染方式。这里
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-06-23 09:52:19" itemprop="dateModified" datetime="2025-06-23T09:52:19+00:00">2025-06-23</time>
+                <time title="修改时间：2025-06-24 01:54:20" itemprop="dateModified" datetime="2025-06-24T01:54:20+00:00">2025-06-24</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -298,23 +501,197 @@ docs</a>中写的很清楚，有MathJax和Katex两种公式渲染方式。这里
     <div class="post-body" itemprop="articleBody">
 
       
-          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="sampling-and-reconstruction">7. Sampling and Reconstruction</h1>
+          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>dummy</title>
+  <style>
+    html {
+      line-height: 1.5;
+      font-family: Georgia, serif;
+      font-size: 20px;
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 1em;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+      font-size: 85%;
+      margin: 0;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <script
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"
+  type="text/javascript"></script>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<h1 id="sampling-and-reconstruction">7. Sampling and Reconstruction</h1>
 <p>Radiance在胶平面上是连续函数，但是渲染的输出是离散的像素。</p>
 <p>But what happens when we need the value of s signal at a location
 that we didn’t sample at? In such cases, we can use a process known as
 reconstruction to derive an approximation of the original continuous
 function. With this approximation we can then discretely sample its
 values at a new set of sample points, which is referred to as
-resampling. <a target="_blank" rel="noopener" href="https://therealmjp.github.io/posts/signal-processing-primer/">signal
+resampling. <a
+target="_blank" rel="noopener" href="https://therealmjp.github.io/posts/signal-processing-primer/">signal
 processing primer</a></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2025/06/19/PBR-Reading-Notes/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+<h2 id="sampling-theory">7.1 Sampling Theory</h2>
+<p>the Fourier transform of a shah function with period <span
+class="math inline">\(T\)</span> is another shah function with period
+<span class="math inline">\(1/T\)</span>. This reciprocal relationship
+between periods is important to keep in mind: it means that if the
+samples are farther apart in the spatial domain, they are closer
+together in the frequency domain.</p>
+<ul>
+<li>Antialiasing Techniques</li>
+</ul>
+<p><strong>NonUniform Sampling</strong>
+以前是在整数倍周期位置采样，现在在整数倍附近<span
+class="math inline">\(\frac{1}{2}\)</span>周期的位置随机选择一个采样点。
+<span
+class="math display">\[\sum_{i=-\infty}^{\infty}\delta(x-(i+\frac{1}{2}-\xi)T)\]</span></p>
+</body>
+</html>
+
       
     </div>
 
@@ -364,7 +741,7 @@ processing primer</a></p>
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-06-23 09:52:19" itemprop="dateModified" datetime="2025-06-23T09:52:19+00:00">2025-06-23</time>
+                <time title="修改时间：2025-06-24 01:54:20" itemprop="dateModified" datetime="2025-06-24T01:54:20+00:00">2025-06-24</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -387,19 +764,189 @@ processing primer</a></p>
     <div class="post-body" itemprop="articleBody">
 
       
-          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>谨以此篇post记录自己日常中无能愤怒的瞬间，并时常更新温故，提醒自己如何面对这个嘈杂且充满噪声的世界。</p>
+          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>dummy</title>
+  <style>
+    html {
+      line-height: 1.5;
+      font-family: Georgia, serif;
+      font-size: 20px;
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 1em;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+      font-size: 85%;
+      margin: 0;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<p>谨以此篇post记录自己日常中无能愤怒的瞬间，并时常更新温故，提醒自己如何面对这个嘈杂且充满噪声的世界。</p>
 <h1 id="狂怒瞬间">狂怒瞬间</h1>
 <ul>
 <li>骑车路上经常遇到各种奇形怪状占住车道的机动车辆，有的横在车道上，有的堵死一个方向（双向两车道），有的骑在车道线上占影响两个车道，这些人中绝少打双闪的，就是纯堵死，每次遇到这类“人群”，我都要在心理或者口头上骂上一句“煞笔”。</li>
 </ul>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2025/06/16/%E6%97%A5%E5%B8%B8%E6%97%A0%E8%83%BD%E7%8B%82%E6%80%92%E7%9A%84%E7%9E%AC%E9%97%B4/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+<ol type="1">
+<li>武汉的道路基建简直配不上城市的定位，道路规划丝毫不考虑机动车和行人的道路权，道路少有考虑设置非机动车道的，既无规划，又无章法；</li>
+<li>政策制定者和规划者的懒政，把城市道路的压力转嫁成机动车和非机动车的矛盾，上位者不考虑现实，剥削非机动车的路权；部分道路参与者的“上车焊死门”思想作祟，最典型的就是武汉长江大桥重新设置非机动车道后，网络上大量来自机动车使用者的用户言论抨击不应该设置非机动车道，这是把机动车和非机动车违法行为问题偷换成非机动车道的合不合理问题；</li>
+<li>可能最重要的，道路违法行为，包括机动车和非机动车的违法行为，执法者既没有做到有法必依，也没有做做到执法必严</li>
+</ol>
+<ul>
+<li>地铁推搡者：经常有一些站点，大量的乘客需要下车，而你作为不下车的被下车人群夹在中间动弹不得，这种情况下，有时候会莫名出现一些一身肥膘横冲直撞的脑残觉得你挡了他的路，无故就推搡一下过去，这种无脑人类我愿称之为无头苍蝇</li>
+</ul>
+<ol type="1">
+<li>如果没有挡着无头苍蝇的路，时间也足够下车，而且下车的人本来就很多，别人夹在中间没有多余空间来腾挪位置，还来推搡，这种就是纯垃圾</li>
+<li>如果真的挡着无头苍蝇的路，没有人背后长眼，这个时候说一声借过总不为过吧，就问这种货色，你是哑巴了吗
+&gt; 2025/6/16
+在武昌站地铁站，大量的乘客从我两边下车，我被夹在中间无法动弹，被一个头上戴了束带，一身横肉，像个日本鬼子的无头苍蝇无故推搡，一首凉凉送给这货吧，赶紧投胎去吧
+&gt;</li>
+</ol>
+</body>
+</html>
+
       
     </div>
 
@@ -449,7 +996,7 @@ processing primer</a></p>
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-06-23 09:52:19" itemprop="dateModified" datetime="2025-06-23T09:52:19+00:00">2025-06-23</time>
+                <time title="修改时间：2025-06-24 01:54:20" itemprop="dateModified" datetime="2025-06-24T01:54:20+00:00">2025-06-24</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -476,18 +1023,235 @@ processing primer</a></p>
     <div class="post-body" itemprop="articleBody">
 
       
-          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="pixel-data-internal-format">Pixel Data Internal Format</h1>
+          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>dummy</title>
+  <style>
+    html {
+      line-height: 1.5;
+      font-family: Georgia, serif;
+      font-size: 20px;
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 1em;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+      font-size: 85%;
+      margin: 0;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<h1 id="pixel-data-internal-format">Pixel Data Internal Format</h1>
 <p>看一下<code>glTexImage2D</code>的函数签名，有三个参数比较费解，分别是<code>internalformat</code>、<code>format</code>和<code>type</code>。这三个参数相互配合，共同决定了OpenGL
 Texture数据的在GPU上的格式以及内存数据从CPU-〉GPU上传过程中如何被‘解析’。
-</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">glTexImage2D</span><span class="params">(GLenum target,</span></span></span><br><span class="line"><span class="params"><span class="function"> 	GLint level,</span></span></span><br><span class="line"><span class="params"><span class="function"> 	GLint internalformat,</span></span></span><br><span class="line"><span class="params"><span class="function"> 	GLsizei width,</span></span></span><br><span class="line"><span class="params"><span class="function"> 	GLsizei height,</span></span></span><br><span class="line"><span class="params"><span class="function"> 	GLint border,</span></span></span><br><span class="line"><span class="params"><span class="function"> 	GLenum format,</span></span></span><br><span class="line"><span class="params"><span class="function"> 	GLenum type,</span></span></span><br><span class="line"><span class="params"><span class="function"> 	<span class="type">const</span> <span class="type">void</span> * data)</span></span>;</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2025/04/17/Notes-on-Data-Formats-of-Graphics-APIs-2/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">glTexImage2D</span><span class="params">(GLenum target,</span></span></span><br><span class="line"><span class="params"><span class="function"> 	GLint level,</span></span></span><br><span class="line"><span class="params"><span class="function"> 	GLint internalformat,</span></span></span><br><span class="line"><span class="params"><span class="function"> 	GLsizei width,</span></span></span><br><span class="line"><span class="params"><span class="function"> 	GLsizei height,</span></span></span><br><span class="line"><span class="params"><span class="function"> 	GLint border,</span></span></span><br><span class="line"><span class="params"><span class="function"> 	GLenum format,</span></span></span><br><span class="line"><span class="params"><span class="function"> 	GLenum type,</span></span></span><br><span class="line"><span class="params"><span class="function"> 	<span class="type">const</span> <span class="type">void</span> * data)</span></span>;</span><br></pre></td></tr></table></figure> <a
+target="_blank" rel="noopener" href="https://stackoverflow.com/questions/34497195/difference-between-format-and-internalformat">Difference
+between format and
+internalformat</a>中说的很直截了当，<code>internalFormat</code>决定GPU，<code>format/type</code>决定CPU数据。
+&gt; The <code>format</code> (7th argument), together with the
+<code>type</code> argument, describes the data you pass in as the last
+argument. So the <code>format/type</code> combination defines the memory
+layout of the data you pass in. &gt; <code>internalFormat</code> (2nd
+argument) defines the format that OpenGL should use to store the data
+internally.</p>
+<p>这个描述是否让你觉得，如果<code>data</code>参数为null，<code>format/type</code>就不需要设置，或者随意设置了，答案是否定的。
+对于<code>glTexImage2D</code>来说，不管<code>data</code>参数是否为null，<code>internalFormat</code>和<code>format/type</code>一定要是兼容的组合。</p>
+<blockquote>
+<p><strong>Note</strong> Even if data is NULL, the format and type
+fields must be legal fields, or the entire call will fail with a
+GL_INVALID_ENUM error.<a
+target="_blank" rel="noopener" href="https://www.khronos.org/opengl/wiki/Texture_Storage"><sup>Texture_Storage</sup></a></p>
+</blockquote>
+<p><code>glTexImage2D</code>做了两件事情，分配显存，并上传数据，所以需要格式的兼容，这个显存分配过程也被称作<code>Mutable Storage</code>。
+还有一组<code>Immutable Storage</code>的分配方式，把<code>glTexImage2D</code>的分配显存和上传数据的两个过程分开，如此，在某些情况下（比如Texture
+as RT），可以不关心<code>format/type</code>的设置了。 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">glTexStorage2D</span><span class="params">( GLenum target​, GLint levels​, GLint internalformat​, GLsizei width​, GLsizei height​ )</span></span>;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">glTexSubImage2D</span><span class="params">(GLenum target​, GLint level​, GLint xoffset​, GLint yoffset​, GLsizei width​, GLsizei height​, GLenum format​, GLenum type​, <span class="type">const</span> GLvoid * data​)</span></span>;</span><br></pre></td></tr></table></figure></p>
+<h1 id="pixel-data格式的兼容">Pixel Data格式的兼容</h1>
+<p><code>internalFormat</code>和<code>format/type</code>，首先确定<code>internalFormat</code>，然后根据实际情况确定与其兼容的<code>format/type</code>，类型的兼容只是最低要求，如果没有正确设置这三个参数，数据在上传的时候，会有类型转换，那你精心组织的数据，可能就要以其他面目呈现给GL了。</p>
+<p>举个例子：参考下面的格式语法，如果你想要4通道每个通道都是浮点型的格式，设置<code>internalFormat</code>为<code>GL_RGBA</code>，<code>format/type</code>为<code>GL_RGBA/GL_FLOAT</code>。<code>GL_RGBA</code>表示<code>unsigned normalized integer format</code>，且每格通道8位，也就是8位无符号归一化整型，如此，<code>GL_FLOAT</code>则会类型转换到<code>8 bit unsigned normalized integer</code>。</p>
+<p>再举个例子：<code>internalFormat</code>为<code>GL_R32UI</code>、<code>type</code>就是<code>GL_UNSIGNED_INT</code>了，那么<code>format</code>就决定了数据初始化了，如果是<code>GL_RED</code>,会把输入作为定点数归一化到[0,
+1], 正确的格式应该是<code>GL_RED_INTEGER</code>。 &gt; GL_RED &gt; Each
+element is a single red component. For fixed point normalized
+components, the GL converts it to floating point, clamps to the range
+[0,1], and assembles it into an RGBA element by attaching 0.0 for green
+and blue, and 1.0 for alpha.<a
+target="_blank" rel="noopener" href="https://registry.khronos.org/OpenGL-Refpages/es3.0/html/glTexImage2D.xhtml"><sup>es3.0
+glTexImage2D</sup></a></p>
+<p>另外，整型类型的Texture，不能设置为<code>linear filtering</code>即<code>GL_LINEAR</code>，只能设置为<code>GL_NEAREST</code>或者<code>GL_NEAREST_MIPMAP_NEAREST</code>。</p>
+<!-- ![Notes-on-Data-Formats-of-Graphics-APIs/color_format_syntax](../images/Notes-on-Data-Formats-of-Graphics-APIs/color_format_syntax.jpeg) -->
+<img src="/images/Notes-on-Data-Formats-of-Graphics-APIs/color_format_syntax.jpeg" class="Notes-on-Data-Formats-of-Graphics-APIs&#x2F;color_format_syntax">
+<h1 id="pixel-formats-cheatsheets">Pixel Formats Cheatsheets</h1>
+<p><a
+target="_blank" rel="noopener" href="https://registry.khronos.org/OpenGL-Refpages/es3.0/html/glTexImage2D.xhtml">es3.0
+glTexImage2D Table 2. Sized Internal Formats</a> <a
+target="_blank" rel="noopener" href="https://gist.github.com/alexsr/034bb802ae43a1adb0863b735fda0ab9">gl_texture_format_util.hpp</a>
+<a target="_blank" rel="noopener" href="https://gist.github.com/Kos/4739337">OpenGL image
+formats</a></p>
+<h1 id="参考">参考</h1>
+<ul>
+<li><a
+target="_blank" rel="noopener" href="https://www.khronos.org/opengl/wiki/Image_Format#Color_formats">Color
+Formats</a></li>
+<li><a
+target="_blank" rel="noopener" href="https://www.khronos.org/opengl/wiki/Normalized_Integer">Normalized_Integer</a></li>
+<li><a
+target="_blank" rel="noopener" href="https://gist.github.com/alexsr/034bb802ae43a1adb0863b735fda0ab9">gl_texture_format_util.hpp</a></li>
+<li><a target="_blank" rel="noopener" href="https://gist.github.com/Kos/4739337">OpenGL image
+formats</a></li>
+<li><a
+target="_blank" rel="noopener" href="https://stackoverflow.com/questions/34497195/difference-between-format-and-internalformat">Difference
+between format and internalformat</a></li>
+<li>OpenGL formats Equivalent in Vulkan <a
+target="_blank" rel="noopener" href="https://chromium.googlesource.com/external/github.com/KhronosGroup/OpenXR-SDK/+/9d9ae386adf791576a839ceb733cc577224b7985/external/include/vulkan/vk_format.h"><u>1</u></a>
+<a
+target="_blank" rel="noopener" href="https://github.com/KhronosGroup/Vulkan-Samples-Deprecated/blob/master/external/include/vulkan/vk_format.h"><u>2</u></a></li>
+<li><a
+target="_blank" rel="noopener" href="https://github.com/KhronosGroup/Vulkan-Samples-Deprecated/blob/master/external/include/GL/gl_format.h">gl_format.h</a>，可以参考一下，有错误，比如<code>GL_R32UI</code>对应<code>GL_RED</code></li>
+</ul>
+</body>
+</html>
+
       
     </div>
 
@@ -537,7 +1301,7 @@ Texture数据的在GPU上的格式以及内存数据从CPU-〉GPU上传过程中
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-06-23 09:52:19" itemprop="dateModified" datetime="2025-06-23T09:52:19+00:00">2025-06-23</time>
+                <time title="修改时间：2025-06-24 01:54:20" itemprop="dateModified" datetime="2025-06-24T01:54:20+00:00">2025-06-24</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -564,18 +1328,251 @@ Texture数据的在GPU上的格式以及内存数据从CPU-〉GPU上传过程中
     <div class="post-body" itemprop="articleBody">
 
       
-          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>API是渲染里面最稀碎最脏的一块，砖搬的越多，问题重复遇到的可能性也越大；有些东西以前遇到过，现在又遇到了；有些以前很熟悉，现在又忘记了。虽然不一定是高明的东西，记录一下，下次再忘记可以翻一翻。古人云，“纸上得来终觉浅，好记性不如烂笔头”，诚不欺我。</p>
+          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>dummy</title>
+  <style>
+    html {
+      line-height: 1.5;
+      font-family: Georgia, serif;
+      font-size: 20px;
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 1em;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+      font-size: 85%;
+      margin: 0;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<p>API是渲染里面最稀碎最脏的一块，砖搬的越多，问题重复遇到的可能性也越大；有些东西以前遇到过，现在又遇到了；有些以前很熟悉，现在又忘记了。虽然不一定是高明的东西，记录一下，下次再忘记可以翻一翻。古人云，“纸上得来终觉浅，好记性不如烂笔头”，诚不欺我。</p>
 <p>今天就来记录一下，各种Graphics
 API里面，使用的数据格式对于定点数的处理。</p>
 <p>数据格式这里主要记录两方面的使用，其一就是顶点数据，其二是纹理。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2025/04/16/Notes-on-Data-Formats-of-Graphics-APIs-1/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+<p>glVertexAttribPointer中描述，如果设置了归一化<code>normalized</code>，传入的有符号整型被归一到[-1,
+1]，无符号整型被归一到[0, 1]。 &gt; For glVertexAttribPointer, specifies
+whether <code>fixed-point data</code> values should be normalized
+(GL_TRUE) or converted directly as fixed-point values (GL_FALSE) when
+they are accessed.</p>
+<blockquote>
+<p>For glVertexAttribPointer, if normalized is set to GL_TRUE, it
+indicates that values stored in an integer format are to be mapped to
+the range [-1,1] (for signed values) or [0,1] (for unsigned values) when
+they are accessed and converted to floating point. Otherwise, values
+will be converted to floats directly without normalization. <a
+target="_blank" rel="noopener" href="https://registry.khronos.org/OpenGL-Refpages/gl4/html/glVertexAttribPointer.xhtml"><sup>glVertexAttribPointer</sup></a></p>
+</blockquote>
+<p>OpenGL和Vulkan使用了同样的表述，毕竟来自同一家：如果<code>vertex attributes and pixel color or depth components</code>使用整型来表示，它们通常被认为是<code>normalized</code>。在使用前会转为浮点型，转换的算法很简单，可以参考OpenGL和Vulkan的手册。
+&gt; When generic vertex attributes and pixel color or depth components
+are repre sented as integers, they are often (but not always) considered
+to be normalized. Normalized integer values are treated specially when
+being converted to and from floating-point values, and are usually
+referred to as <code>normalized fixed-point</code>. Such values are
+always either signed or unsigned.<a
+target="_blank" rel="noopener" href="https://registry.khronos.org/OpenGL/specs/gl/glspec46.core.pdf"><sup>glspec46.core
+p47</sup></a> <a
+target="_blank" rel="noopener" href="https://docs.vulkan.org/spec/latest/chapters/fundamentals.html#fundamentals-fixedconv"><sup>
+Vulkan Fixed-Point Data Conversions</sup></a></p>
+<p>D3D的文档写的也很清楚，而且Vulkan和DX的数据格式format
+enum都比较明了一些，比如Vulkan的VK_FORMAT_D24_UNORM_S8_UINT、DX的DXGI_FORMAT_D24_UNORM_S8_UINT，和OpenGL的GL_DEPTH24_STENCIL8，对比一下，是不是要吐血。
+&gt; Depth/stencil formats are considered opaque and need not be stored
+in the exact number of bits per texel or component ordering indicated by
+the format enum. However, implementations must not substitute a
+different depth or stencil precision than is described in the format
+(e.g. D16 must not be implemented as D24 or D32).<a
+target="_blank" rel="noopener" href="https://docs.vulkan.org/spec/latest/chapters/formats.html#formats-depth-stencil"><sup>
+Vulkan Depth/Stencil Formats</sup></a></p>
+<p><!-- ![Notes-on-Data-Formats-of-Graphics-APIs/D3D11_Format](../images/Notes-on-Data-Formats-of-Graphics-APIs/D3D11_Format.png) -->
+<img src="/images/Notes-on-Data-Formats-of-Graphics-APIs/D3D11_Format.png" class="Notes-on-Data-Formats-of-Graphics-APIs&#x2F;D3D11_Format"></p>
+<p>对于OpenGL中的corlor format和depth
+format，官方spec对于internal_format的描述表格里，记录了相应的解析方式；在表格说明里面，color
+format中无前缀的是<code>unsigned normalized fixed-point</code>，depth
+format中无前缀的是<code>fixed-point</code>，意思是有符号定点数，那么<code>GL_DEPTH_COMPONENT24</code>的范围就是[-1,
+1]了？这也是我疑惑的一点，需要验证是不是可以直接写入负数到深度里。后续看到在<a
+target="_blank" rel="noopener" href="https://www.khronos.org/opengl/wiki/Image_Format#Depth_formats">OpenGL
+Depth formats</a>描述，深度是映射到[0, 1]。 &gt; The normalized integer
+versions work similar to normalized integers for color formats; they map
+the integer range onto the depth values [0, 1]</p>
+<p><strong>sized internal color formats</strong>
+<!-- ![Notes-on-Data-Formats-of-Graphics-APIs/opengl_color_format](../images/Notes-on-Data-Formats-of-Graphics-APIs/opengl_color_format.png) -->
+<img src="/images/Notes-on-Data-Formats-of-Graphics-APIs/opengl_color_format.png" class="Notes-on-Data-Formats-of-Graphics-APIs&#x2F;opengl_color_format"></p>
+<p><strong>sized internal depth and stencil formats</strong>
+<!-- ![Compare-Mode-in-OpenGL-Sampler/depth_format](../images/Compare-Mode-in-OpenGL-Sampler/depth_format.png) -->
+<img src="/images/Compare-Mode-in-OpenGL-Sampler/depth_format.png" class="Compare-Mode-in-OpenGL-Sampler&#x2F;depth_format"></p>
+<h1 id="参考">参考</h1>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blarg.ca/2020/10/11/fixed-point-math">Fixed Point
+Math</a></li>
+<li><a
+target="_blank" rel="noopener" href="https://de.mathworks.com/help/simulink/ug/fixed-point-numbers.html">Fixed-Point
+Numbers</a></li>
+<li><a
+target="_blank" rel="noopener" href="https://registry.khronos.org/OpenGL-Refpages/gl4/html/glVertexAttribPointer.xhtml">glVertexAttribPointer</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.khronos.org/opengl/wiki/OpenGL_Type">OpenGL
+Type</a></li>
+<li><a
+target="_blank" rel="noopener" href="https://github.com/ocornut/imgui/discussions/6049"><strong>vertex
+description for color sent as VK_FORMAT_R8G8B8A8_UNORM but consumed as
+vec4</strong></a></li>
+<li><a
+target="_blank" rel="noopener" href="https://docs.vulkan.org/spec/latest/chapters/formats.html#_identification_of_formats">Vulkan
+Identification of Formats</a></li>
+<li><a
+target="_blank" rel="noopener" href="https://microsoft.github.io/DirectX-Specs/d3d/archive/D3D11_3_FunctionalSpec.htm#3.2.3.1%20Terminology">Direct3D
+definition</a></li>
+<li><a
+target="_blank" rel="noopener" href="https://registry.khronos.org/OpenGL/specs/gl/glspec46.core.pdf">glspec46.core
+p47</a></li>
+<li><a
+target="_blank" rel="noopener" href="https://docs.vulkan.org/spec/latest/chapters/fundamentals.html#fundamentals-fixedconv">Vulkan
+Fixed-Point Data Conversions</a></li>
+</ul>
+</body>
+</html>
+
       
     </div>
 
@@ -625,7 +1622,7 @@ API里面，使用的数据格式对于定点数的处理。</p>
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-06-23 09:52:19" itemprop="dateModified" datetime="2025-06-23T09:52:19+00:00">2025-06-23</time>
+                <time title="修改时间：2025-06-24 01:54:20" itemprop="dateModified" datetime="2025-06-24T01:54:20+00:00">2025-06-24</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -652,27 +1649,245 @@ API里面，使用的数据格式对于定点数的处理。</p>
     <div class="post-body" itemprop="articleBody">
 
       
-          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>网络链接，常常失效，很多大公司亦是如此。好些前两年很容易访问到的链接，忽然就失了踪迹。再者，有些资源，不收藏一下，难受。</p>
+          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>dummy</title>
+  <style>
+    html {
+      line-height: 1.5;
+      font-family: Georgia, serif;
+      font-size: 20px;
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 1em;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+      font-size: 85%;
+      margin: 0;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<p>网络链接，常常失效，很多大公司亦是如此。好些前两年很容易访问到的链接，忽然就失了踪迹。再者，有些资源，不收藏一下，难受。</p>
 <h1 id="nvidia-legacy-opengl-sdk-samples">Nvidia Legacy OpenGL SDK
 samples</h1>
 <ol type="1">
-<li><a target="_blank" rel="noopener" href="https://github.com/ahcox/NVIDIA-GameWorks-Graphics-Samples-GL4-GLES2-GLES3-Vulkan-SDK-3-16-August-2017-36-Commits">NVIDIA
+<li><a
+target="_blank" rel="noopener" href="https://github.com/ahcox/NVIDIA-GameWorks-Graphics-Samples-GL4-GLES2-GLES3-Vulkan-SDK-3-16-August-2017-36-Commits">NVIDIA
 GameWorks Graphics Samples</a>，by ahcox &gt; The GameWorks Graphics
 Samples pack is a resource for cross-platform Vulkan, OpenGL 4 (GL4) and
 OpenGL ES 2 and 3 (ES2 and ES3) development, targeting Android and
 Windows (and soon, will again support Linux x86/x64 and Linux for
 Tegra). It is an expansion and continuation of the longstanding OpenGL
 Graphics and Compute Samples, adding full support for and samples of the
-Vulkan 3D API. <a target="_blank" rel="noopener" href="https://ahcox.github.io/NVIDIA-GameWorks-Graphics-Samples-GL4-GLES2-GLES3-Vulkan-SDK-3-16-August-2017-36-Commits/"><sup>mirror</sup></a></li>
+Vulkan 3D API. <a
+target="_blank" rel="noopener" href="https://ahcox.github.io/NVIDIA-GameWorks-Graphics-Samples-GL4-GLES2-GLES3-Vulkan-SDK-3-16-August-2017-36-Commits/"><sup>mirror</sup></a></li>
 </ol>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2025/04/15/Graphics-Samples-Collections/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+<ul>
+<li><a
+target="_blank" rel="noopener" href="https://github.com/hghdev/NVIDIAGameWorks-GraphicsSamples"><u>1</u></a>,
+<a target="_blank" rel="noopener" href="https://github.com/Samana/OpenGLSamples"><u>2</u></a></li>
+</ul>
+<ol start="2" type="1">
+<li><a
+target="_blank" rel="noopener" href="https://developer.download.nvidia.com/SDK/10/opengl/samples.html">NVIDIA
+OpenGL SDK 10 Code Samples</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/g-truc/ogl-samples">ogl-samples</a></li>
+</ol>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://www.g-truc.net/project-0026.html">OpenGL Samples
+Pack</a> &gt; The OpenGL Samples Pack is a collection of OpenGL samples
+based on the OpenGL “core profile” specifications.</li>
+</ul>
+<ol start="4" type="1">
+<li><a target="_blank" rel="noopener" href="https://developer.nvidia.com/opengl">OpenGL|Nvidia
+Developer prsentations</a></li>
+</ol>
+<h1 id="d3d-sdk-samples">D3D SDK samples</h1>
+<ol type="1">
+<li><a
+target="_blank" rel="noopener" href="https://developer.download.nvidia.com/SDK/10/direct3d/samples.html">NVIDIA
+Direct3D SDK 10 Code Samples</a> DirectX 10</li>
+<li><a
+target="_blank" rel="noopener" href="https://developer.download.nvidia.com/SDK/9.5/Samples/3dgraphics_samples.html">SDK
+9.52 Code Samples</a></li>
+<li><a
+target="_blank" rel="noopener" href="https://docs.nvidia.com/gameworks/content/gameworkslibrary/graphicssamples/graphics_samples_v2_0.htm">Graphics
+and Compute Samples 2.0</a>: <a
+target="_blank" rel="noopener" href="https://docs.nvidia.com/gameworks/content/gameworkslibrary/graphicssamples/d3d_samples/direct3d_index.htm"><u>Direct3D
+Samples</u></a>,<a
+target="_blank" rel="noopener" href="https://docs.nvidia.com/gameworks/content/gameworkslibrary/graphicssamples/opengl_samples/opengl_index.htm"><u>OpenGL
+Samples</u></a></li>
+</ol>
+<ul>
+<li><a
+target="_blank" rel="noopener" href="https://docs.nvidia.com/gameworks/index.html#gameworkslibrary/graphicssamples/graphics_samples.htm">Documentation</a></li>
+</ul>
+<h1 id="vendor-sdk">Vendor SDK</h1>
+<ol type="1">
+<li><a target="_blank" rel="noopener" href="https://github.com/powervr-graphics/Native_SDK">PowerVR
+SDK</a> &gt; C++ cross-platform 3D graphics SDK. Includes demos &amp;
+helper code (resource loading etc.) to speed up development of Vulkan,
+OpenGL ES 2.0 &amp; 3.x applications &gt; PVRVFrame is included as part
+of the PowerVR SDK and provides a set of desktop
+<strong>emulation</strong> libraries for OpenGL ES wrapping desktop
+OpenGL allowing deployment of OpenGL ES applications on desktop Windows,
+macOS, and Linux which can help to speed up development times and
+improve productivity.</li>
+<li><a
+target="_blank" rel="noopener" href="https://github.com/SnapdragonStudios/adreno-gpu-opengl-es-code-sample-framework">SnapdragonStudios/adreno-gpu-opengl-es-code-sample-framework</a>
+&gt; This repository contains an OpenGL ES Framework for game and
+graphics developers to get up and running quickly for creating sample
+content and rapid prototyping. It is designed to be easy to build and
+have the basic building blocks needed for creating an Android APK with
+OpenGL ES functionality including an input system, as well as other
+helper utilities for loading resources, etc. This Framework has been
+extracted from and is a subset of the Adreno GPU SDK.</li>
+</ol>
+</body>
+</html>
+
       
     </div>
 
@@ -722,7 +1937,7 @@ Vulkan 3D API. <a target="_blank" rel="noopener" href="https://ahcox.github.io/N
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-06-23 09:52:19" itemprop="dateModified" datetime="2025-06-23T09:52:19+00:00">2025-06-23</time>
+                <time title="修改时间：2025-06-24 01:54:20" itemprop="dateModified" datetime="2025-06-24T01:54:20+00:00">2025-06-24</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -749,21 +1964,223 @@ Vulkan 3D API. <a target="_blank" rel="noopener" href="https://ahcox.github.io/N
     <div class="post-body" itemprop="articleBody">
 
       
-          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>OpenGL虽然简单，但是问题也是公认的多，不同驱动实现的表现可能差异很大，导致同样的OpenGL的代码，在一台机器上正常执行，在另外一台机器上表现异常。</p>
+          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>dummy</title>
+  <style>
+    html {
+      line-height: 1.5;
+      font-family: Georgia, serif;
+      font-size: 20px;
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 1em;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+      font-size: 85%;
+      margin: 0;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<p>OpenGL虽然简单，但是问题也是公认的多，不同驱动实现的表现可能差异很大，导致同样的OpenGL的代码，在一台机器上正常执行，在另外一台机器上表现异常。</p>
 <p>我这就遇到一个，采样<code>GL_DEPTH_COMPONENT</code>类型的depth
 texture，全屏显示到窗口。同样是GL4.6 core
 profile的上下文，在RTX4080上没问题，但是在笔记本ThinkPad P50（显卡NVIDIA
 Quadro
 M1000M）上结果全白色（1.0），当然P50确实太老了，10年老机了，妥妥的电子垃圾了。</p>
 <p>可是，奈何啊，“同样是生活一起的两口子，做人的差别咋这么大咧？”。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2025/04/14/Compare-Mode-in-OpenGL-Sampler/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+<p>最后查到，还是代码的问题，我使用的Texture的封装代码是直接复制网上的，没有注意相关的设置细节；另外，虽然我对OpenGL比较熟悉，但是还是有很多细节问题没怎么用过。现在的很多系统都在拥抱更现代的渲染API，OpenGL不仅落后于同时代的同侪，更落后于历史的车轮，可是还是有很多古老的系统因为跨平台的考虑在使用OpenGL，吐槽归吐槽，这砖该搬还得搬啊。</p>
+<p>书归正传，回到正题。</p>
+<h1 id="depth-texture的比较模式">Depth Texture的比较模式</h1>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">glTextureParameteri</span>(m_handle, GL_TEXTURE_COMPARE_MODE, GL_COMPARE_REF_TO_TEXTURE);</span><br><span class="line"><span class="built_in">glTextureParameteri</span>(m_handle, GL_TEXTURE_COMPARE_FUNC, GL_LEQUAL);</span><br></pre></td></tr></table></figure>
+<p>深度贴图，有两种采样方法。一种是作为普通贴图<code>normal texture</code>，采样深度值；另一种作为阴影贴图<code>shadow sampler</code>，使用时必须设置比较模式。在GLSL中，这两种采样方式分别对应sampler2D<code>和</code>sampler2DShadow`。如果混着使用，采样结果是未定义未定义行为。显然，我在两个显卡上跑，得到不同的结果，就是未定义行为在作怪。</p>
+<blockquote>
+<p>Attempting to use a texture without comparison with a shadow sampler,
+or vice-versa, will result in an error upon rendering. <a
+target="_blank" rel="noopener" href="https://www.khronos.org/opengl/wiki/sampler_Object#Comparison_mode"><sup>Sampler
+Object Comparison Mode</sup></a></p>
+</blockquote>
+<blockquote>
+<p>the results of a texture lookup are undefined if any of the following
+conditions are true: • Thesampler used in a texture lookup function is
+not one of the shadow sampler types, the texture object’s base internal
+format is DEPTH_COMPONENT or DEPTH_STENCIL, and the TEXTURE_COMPARE_MODE
+is not NONE. • The sampler used in a texture lookup function is one of
+the shadow sampler types, the texture object’s base internal format is
+DEPTH_COMPONENT or DEPTH_STENCIL, and the TEXTURE_COMPARE_MODE is
+NONE.<a
+target="_blank" rel="noopener" href="https://registry.khronos.org/OpenGL/specs/gl/glspec46.core.pdf"><sup>glspec46.core
+p.401</sup></a></p>
+</blockquote>
+<p>另外，如果<code>shadow sampler</code>设置了<code>linear filtering</code>，采样的结果实际在实现硬件的4采样PCF。</p>
+<p>附一张OpenGL的深度数据格式表：
+<!-- ![Compare-Mode-in-OpenGL-Sampler/depth_format](../images/Compare-Mode-in-OpenGL-Sampler/depth_format.png) -->
+<img src="/images/Compare-Mode-in-OpenGL-Sampler/depth_format.png" class="Compare-Mode-in-OpenGL-Sampler&#x2F;depth_format"></p>
+<h1 id="参考">参考</h1>
+<ul>
+<li><a
+target="_blank" rel="noopener" href="https://registry.khronos.org/OpenGL/specs/gl/glspec46.core.pdf">glspec46.core
+p.401</a></li>
+<li><a
+target="_blank" rel="noopener" href="https://www.khronos.org/opengl/wiki/Sampler_(GLSL)#Shadow_samplers">Shadow_samplers</a></li>
+<li><a
+target="_blank" rel="noopener" href="https://www.khronos.org/opengl/wiki/sampler_Object#Comparison_mode">Sampler
+Object Comparison Mode</a></li>
+<li><a
+target="_blank" rel="noopener" href="https://stackoverflow.com/questions/22919583/opengl-framebuffer-depth-texture-not-working">opengl
+framebuffer depth texture not working</a></li>
+<li><a
+target="_blank" rel="noopener" href="https://stackoverflow.com/questions/22419682/glsl-sampler2dshadow-and-shadow2d-clarification/22426507#22426507">glsl
+sampler2DShadow and shadow2D clarification</a></li>
+<li><a
+target="_blank" rel="noopener" href="https://stackoverflow.com/questions/19516538/opengl-shadow-acne-when-using-shadow2d">Opengl
+shadow acne when using shadow2D</a></li>
+</ul>
+</body>
+</html>
+
       
     </div>
 
@@ -813,7 +2230,7 @@ M1000M）上结果全白色（1.0），当然P50确实太老了，10年老机了
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-06-23 09:52:19" itemprop="dateModified" datetime="2025-06-23T09:52:19+00:00">2025-06-23</time>
+                <time title="修改时间：2025-06-24 01:54:20" itemprop="dateModified" datetime="2025-06-24T01:54:20+00:00">2025-06-24</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -840,7 +2257,167 @@ M1000M）上结果全白色（1.0），当然P50确实太老了，10年老机了
     <div class="post-body" itemprop="articleBody">
 
       
-          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>OpenGL 4.0和DirectX 11提供了原子操作(atomic
+          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>dummy</title>
+  <style>
+    html {
+      line-height: 1.5;
+      font-family: Georgia, serif;
+      font-size: 20px;
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 1em;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+      font-size: 85%;
+      margin: 0;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<p>OpenGL 4.0和DirectX 11提供了原子操作(atomic
 operation），为GPU上并行创建链表数据结构提供了便利。基于此算法的<code>per-pixel link lists</code>可以应用到<code>order independent transparency</code>，实现像素的程序化混合，实现顺序无关的半透明效果，避免了程序员在api层面对于略显无力的排序的折磨。</p>
 <h1 id="per-pixel-link-list">Per-Pixel Link List</h1>
 <p>PPLL的实现需要三个数据结构：头结点指针Buffer、链表Node
@@ -850,14 +2427,99 @@ Buffer中的位置，初始化为一个空符号，比如-1； - 链表Node
 Buffer：存储所有结点数据，可以是任意数据，<code>next</code>字段是必需的，指向链表下一个结点；不需要初始化，只需要分配足够大小。
 -
 结点计数器：用于分配下一个<code>Node Buffer</code>位置来存储数据，使用原子操作累加。初始化为0。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2025/04/08/Per-Pixel-Link-List/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+<p>三步： 1. 从Node
+Buffer中获取下一个空闲位置，使用原子加计数器操作<code>atomicCounterIncrement</code>实现，每个光栅化后的片元占用一个，这个步骤是所有线程都在抢占
+2.
+使用原子交换操作<code>imageAtomicExchange</code>，把新的位置写入到头结点指针Buffer作为新的头结点指针，并拿出旧的头节点指针。相当于每个新节点，都从链表的头部插入，这个步骤是所有线程都在抢占
+3. 把新头节点数据写入到Node
+Buffer，旧头节点指针作为新头节点的<code>next</code>字段</p>
+<p>其实就是一个游标代替指针、数据存在全局大数组的链表的构造过程，描述的不好，一图胜千言：</p>
+<!-- ![Per-Pixel-Link-List/PPLL](../images/Per-Pixel-Link-List/PPLL.png) -->
+<img src="/images/Per-Pixel-Link-List/PPLL.png" class="Per-Pixel-Link-List&#x2F;PPLL">
+<h1 id="order-independent-transparency">Order Independent
+Transparency</h1>
+<p>每一个链表存储的是光栅化到该像素位置的所有片元数据，把这些片元按照顺序混合起来，叫做<code>resolve</code>操作，类似mutisample的resolve操作。</p>
+<p>也是三步，论文写的比较清楚： &gt; 1. Render all opaque or background
+objects as usual, including depth testing. &gt; 2. Render all objects
+with transparency, and – instead of writing to the render target –
+insert the fragment data into the per-pixel linked-list structure. Depth
+testing is still supported, so any fragments occluded by opaque elements
+in the previous step will be dropped. &gt; 3. Resolve each linked list
+by first sorting and then traversing the list in sorted order for alpha
+blending. This is performed in a single shader pass using a full screen
+quad.</p>
+<p><strong>Note</strong> -
+渲染半透明物体构造PPLL时候，打开<code>depth test</code>，关闭<code>depth write</code>
+-
+渲染半透明物体的片元数据，通常深度测试是在<code>fragment shader</code>之后的<code>Per-Sample Processing</code>阶段，要在<code>fragment shader</code>中就拿到<code>depth test</code>的结果，需要用到<code>early depth test</code></p>
+<p><strong>像素排序</strong></p>
+<p>每个链表结点数比较有限，论文<a
+target="_blank" rel="noopener" href="https://dl.acm.org/doi/10.1111/j.1467-8659.2010.01725.x">Real-Time
+Concurrent Linked List Construction on the
+GPU</a>中推荐的是插入排序。</p>
+<p>在GLSL中实现插入排序时遇到了个经典问题，<code>uint</code>类型迭代变量递减到<code>-1</code>时候，warp到<code>max uint</code>，循环退出失败然后显存访存越界，导致屏幕黑掉一下，然后程序crash掉，还会影响到其他程序窗口的显示；让驱动小小的震撼一下。</p>
+<p><strong>Blend顺序</strong></p>
+<p>比较常用而且简单的混合方式是back-to-front，PPLL也不例外。但是考虑的具体实现，需要考虑背景层。如果不透明物体的渲染结果，我们能够轻易的拿到其贴图，比如vulkan的swapchain的image，或者之前的渲染的都render-to-texture（这种情况下，渲染半透明时也要绑定同样的fbo，以利用不透明pass的深度结果做深度测试），就可以轻易的使用back-to-front方式做blend；如果不能拿到不透明pass的渲染结果，比如使用OpenGL而且都往default
+framebuffer上渲，那就得考虑一下front-to-back的blend方式了，<code>Dual Depth Peeling</code>是最先吃螃蟹的论文。</p>
+<p>但是论文描述里面比较费解，好像还有错误，看的头疼。可能未必是论文的问题，也许是我对SRC/DST的理解有误。<code>glBlendFunc</code>的规范里面，DST是framebuffer上的，SRC是当前渲染，跟论文好像是反的。但是整体思路就是，从front到back的每一层，先预乘alpha，同时累积之前所有层的<code>1.0 - alpha</code>的乘积，把这俩相加，再加上之前成的blend结果。看图说话吧。</p>
+<!-- ![Per-Pixel-Link-List/back-to-front](../images/Per-Pixel-Link-List/back-to-front.png) -->
+<img src="/images/Per-Pixel-Link-List/back-to-front.png" class="Per-Pixel-Link-List&#x2F;back-to-front">
+<p><strong>遇到的问题</strong> 1.
+<code>uint</code>递减到-1导致内存越界问题 2.
+窗口设置最大或者相机拉近时出现严重的闪烁
+<!-- ![Per-Pixel-Link-List/flickering](../images/Per-Pixel-Link-List/flickering.gif) -->
+<img src="/images/Per-Pixel-Link-List/flickering.png" class="Per-Pixel-Link-List&#x2F;flickering"></p>
+<p>论文中明示了坑点： &gt; The size of the node buffer must be large
+enough to handle all possible fragments, or there must be a scheme to
+handle overflow.</p>
+<blockquote>
+<p>The creation of a node buffer can become an unreasonable burden on
+video memory requirements when render dimensions, the size of the node
+structure, and the number of fragments to store become large. For this
+reason it is important to be economical with those variables when
+circumstances allow it. For instance, the node structure can be
+optimized so its variables are stored in packed formats instead of
+floating-point vectors (fragment color in particular would benefit
+greatly from this approach).</p>
+</blockquote>
+<ul>
+<li>具体原因不清，可能因为分辨率增大或者渲染占据更大面积，导致片元数量增加，PPLL的node
+buffer和显存有限，导致部分片元缺失，闪烁中的白色应该就是背景的颜色</li>
+<li>增加node buffer的数量能够缓解，但是不能消除</li>
+<li>使用<code>packUnorm</code>/<code>unpackSnorm4x8</code>压缩color居然立竿见影，消除了问题，明明数量没有变化啊；难道是因为同样的数量，没压缩之前申请的内存超出了最大值，实际申请到的node数量其实少很多？？</li>
+</ul>
+<p>此处暂时没能验证，存疑~~</p>
+<h1 id="渲染结果">渲染结果</h1>
+<p>最后贴一张头发OIT半透明渲染的结果~</p>
+<!-- ![Per-Pixel-Link-List/flickering](../images/Per-Pixel-Link-List/hair.png) -->
+<img src="/images/Per-Pixel-Link-List/hair.png" class="Per-Pixel-Link-List&#x2F;hair">
+<h1 id="参考">参考</h1>
+<ul>
+<li><a
+target="_blank" rel="noopener" href="https://dl.acm.org/doi/10.1111/j.1467-8659.2010.01725.x">Real-Time
+Concurrent Linked List Construction on the GPU</a></li>
+<li><a
+target="_blank" rel="noopener" href="https://developer.download.nvidia.com/SDK/10/opengl/src/dual_depth_peeling/doc/DualDepthPeeling.pdf">Order
+Independent Transparency with Dual Depth Peeling</a></li>
+<li><a
+target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/364762003">【论文复现】Real-Time
+Concurrent Linked List Construction on the GPU</a></li>
+<li><a
+target="_blank" rel="noopener" href="https://github.com/AngelMonica126/GraphicAlgorithm/blob/master/012_Real%20Time%20Concurrent%20Linked%20List%20Construction%20on%20the%20GPU/BlendPass_FS.glsl">PPLL
+OIT实现</a></li>
+<li><a
+target="_blank" rel="noopener" href="https://gamedev.stackexchange.com/questions/184285/how-front-to-back-blending-works">How
+front-to-back blending works?</a></li>
+<li><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Integer_overflow">Integer
+overflow</a></li>
+<li><a
+target="_blank" rel="noopener" href="https://registry.khronos.org/OpenGL-Refpages/gl4/html/packUnorm.xhtml">packUnorm</a></li>
+<li><a
+target="_blank" rel="noopener" href="https://registry.khronos.org/OpenGL-Refpages/gl4/html/unpackUnorm.xhtml">unpackSnorm4x8</a></li>
+</ul>
+</body>
+</html>
+
       
     </div>
 
@@ -907,7 +2569,7 @@ Buffer：存储所有结点数据，可以是任意数据，<code>next</code>字
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-06-23 09:52:19" itemprop="dateModified" datetime="2025-06-23T09:52:19+00:00">2025-06-23</time>
+                <time title="修改时间：2025-06-24 01:54:20" itemprop="dateModified" datetime="2025-06-24T01:54:20+00:00">2025-06-24</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -930,18 +2592,193 @@ Buffer：存储所有结点数据，可以是任意数据，<code>next</code>字
     <div class="post-body" itemprop="articleBody">
 
       
-          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="设置生成目标的输出目录">设置生成目标的输出目录</h2>
+          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>dummy</title>
+  <style>
+    html {
+      line-height: 1.5;
+      font-family: Georgia, serif;
+      font-size: 20px;
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 1em;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+      font-size: 85%;
+      margin: 0;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<h2 id="设置生成目标的输出目录">设置生成目标的输出目录</h2>
 <figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">set(CMAKE_RUNTIME_OUTPUT_DIRECTORY $&#123;CMAKE_BINARY_DIR&#125;/<span class="variable">$&lt;</span>CONFIG&gt;)</span><br><span class="line">set(CMAKE_LIBRARY_OUTPUT_DIRECTORY $&#123;CMAKE_BINARY_DIR&#125;/<span class="variable">$&lt;</span>CONFIG&gt;)</span><br></pre></td></tr></table></figure>
 <p><strong>Note</strong>
 <code>$&lt;CONFIG&gt;</code>应该在VS下才起作用</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2025/04/01/CMake%E4%BD%BF%E7%94%A8%E9%80%9F%E6%8A%84%E6%8C%87%E5%8C%97/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+<h2 id="生成配置文件">生成配置文件</h2>
+<p>比如生成版本信息，可以参考assimp <figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">PROJECT(Assimp VERSION 5.4.3)</span><br><span class="line"></span><br><span class="line">SET (ASSIMP_VERSION_MAJOR $&#123;PROJECT_VERSION_MAJOR&#125;)</span><br><span class="line">SET (ASSIMP_VERSION_MINOR $&#123;PROJECT_VERSION_MINOR&#125;)</span><br><span class="line">SET (ASSIMP_VERSION_PATCH $&#123;PROJECT_VERSION_PATCH&#125;)</span><br><span class="line"></span><br><span class="line">CONFIGURE_FILE(</span><br><span class="line">  $&#123;CMAKE_CURRENT_LIST_DIR&#125;/<span class="keyword">include</span>/assimp/revision.h.in</span><br><span class="line">  $&#123;CMAKE_CURRENT_BINARY_DIR&#125;/<span class="keyword">include</span>/assimp/revision.h</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+revision.h.in中的一部分如下： <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> VER_MAJOR @ASSIMP_VERSION_MAJOR@</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> VER_MINOR @ASSIMP_VERSION_MINOR@</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> VER_PATCH @ASSIMP_VERSION_PATCH@</span></span><br></pre></td></tr></table></figure></p>
+<p><code>PROJECT(Assimp VERSION 5.4.3)</code>会生成<code>PROJECT_VERSION_MAJOR</code>、<code>PROJECT_VERSION_MINOR</code>、<code>PROJECT_VERSION_PATCH</code>变量。</p>
+<h2 id="后处理事件">后处理事件</h2>
+<ol type="1">
+<li><p>拷贝目标所需文件到对应Configuration目录 参考自<a
+target="_blank" rel="noopener" href="https://stackoverflow.com/questions/10671916/how-to-copy-dll-files-into-the-same-folder-as-the-executable-using-cmake">How
+to copy DLL files into the same folder as the executable using
+CMake?</a> <figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># copy file</span></span><br><span class="line">add_custom_command(TARGET MyTest POST_BUILD        <span class="comment"># Adds a post-build event to MyTest</span></span><br><span class="line">    COMMAND $&#123;CMAKE_COMMAND&#125; -E copy_if_different  <span class="comment"># which executes &quot;cmake - E copy_if_different...&quot;</span></span><br><span class="line">        <span class="string">&quot;$&#123;PROJECT_SOURCE_DIR&#125;/libs/test.dll&quot;</span>      <span class="comment"># &lt;--this is in-file</span></span><br><span class="line">        <span class="variable">$&lt;</span>TARGET_FILE_DIR:MyTest&gt;)                 <span class="comment"># &lt;--this is out-file path</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># copy dir</span></span><br><span class="line">add_custom_command(TARGET MyTest POST_BUILD</span><br><span class="line">    COMMAND $&#123;CMAKE_COMMAND&#125; -E copy_directory</span><br><span class="line">        <span class="string">&quot;$&#123;PROJECT_SOURCE_DIR&#125;/libs&quot;</span></span><br><span class="line">        <span class="variable">$&lt;</span>TARGET_FILE_DIR:MyTest&gt;)</span><br><span class="line"></span><br><span class="line"><span class="comment"># copy dir of specified configuration</span></span><br><span class="line">add_custom_command(TARGET MyTest POST_BUILD</span><br><span class="line">    COMMAND $&#123;CMAKE_COMMAND&#125; -E copy_directory</span><br><span class="line">        <span class="string">&quot;$&#123;PROJECT_SOURCE_DIR&#125;/libs/<span class="variable">$&lt;</span>CONFIGURATION&gt;&quot;</span></span><br><span class="line">        <span class="variable">$&lt;</span>TARGET_FILE_DIR:MyTest&gt;)</span><br><span class="line"></span><br></pre></td></tr></table></figure></p></li>
+<li><p>拷贝所有目标所需文件到对应Configuration目录 参考自<a
+target="_blank" rel="noopener" href="https://stackoverflow.com/questions/24311402/copy-all-files-with-given-extension-to-output-directory-using-cmake">Copy
+all files with given extension to output directory using
+CMake</a></p></li>
+</ol>
+<p><em>方法一</em> <figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">file(GLOB MY_PUBLIC_FILES <span class="string">&quot;myDir/*.*&quot;</span> )</span><br><span class="line">file(COPY $&#123;MY_PUBLIC_FILES&#125; DESTINATION $&#123;CMAKE_BINARY_DIR&#125;/$&#123;CMAKE_BUILD_TYPE&#125;)</span><br></pre></td></tr></table></figure></p>
+<p><em>方法二</em> <figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">install(DIRECTORY $&#123;PROJECT_SOURCE_DIR&#125;/myDir/ <span class="comment"># 注意末尾的`/`</span></span><br><span class="line">        DESTINATION $&#123;CMAKE_BINARY_DIR&#125;/$&#123;CMAKE_BUILD_TYPE&#125;</span><br><span class="line">        FILES_MATCHING PATTERN <span class="string">&quot;*.*&quot;</span> )</span><br><span class="line"></span><br><span class="line">cmake --install . <span class="comment"># --config RelWithDebInfo</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="开源库依赖">开源库依赖</h2>
+<h3 id="pcl"><a target="_blank" rel="noopener" href="https://pointclouds.org/">PCL</a></h3>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">set(Boost_DIR <span class="string">&quot;D:/program/PCL 1.15.0/3rdParty/Boost/lib/cmake&quot;</span>)</span><br><span class="line">set(PCL_DIR <span class="string">&quot;D:/program/PCL 1.15.0/cmake&quot;</span>)</span><br><span class="line"></span><br><span class="line">set(Boost_DEBUG ON)</span><br><span class="line"><span class="comment">#set(Boost_USE_STATIC_LIBS ON)</span></span><br><span class="line"><span class="comment">#set(Boost_USE_STATIC ON)</span></span><br><span class="line"></span><br><span class="line">find_package(PCL 1.15 REQUIRED)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">include_directories($&#123;PCL_INCLUDE_DIRS&#125;)</span><br><span class="line">link_directories($&#123;PCL_LIBRARY_DIRS&#125;)</span><br><span class="line">add_definitions($&#123;PCL_DEFINITIONS&#125;)</span><br><span class="line"></span><br><span class="line">target_link_libraries(exe $&#123;PCL_LIBRARIES&#125;)</span><br></pre></td></tr></table></figure>
+</body>
+</html>
+
       
     </div>
 
@@ -991,7 +2828,7 @@ Buffer：存储所有结点数据，可以是任意数据，<code>next</code>字
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-06-23 09:52:19" itemprop="dateModified" datetime="2025-06-23T09:52:19+00:00">2025-06-23</time>
+                <time title="修改时间：2025-06-24 01:54:20" itemprop="dateModified" datetime="2025-06-24T01:54:20+00:00">2025-06-24</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1018,28 +2855,220 @@ Buffer：存储所有结点数据，可以是任意数据，<code>next</code>字
     <div class="post-body" itemprop="articleBody">
 
       
-          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="how-near-and-far-planes-affet-depth-percision">How near and far
+          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>dummy</title>
+  <style>
+    html {
+      line-height: 1.5;
+      font-family: Georgia, serif;
+      font-size: 20px;
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 1em;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+      font-size: 85%;
+      margin: 0;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<h1 id="how-near-and-far-planes-affet-depth-percision">How near and far
 planes affet depth percision</h1>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/25755853/my-opengl-render-depths-are-nearly-the-value-of-1-why-is-that">My
+<li><a
+target="_blank" rel="noopener" href="https://stackoverflow.com/questions/25755853/my-opengl-render-depths-are-nearly-the-value-of-1-why-is-that">My
 openGL render depths are nearly the value of 1 why is that?</a></li>
-<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/16768090/depth-buffer-got-by-glreadpixels-is-always-1">depth
+<li><a
+target="_blank" rel="noopener" href="https://stackoverflow.com/questions/16768090/depth-buffer-got-by-glreadpixels-is-always-1">depth
 buffer got by glReadPixels is always 1</a></li>
-<li><a target="_blank" rel="noopener" href="https://computergraphics.stackexchange.com/questions/5116/how-am-i-able-to-perform-perspective-projection-without-a-near-plane">How
+<li><a
+target="_blank" rel="noopener" href="https://computergraphics.stackexchange.com/questions/5116/how-am-i-able-to-perform-perspective-projection-without-a-near-plane">How
 am I able to perform perspective projection without a near
 plane?</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.opengl.org/archives/resources/faq/technical/depthbuffer.htm#dept0045">Why
+<li><a
+target="_blank" rel="noopener" href="https://www.opengl.org/archives/resources/faq/technical/depthbuffer.htm#dept0045">Why
 is my depth buffer precision so poor?</a></li>
 </ul>
 <h1 id="reversed-z-depth-buffer">Reversed-Z Depth Buffer</h1>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2025/03/28/Depth-Buffer-Precision/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+<p><code>D3DXMatrixPerspectiveFovRH</code> <a
+target="_blank" rel="noopener" href="https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dxmatrixperspectivefovrh?redirectedfrom=MSDN">D3DXMatrixPerspectiveFovRH</a>
+<!-- ![](../images/Depth-Buffer-Precision/Reversed-Z-Depth-Buffer-001.png) -->
+<img src="/images/Depth-Buffer-Precision/Reversed-Z-Depth-Buffer-001.png" class="Depth-Buffer-Precision&#x2F;Reversed-Z-Depth-Buffer-001"></p>
+<h1 id="参考">参考</h1>
+<ul>
+<li><a
+target="_blank" rel="noopener" href="https://nlguillemot.wordpress.com/2016/12/07/reversed-z-in-opengl/">Reversed-Z
+in OpenGL</a></li>
+<li><a
+target="_blank" rel="noopener" href="https://registry.khronos.org/OpenGL-Refpages/gl4/html/glClipControl.xhtml">glClipControl</a></li>
+<li><a
+target="_blank" rel="noopener" href="https://web.archive.org/web/20200427121222/http://dev.theomader.com/depth-precision/">Depth
+Precision</a></li>
+<li><a
+target="_blank" rel="noopener" href="https://developer.nvidia.com/blog/visualizing-depth-precision/">Visualizing
+Depth Precision</a></li>
+<li><a
+target="_blank" rel="noopener" href="https://www.danielecarbone.com/reverse-depth-buffer-in-opengl/">Reverse
+Depth Buffer in OpenGL</a></li>
+<li><a
+target="_blank" rel="noopener" href="https://www.songho.ca/opengl/gl_projectionmatrix.html">OpenGL
+Projection Matrix</a></li>
+<li><a
+target="_blank" rel="noopener" href="https://mynameismjp.wordpress.com/2010/03/22/attack-of-the-depth-buffer/">Attack
+of the depth buffer</a></li>
+<li><a
+target="_blank" rel="noopener" href="https://github.com/g-truc/glm/blob/master/glm/ext/matrix_clip_space.inl#L233">glm
+perspectiveRH_ZO</a></li>
+<li><a
+target="_blank" rel="noopener" href="https://iolite-engine.com/blog_posts/reverse_z_cheatsheet">Reverse
+Z Cheatsheet</a></li>
+</ul>
+</body>
+</html>
+
       
     </div>
 

@@ -196,7 +196,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-06-23 09:52:19" itemprop="dateModified" datetime="2025-06-23T09:52:19+00:00">2025-06-23</time>
+                <time title="修改时间：2025-06-24 01:54:20" itemprop="dateModified" datetime="2025-06-24T01:54:20+00:00">2025-06-24</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -219,18 +219,198 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="人脸关键点">人脸关键点</h1>
-<p>使用Google的人脸检测工具MediaPipe来做人脸关键点的检测，可以按照<a target="_blank" rel="noopener" href="https://python.plainenglish.io/face-mesh-detection-with-python-and-opencv-complete-project-359d81d6a712">Face
+          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>dummy</title>
+  <style>
+    html {
+      line-height: 1.5;
+      font-family: Georgia, serif;
+      font-size: 20px;
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 1em;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+      font-size: 85%;
+      margin: 0;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<h1 id="人脸关键点">人脸关键点</h1>
+<p>使用Google的人脸检测工具MediaPipe来做人脸关键点的检测，可以按照<a
+target="_blank" rel="noopener" href="https://python.plainenglish.io/face-mesh-detection-with-python-and-opencv-complete-project-359d81d6a712">Face
 Mesh Detection with Python and
-OpenCV</a>的操作安装MediaPipe并可视化关键点。 </p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> mediapipe <span class="keyword">as</span> mp</span><br><span class="line"> </span><br><span class="line"><span class="comment">#Face Mesh</span></span><br><span class="line"> </span><br><span class="line">mp_face_mesh = mp.solutions.face_mesh</span><br><span class="line">face_mesh = mp_face_mesh.FaceMesh()</span><br><span class="line"> </span><br><span class="line"><span class="comment">#Image</span></span><br><span class="line"> </span><br><span class="line">image = cv2.imread(<span class="string">&quot;/home/python/OpenCV/faceMash/image1.jpg&quot;</span>)</span><br><span class="line">height, width, _ = image.shape</span><br><span class="line">rgb_image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)</span><br><span class="line"> </span><br><span class="line"><span class="comment">#Facial landmarks</span></span><br><span class="line">result = face_mesh.process(image)</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="keyword">for</span> facial_landmarks <span class="keyword">in</span> result.multi_face_landmarks:</span><br><span class="line">   <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="number">468</span>):</span><br><span class="line">      </span><br><span class="line">       pt1 = facial_landmarks.landmark[i]</span><br><span class="line">       x = <span class="built_in">int</span>(pt1.x * width)</span><br><span class="line">       y = <span class="built_in">int</span>(pt1.y * height)</span><br><span class="line">      </span><br><span class="line">       cv2.circle(image, (x,y), <span class="number">2</span>, (<span class="number">100</span>,<span class="number">100</span>,<span class="number">0</span>), -<span class="number">1</span>)</span><br><span class="line">       <span class="comment">#cv2.putText(image, str(i), (x,y), 0,1,(0,0,0))</span></span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">cv2.imshow(<span class="string">&quot;Face Mesh detection&quot;</span>, image)</span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2025/02/14/%E5%88%A9%E7%94%A8%E4%BA%BA%E8%84%B8%E6%A3%80%E6%B5%8B%E5%85%B3%E9%94%AE%E7%82%B9%E7%AE%80%E5%8D%95%E5%88%86%E5%89%B2%E5%90%88%E5%B9%B6%E6%93%8D%E4%BD%9C/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+OpenCV</a>的操作安装MediaPipe并可视化关键点。 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> mediapipe <span class="keyword">as</span> mp</span><br><span class="line"> </span><br><span class="line"><span class="comment">#Face Mesh</span></span><br><span class="line"> </span><br><span class="line">mp_face_mesh = mp.solutions.face_mesh</span><br><span class="line">face_mesh = mp_face_mesh.FaceMesh()</span><br><span class="line"> </span><br><span class="line"><span class="comment">#Image</span></span><br><span class="line"> </span><br><span class="line">image = cv2.imread(<span class="string">&quot;/home/python/OpenCV/faceMash/image1.jpg&quot;</span>)</span><br><span class="line">height, width, _ = image.shape</span><br><span class="line">rgb_image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)</span><br><span class="line"> </span><br><span class="line"><span class="comment">#Facial landmarks</span></span><br><span class="line">result = face_mesh.process(image)</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="keyword">for</span> facial_landmarks <span class="keyword">in</span> result.multi_face_landmarks:</span><br><span class="line">   <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="number">468</span>):</span><br><span class="line">      </span><br><span class="line">       pt1 = facial_landmarks.landmark[i]</span><br><span class="line">       x = <span class="built_in">int</span>(pt1.x * width)</span><br><span class="line">       y = <span class="built_in">int</span>(pt1.y * height)</span><br><span class="line">      </span><br><span class="line">       cv2.circle(image, (x,y), <span class="number">2</span>, (<span class="number">100</span>,<span class="number">100</span>,<span class="number">0</span>), -<span class="number">1</span>)</span><br><span class="line">       <span class="comment">#cv2.putText(image, str(i), (x,y), 0,1,(0,0,0))</span></span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">cv2.imshow(<span class="string">&quot;Face Mesh detection&quot;</span>, image)</span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br></pre></td></tr></table></figure></p>
+<p><a
+target="_blank" rel="noopener" href="https://ai.google.dev/edge/mediapipe/solutions/vision/face_landmarker?hl=zh-cn">人脸特征点检测指南</a>给出了人脸关键点landmarks序列的序号分布，可以通过关键点的序号粗略圈出感兴趣范围。</p>
+<p>比如眉毛大致范围： <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 左下角，逆时针</span><br><span class="line">left_eye = [46, 53, 52, 65, 55, 107, 66, 105, 63, 70]</span><br><span class="line"># 右下角，顺时针</span><br><span class="line">right_eye =  [276, 283, 282, 295, 285, 336, 296, 334, 293, 300]</span><br></pre></td></tr></table></figure></p>
+<h1
+id="同样大小图片的同一范围做mask以及合并操作">同样大小图片的同一范围做mask以及合并操作</h1>
+<ol type="1">
+<li>使用opencv的cv2.drawContours生成mask遮罩</li>
+<li>使用numpy的位操作<code>numpy.invert</code>、<code>numpy.bitwist_and</code>、<code>numpy.bitwist_or</code>，能够很方便的完成图片的分割、取反以及合并操作</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> mediapipe <span class="keyword">as</span> mp</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"> </span><br><span class="line"><span class="comment">#Face Mesh</span></span><br><span class="line"> </span><br><span class="line">mp_face_mesh = mp.solutions.face_mesh</span><br><span class="line">face_mesh = mp_face_mesh.FaceMesh()</span><br><span class="line"> </span><br><span class="line"><span class="comment">#Image</span></span><br><span class="line"> </span><br><span class="line">image = cv2.imread(<span class="string">&quot;faceinput.png&quot;</span>)</span><br><span class="line">height, width, _ = image.shape</span><br><span class="line">rgb_image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)</span><br><span class="line"> </span><br><span class="line"><span class="comment">#Facial landmarks</span></span><br><span class="line">result = face_mesh.process(image)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 左下角，逆时针</span></span><br><span class="line">left_eye = [<span class="number">46</span>, <span class="number">53</span>, <span class="number">52</span>, <span class="number">65</span>, <span class="number">55</span>, <span class="number">107</span>, <span class="number">66</span>, <span class="number">105</span>, <span class="number">63</span>, <span class="number">70</span>]</span><br><span class="line"><span class="comment"># 右下角，顺时针</span></span><br><span class="line">right_eye =  [<span class="number">276</span>, <span class="number">283</span>, <span class="number">282</span>, <span class="number">295</span>, <span class="number">285</span>, <span class="number">336</span>, <span class="number">296</span>, <span class="number">334</span>, <span class="number">293</span>, <span class="number">300</span>]</span><br><span class="line"></span><br><span class="line">left_pts = [[]]</span><br><span class="line">right_pts = [[]]</span><br><span class="line"><span class="keyword">for</span> facial_landmarks <span class="keyword">in</span> result.multi_face_landmarks:</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="number">468</span>):</span><br><span class="line">      </span><br><span class="line">        <span class="keyword">if</span> i <span class="keyword">in</span> right_eye <span class="keyword">or</span> i <span class="keyword">in</span> left_eye:</span><br><span class="line">            pt1 = facial_landmarks.landmark[i]</span><br><span class="line">            x = <span class="built_in">int</span>(pt1.x * width)</span><br><span class="line">            y = <span class="built_in">int</span>(pt1.y * height)</span><br><span class="line"></span><br><span class="line">            cv2.circle(image, (x,y), <span class="number">2</span>, (<span class="number">100</span>,<span class="number">100</span>,<span class="number">0</span>), -<span class="number">1</span>)</span><br><span class="line">            <span class="comment">#cv2.putText(image, str(i), (x,y), 0,1,(0,0,0))</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> left_eye:</span><br><span class="line">        pt1 = facial_landmarks.landmark[i]</span><br><span class="line">        x = <span class="built_in">int</span>(pt1.x * width)</span><br><span class="line">        y = <span class="built_in">int</span>(pt1.y * height)</span><br><span class="line">        left_pts[<span class="number">0</span>].append([x, y])</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> right_eye:</span><br><span class="line">        pt1 = facial_landmarks.landmark[i]</span><br><span class="line">        x = <span class="built_in">int</span>(pt1.x * width)</span><br><span class="line">        y = <span class="built_in">int</span>(pt1.y * height)</span><br><span class="line">        right_pts[<span class="number">0</span>].append([x, y])</span><br><span class="line"></span><br><span class="line">grayscaleImage = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)</span><br><span class="line">grayscaleImage = cv2.cvtColor(grayscaleImage, cv2.COLOR_GRAY2BGR)</span><br><span class="line">maskImage = np.zeros_like(image)</span><br><span class="line">cv2.drawContours(maskImage, np.array(left_pts), <span class="number">0</span>, (<span class="number">255</span>, <span class="number">255</span>, <span class="number">255</span>), -<span class="number">1</span>)</span><br><span class="line">cv2.drawContours(maskImage, np.array(right_pts), <span class="number">0</span>, (<span class="number">255</span>, <span class="number">255</span>, <span class="number">255</span>), -<span class="number">1</span>)</span><br><span class="line">extractedImage=np.bitwise_and(grayscaleImage, maskImage)</span><br><span class="line"></span><br><span class="line"><span class="comment"># gray image</span></span><br><span class="line"><span class="comment"># maskImage = np.zeros_like(grayscaleImage)</span></span><br><span class="line"><span class="comment"># cv2.drawContours(maskImage, np.array(left_pts), 0, 255, -1)</span></span><br><span class="line"><span class="comment"># cv2.drawContours(maskImage, np.array(right_pts), 0, 255, -1)</span></span><br><span class="line"><span class="comment"># extractedImage=np.bitwise_and(grayscaleImage, maskImage)</span></span><br><span class="line"></span><br><span class="line">invert_maskImage = np.invert(maskImage)</span><br><span class="line">other = cv2.imread(<span class="string">&quot;face2.png&quot;</span>)</span><br><span class="line"><span class="comment"># other_grayscaleImage = cv2.cvtColor(other, cv2.COLOR_BGR2GRAY)</span></span><br><span class="line">extractedOther = np.bitwise_and(other, invert_maskImage)</span><br><span class="line"></span><br><span class="line">res = np.bitwise_or(extractedImage, extractedOther)</span><br><span class="line"></span><br><span class="line"><span class="comment"># cv2.imwrite(&quot;res.png&quot;, res)</span></span><br><span class="line">cv2.imshow(<span class="string">&quot;Face Mesh detection&quot;</span>, extractedImage)</span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+<h1 id="参考">参考</h1>
+<ul>
+<li><a
+target="_blank" rel="noopener" href="https://python.plainenglish.io/face-mesh-detection-with-python-and-opencv-complete-project-359d81d6a712">Face
+Mesh Detection with Python and OpenCV — Complete Project</a></li>
+<li><a
+target="_blank" rel="noopener" href="https://ai.google.dev/edge/mediapipe/solutions/vision/face_landmarker?hl=zh-cn">人脸特征点检测指南</a></li>
+<li><a
+target="_blank" rel="noopener" href="https://stackoverflow.com/questions/15403580/extracting-a-subimage-in-shape-of-a-polygon">extracting
+a subimage in shape of a polygon</a></li>
+<li><a
+target="_blank" rel="noopener" href="https://numpy.org/doc/2.1/reference/routines.bitwise.html">Bit-wise
+operations</a></li>
+</ul>
+</body>
+</html>
+
       
     </div>
 
@@ -280,7 +460,7 @@ OpenCV</a>的操作安装MediaPipe并可视化关键点。 </p><figure class="hi
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-06-23 09:52:19" itemprop="dateModified" datetime="2025-06-23T09:52:19+00:00">2025-06-23</time>
+                <time title="修改时间：2025-06-24 01:54:20" itemprop="dateModified" datetime="2025-06-24T01:54:20+00:00">2025-06-24</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -303,22 +483,340 @@ OpenCV</a>的操作安装MediaPipe并可视化关键点。 </p><figure class="hi
     <div class="post-body" itemprop="articleBody">
 
       
-          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><blockquote class="blockquote-center">
+          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>dummy</title>
+  <style>
+    html {
+      line-height: 1.5;
+      font-family: Georgia, serif;
+      font-size: 20px;
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 1em;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+      font-size: 85%;
+      margin: 0;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<blockquote class="blockquote-center">
             <i class="fa fa-quote-left"></i>
-            <p>Something</p>
+            <!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>dummy</title>
+  <style>
+    html {
+      line-height: 1.5;
+      font-family: Georgia, serif;
+      font-size: 20px;
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 1em;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+      font-size: 85%;
+      margin: 0;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<p>Something</p>
+</body>
+</html>
 
             <i class="fa fa-quote-right"></i>
           </blockquote>
 <a href="/2022/12/24/%E6%B5%8B%E8%AF%95/" title="测试">测试</a>
 <img src="/images/2025-02-17-Render-line-001.png" class width="800" height="800" title="title alt">
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/12/24/%E6%B5%8B%E8%AF%95/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+<figure class="highlight python"><figcaption><span>glenum.py</span><a href="/scripts/codes/glenum.py">view raw</a></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line">exts = [<span class="string">&quot;ARB&quot;</span>, <span class="string">&quot;KHR&quot;</span>, <span class="string">&quot;AMD&quot;</span>, <span class="string">&quot;NV&quot;</span>, <span class="string">&quot;OVR&quot;</span>, <span class="string">&quot;APPLE&quot;</span>, <span class="string">&quot;EXT&quot;</span>, <span class="string">&quot;INTEL&quot;</span>, <span class="string">&quot;MESA&quot;</span>,</span><br><span class="line">    <span class="string">&quot;VIEW&quot;</span>,</span><br><span class="line">    <span class="string">&quot;GL_CONTEXT_ROBUST_ACCESS&quot;</span></span><br><span class="line">]</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">IsExts</span>(<span class="params">line</span>):</span><br><span class="line">    <span class="keyword">for</span> ext <span class="keyword">in</span> exts:</span><br><span class="line">        head = <span class="string">&quot;GL_&quot;</span> + ext + <span class="string">&quot;_&quot;</span></span><br><span class="line">        tail = <span class="string">&quot;_&quot;</span> + ext</span><br><span class="line">        tokens = line.split()</span><br><span class="line">        <span class="keyword">if</span> tokens[<span class="number">1</span>].endswith(tail) <span class="keyword">or</span> tokens[<span class="number">1</span>].startswith(head) <span class="keyword">or</span> tokens[<span class="number">1</span>] == ext:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">IsMacro</span>(<span class="params">line</span>):</span><br><span class="line">    tokens = line.split()</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(tokens) != <span class="number">3</span> <span class="keyword">or</span> <span class="keyword">not</span> tokens[<span class="number">2</span>].startswith(<span class="string">&quot;0x&quot;</span>):</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">enum2hex = {}</span><br><span class="line">hex2enum = {}</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">find_key</span>(<span class="params">enum</span>):</span><br><span class="line">    <span class="keyword">for</span> el <span class="keyword">in</span> hex2enum.values():</span><br><span class="line">        <span class="keyword">if</span> enum <span class="keyword">in</span> el:</span><br><span class="line">            <span class="keyword">return</span> el</span><br><span class="line">    <span class="keyword">return</span> []</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">header = <span class="string">&quot;&quot;&quot;#pragma once</span></span><br><span class="line"><span class="string">#ifdef __cplusplus</span></span><br><span class="line"><span class="string">#include &lt;string&gt;</span></span><br><span class="line"><span class="string">#endif</span></span><br><span class="line"><span class="string">#include &lt;glad/glad.h&gt;</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    f = <span class="built_in">open</span>(<span class="string">&quot;glcorearb.h&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> f.readlines():</span><br><span class="line">        <span class="keyword">if</span> line.startswith(<span class="string">&quot;#define&quot;</span>):</span><br><span class="line">            tokens = line.split()</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> IsMacro(line) <span class="keyword">and</span> <span class="keyword">not</span> IsExts(line):</span><br><span class="line">                <span class="built_in">print</span>(line)</span><br><span class="line"></span><br><span class="line">                e = tokens[<span class="number">1</span>]</span><br><span class="line">                h = <span class="string">&quot;0x&quot;</span> + tokens[<span class="number">2</span>][<span class="number">2</span>:].lstrip(<span class="string">&quot;0&quot;</span>)</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> tokens[<span class="number">2</span>] == <span class="string">&quot;0xFFFFFFFFFFFFFFFFull&quot;</span> <span class="keyword">or</span> tokens[<span class="number">2</span>] == <span class="string">&quot;0xFFFFFFFFu&quot;</span>:</span><br><span class="line">                    h = <span class="string">&quot;0xFFFFFFFF&quot;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">                enum2hex[e] = h</span><br><span class="line">                </span><br><span class="line">                <span class="keyword">if</span> h <span class="keyword">not</span> <span class="keyword">in</span> hex2enum.keys():</span><br><span class="line">                    hex2enum[h] = [e]</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    hex2enum[h].append(e)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&quot;gl_enum_string_helper.h&quot;</span>, <span class="string">&quot;w&quot;</span>) <span class="keyword">as</span> outfile:</span><br><span class="line">        <span class="built_in">print</span>(header, file=outfile)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;static inline const char* string_gl_enum(GLenum input_value) {&quot;</span>, file=outfile)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;    switch (input_value) {&quot;</span>, file=outfile)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> el <span class="keyword">in</span> hex2enum.values():</span><br><span class="line">            <span class="comment"># print(&#x27;GL_ENUM(%s,%s)&#x27; % (enum, enums[enum]), file=outfile)</span></span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;        case %s:&quot;</span> % el[<span class="number">0</span>], file=outfile)</span><br><span class="line">            </span><br><span class="line">            res = <span class="string">&#x27;|&#x27;</span>.join(el)</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;            return \&quot;%s\&quot;;&quot;</span> % res, file=outfile)</span><br><span class="line">        </span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;        default:&quot;</span>, file=outfile)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;            return \&quot;Unhandled Enum\&quot;;&quot;</span>, file=outfile)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;    }&quot;</span>, file=outfile)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;}&quot;</span>, file=outfile)</span><br></pre></td></tr></table></figure>
+</body>
+</html>
+
       
     </div>
 
@@ -368,7 +866,7 @@ OpenCV</a>的操作安装MediaPipe并可视化关键点。 </p><figure class="hi
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-06-23 09:52:19" itemprop="dateModified" datetime="2025-06-23T09:52:19+00:00">2025-06-23</time>
+                <time title="修改时间：2025-06-24 01:54:20" itemprop="dateModified" datetime="2025-06-24T01:54:20+00:00">2025-06-24</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -391,10 +889,179 @@ OpenCV</a>的操作安装MediaPipe并可视化关键点。 </p><figure class="hi
     <div class="post-body" itemprop="articleBody">
 
       
-          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>看到很多人的主页做的好看丝滑又专业，不免得想拥有一个自己的。最开始使用<a target="_blank" rel="noopener" href="https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll/about-github-pages-and-jekyll">Github
-Pages</a>的默认静态网页生成器<a target="_blank" rel="noopener" href="https://jekyllrb.com/">jekyll</a>搭建了一个，但是奈何觉得有些复杂和浮夸。搜索一番，发现<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/">Hexo</a>和<a target="_blank" rel="noopener" href="https://theme-next.js.org/">NexT
-Theme</a>使用广泛，而且找到了我想要的比较简洁的风格示例，比如<a target="_blank" rel="noopener" href="https://www.qtmuniao.com/">木鸟杂记</a>、<a target="_blank" rel="noopener" href="https://notes.iissnan.com/">IIssNan’s Notes</a>、<a target="_blank" rel="noopener" href="https://nightteam.github.io/">NightTeam</a>、<a target="_blank" rel="noopener" href="https://hmemcpy.com/">In
-Absentia</a>，在阅读官方文档和热情网友分享的文章（比如<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/20962496">如何在 GitHub
+          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>dummy</title>
+  <style>
+    html {
+      line-height: 1.5;
+      font-family: Georgia, serif;
+      font-size: 20px;
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 1em;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+      font-size: 85%;
+      margin: 0;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<p>看到很多人的主页做的好看丝滑又专业，不免得想拥有一个自己的。最开始使用<a
+target="_blank" rel="noopener" href="https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll/about-github-pages-and-jekyll">Github
+Pages</a>的默认静态网页生成器<a
+target="_blank" rel="noopener" href="https://jekyllrb.com/">jekyll</a>搭建了一个，但是奈何觉得有些复杂和浮夸。搜索一番，发现<a
+target="_blank" rel="noopener" href="https://hexo.io/zh-cn/">Hexo</a>和<a
+target="_blank" rel="noopener" href="https://theme-next.js.org/">NexT
+Theme</a>使用广泛，而且找到了我想要的比较简洁的风格示例，比如<a
+target="_blank" rel="noopener" href="https://www.qtmuniao.com/">木鸟杂记</a>、<a
+target="_blank" rel="noopener" href="https://notes.iissnan.com/">IIssNan’s Notes</a>、<a
+target="_blank" rel="noopener" href="https://nightteam.github.io/">NightTeam</a>、<a
+target="_blank" rel="noopener" href="https://hmemcpy.com/">In
+Absentia</a>，在阅读官方文档和热情网友分享的文章（比如<a
+target="_blank" rel="noopener" href="https://www.zhihu.com/question/20962496">如何在 GitHub
 上写博客？</a>）中，在不懂得各种前端知识情况下，一步步搭建了一个机遇GitHub
 Pages + Hexo +
 NexT的个人主页。刚刚开始，对于Hexo一点儿也不熟悉，还有很多需要配置的地方，但是趁着热乎劲，把搭建的历程记录下来，为后来者以参考，为自己以作备忘。</p>
@@ -404,19 +1071,85 @@ NexT的个人主页。刚刚开始，对于Hexo一点儿也不熟悉，还有很
 </blockquote>
 <ol type="1">
 <li><p>个人主页的文件是以repo的形式托管在GitHub上的，所以第一步要创建一个名为
-{username}.github.io的项目，按照<a target="_blank" rel="noopener" href="https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site">creating
+{username}.github.io的项目，按照<a
+target="_blank" rel="noopener" href="https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site">creating
 a github pages site</a>一步步操作即可。</p></li>
 <li><p>安装Nodejs和Hexo, <a target="_blank" rel="noopener" href="https://hexo.io/docs/">Hexo
 Overview</a></p></li>
 </ol>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/12/24/Hexo-Next%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+<ul>
+<li>Install Node.js from <a
+target="_blank" rel="noopener" href="https://nodejs.org/en/download/">official installer</a></li>
+<li>Install Hexo, 通过一下命令可以安装bash中<code>全局可见</code>的命令
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure></li>
+</ul>
+<ol start="3" type="1">
+<li><p>在本地初始化个人主页项目，按照<a
+target="_blank" rel="noopener" href="https://hexo.io/docs/setup">Hexo Setup</a>操作，一路无险
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo init &lt;folder&gt;</span><br><span class="line"><span class="built_in">cd</span> &lt;folder&gt;</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure></p></li>
+<li><p>Hexo的基础操作，<a target="_blank" rel="noopener" href="https://hexo.io/docs/commands">Hexo
+Command</a></p></li>
+</ol>
+<ul>
+<li>新建一个主页项目 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo init &lt;folder&gt;</span><br></pre></td></tr></table></figure></li>
+<li>生成网页，在public文件夹里 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo generate</span><br></pre></td></tr></table></figure></li>
+<li>本地运行，启动一个本地服务器，在浏览器通过http://localhost:4000/就可以查看生成的个人主页了。
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo server</span><br></pre></td></tr></table></figure></li>
+<li>clean <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br></pre></td></tr></table></figure></li>
+</ul>
+<ol start="5" type="1">
+<li>Hexo的部署，即把个人主页托管到GitHub上，<a href="">Hexo
+Deplyment</a></li>
+</ol>
+<ul>
+<li>一种方式是通过Hexo的一键部署，可以参考<a
+target="_blank" rel="noopener" href="https://hexo.io/docs/github-pages#One-command-deployment">One-comman
+deployment</a>，目的是将本地生产的个人主页文件push到步骤1中创建的远程项目的gh-pages分支上。这种方式的好处是，不需要在github上托管个人主页的源文件。</li>
+<li>由于对gitlab的CI/CD比较熟悉，我选择了第二种方式，利用Github
+Action，按照<a
+target="_blank" rel="noopener" href="https://hexo.io/docs/github-pages">Deployment/GitHub
+Pages</a>配置GitHub的CD配置文件，在检测到源文件分支的push操作时候，就能GitHub的Runner机器上自动化生产个人主页并推送到gp-pages分支，是不是很方便。
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">name:</span> <span class="string">Pages</span></span><br><span class="line"></span><br><span class="line"><span class="attr">on:</span></span><br><span class="line">  <span class="attr">push:</span></span><br><span class="line">    <span class="attr">branches:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">master</span> <span class="comment"># default branch</span></span><br><span class="line"></span><br><span class="line"><span class="attr">jobs:</span></span><br><span class="line">  <span class="attr">pages:</span></span><br><span class="line">    <span class="attr">runs-on:</span> <span class="string">ubuntu-latest</span></span><br><span class="line">    <span class="attr">steps:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">uses:</span> <span class="string">actions/checkout@v2</span></span><br><span class="line">        <span class="attr">with:</span></span><br><span class="line">          <span class="attr">submodules:</span> <span class="literal">true</span> </span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Use</span> <span class="string">Node.js</span> <span class="number">16.</span><span class="string">x</span></span><br><span class="line">        <span class="attr">uses:</span> <span class="string">actions/setup-node@v2</span></span><br><span class="line">        <span class="attr">with:</span></span><br><span class="line">          <span class="attr">node-version:</span> <span class="string">&quot;16&quot;</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Cache</span> <span class="string">NPM</span> <span class="string">dependencies</span></span><br><span class="line">        <span class="attr">uses:</span> <span class="string">actions/cache@v2</span></span><br><span class="line">        <span class="attr">with:</span></span><br><span class="line">          <span class="attr">path:</span> <span class="string">node_modules</span></span><br><span class="line">          <span class="attr">key:</span> <span class="string">$&#123;&#123;</span> <span class="string">runner.OS</span> <span class="string">&#125;&#125;-npm-cache</span></span><br><span class="line">          <span class="attr">restore-keys:</span> <span class="string">|</span></span><br><span class="line"><span class="string">            $&#123;&#123; runner.OS &#125;&#125;-npm-cache</span></span><br><span class="line"><span class="string"></span>      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Install</span> <span class="string">Dependencies</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">npm</span> <span class="string">install</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Build</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">npm</span> <span class="string">run</span> <span class="string">build</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Deploy</span></span><br><span class="line">        <span class="attr">uses:</span> <span class="string">peaceiris/actions-gh-pages@v3</span></span><br><span class="line">        <span class="attr">with:</span></span><br><span class="line">          <span class="attr">github_token:</span> <span class="string">$&#123;&#123;</span> <span class="string">secrets.GITHUB_TOKEN</span> <span class="string">&#125;&#125;</span></span><br><span class="line">          <span class="attr">publish_dir:</span> <span class="string">./public</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<ol start="6" type="1">
+<li>应用主题，<a href="">NexT</a></li>
+</ol>
+<ul>
+<li>Install NexT,
+将hexo-theme-next项目放在themes/next目录下，把next的文件作为个人主页工程源码的一部分，修改项目配置文件<code>_config.yml</code>中<code>theme</code>项为<code>theme: next</code>，继续按照以上操作即可
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/next-theme/hexo-theme-next themes/next</span><br></pre></td></tr></table></figure> 但是，我将hexo-theme-next作为submodule使用，则需要在GitHub
+Action配置文件中需要额外添加submoudle的配置，否则GitHub
+CD中不能正确下载主题，也就无法正确生成主页文件了。我在这一块花费了一些时间。
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">with:</span></span><br><span class="line">  <span class="attr">submodules:</span> <span class="literal">true</span> </span><br></pre></td></tr></table></figure></li>
+</ul>
+<ol start="7" type="1">
+<li>配置</li>
+</ol>
+<ul>
+<li><a
+target="_blank" rel="noopener" href="https://hexo.io/docs/configuration#Using-an-Alternate-Config">Using
+an Alternate Config</a></li>
+<li><a
+target="_blank" rel="noopener" href="https://www.qtmuniao.com/2019/10/16/hexo-theme-landscaping/">Hexo
+Next 主题进阶设置</a></li>
+</ul>
+<ol start="8" type="1">
+<li>其他主题</li>
+</ol>
+<ul>
+<li><a
+target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">hexo-theme-butterfly</a>,
+参考<a target="_blank" rel="noopener" href="https://diandiangu.github.io/">示例博客</a></li>
+</ul>
+<ol start="9" type="1">
+<li>结语 &gt;
+Hexo、NexT文档详尽，按照以上操作，恭喜你，你已经拥有一个属于自己的个人主页了。但是，要配置出一个更有逼格更符合个人审美要求的主页，就要多了解NexT的配置了。
+&gt; 查阅<a target="_blank" rel="noopener" href="https://hexo.io/docs/writing">Hexo
+writing</a>开启写作之旅吧～～</li>
+</ol>
+</body>
+</html>
+
       
     </div>
 
@@ -466,7 +1199,7 @@ Overview</a></p></li>
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-06-23 09:52:19" itemprop="dateModified" datetime="2025-06-23T09:52:19+00:00">2025-06-23</time>
+                <time title="修改时间：2025-06-24 01:54:20" itemprop="dateModified" datetime="2025-06-24T01:54:20+00:00">2025-06-24</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -489,21 +1222,192 @@ Overview</a></p></li>
     <div class="post-body" itemprop="articleBody">
 
       
-          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very
+          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>dummy</title>
+  <style>
+    html {
+      line-height: 1.5;
+      font-family: Georgia, serif;
+      font-size: 20px;
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 1em;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+      font-size: 85%;
+      margin: 0;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very
 first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for
 more info. If you get any problems when using Hexo, you can find the
-answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or
-you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+answer in <a
+target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or
+you can ask me on <a
+target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
 <h2 id="quick-start">Quick Start</h2>
 <h3 id="create-a-new-post">Create a new post</h3>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/12/24/hello-world/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a
+target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="run-server">Run server</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="generate-static-files">Generate static files</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>More info: <a
+target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="deploy-to-remote-sites">Deploy to remote sites</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>More info: <a
+target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+</body>
+</html>
+
       
     </div>
 
