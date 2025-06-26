@@ -22,10 +22,10 @@ the Fourier transform of a shah function with period $T$ is another shah functio
 
 - 7.1.4 Antialiasing Techniques
 
-**NonUniform Sampling**
-以前是在整数倍周期位置采样，现在在整数倍附近$\frac{1}{2}$周期的位置随机选择一个采样点。采样率不够的情况下，无论均匀采样还是非均匀采样，都会产生重建走样，但是非均匀采样倾向于把规则的走样转变为噪声，相对来说噪声对视觉的干扰更小。
+**NonUniform Sampling** 以前是在整数倍周期位置采样，现在在整数倍附近$\frac{1}{2}$周期的位置随机选择一个采样点。采样率不够的情况下，无论均匀采样还是非均匀采样，都会产生重建走样，但是非均匀采样倾向于把规则的走样转变为噪声，相对来说噪声对视觉的干扰更小。
   $$\sum_{i=-\infty}^{\infty}\delta(x-(i+\frac{1}{2}-\xi)T), \xi \in (0, 1)$$
-
+**Adaptive Sampling** adaptive supersampling，难实现
+**Prefiltering** 滤波（模糊）移除高频，模糊也没有走样使人讨厌
 - 7.1.6 Sources of Aliasing in Rendering
 1. 几何（Geometry aliasing）：模型边界（step function）、完美重建滤波器（sinc filter）应用到混叠采样（aliased samples，or 走样采样？，会产生振铃走样，ring artifacts，也叫Gibbs phenomenon）、特别小的物体（在两个采样之间，就会在动画的不同帧间出现消失的反复闪烁）
 2. 着色（Shading aliasing）：贴图、材质、锐利的阴影（step function）
