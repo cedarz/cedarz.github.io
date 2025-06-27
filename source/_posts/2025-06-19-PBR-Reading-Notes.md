@@ -20,6 +20,11 @@ Radiance在胶平面上是连续函数，但是渲染的输出是离散的像素
 
 the Fourier transform of a shah function with period $T$ is another shah function with period $1/T$. This reciprocal relationship between periods is important to keep in mind: it means that if the samples are farther apart in the spatial domain, they are closer together in the frequency domain.
 
+- 7.1.1 The Frequency Domain and the Fourier Transform
+
+[Definition of the Fourier (and Inverse) Transform (synthesis and analysis)](https://lpsa.swarthmore.edu/Fourier/Xforms/FXformIntro.html)
+{% img PBR-Reading-Notes/Fourier_Transform /images/PBR-Reading-Notes/Fourier_Transform.jpeg %}
+
 - 7.1.4 Antialiasing Techniques
 
 **NonUniform Sampling** 以前是在整数倍周期位置采样，现在在整数倍附近$\frac{1}{2}$周期的位置随机选择一个采样点。采样率不够的情况下，无论均匀采样还是非均匀采样，都会产生重建走样，但是非均匀采样倾向于把规则的走样转变为噪声，相对来说噪声对视觉的干扰更小。
