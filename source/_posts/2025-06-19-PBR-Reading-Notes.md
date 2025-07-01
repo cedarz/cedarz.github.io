@@ -24,6 +24,25 @@ the Fourier transform of a shah function with period $T$ is another shah functio
 
 [Definition of the Fourier (and Inverse) Transform (synthesis and analysis)](https://lpsa.swarthmore.edu/Fourier/Xforms/FXformIntro.html)
 {% img PBR-Reading-Notes/Fourier_Transform /images/PBR-Reading-Notes/Fourier_Transform.jpeg %}
+书里给的是第二种定义方式`Symmetric Form: Hertz Frequency`
+
+- 7.1.2 Ideal Sampling and Reconstruction
+使用shah fucntion、impulse train function也叫Dirac comb，记作$\operatorname{III}_T(x)$来乘以函数来进行采样。
+
+$$\operatorname{III}_T(x) = T\sum_{i=-\infty}^{\infty}\delta(x-iT)$$
+
+采样过程如下：
+$$\operatorname{III}_T(x) f(x)= T\sum_{i=-\infty}^{\infty}f(iT)\delta(x-iT)$$
+
+有个疑问，对于Dirac delta函数$\delta(x)$，有$\int{\delta(x - \alpha)}f(x) = f(\alpha)$，积分形式才得到$f(\alpha)$，采样过程为啥不是积分形式？
+
+{% img PBR-Reading-Notes/fall2025_triangle_slide_019 /images/PBR-Reading-Notes/fall2025_triangle_slide_019.png %}
+
+
+{% img PBR-Reading-Notes/Fourier_Transform /images/PBR-Reading-Notes/Fourier_transform.png %}
+来自[the dirac comb and its fourier transform](https://dspillustrations.com/pages/posts/misc/the-dirac-comb-and-its-fourier-transform.html)
+
+
 
 - 7.1.4 Antialiasing Techniques
 
