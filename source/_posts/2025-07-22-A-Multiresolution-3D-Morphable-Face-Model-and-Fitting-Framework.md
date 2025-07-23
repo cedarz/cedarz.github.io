@@ -31,7 +31,11 @@ PCA结果主成分中，保留了63个网格特征向量和132个颜色特征向
 # 具体实现
 
 - Pose Estimation：Gold Standard Algorithm of Hartley & Zisserman (Hartley and Zisserman, 2004)，假设放摄像机模型`affine camera`
-- Shape Fitting：Aldrian, O. and Smith, W. A. P. (2013). Inverse rendering of faces with a 3D Morphable Model.
+- Shape Fitting：shape-to-landmarks fitting, Aldrian, O. and Smith, W. A. P. (2013). Inverse rendering of faces with a 3D Morphable Model.
+
+# 解析参考
+- [[图形学]-3. 2D图像的3D重建(3DMM)](https://zhuanlan.zhihu.com/p/465224205)
+- [基于3DMM的人脸重建-传统优化方法（1）](https://zhuanlan.zhihu.com/p/445048115)
 
 # Annotations
 
