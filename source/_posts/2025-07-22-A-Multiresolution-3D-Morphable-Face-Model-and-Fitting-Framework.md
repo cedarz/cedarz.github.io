@@ -3,11 +3,37 @@ title: A Multiresolution 3D Morphable Face Model and Fitting Framework
 date: 2025-07-22 17:55:55
 categories:
 - Reading Notes
+- 3dmm
 tags: 
 - Reading Notes
+- 3dmm
 ---
 
-# Annotations (7/22/2025, 5:40:49 PM)
+# 贡献
+提供了名为SFM（Surrey Face Model）的人脸模型，包含不同的分辨率层次和标注landmarks，让人脸模型的拟合更快；同时开源了一个3DMM人脸重建的代码框架，促进社区的研究。
+- [Surrey Face Model](https://cvssp.org/faceweb/3dmm/facemodels/)，包括开源非商用版本和商用版本
+- [eos: A lightweight header-only 3D Morphable Face Model fitting library](https://github.com/patrikhuber/eos)，代码框架
+
+# 数据集
+
+使用[3dMDface](https://3dmd.com/)相机系统采集，并用Iterative Multi-resolution Dense 3D Registration (IMDR) method (Tena et al., 2006)配准及细分操作，生成不同分辨率的人脸3D模型。低分辨率网格顶点在高分辨率网格中依然存在，且序号一致。
+
+# 标注
+
+PCA结果主成分中，保留了63个网格特征向量和132个颜色特征向量，这样重建模型能保留99%的原始数据变化。特征向量和特征值都预存到数据文件中了。
+论文公布了常用的landmars标注数据，代码中使用了`[ibug](http://ibug.doc.ic.ac.uk/resources/facial-point-annotations/)`人脸点标注。
+
+# 纹理贴图
+
+- 表示方法：isomap algorithm (Tenenbaum et al., 2000): it finds a projection from the 3D vertices to a 2D plane that preserves the geodesic distance between the mesh vertices. 
+- 映射算法：Rodr ́ıguez, 2007, 3D Face Modelling for 2D+3D Face Recognition. PhD thesis
+
+# 具体实现
+
+- Pose Estimation：Gold Standard Algorithm of Hartley & Zisserman (Hartley and Zisserman, 2004)，假设放摄像机模型`affine camera`
+- Shape Fitting：Aldrian, O. and Smith, W. A. P. (2013). Inverse rendering of faces with a 3D Morphable Model.
+
+# Annotations
 
 <span class="highlight" data-annotation="%7B%22attachmentURI%22%3A%22http%3A%2F%2Fzotero.org%2Fusers%2F12198786%2Fitems%2FEIWKIWKF%22%2C%22annotationKey%22%3A%22VYC8VL4V%22%2C%22color%22%3A%22%235fb236%22%2C%22pageLabel%22%3A%221%22%2C%22position%22%3A%7B%22pageIndex%22%3A0%2C%22rects%22%3A%5B%5B501.756%2C529.165%2C521.581%2C537.181%5D%2C%5B129.175%2C518.206%2C243.775%2C526.222%5D%5D%7D%2C%22citationItem%22%3A%7B%22uris%22%3A%5B%22http%3A%2F%2Fzotero.org%2Fusers%2F12198786%2Fitems%2F4GDBRS3R%22%5D%2C%22locator%22%3A%221%22%7D%7D" ztype="zhighlight"><a href="zotero://open-pdf/library/items/EIWKIWKF?page=1&#x26;annotation=VYC8VL4V">“facial landmark detection and tracking”</a></span> <span class="citation" data-citation="%7B%22citationItems%22%3A%5B%7B%22uris%22%3A%5B%22http%3A%2F%2Fzotero.org%2Fusers%2F12198786%2Fitems%2F4GDBRS3R%22%5D%2C%22locator%22%3A%221%22%7D%5D%2C%22properties%22%3A%7B%7D%7D" ztype="zcitation">(<span class="citation-item"><a href="zotero://select/library/items/4GDBRS3R">Huber et al., 2016, p. 1</a></span>)</span> 🔤面部地标检测和跟踪🔤
 
@@ -41,9 +67,7 @@ tags:
 
 <span class="highlight" data-annotation="%7B%22attachmentURI%22%3A%22http%3A%2F%2Fzotero.org%2Fusers%2F12198786%2Fitems%2FEIWKIWKF%22%2C%22annotationKey%22%3A%22SB72J5VH%22%2C%22color%22%3A%22%232ea8e5%22%2C%22pageLabel%22%3A%224%22%2C%22position%22%3A%7B%22pageIndex%22%3A3%2C%22rects%22%3A%5B%5B308.995%2C172.536%2C521.617%2C181.443%5D%2C%5B308.995%2C161.079%2C521.617%2C169.986%5D%2C%5B308.995%2C149.622%2C358.618%2C160.389%5D%5D%7D%2C%22citationItem%22%3A%7B%22uris%22%3A%5B%22http%3A%2F%2Fzotero.org%2Fusers%2F12198786%2Fitems%2F4GDBRS3R%22%5D%2C%22locator%22%3A%224%22%7D%7D" ztype="zhighlight"><a href="zotero://open-pdf/library/items/EIWKIWKF?page=4&#x26;annotation=SB72J5VH">“manually selected landmark points on the mesh that correspond to a subset of the popular ibug facial point annotations3”</a></span> <span class="citation" data-citation="%7B%22citationItems%22%3A%5B%7B%22uris%22%3A%5B%22http%3A%2F%2Fzotero.org%2Fusers%2F12198786%2Fitems%2F4GDBRS3R%22%5D%2C%22locator%22%3A%224%22%7D%5D%2C%22properties%22%3A%7B%7D%7D" ztype="zcitation">(<span class="citation-item"><a href="zotero://select/library/items/4GDBRS3R">Huber et al., 2016, p. 4</a></span>)</span> 🔤在网格上手动选择的地标点，与流行的Ibug面部点注释相对应🔤
 
-<span class="highlight" data-annotation="%7B%22attachmentURI%22%3A%22http%3A%2F%2Fzotero.org%2Fusers%2F12198786%2Fitems%2FEIWKIWKF%22%2C%22annotationKey%22%3A%229IGHYGJ8%22%2C%22color%22%3A%22%235fb236%22%2C%22pageLabel%22%3A%225%22%2C%22position%22%3A%7B%22pageIndex%22%3A4%2C%22rects%22%3A%5B%5B166.124%2C164.444%2C286.323%2C173.351%5D%2C%5B73.701%2C152.987%2C286.323%2C161.894%5D%2C%5B73.701%2C141.53%2C286.323%2C150.437%5D%2C%5B73.701%2C130.072%2C286.323%2C138.979%5D%2C%5B73.701%2C118.615%2C286.323%2C127.522%5D%5D%7D%2C%22citationItem%22%3A%7B%22uris%22%3A%5B%22http%3A%2F%2Fzotero.org%2Fusers%2F12198786%2Fitems%2F4GDBRS3R%22%5D%2C%22locator%22%3A%225%22%7D%7D" ztype="zhighlight"><a href="zotero://open-pdf/library/items/EIWKIWKF?page=5&#x26;annotation=9IGHYGJ8">“We create such a generic representation with the isomap algorithm (Tenenbaum et al., 2000): it finds a projection from the 3D vertices to a 2D plane that preserves the geodesic distance between the mesh vertices. Our mapping is computed”</a></span> <span class="citation" data-citation="%7B%22citationItems%22%3A%5B%7B%22uris%22%3A%5B%22http%3A%2F%2Fzotero.org%2Fusers%2F12198786%2Fitems%2F4GDBRS3R%22%5D%2C%22locator%22%3A%225%22%7D%5D%2C%22properties%22%3A%7B%7D%7D" ztype="zcitation">(<span class="citation-item"><a href="zotero://select/library/items/4GDBRS3R">Huber et al., 2016, p. 5</a></span>)</span> 🔤我们使用ISOMAP算法创建了这样的通用表示（Tenenbaum等，2000）：它发现了从3D顶点到2D平面的投影，该投影可保留网格顶点之间的地理距离。我们的映射是计算的🔤
-
-<span class="highlight" data-annotation="%7B%22attachmentURI%22%3A%22http%3A%2F%2Fzotero.org%2Fusers%2F12198786%2Fitems%2FEIWKIWKF%22%2C%22annotationKey%22%3A%225NNKHRD4%22%2C%22color%22%3A%22%235fb236%22%2C%22pageLabel%22%3A%225%22%2C%22position%22%3A%7B%22pageIndex%22%3A4%2C%22rects%22%3A%5B%5B308.995%2C516.456%2C504.202%2C525.413%5D%5D%7D%2C%22citationItem%22%3A%7B%22uris%22%3A%5B%22http%3A%2F%2Fzotero.org%2Fusers%2F12198786%2Fitems%2F4GDBRS3R%22%5D%2C%22locator%22%3A%225%22%7D%7D" ztype="zhighlight"><a href="zotero://open-pdf/library/items/EIWKIWKF?page=5&#x26;annotation=5NNKHRD4">“with the algorithm from Tena (Rodr ́ıguez, 2007).”</a></span> <span class="citation" data-citation="%7B%22citationItems%22%3A%5B%7B%22uris%22%3A%5B%22http%3A%2F%2Fzotero.org%2Fusers%2F12198786%2Fitems%2F4GDBRS3R%22%5D%2C%22locator%22%3A%225%22%7D%5D%2C%22properties%22%3A%7B%7D%7D" ztype="zcitation">(<span class="citation-item"><a href="zotero://select/library/items/4GDBRS3R">Huber et al., 2016, p. 5</a></span>)</span> 🔤带有Tena的算法（Rodŕıguez，2007年）。🔤
+<span class="highlight" data-annotation="%7B%22attachmentURI%22%3A%22http%3A%2F%2Fzotero.org%2Fusers%2F12198786%2Fitems%2FEIWKIWKF%22%2C%22annotationKey%22%3A%229IGHYGJ8%22%2C%22color%22%3A%22%235fb236%22%2C%22pageLabel%22%3A%225%22%2C%22position%22%3A%7B%22pageIndex%22%3A4%2C%22rects%22%3A%5B%5B166.124%2C164.444%2C286.323%2C173.351%5D%2C%5B73.701%2C152.987%2C286.323%2C161.894%5D%2C%5B73.701%2C141.53%2C286.323%2C150.437%5D%2C%5B73.701%2C130.072%2C286.323%2C138.979%5D%2C%5B73.701%2C118.615%2C286.323%2C127.522%5D%5D%7D%2C%22citationItem%22%3A%7B%22uris%22%3A%5B%22http%3A%2F%2Fzotero.org%2Fusers%2F12198786%2Fitems%2F4GDBRS3R%22%5D%2C%22locator%22%3A%225%22%7D%7D" ztype="zhighlight"><a href="zotero://open-pdf/library/items/EIWKIWKF?page=5&#x26;annotation=9IGHYGJ8">“We create such a generic representation with the isomap algorithm (Tenenbaum et al., 2000): it finds a projection from the 3D vertices to a 2D plane that preserves the geodesic distance between the mesh vertices. Our mapping is computed with the algorithm from Tena (Rodr ́ıguez, 2007).”</a></span> <span class="citation" data-citation="%7B%22citationItems%22%3A%5B%7B%22uris%22%3A%5B%22http%3A%2F%2Fzotero.org%2Fusers%2F12198786%2Fitems%2F4GDBRS3R%22%5D%2C%22locator%22%3A%225%22%7D%5D%2C%22properties%22%3A%7B%7D%7D" ztype="zcitation">(<span class="citation-item"><a href="zotero://select/library/items/4GDBRS3R">Huber et al., 2016, p. 5</a></span>)</span> 🔤我们使用ISOMAP算法创建了这样的通用表示（Tenenbaum等，2000）：它发现了从3D顶点到2D平面的投影，该投影可保留网格顶点之间的地理距离。我们的映射使用Tena的算法（Rodŕıguez，2007年）。🔤
 
 <span class="highlight" data-annotation="%7B%22attachmentURI%22%3A%22http%3A%2F%2Fzotero.org%2Fusers%2F12198786%2Fitems%2FEIWKIWKF%22%2C%22annotationKey%22%3A%22MBPDCBJG%22%2C%22color%22%3A%22%235fb236%22%2C%22pageLabel%22%3A%226%22%2C%22position%22%3A%7B%22pageIndex%22%3A5%2C%22rects%22%3A%5B%5B355.54%2C614.546%2C521.617%2C623.453%5D%2C%5B308.995%2C603.089%2C521.615%2C611.996%5D%2C%5B308.995%2C591.632%2C490.952%2C600.539%5D%5D%7D%2C%22citationItem%22%3A%7B%22uris%22%3A%5B%22http%3A%2F%2Fzotero.org%2Fusers%2F12198786%2Fitems%2F4GDBRS3R%22%5D%2C%22locator%22%3A%226%22%7D%7D" ztype="zhighlight"><a href="zotero://open-pdf/library/items/EIWKIWKF?page=6&#x26;annotation=MBPDCBJG">“We assume an affine camera model and implement the Gold Standard Algorithm of Hartley &#x26; Zisserman (Hartley and Zisserman, 2004)”</a></span> <span class="citation" data-citation="%7B%22citationItems%22%3A%5B%7B%22uris%22%3A%5B%22http%3A%2F%2Fzotero.org%2Fusers%2F12198786%2Fitems%2F4GDBRS3R%22%5D%2C%22locator%22%3A%226%22%7D%5D%2C%22properties%22%3A%7B%7D%7D" ztype="zcitation">(<span class="citation-item"><a href="zotero://select/library/items/4GDBRS3R">Huber et al., 2016, p. 6</a></span>)</span> 🔤我们假设一个仿射摄像头模型并实施了Hartley＆Zisserman的黄金标准算法（Hartley and Zisserman，2004年）🔤
 

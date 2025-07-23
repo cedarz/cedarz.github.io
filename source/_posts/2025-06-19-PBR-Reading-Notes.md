@@ -4,8 +4,10 @@ date: 2025-06-19 10:27:45
 mathjax: true
 categories:
 - Reading Notes
+- PBR
 tags: 
 - Reading Notes
+- PBR
 ---
 
 # 7. Sampling and Reconstruction
