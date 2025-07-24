@@ -31,7 +31,7 @@
 <meta property="og:description" content="贡献 提供了名为SFM（Surrey Face Model）的人脸模型，包含不同的分辨率层次和标注landmarks，让人脸模型的拟合更快；同时开源了一个3DMM人脸重建的代码框架，促进社区的研究。 - Surrey Face Model，包括开源非商用版本和商用版本 - eos: A lightweight header-only 3D Morphable Face Model fitting">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-07-22T17:55:55.000Z">
-<meta property="article:modified_time" content="2025-07-23T03:12:26.778Z">
+<meta property="article:modified_time" content="2025-07-24T08:14:21.328Z">
 <meta property="article:author" content="黑色像素">
 <meta property="article:tag" content="Reading Notes">
 <meta property="article:tag" content="3dmm">
@@ -200,7 +200,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-07-23 03:12:26" itemprop="dateModified" datetime="2025-07-23T03:12:26+00:00">2025-07-23</time>
+                <time title="修改时间：2025-07-24 08:14:21" itemprop="dateModified" datetime="2025-07-24T08:14:21+00:00">2025-07-24</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -241,7 +241,8 @@ Multi-resolution Dense 3D Registration (IMDR) method (Tena et al.,
 2006)配准及细分操作，生成不同分辨率的人脸3D模型。低分辨率网格顶点在高分辨率网格中依然存在，且序号一致。</p>
 <h1 id="标注">标注</h1>
 <p>PCA结果主成分中，保留了63个网格特征向量和132个颜色特征向量，这样重建模型能保留99%的原始数据变化。特征向量和特征值都预存到数据文件中了。
-论文公布了常用的landmars标注数据，代码中使用了<code>[ibug](http://ibug.doc.ic.ac.uk/resources/facial-point-annotations/)</code>人脸点标注。</p>
+论文公布了常用的landmars标注数据，代码中使用了<a
+target="_blank" rel="noopener" href="http://ibug.doc.ic.ac.uk/resources/facial-point-annotations/"><code>ibug</code></a>人脸点标注。</p>
 <h1 id="纹理贴图">纹理贴图</h1>
 <ul>
 <li>表示方法：isomap algorithm (Tenenbaum et al., 2000): it finds a
