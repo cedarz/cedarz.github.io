@@ -21,7 +21,7 @@ tags:
 # 标注
 
 PCA结果主成分中，保留了63个网格特征向量和132个颜色特征向量，这样重建模型能保留99%的原始数据变化。特征向量和特征值都预存到数据文件中了。
-论文公布了常用的landmars标注数据，代码中使用了`[ibug](http://ibug.doc.ic.ac.uk/resources/facial-point-annotations/)`人脸点标注。
+论文公布了常用的landmars标注数据，代码中使用了[`ibug`](http://ibug.doc.ic.ac.uk/resources/facial-point-annotations/)人脸点标注。
 
 # 纹理贴图
 
