@@ -20,8 +20,6 @@ Radiance在胶平面上是连续函数，但是渲染的输出是离散的像素
 
 ## 7.1 Sampling Theory
 
-the Fourier transform of a shah function with period $T$ is another shah function with period $1/T$. This reciprocal relationship between periods is important to keep in mind: it means that if the samples are farther apart in the spatial domain, they are closer together in the frequency domain.
-
 - 7.1.1 The Frequency Domain and the Fourier Transform
 
 [Definition of the Fourier (and Inverse) Transform (synthesis and analysis)](https://lpsa.swarthmore.edu/Fourier/Xforms/FXformIntro.html)
@@ -42,12 +40,16 @@ $$\operatorname{III}_T(x) f(x)= T\sum_{i=-\infty}^{\infty}f(iT)\delta(x-iT)$$
 {% img PBR-Reading-Notes/fall2025_triangle_slide_019 /images/PBR-Reading-Notes/fall2025_triangle_slide_019.png %} 
 
 
-
-
 {% img PBR-Reading-Notes/Fourier_Transform /images/PBR-Reading-Notes/Fourier_transform.png %}
 来自[the dirac comb and its fourier transform](https://dspillustrations.com/pages/posts/misc/the-dirac-comb-and-its-fourier-transform.html)
 
+> An important idea used in Fourier analysis is the fact that the Fourier transform of the product of two functions $F\{f(x)g(x)\}$ can be shown to be the convolution of their individual Fourier transforms $F(\omega)$ and $G(\omega)$: $F\{f(x)g(x)\} = F(\omega) \circledast G(\omega)$.
+>
+> It is similarly the case that convolution in the spatial domain is equivalent to multiplication in the frequency domain: $F\{f(x) \circledast g(x)\} = F(\omega)G(\omega)$
 
+空域的周期和频域的周期互为相反数，这是理解混叠的关键，空域中采样间隔越大，在频域中间隔就越小，就导致频域的互相挤压，一起混叠（aliasing）。
+
+> the Fourier transform of a shah function with period $T$ is another shah function with period $1/T$. This reciprocal relationship between periods is important to keep in mind: it means that if the samples are farther apart in the spatial domain, they are closer together in the frequency domain.
 
 - 7.1.4 Antialiasing Techniques
 
