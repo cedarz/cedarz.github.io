@@ -67,3 +67,14 @@ $$\operatorname{III}_T(x) f(x)= T\sum_{i=-\infty}^{\infty}f(iT)\delta(x-iT)$$
 
 1. Pixel是图像函数上的采样点，并不关联面积的概念。
 2. 图像定义再离散坐标$(x,y)$上，采样函数定义在连续浮点型坐标$(x,y)$位置上，（这里的离散值应该是离散的序号，连续值是物理意义的位置，可以映射，但是不能等同）。可以使用不同的映射，1）取整到最近的整数，即离散点正好落在整数位置上，2）向下取整，即离散点落在整数点距离0.5的位置。
+
+## 7.1 Sampling Interface
+- Evaluating Sample Patterns: Discrepancy
+1. 使用`discrepancy `评估采样样式的质量。采样范围$\left[0, 1 \right)^n$，`discrepancy `的定义如下：
+   {% img PBR-Reading-Notes/7.2.discrepancy /images/PBR-Reading-Notes/7.2.discrepancy.png %}
+**Note** “sup”是数学中常用的符号，代表“上确界”(supremum)。它表示一个集合或函数的最小上界。
+2. 采样点的聚集性，使用点之间的最小距离来度量。`Sobol`采样器就存在采样点集中聚集的问题，太近的采样点能提供的额外信息更少。
+> Intuitively, samples that are too close together aren’t a good use of sampling resources: the closer one sample is to another, the less likely it is to give useful new information about the function being sampled. Therefore, computing the minimum distance between any two samples in a set of points has also proved to be a useful metric of sample pattern quality; the higher the minimum distance, the better.
+
+`Poisson disk sampling`采样模式在距离度量上表现优异。Studies have shown that the rods and cones in the eye are distributed in a similar way, which further validates the idea that this distribution is a good one for imaging. 实际使用中，`Poisson disk sampling`更适合2D图像的采样，在更高维采样时就没那么有效了。
+- low-discrepancy 
