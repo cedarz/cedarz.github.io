@@ -23,21 +23,22 @@
     var CONFIG = {"hostname":"darkpixel.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="I don’t know of any game engines where they attribute real-world units to lighting and material values, since those kinds of things tend to be driven more by the appearance than the physical correctn">
+  <meta name="description" content="MediaPipe人脸关键点指南 人脸关键点的数量 根据Claude-Sonnet-4的介绍，标准版本是468个，优化版本是478个，添加左右眼虹膜关键点。看下面的关键点参考图能看到，虹膜关键点的起始序号正好是468。 &gt; 478个关键点是MediaPipe Face Mesh的最新升级版本的结果（通常称为 Refined Mesh Model）。相比于标准的468个关键点版本，新增的10个">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Light Unit in Graphics">
-<meta property="og:url" content="https://darkpixel.top/2025/03/26/Light-Unit-in-Graphics/index.html">
+<meta property="og:title" content="mediapipe人脸关键点序列">
+<meta property="og:url" content="https://darkpixel.top/2025/08/13/mediapipe%E4%BA%BA%E8%84%B8%E5%85%B3%E9%94%AE%E7%82%B9%E5%BA%8F%E5%88%97/index.html">
 <meta property="og:site_name" content="Integrator">
-<meta property="og:description" content="I don’t know of any game engines where they attribute real-world units to lighting and material values, since those kinds of things tend to be driven more by the appearance than the physical correctn">
+<meta property="og:description" content="MediaPipe人脸关键点指南 人脸关键点的数量 根据Claude-Sonnet-4的介绍，标准版本是468个，优化版本是478个，添加左右眼虹膜关键点。看下面的关键点参考图能看到，虹膜关键点的起始序号正好是468。 &gt; 478个关键点是MediaPipe Face Mesh的最新升级版本的结果（通常称为 Refined Mesh Model）。相比于标准的468个关键点版本，新增的10个">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2025-03-26T14:19:27.000Z">
-<meta property="article:modified_time" content="2025-08-13T08:35:26.701Z">
+<meta property="og:image" content="https://darkpixel.top/images/mediapipe%E4%BA%BA%E8%84%B8%E5%85%B3%E9%94%AE%E7%82%B9%E5%BA%8F%E5%88%97/face_landmarker_keypoints.png">
+<meta property="article:published_time" content="2025-08-13T15:40:40.000Z">
+<meta property="article:modified_time" content="2025-08-13T08:35:26.702Z">
 <meta property="article:author" content="黑色像素">
-<meta property="article:tag" content="Computer Graphics">
-<meta property="article:tag" content="BRDF">
+<meta property="article:tag" content="python">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://darkpixel.top/images/mediapipe%E4%BA%BA%E8%84%B8%E5%85%B3%E9%94%AE%E7%82%B9%E5%BA%8F%E5%88%97/face_landmarker_keypoints.png">
 
-<link rel="canonical" href="https://darkpixel.top/2025/03/26/Light-Unit-in-Graphics/">
+<link rel="canonical" href="https://darkpixel.top/2025/08/13/mediapipe%E4%BA%BA%E8%84%B8%E5%85%B3%E9%94%AE%E7%82%B9%E5%BA%8F%E5%88%97/">
 
 
 <script id="page-configurations">
@@ -50,7 +51,7 @@
   };
 </script>
 
-  <title>Light Unit in Graphics | Integrator</title>
+  <title>mediapipe人脸关键点序列 | Integrator</title>
   
 
 
@@ -170,7 +171,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://darkpixel.top/2025/03/26/Light-Unit-in-Graphics/">
+    <link itemprop="mainEntityOfPage" href="https://darkpixel.top/2025/08/13/mediapipe%E4%BA%BA%E8%84%B8%E5%85%B3%E9%94%AE%E7%82%B9%E5%BA%8F%E5%88%97/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -183,7 +184,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Light Unit in Graphics
+          mediapipe人脸关键点序列
         </h1>
 
         <div class="post-meta">
@@ -192,27 +193,17 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2025-03-26 14:19:27" itemprop="dateCreated datePublished" datetime="2025-03-26T14:19:27+00:00">2025-03-26</time>
+              <time title="创建时间：2025-08-13 15:40:40 / 修改时间：08:35:26" itemprop="dateCreated datePublished" datetime="2025-08-13T15:40:40+00:00">2025-08-13</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-08-13 08:35:26" itemprop="dateModified" datetime="2025-08-13T08:35:26+00:00">2025-08-13</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Computer-Graphics/" itemprop="url" rel="index"><span itemprop="name">Computer Graphics</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Computer-Graphics/BRDF/" itemprop="url" rel="index"><span itemprop="name">BRDF</span></a>
+                  <a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a>
                 </span>
             </span>
 
@@ -227,40 +218,31 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><blockquote>
-<p>I don’t know of any game engines where they attribute real-world
-units to lighting and material values, since those kinds of things tend
-to be driven more by the appearance than the physical correctness. The
-relative intensities of, say, a candle and a 100W light bulb are
-probably more important than the absolute values.<a
-href=""><sup>Lighting: The Rendering Equation</sup></a></p>
-</blockquote>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="mediapipe人脸关键点指南">MediaPipe人脸关键点指南</h1>
+<p><strong>人脸关键点的数量</strong></p>
+<p>根据Claude-Sonnet-4的介绍，标准版本是468个，优化版本是478个，添加左右眼虹膜关键点。看下面的关键点参考图能看到，虹膜关键点的起始序号正好是468。
+&gt; 478个关键点是MediaPipe Face Mesh的最新升级版本的结果（通常称为
+Refined Mesh
+Model）。相比于标准的468个关键点版本，新增的10个关键点主要分布在
+虹膜（瞳孔）区域，用于更精确地描述眼睛的几何形状和运动。</p>
+<p>MediaPipe人脸关键点都在这张图里，密密麻麻，想不想街边看到的有些门店摆出来的穴位图。大图可看这里<a
+target="_blank" rel="noopener" href="https://storage.googleapis.com/mediapipe-assets/documentation/mediapipe_face_landmark_fullsize.png">传送门</a>。
+<img src="/images/mediapipe%E4%BA%BA%E8%84%B8%E5%85%B3%E9%94%AE%E7%82%B9%E5%BA%8F%E5%88%97/face_landmarker_keypoints.png" class="PBR-Reading-Notes&#x2F;7.2.discrepancy"></p>
+<p>有没有发现一个问题，大图上关键点的序号层层叠叠，无法很好分辨具体的序号。</p>
+<p><strong>关键点的序号</strong></p>
+<p>搜索了一圈，也就<a
+target="_blank" rel="noopener" href="https://github.com/tensorflow/tfjs-models/blob/838611c02f51159afdd77469ce67f0e26b7bbb23/face-landmarks-detection/src/mediapipe-facemesh/keypoints.ts">keypoints.ts</a>是记录的比较准确的，但是还不够完整，比如我想获取完整嘴唇部位的关键点序列，一共有80个4圈，但是这里只给了两圈轮廓。</p>
+<p>好在<a
+target="_blank" rel="noopener" href="https://github.com/google-ai-edge/mediapipe">google-ai-edge/mediapipe</a>给了标准人脸的网格，能够藉以确定所有关键点的序列，再也不用吭哧吭哧到处查找或者盯着关键点图片人肉识别了。</p>
+<p>贴一下嘴唇部位的所有关键点：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">LIPS_KEYPOINTS = [</span><br><span class="line">    <span class="number">61</span>, <span class="number">185</span>, <span class="number">40</span>, <span class="number">39</span>, <span class="number">37</span>, <span class="number">0</span>, <span class="number">267</span>, <span class="number">269</span>, <span class="number">270</span>, <span class="number">409</span>, <span class="number">291</span>,      <span class="comment"># lipsUpperOuter level 4</span></span><br><span class="line">    <span class="number">61</span>, <span class="number">146</span>, <span class="number">91</span>, <span class="number">181</span>, <span class="number">84</span>, <span class="number">17</span>, <span class="number">314</span>, <span class="number">405</span>, <span class="number">321</span>, <span class="number">375</span>, <span class="number">291</span>,    <span class="comment"># lipsLowerOuter level 4</span></span><br><span class="line"></span><br><span class="line">    <span class="number">76</span>, <span class="number">184</span>, <span class="number">74</span>, <span class="number">73</span>, <span class="number">72</span>, <span class="number">11</span>, <span class="number">302</span>, <span class="number">303</span>, <span class="number">304</span>, <span class="number">408</span>, <span class="number">306</span>,     <span class="comment"># lipsUpperOuter level 3</span></span><br><span class="line">    <span class="number">76</span>, <span class="number">77</span>, <span class="number">90</span>, <span class="number">180</span>, <span class="number">85</span>, <span class="number">16</span>, <span class="number">315</span>, <span class="number">404</span>, <span class="number">320</span>, <span class="number">307</span>, <span class="number">306</span>,     <span class="comment"># lipsLowerOuter level 3</span></span><br><span class="line"></span><br><span class="line">    <span class="number">62</span>, <span class="number">183</span>, <span class="number">42</span>, <span class="number">41</span>, <span class="number">38</span>, <span class="number">12</span>, <span class="number">268</span>, <span class="number">271</span>, <span class="number">272</span>, <span class="number">407</span>, <span class="number">292</span>,     <span class="comment"># lipsUpperOuter level 2</span></span><br><span class="line">    <span class="number">62</span>, <span class="number">96</span>, <span class="number">89</span>, <span class="number">179</span>, <span class="number">86</span>, <span class="number">15</span>, <span class="number">316</span>, <span class="number">403</span>, <span class="number">319</span>, <span class="number">325</span>, <span class="number">292</span>,     <span class="comment"># lipsLowerOuter level 2</span></span><br><span class="line"></span><br><span class="line">    <span class="number">78</span>, <span class="number">191</span>, <span class="number">80</span>, <span class="number">81</span>, <span class="number">82</span>, <span class="number">13</span>, <span class="number">312</span>, <span class="number">311</span>, <span class="number">310</span>, <span class="number">415</span>, <span class="number">308</span>,     <span class="comment"># lipsUpperOuter level 1</span></span><br><span class="line">    <span class="number">78</span>, <span class="number">95</span>, <span class="number">88</span>, <span class="number">178</span>, <span class="number">87</span>, <span class="number">14</span>, <span class="number">317</span>, <span class="number">402</span>, <span class="number">318</span>, <span class="number">324</span>, <span class="number">308</span>,     <span class="comment"># lipsLowerOuter level 1</span></span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<h1 id="参考">参考</h1>
 <ul>
 <li><a
-target="_blank" rel="noopener" href="https://stackoverflow.com/questions/34563197/what-units-should-i-use-for-lighting-in-a-3d-rendering-engine">What
-units should I use for lighting in a 3D rendering engine?</a></li>
+target="_blank" rel="noopener" href="https://ai.google.dev/edge/mediapipe/solutions/vision/face_landmarker?hl=zh-cn">人脸特征点检测指南</a></li>
 <li><a
-target="_blank" rel="noopener" href="https://media.contentapi.ea.com/content/dam/eacom/frostbite/files/course-notes-moving-frostbite-to-pbr-v2.pdf">Moving
-Frostbite to Physically Based Rendering 2.0</a></li>
-<li><a
-target="_blank" rel="noopener" href="https://www.realtimerendering.com/blog/physical-units-for-lights/">Physical
-Units for Lights</a></li>
-<li><a
-target="_blank" rel="noopener" href="https://dev.epicgames.com/documentation/en-us/unreal-engine/physical-lighting-units?application_version=4.27">Physical
-Lighting Units</a></li>
-<li><a
-target="_blank" rel="noopener" href="https://google.github.io/filament/Filament.md.html#lighting/units">Filament
-lighting/units</a></li>
-<li><a
-target="_blank" rel="noopener" href="https://docs.unity3d.com/Packages/com.unity.render-pipelines.high-definition@17.2/manual/Physical-Light-Units.html">Understand
-physical light units</a></li>
-<li><a
-target="_blank" rel="noopener" href="https://www.rorydriscoll.com/2008/08/24/lighting-the-rendering-equation/">Lighting:
-The Rendering Equation</a></li>
-<li><a
-target="_blank" rel="noopener" href="https://blendergrid.com/learn/articles/cycles-physically-correct-brightness">Using
-Physically Correct Brightness in Cycles</a>, <a
-target="_blank" rel="noopener" href="https://docs.blender.org/manual/en/4.5/render/shader_nodes/shader/emission.html">emission</a></li>
+target="_blank" rel="noopener" href="https://github.com/google-ai-edge/mediapipe/blob/master/mediapipe/modules/face_geometry/data/canonical_face_model.obj">mediapipe
+canonical_face_model.obj</a></li>
 </ul>
 
     </div>
@@ -271,8 +253,7 @@ target="_blank" rel="noopener" href="https://docs.blender.org/manual/en/4.5/rend
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/Computer-Graphics/" rel="tag"># Computer Graphics</a>
-              <a href="/tags/BRDF/" rel="tag"># BRDF</a>
+              <a href="/tags/python/" rel="tag"># python</a>
           </div>
 
         
@@ -281,13 +262,10 @@ target="_blank" rel="noopener" href="https://docs.blender.org/manual/en/4.5/rend
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2025/03/25/Unity%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/" rel="prev" title="Unity基础使用记录">
-      <i class="fa fa-chevron-left"></i> Unity基础使用记录
+    <a href="/2025/07/22/A-Multiresolution-3D-Morphable-Face-Model-and-Fitting-Framework/" rel="prev" title="A Multiresolution 3D Morphable Face Model and Fitting Framework">
+      <i class="fa fa-chevron-left"></i> A Multiresolution 3D Morphable Face Model and Fitting Framework
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2025/03/28/Depth-Buffer-Precision/" rel="next" title="Depth Buffer Precision">
-      Depth Buffer Precision <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -346,6 +324,7 @@ target="_blank" rel="noopener" href="https://docs.blender.org/manual/en/4.5/rend
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#mediapipe%E4%BA%BA%E8%84%B8%E5%85%B3%E9%94%AE%E7%82%B9%E6%8C%87%E5%8D%97"><span class="nav-number">1.</span> <span class="nav-text">MediaPipe人脸关键点指南</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">2.</span> <span class="nav-text">参考</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
