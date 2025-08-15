@@ -2,6 +2,8 @@
 title: PBR Reading Notes
 date: 2025-06-19 10:27:45
 mathjax: true
+toc:
+  number: false
 categories:
 - Reading Notes
 - PBR
@@ -73,12 +75,26 @@ $$\operatorname{III}_T(x) f(x)= T\sum_{i=-\infty}^{\infty}f(iT)\delta(x-iT)$$
 1. 使用`discrepancy `评估采样样式的质量。采样范围$\left[0, 1 \right)^n$，`discrepancy `的定义如下：
    {% img PBR-Reading-Notes/7.2.discrepancy /images/PBR-Reading-Notes/7.2.discrepancy.png %}
 **Note** “sup”是数学中常用的符号，代表“上确界”(supremum)。它表示一个集合或函数的最小上界。
-2. 采样点的聚集性，使用点之间的最小距离来度量。`Sobol`采样器就存在采样点集中聚集的问题，太近的采样点能提供的额外信息更少。
+2. 采样点的聚集性，使用点之间的最小距离来度量。`Sobol`采样器就存在采样点集中聚集的问题，太近的采样点能提供的额外信息更少
+
 > Intuitively, samples that are too close together aren’t a good use of sampling resources: the closer one sample is to another, the less likely it is to give useful new information about the function being sampled. Therefore, computing the minimum distance between any two samples in a set of points has also proved to be a useful metric of sample pattern quality; the higher the minimum distance, the better.
 
 `Poisson disk sampling`采样模式在距离度量上表现优异。Studies have shown that the rods and cones in the eye are distributed in a similar way, which further validates the idea that this distribution is a good one for imaging. 实际使用中，`Poisson disk sampling`更适合2D图像的采样，在更高维采样时就没那么有效了。
-- low-discrepancy 
 
-7.4 The Halton Sampler
+- 实现
+1. Pixel Sampler：一次性生成一个像素的所有采样值
+2. Global Sampler：顺序的为一张图的每个像素点生成一个采样值，每次访问不同的像素位置，比如HaltonSampler、SobelSampler
+
+## 7.3 Stratified Sampling
+
+采样的每一维作划分，然后通过`jittering`每一个`stratum`的中心放置采样点。
+> The key idea behind stratification is that by subdividing the sampling domain into nonoverlapping regions and taking a single sample from each one, we are less likely to miss important features of the image entirely, since the samples are guaranteed not to all be close together.
+直接应用分层采样于高维的采样空间，势必要采样数量几何爆炸。实际中并不需要这么费力不讨好，可以把多维采样空间划分为多个子集，在低维度应用分层采样，最后把各个子集的采样点随意组合起来，这样就可以不必要付出过量的完整采样代价，也能获得分层采样的效果。
+> We can reap most of the benefits of stratification without paying the price in excessive total sampling by computing lower dimensional stratified patterns for subsets of the domain’s dimensions and then randomly associating samples from each set of dimensions. (This process is sometimes called padding.) 这句话太长了。。。难懂~~
+![](https://pbr-book.org/3ed-2018/Sampling_and_Reconstruction/Sample%20padding.svg)
+
+
+
+## 7.4 The Halton Sampler
 
 `HaltonSampler`直接生成low-discrepancy的点集，保证点不聚集，且在每一维上都良好分布。
