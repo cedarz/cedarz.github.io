@@ -87,13 +87,15 @@ $$\operatorname{III}_T(x) f(x)= T\sum_{i=-\infty}^{\infty}f(iT)\delta(x-iT)$$
 
 ## 7.3 Stratified Sampling
 
-采样的每一维作划分，然后通过`jittering`每一个`stratum`的中心放置采样点。
+采样的每一维作划分，然后通过`jittering`每一个`stratum`的中心确定采样点。
 > The key idea behind stratification is that by subdividing the sampling domain into nonoverlapping regions and taking a single sample from each one, we are less likely to miss important features of the image entirely, since the samples are guaranteed not to all be close together.
 直接应用分层采样于高维的采样空间，势必要采样数量几何爆炸。实际中并不需要这么费力不讨好，可以把多维采样空间划分为多个子集，在低维度应用分层采样，最后把各个子集的采样点随意组合起来，这样就可以不必要付出过量的完整采样代价，也能获得分层采样的效果。
 > We can reap most of the benefits of stratification without paying the price in excessive total sampling by computing lower dimensional stratified patterns for subsets of the domain’s dimensions and then randomly associating samples from each set of dimensions. (This process is sometimes called padding.) 这句话太长了。。。难懂~~
 ![](https://pbr-book.org/3ed-2018/Sampling_and_Reconstruction/Sample%20padding.svg)
 
-
+采样数组的两个目标：良好分布到采样空间；采样之间的数值不要太相似。
+如果采样数不是平方数（影响第二个目标），stratification就不太好应用。把采样数舍入到最近的平方数或可一用，但是Latin hypercube sampling (LHS)，也叫n-rooks sampling，更适合。在每个采样维度上平均划分n各区域，沿着采样空间对角线上的n个小区域，使用jitter生成n个采样，再对采样进行`shuffle`重排。普通的重排是采样的多个维的整体重排，LHS的重排是多个维分别重排。
+{% img PBR-Reading-Notes/LHS_shuffle /images/PBR-Reading-Notes/7.3.LHS_shuffle.jpeg %}
 
 ## 7.4 The Halton Sampler
 
