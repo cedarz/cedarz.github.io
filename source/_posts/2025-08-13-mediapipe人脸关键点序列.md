@@ -2,9 +2,11 @@
 title: mediapipe人脸关键点序列
 date: 2025-08-13 15:40:40
 categories:
-- python
+- Development
+- Python
 tags: 
-- python
+- Development
+- Python
 ---
 
 # MediaPipe人脸关键点指南
