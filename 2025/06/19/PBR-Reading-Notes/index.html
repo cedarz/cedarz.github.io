@@ -36,8 +36,9 @@
 <meta property="og:image" content="https://darkpixel.top/images/PBR-Reading-Notes/gibbs-phenomenon.png">
 <meta property="og:image" content="https://darkpixel.top/images/PBR-Reading-Notes/7.2.discrepancy.png">
 <meta property="og:image" content="https://pbr-book.org/3ed-2018/Sampling_and_Reconstruction/Sample%20padding.svg">
+<meta property="og:image" content="https://darkpixel.top/images/PBR-Reading-Notes/7.3.LHS_shuffle.jpeg">
 <meta property="article:published_time" content="2025-06-19T10:27:45.000Z">
-<meta property="article:modified_time" content="2025-08-15T09:33:27.265Z">
+<meta property="article:modified_time" content="2025-08-19T09:13:44.078Z">
 <meta property="article:author" content="黑色像素">
 <meta property="article:tag" content="Reading Notes">
 <meta property="article:tag" content="PBR">
@@ -319,7 +320,7 @@ mjx-container[display="true"] + br {
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-08-15 09:33:27" itemprop="dateModified" datetime="2025-08-15T09:33:27+00:00">2025-08-15</time>
+                <time title="修改时间：2025-08-19 09:13:44" itemprop="dateModified" datetime="2025-08-19T09:13:44+00:00">2025-08-19</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -443,7 +444,7 @@ a good one for imaging.
 Sampler：顺序的为一张图的每个像素点生成一个采样值，每次访问不同的像素位置，比如HaltonSampler、SobelSampler</li>
 </ol>
 <h2 id="stratified-sampling">7.3 Stratified Sampling</h2>
-<p>采样的每一维作划分，然后通过<code>jittering</code>每一个<code>stratum</code>的中心放置采样点。
+<p>采样的每一维作划分，然后通过<code>jittering</code>每一个<code>stratum</code>的中心确定采样点。
 &gt; The key idea behind stratification is that by subdividing the
 sampling domain into nonoverlapping regions and taking a single sample
 from each one, we are less likely to miss important features of the
@@ -455,6 +456,11 @@ the price in excessive total sampling by computing lower dimensional
 stratified patterns for subsets of the domain’s dimensions and then
 randomly associating samples from each set of dimensions. (This process
 is sometimes called padding.) 这句话太长了。。。难懂~~ <img src="https://pbr-book.org/3ed-2018/Sampling_and_Reconstruction/Sample%20padding.svg"></p>
+<p>采样数组的两个目标：良好分布到采样空间；采样之间的数值不要太相似。
+如果采样数不是平方数（影响第二个目标），stratification就不太好应用。把采样数舍入到最近的平方数或可一用，但是Latin
+hypercube sampling (LHS)，也叫n-rooks
+sampling，更适合。在每个采样维度上平均划分n各区域，沿着采样空间对角线上的n个小区域，使用jitter生成n个采样，再对采样进行<code>shuffle</code>重排。普通的重排是采样的多个维的整体重排，LHS的重排是多个维分别重排。
+<img src="/images/PBR-Reading-Notes/7.3.LHS_shuffle.jpeg" class="PBR-Reading-Notes/LHS_shuffle"></p>
 <h2 id="the-halton-sampler">7.4 The Halton Sampler</h2>
 <p><code>HaltonSampler</code>直接生成low-discrepancy的点集，保证点不聚集，且在每一维上都良好分布。</p>
 
