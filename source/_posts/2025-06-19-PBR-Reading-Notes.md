@@ -38,8 +38,13 @@ $$\operatorname{III}_T(x) f(x)= T\sum_{i=-\infty}^{\infty}f(iT)\delta(x-iT)$$
 
 有个疑问，对于Dirac delta函数$\delta(x)$，有$\int{\delta(x - \alpha)}f(x) = f(\alpha)$，积分形式才得到$f(\alpha)$，采样过程为啥不是积分形式？
 
+采样：
 <!-- https://15462.courses.cs.cmu.edu/fall2015/lecture/triangle/slide_019 -->
 {% img PBR-Reading-Notes/fall2025_triangle_slide_019 /images/PBR-Reading-Notes/fall2025_triangle_slide_019.png %} 
+
+重建：
+<!-- https://15462.courses.cs.cmu.edu/fall2015/lecture/triangle/slide_020 -->
+{% img PBR-Reading-Notes/fall2025_triangle_slide_020 /images/PBR-Reading-Notes/fall2025_triangle_slide_020.png %}
 
 
 {% img PBR-Reading-Notes/Fourier_Transform /images/PBR-Reading-Notes/Fourier_transform.png %}
