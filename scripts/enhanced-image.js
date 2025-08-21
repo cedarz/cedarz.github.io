@@ -1,7 +1,7 @@
 'use strict';
 
-console.log('=== Enhanced Image Plugin Loading ===');
-console.log('Registering enhanced_img tag...');
+// console.log('=== Enhanced Image Plugin Loading ===');
+// console.log('Registering enhanced_img tag...');
 
 // 预定义的样式配置
 const imageConfig = {
@@ -34,7 +34,7 @@ const imageConfig = {
 
 // 注册支持 {% image %}...{% endimage %} 语法的标签
 hexo.extend.tag.register('image', function(args, content) {
-  console.log('Image tag called with args:', args, 'content:', content);
+  // console.log('Image tag called with args:', args, 'content:', content);
   
   const [src, size = 'medium', style = 'bordered', align = 'center', ...altParts] = args;
   
@@ -175,12 +175,12 @@ function openImageModal(img) {
 </script>
 `);
 
-console.log('=== Enhanced Image Plugin Loaded ===');
-console.log('All tags registered successfully!');
+// console.log('=== Enhanced Image Plugin Loaded ===');
+// console.log('All tags registered successfully!');
 
 // 注册 enhanced_img 标签
 hexo.extend.tag.register('enhanced_img', function(args) {
-  console.log('Enhanced_img tag called with args:', args);
+  // console.log('Enhanced_img tag called with args:', args);
   
   const src = args[0];
   const size = args[1] || 'medium';
@@ -188,7 +188,7 @@ hexo.extend.tag.register('enhanced_img', function(args) {
   const align = args[3] || 'center';
   const altParts = args.slice(4);
   
-  console.log('Parsed args:', { src, size, style, align, altParts });
+  // console.log('Parsed args:', { src, size, style, align, altParts });
   
   if (!src) {
     return '<p style="color: red;">Error: Image src is required</p>';
@@ -201,18 +201,18 @@ hexo.extend.tag.register('enhanced_img', function(args) {
   // 检查是否有标题（如果参数数量大于4，最后一个参数视为标题）
   const hasCaption = altParts.length > 0;
   
-  console.log('Caption check:', { altParts, hasCaption });
+  // console.log('Caption check:', { altParts, hasCaption });
   
   let alt, caption;
   if (hasCaption) {
     // 有标题的情况，最后一个参数是标题，其他是alt
     caption = altParts[altParts.length - 1];
     alt = altParts.slice(0, -1).join(' ') || caption;
-    console.log('Has caption:', { caption, alt });
+    // console.log('Has caption:', { caption, alt });
   } else {
     // 无标题的情况，所有参数都是alt
     alt = altParts.join(' ') || '';
-    console.log('No caption:', { alt });
+    // console.log('No caption:', { alt });
   }
   
   const baseImageStyle = `max-width: 100%; height: auto; ${imageWidth !== '100%' ? `width: ${imageWidth};` : ''} ${imageStyle}`;
@@ -229,6 +229,6 @@ hexo.extend.tag.register('enhanced_img', function(args) {
     result = '<div style="' + containerStyle + '"><img src="' + src + '" alt="' + alt + '" style="' + baseImageStyle + ' cursor: zoom-in;" loading="lazy" onclick="openImageModal(this)"></div>';
   }
   
-  console.log('Enhanced_img generated HTML:', result);
+  // console.log('Enhanced_img generated HTML:', result);
   return result;
 });

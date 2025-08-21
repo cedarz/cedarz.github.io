@@ -110,3 +110,17 @@ $$\operatorname{III}_T(x) f(x)= T\sum_{i=-\infty}^{\infty}f(iT)\delta(x-iT)$$
 **radical inverse**
 
 {% enhanced_img /images/PBR-Reading-Notes/7.4.radical_inverse.jpeg 90% card center "Radical Inverse" %}
+
+**van der Corput sequence**
+
+1D sequence given by the radical inverse function in base 2: $x_a = \Phi_2(a)$
+
+**n-dimensional Halton sequence**
+每维序列生成radical_inverse使用的base是前n个素数
+$$x_a = (\Phi_2(a), \Phi_3(a), \Phi_5(a), \dots, \Phi_{p_n}(a))$$
+
+**Hammersley**
+当N固定时，更低的discrepancy。
+   $$x_a = \left(\frac{a}{N}, \Phi_{b_1}(a), \Phi_{b_2}(a), \dots, \Phi_{b_n}(a)\right)$$
+
+参考[Sampling with Hammersley and Halton Points](https://ttwong12.github.io/papers/udpoint/udpoint.pdf)
