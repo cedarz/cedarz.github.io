@@ -38,8 +38,9 @@
 <meta property="og:image" content="https://darkpixel.top/images/PBR-Reading-Notes/7.2.discrepancy.png">
 <meta property="og:image" content="https://pbr-book.org/3ed-2018/Sampling_and_Reconstruction/Sample%20padding.svg">
 <meta property="og:image" content="https://darkpixel.top/images/PBR-Reading-Notes/7.3.LHS_shuffle.jpeg">
+<meta property="og:image" content="https://darkpixel.top/images/PBR-Reading-Notes/7.4.radical_inverse.jpeg">
 <meta property="article:published_time" content="2025-06-19T10:27:45.000Z">
-<meta property="article:modified_time" content="2025-08-20T03:26:37.200Z">
+<meta property="article:modified_time" content="2025-08-21T02:32:03.087Z">
 <meta property="article:author" content="黑色像素">
 <meta property="article:tag" content="Reading Notes">
 <meta property="article:tag" content="PBR">
@@ -90,7 +91,66 @@
   </style>
 </noscript>
 
-<style>mjx-container[jax="SVG"] {
+<!-- hexo injector head_end start -->
+<style>
+/* Enhanced Image 样式 */
+.enhanced-image:hover {
+  transform: scale(1.02);
+  transition: transform 0.3s ease;
+}
+
+/* 模态框样式 */
+.image-modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+  cursor: zoom-out;
+}
+
+.image-modal-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 90%;
+  max-height: 90%;
+  text-align: center;
+}
+
+.image-modal img {
+  max-width: 100%;
+  max-height: 80vh;
+  border-radius: 8px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+.image-modal .close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  color: #fff;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.image-modal .close:hover {
+  opacity: 0.7;
+}
+
+/* 响应式 */
+@media (max-width: 768px) {
+  img[style*="width"] {
+    width: 100% !important;
+  }
+}
+</style>
+<!-- hexo injector head_end end --><style>mjx-container[jax="SVG"] {
   direction: ltr;
 }
 
@@ -321,7 +381,7 @@ mjx-container[display="true"] + br {
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-08-20 03:26:37" itemprop="dateModified" datetime="2025-08-20T03:26:37+00:00">2025-08-20</time>
+                <time title="修改时间：2025-08-21 02:32:03" itemprop="dateModified" datetime="2025-08-21T02:32:03+00:00">2025-08-21</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -467,7 +527,12 @@ hypercube sampling (LHS)，也叫n-rooks
 sampling，更适合。在每个采样维度上平均划分n各区域，沿着采样空间对角线上的n个小区域，使用jitter生成n个采样，再对采样进行<code>shuffle</code>重排。普通的重排是采样的多个维的整体重排，LHS的重排是多个维分别重排。
 <img src="/images/PBR-Reading-Notes/7.3.LHS_shuffle.jpeg" class="PBR-Reading-Notes/LHS_shuffle"></p>
 <h2 id="the-halton-sampler">7.4 The Halton Sampler</h2>
-<p><code>HaltonSampler</code>直接生成low-discrepancy的点集，保证点不聚集，且在每一维上都良好分布。</p>
+<p><code>StratifiedSampler</code>优缺点：well-distributed but
+non-uniform,
+采样点不会太近且不会发生足够大的区域内没有采样点的情形。如果两个strata内的jitter采样点都靠近共享边，采样质量就比较糟糕。
+<code>HaltonSampler</code>直接生成low-discrepancy的点集，保证点不聚集，且在每一维上都良好分布。</p>
+<p><strong>radical inverse</strong></p>
+<figure style="text-align: center; margin: 20px 0;"><img src="/images/PBR-Reading-Notes/7.4.radical_inverse.jpeg" alt="Radical Inverse" style="max-width: 100%; height: auto; width: 700px; border: 1px solid #f0f0f0; border-radius: 12px; padding: 8px; background: #fff; box-shadow: 0 2px 16px rgba(0, 0, 0, 0.1); cursor: zoom-in;" loading="lazy" onclick="openImageModal(this)"><figcaption style="margin-top: 12px; font-size: 0.9em; color: #666; line-height: 1.6;">Radical Inverse</figcaption></figure>
 
     </div>
 
@@ -721,5 +786,40 @@ sampling，更适合。在每个采样维度上平均划分n各区域，沿着�
 
   
 
-</body>
+<!-- hexo injector body_end start -->
+<div id="imageModal" class="image-modal">
+  <span class="close">×</span>
+  <div class="image-modal-content">
+    <img id="modalImage" src="" alt="">
+  </div>
+</div>
+
+<script>
+function openImageModal(img) {
+  const modal = document.getElementById('imageModal');
+  const modalImg = document.getElementById('modalImage');
+  
+  modal.style.display = 'block';
+  modalImg.src = img.src;
+  modalImg.alt = img.alt;
+  
+  // 关闭事件
+  modal.onclick = function(e) {
+    if (e.target === modal) {
+      modal.style.display = 'none';
+    }
+  }
+  
+  document.querySelector('.image-modal .close').onclick = function() {
+    modal.style.display = 'none';
+  }
+  
+  document.onkeydown = function(event) {
+    if (event.key === 'Escape') {
+      modal.style.display = 'none';
+    }
+  }
+}
+</script>
+<!-- hexo injector body_end end --></body>
 </html>

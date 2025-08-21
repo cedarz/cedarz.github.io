@@ -31,7 +31,7 @@
 <meta property="og:description" content="书接Hexo-Next样式美化，本篇记录hexo-next组合对于公式的支持。 Latex渲染插件配置 具体的在theme-next Math docs中写的很清楚，有MathJax和Katex两种公式渲染方式。这里经过实际操作，选择MathJax。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-06-23T15:45:48.000Z">
-<meta property="article:modified_time" content="2025-08-20T03:26:37.200Z">
+<meta property="article:modified_time" content="2025-08-21T02:32:03.087Z">
 <meta property="article:author" content="黑色像素">
 <meta property="article:tag" content="Hexo-Next">
 <meta name="twitter:card" content="summary">
@@ -80,7 +80,66 @@
   </style>
 </noscript>
 
-<style>mjx-container[jax="SVG"] {
+<!-- hexo injector head_end start -->
+<style>
+/* Enhanced Image 样式 */
+.enhanced-image:hover {
+  transform: scale(1.02);
+  transition: transform 0.3s ease;
+}
+
+/* 模态框样式 */
+.image-modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+  cursor: zoom-out;
+}
+
+.image-modal-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 90%;
+  max-height: 90%;
+  text-align: center;
+}
+
+.image-modal img {
+  max-width: 100%;
+  max-height: 80vh;
+  border-radius: 8px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+.image-modal .close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  color: #fff;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.image-modal .close:hover {
+  opacity: 0.7;
+}
+
+/* 响应式 */
+@media (max-width: 768px) {
+  img[style*="width"] {
+    width: 100% !important;
+  }
+}
+</style>
+<!-- hexo injector head_end end --><style>mjx-container[jax="SVG"] {
   direction: ltr;
 }
 
@@ -311,7 +370,7 @@ mjx-container[display="true"] + br {
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-08-20 03:26:37" itemprop="dateModified" datetime="2025-08-20T03:26:37+00:00">2025-08-20</time>
+                <time title="修改时间：2025-08-21 02:32:03" itemprop="dateModified" datetime="2025-08-21T02:32:03+00:00">2025-08-21</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -626,5 +685,40 @@ Actions部署安装pandoc</a></li>
 
   
 
-</body>
+<!-- hexo injector body_end start -->
+<div id="imageModal" class="image-modal">
+  <span class="close">×</span>
+  <div class="image-modal-content">
+    <img id="modalImage" src="" alt="">
+  </div>
+</div>
+
+<script>
+function openImageModal(img) {
+  const modal = document.getElementById('imageModal');
+  const modalImg = document.getElementById('modalImage');
+  
+  modal.style.display = 'block';
+  modalImg.src = img.src;
+  modalImg.alt = img.alt;
+  
+  // 关闭事件
+  modal.onclick = function(e) {
+    if (e.target === modal) {
+      modal.style.display = 'none';
+    }
+  }
+  
+  document.querySelector('.image-modal .close').onclick = function() {
+    modal.style.display = 'none';
+  }
+  
+  document.onkeydown = function(event) {
+    if (event.key === 'Escape') {
+      modal.style.display = 'none';
+    }
+  }
+}
+</script>
+<!-- hexo injector body_end end --></body>
 </html>
