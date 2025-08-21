@@ -104,4 +104,9 @@ $$\operatorname{III}_T(x) f(x)= T\sum_{i=-\infty}^{\infty}f(iT)\delta(x-iT)$$
 
 ## 7.4 The Halton Sampler
 
+`StratifiedSampler`优缺点：well-distributed but non-uniform, 采样点不会太近且不会发生足够大的区域内没有采样点的情形。如果两个strata内的jitter采样点都靠近共享边，采样质量就比较糟糕。
 `HaltonSampler`直接生成low-discrepancy的点集，保证点不聚集，且在每一维上都良好分布。
+
+**radical inverse**
+
+{% enhanced_img /images/PBR-Reading-Notes/7.4.radical_inverse.jpeg large card center "Radical Inverse" %}
