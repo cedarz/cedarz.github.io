@@ -109,4 +109,4 @@ $$\operatorname{III}_T(x) f(x)= T\sum_{i=-\infty}^{\infty}f(iT)\delta(x-iT)$$
 
 **radical inverse**
 
-{% enhanced_img /images/PBR-Reading-Notes/7.4.radical_inverse.jpeg large card center "Radical Inverse" %}
+{% enhanced_img /images/PBR-Reading-Notes/7.4.radical_inverse.jpeg 90% card center "Radical Inverse" %}
