@@ -224,6 +224,100 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://darkpixel.top/2025/04/08/Per-Pixel-Link-List/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="黑色像素">
+      <meta itemprop="description" content="活着就要继续前进">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Integrator">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/04/08/Per-Pixel-Link-List/" class="post-title-link" itemprop="url">Per-Pixel Link List</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2025-04-08 16:21:37" itemprop="dateCreated datePublished" datetime="2025-04-08T16:21:37+00:00">2025-04-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2025-08-26 02:56:24" itemprop="dateModified" datetime="2025-08-26T02:56:24+00:00">2025-08-26</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Computer-Graphics/" itemprop="url" rel="index"><span itemprop="name">Computer Graphics</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Computer-Graphics/Rendering/" itemprop="url" rel="index"><span itemprop="name">Rendering</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>OpenGL 4.0和DirectX 11提供了原子操作(atomic
+operation），为GPU上并行创建链表数据结构提供了便利。基于此算法的<code>per-pixel link lists</code>可以应用到<code>order independent transparency</code>，实现像素的程序化混合，实现顺序无关的半透明效果，避免了程序员在api层面对于略显无力的排序的折磨。</p>
+<h1 id="per-pixel-link-list">Per-Pixel Link List</h1>
+<p>PPLL的实现需要三个数据结构：头结点指针Buffer、链表Node
+Buffer、结点计数器。 -
+头结点指针Buffer：每个像素位置又一个链表，所以叫<code>per-pixel link lists</code>,头指针Buffer的大小是framebuffer的大小，存储的是头结点在Node
+Buffer中的位置，初始化为一个空符号，比如-1； - 链表Node
+Buffer：存储所有结点数据，可以是任意数据，<code>next</code>字段是必需的，指向链表下一个结点；不需要初始化，只需要分配足够大小。
+-
+结点计数器：用于分配下一个<code>Node Buffer</code>位置来存储数据，使用原子操作累加。初始化为0。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2025/04/08/Per-Pixel-Link-List/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://darkpixel.top/2025/04/01/CMake%E4%BD%BF%E7%94%A8%E9%80%9F%E6%8A%84%E6%8C%87%E5%8C%97/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -255,7 +349,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-08-21 06:36:10" itemprop="dateModified" datetime="2025-08-21T06:36:10+00:00">2025-08-21</time>
+                <time title="修改时间：2025-08-26 02:56:24" itemprop="dateModified" datetime="2025-08-26T02:56:24+00:00">2025-08-26</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -343,7 +437,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-08-21 06:36:10" itemprop="dateModified" datetime="2025-08-21T06:36:10+00:00">2025-08-21</time>
+                <time title="修改时间：2025-08-26 02:56:24" itemprop="dateModified" datetime="2025-08-26T02:56:24+00:00">2025-08-26</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -441,7 +535,7 @@ is my depth buffer precision so poor?</a></li>
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-08-21 06:36:10" itemprop="dateModified" datetime="2025-08-21T06:36:10+00:00">2025-08-21</time>
+                <time title="修改时间：2025-08-26 02:56:24" itemprop="dateModified" datetime="2025-08-26T02:56:24+00:00">2025-08-26</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -553,7 +647,7 @@ target="_blank" rel="noopener" href="https://docs.blender.org/manual/en/4.5/rend
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-08-21 06:36:10" itemprop="dateModified" datetime="2025-08-21T06:36:10+00:00">2025-08-21</time>
+                <time title="修改时间：2025-08-26 02:56:24" itemprop="dateModified" datetime="2025-08-26T02:56:24+00:00">2025-08-26</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -644,7 +738,7 @@ to Set Unity Camera to Scene View or Field of View</sup></a></p>
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-08-21 06:36:10" itemprop="dateModified" datetime="2025-08-21T06:36:10+00:00">2025-08-21</time>
+                <time title="修改时间：2025-08-26 02:56:24" itemprop="dateModified" datetime="2025-08-26T02:56:24+00:00">2025-08-26</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -731,7 +825,7 @@ to Set Unity Camera to Scene View or Field of View</sup></a></p>
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-08-21 06:36:10" itemprop="dateModified" datetime="2025-08-21T06:36:10+00:00">2025-08-21</time>
+                <time title="修改时间：2025-08-26 02:56:24" itemprop="dateModified" datetime="2025-08-26T02:56:24+00:00">2025-08-26</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -822,7 +916,7 @@ example</a>里看到更精简的写法，当时表示惊呆了，使用<code>gl_
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-08-21 06:36:10" itemprop="dateModified" datetime="2025-08-21T06:36:10+00:00">2025-08-21</time>
+                <time title="修改时间：2025-08-26 02:56:24" itemprop="dateModified" datetime="2025-08-26T02:56:24+00:00">2025-08-26</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -909,7 +1003,7 @@ example</a>里看到更精简的写法，当时表示惊呆了，使用<code>gl_
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-08-21 06:36:10" itemprop="dateModified" datetime="2025-08-21T06:36:10+00:00">2025-08-21</time>
+                <time title="修改时间：2025-08-26 02:56:24" itemprop="dateModified" datetime="2025-08-26T02:56:24+00:00">2025-08-26</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -999,7 +1093,7 @@ example</a>里看到更精简的写法，当时表示惊呆了，使用<code>gl_
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-08-21 06:36:10" itemprop="dateModified" datetime="2025-08-21T06:36:10+00:00">2025-08-21</time>
+                <time title="修改时间：2025-08-26 02:56:24" itemprop="dateModified" datetime="2025-08-26T02:56:24+00:00">2025-08-26</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1024,96 +1118,6 @@ example</a>里看到更精简的写法，当时表示惊呆了，使用<code>gl_
       
           <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css">
 
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://darkpixel.top/2025/02/19/OpenGL%20Context%E5%88%9B%E5%BB%BA%E6%97%B6%E9%9C%80%E8%A6%81%E8%AE%BE%E7%BD%AE%E7%9A%84%E4%B8%80%E4%BA%9B%E5%AD%97%E6%AE%B5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="黑色像素">
-      <meta itemprop="description" content="活着就要继续前进">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Integrator">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/02/19/OpenGL%20Context%E5%88%9B%E5%BB%BA%E6%97%B6%E9%9C%80%E8%A6%81%E8%AE%BE%E7%BD%AE%E7%9A%84%E4%B8%80%E4%BA%9B%E5%AD%97%E6%AE%B5/" class="post-title-link" itemprop="url">OpenGL Context创建时需要设置的一些字段</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2025-02-19 09:52:31" itemprop="dateCreated datePublished" datetime="2025-02-19T09:52:31+00:00">2025-02-19</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-08-21 06:36:10" itemprop="dateModified" datetime="2025-08-21T06:36:10+00:00">2025-08-21</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Computer-Graphics/" itemprop="url" rel="index"><span itemprop="name">Computer Graphics</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Computer-Graphics/OpenGL/" itemprop="url" rel="index"><span itemprop="name">OpenGL</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>OpenGL目前的最新版本是2017年发布的4.6版本，OpenGL老矣也不会再有更新了。尽管OpenGL是一套简单易用的图形API，但是很明显它并没有紧跟图形技术发展的脉搏，不仅仅落后于同时代的DirectX，其自身标准的取舍也使其变的碎片化。模式和兼容性就是其中恶心的一点，本文便是记录GLFW3在创建OpenGL上下文时设置模式和兼容性所设置的一些字段。</p>
-<p>以前用GLFW3和OpenGL做一些demo时候，<code>glfwWindowHint</code>随意复制粘贴一下然后设置一下OpenGL
-Context的版本和Profile即可，并没有过多理会其他的字段的含义和差别。毕竟使用<code>Modern OpenGL</code>或者<code>Core Profile</code>的OpenGL，并不需要在意兼容模式下大量的固定管线API的功能。但是，当实际使用中涉及到了<code>glLineWidth</code>这种从上古时代OpenGL
-2.0时期延续至今并在OpenGL
-4.6中Deprecated的API，更骚气的是其能不能work还要取决于硬件能力和驱动实现，多重buff于一身，某些字段的设置开始变的微妙起来了。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">glfwWindowHint</span>(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);</span><br><span class="line"><span class="comment">// glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GLFW_TRUE);</span></span><br><span class="line"><span class="built_in">glfwWindowHint</span>(GLFW_CONTEXT_VERSION_MAJOR, <span class="number">4</span>);</span><br><span class="line"><span class="built_in">glfwWindowHint</span>(GLFW_CONTEXT_VERSION_MINOR, <span class="number">6</span>);</span><br><span class="line"><span class="built_in">glfwWindowHint</span>(GLFW_SAMPLES, <span class="number">4</span>);</span><br><span class="line"><span class="built_in">glfwWindowHint</span>(GLFW_SCALE_TO_MONITOR, GLFW_TRUE);</span><br><span class="line"></span><br><span class="line">std::cout &lt;&lt; <span class="string">&quot;Vendor  &quot;</span> &lt;&lt; <span class="built_in">glGetString</span>(GL_VENDOR) &lt;&lt; std::endl;</span><br><span class="line">std::cout &lt;&lt; <span class="string">&quot;Render  &quot;</span> &lt;&lt; <span class="built_in">glGetString</span>(GL_RENDERER) &lt;&lt; std::endl;</span><br><span class="line">std::cout &lt;&lt; <span class="string">&quot;GL      &quot;</span> &lt;&lt; <span class="built_in">glGetString</span>(GL_VERSION) &lt;&lt; std::endl;</span><br><span class="line">std::cout &lt;&lt; <span class="string">&quot;GLSL    &quot;</span> &lt;&lt; <span class="built_in">glGetString</span>(GL_SHADING_LANGUAGE_VERSION) &lt;&lt; std::endl;</span><br><span class="line">GLint profile;</span><br><span class="line"><span class="built_in">glGetIntegerv</span>(GL_CONTEXT_PROFILE_MASK, &amp;profile);</span><br><span class="line">std::cout &lt;&lt; <span class="string">&quot;Profile &quot;</span> &lt;&lt; (profile &amp; GL_CONTEXT_CORE_PROFILE_BIT ? <span class="string">&quot;Core&quot;</span> : <span class="string">&quot;Compatibility&quot;</span>) &lt;&lt; std::endl;</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2025/02/19/OpenGL%20Context%E5%88%9B%E5%BB%BA%E6%97%B6%E9%9C%80%E8%A6%81%E8%AE%BE%E7%BD%AE%E7%9A%84%E4%B8%80%E4%BA%9B%E5%AD%97%E6%AE%B5/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
       
     </div>
 
@@ -1197,20 +1201,20 @@ Context的版本和Profile即可，并没有过多理会其他的字段的含义
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-count">27</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-count">18</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-count">18</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

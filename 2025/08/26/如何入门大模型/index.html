@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="/js/image-compare-viewer.min.css">
+<script src="/js/image-compare-viewer.min.js"></script>
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"darkpixel.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="本文内容来自大模型生成和知乎回答  Claude-Sonnet-4 我为你规划一个系统的学习路径：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何入门大模型">
+<meta property="og:url" content="https://darkpixel.top/2025/08/26/%E5%A6%82%E4%BD%95%E5%85%A5%E9%97%A8%E5%A4%A7%E6%A8%A1%E5%9E%8B/index.html">
+<meta property="og:site_name" content="Integrator">
+<meta property="og:description" content="本文内容来自大模型生成和知乎回答  Claude-Sonnet-4 我为你规划一个系统的学习路径：">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-08-26T10:26:21.000Z">
+<meta property="article:modified_time" content="2025-08-26T02:56:24.769Z">
+<meta property="article:author" content="黑色像素">
+<meta property="article:tag" content="LLM">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://darkpixel.top/2025/08/26/%E5%A6%82%E4%BD%95%E5%85%A5%E9%97%A8%E5%A4%A7%E6%A8%A1%E5%9E%8B/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>如何入门大模型 | Integrator</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<style>
+/* Enhanced Image 样式 */
+.enhanced-image:hover {
+  transform: scale(1.02);
+  transition: transform 0.3s ease;
+}
+
+/* 模态框样式 */
+.image-modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+  cursor: zoom-out;
+}
+
+.image-modal-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 90%;
+  max-height: 90%;
+  text-align: center;
+}
+
+.image-modal img {
+  max-width: 100%;
+  max-height: 80vh;
+  border-radius: 8px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+.image-modal .close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  color: #fff;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.image-modal .close:hover {
+  opacity: 0.7;
+}
+
+/* 响应式 */
+@media (max-width: 768px) {
+  img[style*="width"] {
+    width: 100% !important;
+  }
+}
+</style>
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Integrator</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://darkpixel.top/2025/08/26/%E5%A6%82%E4%BD%95%E5%85%A5%E9%97%A8%E5%A4%A7%E6%A8%A1%E5%9E%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="黑色像素">
+      <meta itemprop="description" content="活着就要继续前进">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Integrator">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          如何入门大模型
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2025-08-26 10:26:21 / 修改时间：02:56:24" itemprop="dateCreated datePublished" datetime="2025-08-26T10:26:21+00:00">2025-08-26</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LLM/" itemprop="url" rel="index"><span itemprop="name">LLM</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><blockquote>
+<p>本文内容来自大模型生成和知乎回答</p>
+</blockquote>
+<h1 id="claude-sonnet-4">Claude-Sonnet-4</h1>
+<p>我为你规划一个系统的学习路径：</p>
+<p>第一阶段：基础准备（1-2个月）
+如果编程基础薄弱，先熟练掌握Python，重点学习NumPy、Pandas数据处理库。数学方面补习线性代数（矩阵运算、特征值分解）、概率论（贝叶斯定理、概率分布）和微积分基础。同时了解机器学习基本概念，推荐吴恩达的机器学习课程作为入门。</p>
+<p>第二阶段：深度学习基础（2-3个月）
+学习神经网络原理，从最简单的感知机开始，理解前向传播和反向传播算法。掌握PyTorch或TensorFlow框架，能够搭建和训练基本的神经网络。学习CNN处理图像、RNN处理序列数据的原理和实现。这个阶段要多做动手练习，比如手写数字识别、文本分类等经典任务。</p>
+<p>第三阶段：NLP基础和Transformer（2-3个月）
+学习传统NLP方法，包括词袋模型、TF-IDF、Word2Vec等词向量技术。然后重点学习Transformer架构，这是理解现代大模型的关键。仔细研读”Attention
+Is All You
+Need”论文，理解自注意力机制、位置编码、多头注意力等核心概念。可以尝试从零实现一个小规模的Transformer模型。</p>
+<p>第四阶段：预训练模型理解（2个月）
+学习BERT的双向编码器架构和预训练任务设计，理解掩码语言模型的训练方式。然后学习GPT系列的自回归生成模型，了解从GPT-1到GPT-4的技术演进。重点理解预训练和微调的两阶段训练范式，以及不同模型架构的优缺点和适用场景。</p>
+<p>第五阶段：实践应用（持续进行） 使用Hugging
+Face等平台的预训练模型进行各种下游任务的微调，比如文本分类、问答系统、文本生成等。学习prompt
+engineering技巧，掌握如何设计有效的提示词。尝试构建完整的应用项目，从数据处理到模型部署的全流程。</p>
+<p>第六阶段：前沿技术（3-4个月）
+学习强化学习基础，然后深入RLHF技术，理解如何用人类反馈优化模型输出。了解模型扩展相关技术，包括分布式训练、梯度累积、混合精度训练等。学习模型压缩和优化技术，比如量化、剪枝、知识蒸馏等。</p>
+<p>持续学习
+关注顶级会议论文（NeurIPS、ICML、ACL等），跟踪最新研究进展。参与开源项目，与社区交流学习经验。选择一个垂直应用领域深耕，比如多模态、代码生成、科学计算等。</p>
+<p>整个学习过程大约需要10-12个月的时间，关键是要理论与实践并重，每个阶段都要有具体的项目产出来验证学习效果。</p>
+<h1 id="deepseek">DeepSeek</h1>
+<p>太好了！想要入门大模型领域，这是一个非常棒且充满前景的选择。这是一个系统性的工程，我将为你规划一个从浅入深、循序渐进的入门路径，涵盖了从基础知识到实践的各个方面。</p>
+<p>你可以遵循以下 <strong>“四阶段”学习路线</strong>：</p>
+<hr />
+<h3
+id="阶段一打下坚实的基础重中之重"><strong>阶段一：打下坚实的基础（重中之重）</strong></h3>
+<p>万丈高楼平地起，下面的基础不打好，后面的理解会非常困难。</p>
+<ol type="1">
+<li><strong>数学基础（不必精通，但需理解概念）</strong>：
+<ul>
+<li><strong>线性代数</strong>：核心中的核心。理解<strong>向量、矩阵、张量</strong>的概念及其运算（如点积、矩阵乘法）。因为神经网络里的所有数据都是以张量形式流动的。</li>
+<li><strong>微积分</strong>：理解<strong>导数、梯度</strong>的概念。这是模型如何通过<strong>梯度下降</strong>算法进行学习的关键。</li>
+<li><strong>概率论与统计学</strong>：理解<strong>概率分布、条件概率、贝叶斯定理、熵</strong>等。语言本质上就是概率性的。</li>
+</ul></li>
+<li><strong>编程与工具</strong>：
+<ul>
+<li><strong>Python</strong>：绝对是AI领域的首选语言。必须熟练掌握，特别是<strong>NumPy</strong>（用于科学计算）和<strong>Pandas</strong>（用于数据处理）这两个库。</li>
+<li><strong>深度学习框架</strong>：
+<ul>
+<li><strong>PyTorch</strong>：<strong>当前大模型研究和开发的首选</strong>，非常灵活、动态，深受学术界和工业界青睐。<strong>建议作为主力学习</strong>。</li>
+<li><strong>TensorFlow</strong>：也很强大，但在大模型领域的影响力已不如PyTorch。了解即可。</li>
+</ul></li>
+<li><strong>开发环境</strong>：学会使用 <strong>Jupyter
+Notebook</strong> 做实验，以及 <strong>Git</strong> 进行版本控制。</li>
+</ul></li>
+</ol>
+<hr />
+<h3
+id="阶段二深入机器学习与深度学习"><strong>阶段二：深入机器学习与深度学习</strong></h3>
+<p>在夯实基础后，需要学习更具体的算法和模型。</p>
+<ol type="1">
+<li><strong>机器学习基础</strong>：理解机器学习的基本范式（监督/无监督学习）、<strong>过拟合/欠拟合</strong>、损失函数、优化算法等。推荐吴恩达的《机器学习》课程。</li>
+<li><strong>深度学习核心</strong>：
+<ul>
+<li>从最基础的<strong>多层感知机（MLP）</strong> 开始。</li>
+<li>学习<strong>卷积神经网络（CNN）</strong>：用于理解图像处理，有助于理解模型如何提取特征。</li>
+<li>学习<strong>循环神经网络（RNN）</strong>
+及其变体<strong>LSTM、GRU</strong>：这是处理序列数据（如文本）的经典方法，是理解Transformer的铺垫。</li>
+<li><strong>核心概念</strong>：激活函数、反向传播、嵌入层（Embedding）、注意力机制（<strong>Attention
+Mechanism</strong>，这是Transformer的核心前身）。</li>
+</ul></li>
+</ol>
+<hr />
+<h3
+id="阶段三攻克transformer与大模型核心技术"><strong>阶段三：攻克Transformer与大模型核心技术</strong></h3>
+<p>这是直接通往大模型的关键阶段。</p>
+<ol type="1">
+<li><strong>Transformer架构</strong>：<strong>这是所有现代大模型的基石</strong>。你必须彻底搞懂它。
+<ul>
+<li><strong>学习资源</strong>：必读论文 <strong><a
+target="_blank" rel="noopener" href="https://arxiv.org/abs/1706.03762">《Attention Is All You
+Need》</a></strong>。即使看不懂所有数学细节，也要把架构图看明白。</li>
+<li><strong>关键组件</strong>：弄懂<strong>自注意力机制（Self-Attention）、编码器（Encoder）、解码器（Decoder）、位置编码（Positional
+Encoding）</strong> 的工作原理。</li>
+</ul></li>
+<li><strong>知名大模型家族</strong>：
+<ul>
+<li><strong>GPT
+家族</strong>（OpenAI）：基于Transformer的<strong>解码器</strong>（Decoder-only），通过自回归方式生成文本。理解其“预训练
++ 微调”以及后来的“提示（Prompt）”模式。</li>
+<li><strong>BERT
+家族</strong>（Google）：基于Transformer的<strong>编码器</strong>（Encoder-only），擅长理解语言，用于完形填空、分类等任务。</li>
+<li><strong>T5
+家族</strong>（Google）：基于<strong>编码器-解码器</strong>（Encoder-Decoder），将所有任务都视为“文本到文本”的生成任务。</li>
+</ul></li>
+<li><strong>关键技术</strong>：
+<ul>
+<li><strong>预训练与微调 （Pre-training &amp;
+Fine-tuning）</strong>：理解大模型如何先在海量数据上学习通用知识，再针对特定任务进行微调。</li>
+<li><strong>提示工程 （Prompt
+Engineering）</strong>：如何设计输入（提示）来引导模型产生期望的输出。</li>
+<li><strong>思维链
+（Chain-of-Thought）</strong>：一种先进的提示技巧，让模型一步步推理。</li>
+</ul></li>
+</ol>
+<hr />
+<h3
+id="阶段四动手实践与持续学习"><strong>阶段四：动手实践与持续学习</strong></h3>
+<p>“纸上得来终觉浅，绝知此事要躬行。”</p>
+<ol type="1">
+<li><strong>使用API</strong>：最开始不需要自己训练模型（成本极高）。直接使用各大公司的API来体验和创造。
+<ul>
+<li><strong>OpenAI API</strong>（GPT-4o）、<strong>Anthropic
+API</strong>（Claude）、<strong>DeepSeek API</strong>等。</li>
+<li>尝试用它们写一个聊天机器人、一个翻译器、一个文本总结工具等。</li>
+</ul></li>
+<li><strong>本地运行开源模型</strong>：
+<ul>
+<li>在个人电脑（或云端GPU）上运行<strong>较小的开源模型</strong>（如
+<strong>Llama 3</strong>、<strong>Gemma</strong>、<strong>Qwen</strong>
+的较小参数版本）。</li>
+<li>使用 <strong>Ollama</strong> 或 <strong>Text Generation
+WebUI</strong> 等工具，可以非常方便地下载和运行模型。</li>
+</ul></li>
+<li><strong>微调模型</strong>（进阶）：
+<ul>
+<li>使用 <strong>Hugging Face</strong> 的 <code>transformers</code> 库和
+<code>datasets</code> 库。</li>
+<li>尝试在一个特定数据集（如电影评论情感分析）上对一个预训练好的小模型（如
+<code>DistilBERT</code>）进行<strong>微调（Fine-tuning）</strong>。这是最有价值的学习经历。</li>
+</ul></li>
+<li><strong>保持学习</strong>：
+<ul>
+<li><strong>阅读论文</strong>：关注 <strong>arXiv.org</strong>，尤其是
+<code>cs.CL</code>（计算与语言）和
+<code>cs.LG</code>（机器学习）板块。</li>
+<li><strong>关注社区</strong>：<strong>Hugging
+Face</strong>、<strong>GitHub</strong>、<strong>知乎</strong>、<strong>Reddit
+(r/MachineLearning)</strong> 是获取最新信息和开源项目的好地方。</li>
+<li><strong>关注顶级会议</strong>：<strong>NeurIPS, ICML, ICLR,
+ACL</strong> 等，了解最前沿的研究。</li>
+</ul></li>
+</ol>
+<h3
+id="总结一下你的入门行动清单"><strong>总结一下你的入门行动清单：</strong></h3>
+<ol type="1">
+<li><strong>立即开始</strong>：复习Python和数学基础。</li>
+<li><strong>选择一门课</strong>：系统学习深度学习（推荐吴恩达《深度学习专项课程》或李沐的《动手学深度学习》）。</li>
+<li><strong>精读一篇论文</strong>：《Attention Is All You
+Need》，反复看，结合代码理解。</li>
+<li><strong>玩转一个框架</strong>：安装PyTorch，跟着官方教程把60分钟入门Blitz跑一遍。</li>
+<li><strong>完成一个项目</strong>：用Hugging
+Face的<code>transformers</code>库，尝试一个文本分类或生成任务。</li>
+<li><strong>加入一个社区</strong>：每天花点时间逛逛Hugging Face和相关的
+subreddit，保持信息更新。</li>
+</ol>
+<p>入门的过程可能会遇到很多困难，但请坚持下来。每当你理解一个新的概念，或者代码成功跑通的那一刻，巨大的成就感就是最好的回报。祝你学习愉快！</p>
+<h1 id="知乎">知乎</h1>
+<ul>
+<li><a
+target="_blank" rel="noopener" href="https://www.zhihu.com/question/644285055">初学者怎么入门大语言模型（LLM）？</a></li>
+<li><a
+target="_blank" rel="noopener" href="https://github.com/ZJU-LLMs/Foundations-of-LLMs">大模型基础</a></li>
+<li><a
+target="_blank" rel="noopener" href="https://github.com/datawhalechina/happy-llm">Happy-LLM</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/LLM/" rel="tag"># LLM</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2025/08/13/mediapipe%E4%BA%BA%E8%84%B8%E5%85%B3%E9%94%AE%E7%82%B9%E5%BA%8F%E5%88%97/" rel="prev" title="mediapipe人脸关键点序列">
+      <i class="fa fa-chevron-left"></i> mediapipe人脸关键点序列
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#claude-sonnet-4"><span class="nav-number">1.</span> <span class="nav-text">Claude-Sonnet-4</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#deepseek"><span class="nav-number">2.</span> <span class="nav-text">DeepSeek</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%98%B6%E6%AE%B5%E4%B8%80%E6%89%93%E4%B8%8B%E5%9D%9A%E5%AE%9E%E7%9A%84%E5%9F%BA%E7%A1%80%E9%87%8D%E4%B8%AD%E4%B9%8B%E9%87%8D"><span class="nav-number">2.0.1.</span> <span class="nav-text">阶段一：打下坚实的基础（重中之重）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%98%B6%E6%AE%B5%E4%BA%8C%E6%B7%B1%E5%85%A5%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0"><span class="nav-number">2.0.2.</span> <span class="nav-text">阶段二：深入机器学习与深度学习</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%98%B6%E6%AE%B5%E4%B8%89%E6%94%BB%E5%85%8Btransformer%E4%B8%8E%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF"><span class="nav-number">2.0.3.</span> <span class="nav-text">阶段三：攻克Transformer与大模型核心技术</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%98%B6%E6%AE%B5%E5%9B%9B%E5%8A%A8%E6%89%8B%E5%AE%9E%E8%B7%B5%E4%B8%8E%E6%8C%81%E7%BB%AD%E5%AD%A6%E4%B9%A0"><span class="nav-number">2.0.4.</span> <span class="nav-text">阶段四：动手实践与持续学习</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93%E4%B8%80%E4%B8%8B%E4%BD%A0%E7%9A%84%E5%85%A5%E9%97%A8%E8%A1%8C%E5%8A%A8%E6%B8%85%E5%8D%95"><span class="nav-number">2.0.5.</span> <span class="nav-text">总结一下你的入门行动清单：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%9F%A5%E4%B9%8E"><span class="nav-number">3.</span> <span class="nav-text">知乎</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">黑色像素</p>
+  <div class="site-description" itemprop="description">活着就要继续前进</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">黑色像素</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+<!-- hexo injector body_end start -->
+<div id="imageModal" class="image-modal">
+  <span class="close">×</span>
+  <div class="image-modal-content">
+    <img id="modalImage" src="" alt="">
+  </div>
+</div>
+
+<script>
+function openImageModal(img) {
+  const modal = document.getElementById('imageModal');
+  const modalImg = document.getElementById('modalImage');
+  
+  modal.style.display = 'block';
+  modalImg.src = img.src;
+  modalImg.alt = img.alt;
+  
+  // 关闭事件
+  modal.onclick = function(e) {
+    if (e.target === modal) {
+      modal.style.display = 'none';
+    }
+  }
+  
+  document.querySelector('.image-modal .close').onclick = function() {
+    modal.style.display = 'none';
+  }
+  
+  document.onkeydown = function(event) {
+    if (event.key === 'Escape') {
+      modal.style.display = 'none';
+    }
+  }
+}
+</script>
+<!-- hexo injector body_end end --></body>
+</html>
