@@ -124,3 +124,7 @@ $$x_a = (\Phi_2(a), \Phi_3(a), \Phi_5(a), \dots, \Phi_{p_n}(a))$$
    $$x_a = \left(\frac{a}{N}, \Phi_{b_1}(a), \Phi_{b_2}(a), \dots, \Phi_{b_n}(a)\right)$$
 
 参考[Sampling with Hammersley and Halton Points](https://ttwong12.github.io/papers/udpoint/udpoint.pdf)
+
+**scrambled Halton and Hammersley**
+随着base底的增加，Halton and Hammersley采样序列会呈现严重的规则样式，解决方法对radical inverse的数字进行重排
+   $$\Psi_b(a) = 0.p(d_1(a))p(d_2(a))\dots p(d_m(a))$$
