@@ -128,3 +128,4 @@ $$x_a = (\Phi_2(a), \Phi_3(a), \Phi_5(a), \dots, \Phi_{p_n}(a))$$
 **scrambled Halton and Hammersley**
 随着base底的增加，Halton and Hammersley采样序列会呈现严重的规则样式，解决方法对radical inverse的数字进行重排
    $$\Psi_b(a) = 0.p(d_1(a))p(d_2(a))\dots p(d_m(a))$$
+这个重排要应用采样点的每个数字，且应用到所有的采样点的生成。$p$是对一个base的$(0 \dots b-1)$做重排，生成采样点的时候直接打表替换。
