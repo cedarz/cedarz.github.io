@@ -255,7 +255,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-10-16 08:31:18" itemprop="dateModified" datetime="2025-10-16T08:31:18+00:00">2025-10-16</time>
+                <time title="修改时间：2025-10-17 09:54:23" itemprop="dateModified" datetime="2025-10-17T09:54:23+00:00">2025-10-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -352,7 +352,7 @@ Vulkan 3D API. <a target="_blank" rel="noopener" href="https://ahcox.github.io/N
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-10-16 08:31:18" itemprop="dateModified" datetime="2025-10-16T08:31:18+00:00">2025-10-16</time>
+                <time title="修改时间：2025-10-17 09:54:23" itemprop="dateModified" datetime="2025-10-17T09:54:23+00:00">2025-10-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -443,7 +443,7 @@ M1000M）上结果全白色（1.0），当然P50确实太老了，10年老机了
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-10-16 08:31:18" itemprop="dateModified" datetime="2025-10-16T08:31:18+00:00">2025-10-16</time>
+                <time title="修改时间：2025-10-17 09:54:23" itemprop="dateModified" datetime="2025-10-17T09:54:23+00:00">2025-10-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -506,6 +506,102 @@ Buffer：存储所有结点数据，可以是任意数据，<code>next</code>字
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://darkpixel.top/2025/04/02/Rasterization-Rules/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="黑色像素">
+      <meta itemprop="description" content="活着就要继续前进">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Integrator">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/04/02/Rasterization-Rules/" class="post-title-link" itemprop="url">Rasterization Rules</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2025-04-02 15:38:00" itemprop="dateCreated datePublished" datetime="2025-04-02T15:38:00+00:00">2025-04-02</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2025-10-17 09:54:23" itemprop="dateModified" datetime="2025-10-17T09:54:23+00:00">2025-10-17</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Computer-Graphics/" itemprop="url" rel="index"><span itemprop="name">Computer Graphics</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Computer-Graphics/OpenGL/" itemprop="url" rel="index"><span itemprop="name">OpenGL</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><ul>
+<li><a
+target="_blank" rel="noopener" href="https://microsoft.github.io/DirectX-Specs/d3d/archive/D3D11_3_FunctionalSpec.htm#3.4.2.1%20Top-Left%20Rule">D3D11
+Rasterization Rules</a></li>
+<li><a
+target="_blank" rel="noopener" href="https://stackoverflow.com/questions/78684610/need-help-understanding-top-left-rasterization-rule">Need
+help understanding top-left rasterization rule</a></li>
+<li><a
+target="_blank" rel="noopener" href="https://learn.microsoft.com/en-us/windows/win32/direct3d11/d3d10-graphics-programming-guide-rasterizer-stage-rules">D3D10
+Rasterization Rules</a></li>
+<li><a
+target="_blank" rel="noopener" href="https://fgiesen.wordpress.com/2013/02/08/triangle-rasterization-in-practice/">Triangle
+rasterization in practice</a></li>
+<li><a
+target="_blank" rel="noopener" href="https://graphics-software-engineer.blogspot.com/2012/04/rasterization-rules.html">rasterization-rules</a></li>
+<li><a
+target="_blank" rel="noopener" href="https://nlguillemot.wordpress.com/2016/07/10/rasterizer-notes/">rasterizer
+notes</a></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://darkpixel.top/2025/04/01/CMake%E4%BD%BF%E7%94%A8%E9%80%9F%E6%8A%84%E6%8C%87%E5%8C%97/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -537,7 +633,7 @@ Buffer：存储所有结点数据，可以是任意数据，<code>next</code>字
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-10-16 08:31:18" itemprop="dateModified" datetime="2025-10-16T08:31:18+00:00">2025-10-16</time>
+                <time title="修改时间：2025-10-17 09:54:23" itemprop="dateModified" datetime="2025-10-17T09:54:23+00:00">2025-10-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -625,7 +721,7 @@ Buffer：存储所有结点数据，可以是任意数据，<code>next</code>字
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-10-16 08:31:18" itemprop="dateModified" datetime="2025-10-16T08:31:18+00:00">2025-10-16</time>
+                <time title="修改时间：2025-10-17 09:54:23" itemprop="dateModified" datetime="2025-10-17T09:54:23+00:00">2025-10-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -723,7 +819,7 @@ is my depth buffer precision so poor?</a></li>
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-10-16 08:31:18" itemprop="dateModified" datetime="2025-10-16T08:31:18+00:00">2025-10-16</time>
+                <time title="修改时间：2025-10-17 09:54:23" itemprop="dateModified" datetime="2025-10-17T09:54:23+00:00">2025-10-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -835,7 +931,7 @@ target="_blank" rel="noopener" href="https://docs.blender.org/manual/en/4.5/rend
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-10-16 08:31:18" itemprop="dateModified" datetime="2025-10-16T08:31:18+00:00">2025-10-16</time>
+                <time title="修改时间：2025-10-17 09:54:23" itemprop="dateModified" datetime="2025-10-17T09:54:23+00:00">2025-10-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -926,7 +1022,7 @@ to Set Unity Camera to Scene View or Field of View</sup></a></p>
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-10-16 08:31:18" itemprop="dateModified" datetime="2025-10-16T08:31:18+00:00">2025-10-16</time>
+                <time title="修改时间：2025-10-17 09:54:23" itemprop="dateModified" datetime="2025-10-17T09:54:23+00:00">2025-10-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1013,7 +1109,7 @@ to Set Unity Camera to Scene View or Field of View</sup></a></p>
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-10-16 08:31:18" itemprop="dateModified" datetime="2025-10-16T08:31:18+00:00">2025-10-16</time>
+                <time title="修改时间：2025-10-17 09:54:23" itemprop="dateModified" datetime="2025-10-17T09:54:23+00:00">2025-10-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1050,93 +1146,6 @@ example</a>里看到更精简的写法，当时表示惊呆了，使用<code>gl_
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2025/03/07/Bufferless-rendering-in-OpenGL/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://darkpixel.top/2025/03/05/Stringifying-OpenGL-enums/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="黑色像素">
-      <meta itemprop="description" content="活着就要继续前进">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Integrator">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/03/05/Stringifying-OpenGL-enums/" class="post-title-link" itemprop="url">Stringifying OpenGL enums</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2025-03-05 15:54:25" itemprop="dateCreated datePublished" datetime="2025-03-05T15:54:25+00:00">2025-03-05</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-10-16 08:31:18" itemprop="dateModified" datetime="2025-10-16T08:31:18+00:00">2025-10-16</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Computer-Graphics/" itemprop="url" rel="index"><span itemprop="name">Computer Graphics</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Computer-Graphics/OpenGL/" itemprop="url" rel="index"><span itemprop="name">OpenGL</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="vulkan枚举值的字符串化">Vulkan枚举值的字符串化</h1>
-<p><code>Vulkan</code>中的枚举值做了很好的枚举类型管理，尽管还是是C类型的枚举，具有全局符号可见行；再尽管不似<code>C++ enum class</code>有严格的命名空间访问机制，但是仍然具备相应的枚举类型作为命名空间管理和访问。这为<code>Vulkan</code>枚举值的字符串转换提供了方便，可能这也是为何<a target="_blank" rel="noopener" href="https://vulkan.lunarg.com/sdk/home"><code>VulkanSDK</code></a>给出了官方实现<code>vk_enum_string_helper.h</code>的原因。</p>
-<p>以<code>VkImageType</code>为例， </p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2025/03/05/Stringifying-OpenGL-enums/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1225,7 +1234,7 @@ example</a>里看到更精简的写法，当时表示惊呆了，使用<code>gl_
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">29</span>
+          <span class="site-state-item-count">30</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
