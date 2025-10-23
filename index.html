@@ -336,6 +336,82 @@ mjx-container[display="true"] + br {
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://darkpixel.top/2025/10/23/Unity%E6%88%AA%E5%B1%8F%E8%84%9A%E6%9C%AC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="黑色像素">
+      <meta itemprop="description" content="活着就要继续前进">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Integrator">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/10/23/Unity%E6%88%AA%E5%B1%8F%E8%84%9A%E6%9C%AC/" class="post-title-link" itemprop="url">Unity截屏脚本</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2025-10-23 17:09:06 / 修改时间：09:24:07" itemprop="dateCreated datePublished" datetime="2025-10-23T17:09:06+00:00">2025-10-23</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Computer-Graphics/" itemprop="url" rel="index"><span itemprop="name">Computer Graphics</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Computer-Graphics/Unity/" itemprop="url" rel="index"><span itemprop="name">Unity</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><ol type="1">
+<li><p>作为脚本附到GameObject上，我选择附到相机上 <figure class="highlight csharp"><figcaption><span>Screenshot.cs</span><a href="/scripts/codes/Screenshot.cs">view raw</a></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建这个脚本，挂在任意 GameObject 上</span></span><br><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line"><span class="keyword">using</span> System.IO;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Screenshot</span> : <span class="title">MonoBehaviour</span></span><br><span class="line">{</span><br><span class="line">    [<span class="meta">Header(<span class="string">&quot;截屏设置&quot;</span>)</span>]</span><br><span class="line">    <span class="keyword">public</span> KeyCode screenshotKey = KeyCode.F12;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">int</span> superSize = <span class="number">1</span>; <span class="comment">// 1 = 原始分辨率, 2 = 2倍分辨率</span></span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Update</span>()</span></span><br><span class="line">    {</span><br><span class="line">        <span class="keyword">if</span> (Input.GetKeyDown(screenshotKey))</span><br><span class="line">        {</span><br><span class="line">            TakeScreenshot();</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">TakeScreenshot</span>()</span></span><br><span class="line">    {</span><br><span class="line">        <span class="built_in">string</span> folderPath = Path.Combine(Application.dataPath, <span class="string">&quot;..&quot;</span>, <span class="string">&quot;Screenshots&quot;</span>);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 创建文件夹</span></span><br><span class="line">        <span class="keyword">if</span> (!Directory.Exists(folderPath))</span><br><span class="line">        {</span><br><span class="line">            Directory.CreateDirectory(folderPath);</span><br><span class="line">        }</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 生成文件名</span></span><br><span class="line">        <span class="built_in">string</span> fileName = <span class="string">$&quot;Screenshot_<span class="subst">{System.DateTime.Now:yyyy-MM-dd_HH-mm-ss}</span>.png&quot;</span>;</span><br><span class="line">        <span class="built_in">string</span> filePath = Path.Combine(folderPath, fileName);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 截图</span></span><br><span class="line">        ScreenCapture.CaptureScreenshot(filePath, superSize);</span><br><span class="line">        </span><br><span class="line">        Debug.Log(<span class="string">$&quot;截图已保存: <span class="subst">{filePath}</span>&quot;</span>);</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure></p></li>
+<li><p>修改编辑器UI，作为菜单使用；需要放到scene文件同目录的Editor目录下
+<figure class="highlight csharp"><figcaption><span>Editor/ScreenShotTest.cs</span><a href="/scripts/codes/Editor/ScreenShotTest.cs">view raw</a></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System.IO;</span><br><span class="line"><span class="keyword">using</span> System.Threading.Tasks;</span><br><span class="line"><span class="keyword">using</span> UnityEditor;</span><br><span class="line"><span class="keyword">using</span> UnityEditorInternal;</span><br><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">ScreenShotTest</span> : <span class="title">MonoBehaviour</span></span><br><span class="line">{</span><br><span class="line">    <span class="comment">//ctrl + shift + y 截图</span></span><br><span class="line">    [<span class="meta">MenuItem(<span class="string">&quot;Screenshot/Take Screenshot %#y&quot;</span>)</span>]</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">async</span> <span class="keyword">void</span> <span class="title">Screenshot</span>()</span></span><br><span class="line">    {</span><br><span class="line">        <span class="built_in">string</span> folderPath = Directory.GetCurrentDirectory() + <span class="string">&quot;\\Screenshots&quot;</span>;</span><br><span class="line">        <span class="keyword">if</span> (!Directory.Exists(folderPath))</span><br><span class="line">        {</span><br><span class="line">            Directory.CreateDirectory(folderPath);</span><br><span class="line">        }</span><br><span class="line"></span><br><span class="line">        <span class="keyword">var</span> timestamp = System.DateTime.Now;</span><br><span class="line">        <span class="keyword">var</span> stampString = <span class="built_in">string</span>.Format(<span class="string">&quot;_{0}-{1:00}-{2:00}_{3:00}-{4:00}-{5:00}&quot;</span>, timestamp.Year, timestamp.Month, timestamp.Day, timestamp.Hour, timestamp.Minute, timestamp.Second);</span><br><span class="line">        ScreenCapture.CaptureScreenshot(Path.Combine(folderPath , stampString + <span class="string">&quot;.png&quot;</span>));</span><br><span class="line"></span><br><span class="line">        Debug.Log(<span class="string">&quot;截图中......&quot;</span>);</span><br><span class="line">        <span class="comment">//等待5秒</span></span><br><span class="line">        <span class="keyword">await</span> Task.Delay(<span class="number">5000</span>);</span><br><span class="line">        System.Diagnostics.Process.Start(<span class="string">&quot;explorer.exe&quot;</span>, folderPath);</span><br><span class="line">        Debug.Log(<span class="string">&quot;截图&quot;</span> + stampString + <span class="string">&quot;.png&quot;</span>);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">OnMouseDown</span>()</span></span><br><span class="line">    {</span><br><span class="line">        ScreenCapture.CaptureScreenshot(<span class="string">&quot;SomeLevel.png&quot;</span>);</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure> 效果如下： <img src="/images/Unity%E6%88%AA%E5%B1%8F%E8%84%9A%E6%9C%AC/unity_screenshot_tool.png" class="unity_screenshot_tool"></p></li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://darkpixel.top/2025/10/16/C-%E7%89%B9%E5%8C%96%E6%A8%A1%E6%9D%BF%E7%9A%84%E5%86%85%E9%83%A8%E5%8C%B9%E9%85%8D%E5%8F%82%E6%95%B0%E4%BB%A3%E7%A0%81%E8%A7%A3%E6%9E%90/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -367,7 +443,7 @@ mjx-container[display="true"] + br {
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-10-17 09:54:23" itemprop="dateModified" datetime="2025-10-17T09:54:23+00:00">2025-10-17</time>
+                <time title="修改时间：2025-10-23 09:24:07" itemprop="dateModified" datetime="2025-10-23T09:24:07+00:00">2025-10-23</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -454,7 +530,7 @@ mjx-container[display="true"] + br {
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-10-17 09:54:23" itemprop="dateModified" datetime="2025-10-17T09:54:23+00:00">2025-10-17</time>
+                <time title="修改时间：2025-10-23 09:24:07" itemprop="dateModified" datetime="2025-10-23T09:24:07+00:00">2025-10-23</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -543,7 +619,7 @@ mjx-container[display="true"] + br {
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-10-17 09:54:23" itemprop="dateModified" datetime="2025-10-17T09:54:23+00:00">2025-10-17</time>
+                <time title="修改时间：2025-10-23 09:24:07" itemprop="dateModified" datetime="2025-10-23T09:24:07+00:00">2025-10-23</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -628,7 +704,7 @@ mjx-container[display="true"] + br {
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-10-17 09:54:23" itemprop="dateModified" datetime="2025-10-17T09:54:23+00:00">2025-10-17</time>
+                <time title="修改时间：2025-10-23 09:24:07" itemprop="dateModified" datetime="2025-10-23T09:24:07+00:00">2025-10-23</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -719,7 +795,7 @@ Model）。相比于标准的468个关键点版本，新增的10个关键点主�
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-10-17 09:54:23" itemprop="dateModified" datetime="2025-10-17T09:54:23+00:00">2025-10-17</time>
+                <time title="修改时间：2025-10-23 09:24:07" itemprop="dateModified" datetime="2025-10-23T09:24:07+00:00">2025-10-23</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -810,7 +886,7 @@ Model</a>，包括开源非商用版本和商用版本 - <a target="_blank" rel=
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-10-17 09:54:23" itemprop="dateModified" datetime="2025-10-17T09:54:23+00:00">2025-10-17</time>
+                <time title="修改时间：2025-10-23 09:24:07" itemprop="dateModified" datetime="2025-10-23T09:24:07+00:00">2025-10-23</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -895,7 +971,7 @@ docs</a>中写的很清楚，有MathJax和Katex两种公式渲染方式。这里
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-10-17 09:54:23" itemprop="dateModified" datetime="2025-10-17T09:54:23+00:00">2025-10-17</time>
+                <time title="修改时间：2025-10-23 09:24:07" itemprop="dateModified" datetime="2025-10-23T09:24:07+00:00">2025-10-23</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -988,7 +1064,7 @@ processing primer</a></p>
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-10-17 09:54:23" itemprop="dateModified" datetime="2025-10-17T09:54:23+00:00">2025-10-17</time>
+                <time title="修改时间：2025-10-23 09:24:07" itemprop="dateModified" datetime="2025-10-23T09:24:07+00:00">2025-10-23</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1073,7 +1149,7 @@ processing primer</a></p>
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-10-17 09:54:23" itemprop="dateModified" datetime="2025-10-17T09:54:23+00:00">2025-10-17</time>
+                <time title="修改时间：2025-10-23 09:24:07" itemprop="dateModified" datetime="2025-10-23T09:24:07+00:00">2025-10-23</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1126,98 +1202,10 @@ Texture数据的在GPU上的格式以及内存数据从CPU-〉GPU上传过程中
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://darkpixel.top/2025/04/16/Notes-on-Data-Formats-of-Graphics-APIs-1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="黑色像素">
-      <meta itemprop="description" content="活着就要继续前进">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Integrator">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/04/16/Notes-on-Data-Formats-of-Graphics-APIs-1/" class="post-title-link" itemprop="url">Notes on Data Formats of Graphics APIs(1)</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2025-04-16 22:47:57" itemprop="dateCreated datePublished" datetime="2025-04-16T22:47:57+00:00">2025-04-16</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-10-17 09:54:23" itemprop="dateModified" datetime="2025-10-17T09:54:23+00:00">2025-10-17</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Computer-Graphics/" itemprop="url" rel="index"><span itemprop="name">Computer Graphics</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Computer-Graphics/OpenGL/" itemprop="url" rel="index"><span itemprop="name">OpenGL</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>API是渲染里面最稀碎最脏的一块，砖搬的越多，问题重复遇到的可能性也越大；有些东西以前遇到过，现在又遇到了；有些以前很熟悉，现在又忘记了。虽然不一定是高明的东西，记录一下，下次再忘记可以翻一翻。古人云，“纸上得来终觉浅，好记性不如烂笔头”，诚不欺我。</p>
-<p>今天就来记录一下，各种Graphics
-API里面，使用的数据格式对于定点数的处理。</p>
-<p>数据格式这里主要记录两方面的使用，其一就是顶点数据，其二是纹理。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2025/04/16/Notes-on-Data-Formats-of-Graphics-APIs-1/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1283,7 +1271,7 @@ API里面，使用的数据格式对于定点数的处理。</p>
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">30</span>
+          <span class="site-state-item-count">31</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
