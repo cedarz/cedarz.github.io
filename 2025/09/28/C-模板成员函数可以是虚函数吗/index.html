@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="/js/image-compare-viewer.min.css">
+<script src="/js/image-compare-viewer.min.js"></script>
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"darkpixel.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="C++模板成员函数可以是虚函数吗 引言 在C++编程中，虚函数和模板都是强大的特性，但它们不能结合使用。许多开发者都会疑惑：为什么不能声明虚函数模板？这个限制背后的技术原理是什么？本文将深入探讨这个问题，分析技术可行性，并讨论可能的解决方案。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++模板成员函数可以是虚函数吗">
+<meta property="og:url" content="https://darkpixel.top/2025/09/28/C-%E6%A8%A1%E6%9D%BF%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0%E5%8F%AF%E4%BB%A5%E6%98%AF%E8%99%9A%E5%87%BD%E6%95%B0%E5%90%97/index.html">
+<meta property="og:site_name" content="Integrator">
+<meta property="og:description" content="C++模板成员函数可以是虚函数吗 引言 在C++编程中，虚函数和模板都是强大的特性，但它们不能结合使用。许多开发者都会疑惑：为什么不能声明虚函数模板？这个限制背后的技术原理是什么？本文将深入探讨这个问题，分析技术可行性，并讨论可能的解决方案。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-09-28T11:10:06.000Z">
+<meta property="article:modified_time" content="2025-12-12T06:59:05.198Z">
+<meta property="article:author" content="黑色像素">
+<meta property="article:tag" content="Development">
+<meta property="article:tag" content="C++">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://darkpixel.top/2025/09/28/C-%E6%A8%A1%E6%9D%BF%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0%E5%8F%AF%E4%BB%A5%E6%98%AF%E8%99%9A%E5%87%BD%E6%95%B0%E5%90%97/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>C++模板成员函数可以是虚函数吗 | Integrator</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<style>
+/* Enhanced Image 样式 */
+.enhanced-image:hover {
+  transform: scale(1.02);
+  transition: transform 0.3s ease;
+}
+
+/* 模态框样式 */
+.image-modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+  cursor: zoom-out;
+}
+
+.image-modal-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 90%;
+  max-height: 90%;
+  text-align: center;
+}
+
+.image-modal img {
+  max-width: 100%;
+  max-height: 80vh;
+  border-radius: 8px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+.image-modal .close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  color: #fff;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.image-modal .close:hover {
+  opacity: 0.7;
+}
+
+/* 响应式 */
+@media (max-width: 768px) {
+  img[style*="width"] {
+    width: 100% !important;
+  }
+}
+</style>
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Integrator</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://darkpixel.top/2025/09/28/C-%E6%A8%A1%E6%9D%BF%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0%E5%8F%AF%E4%BB%A5%E6%98%AF%E8%99%9A%E5%87%BD%E6%95%B0%E5%90%97/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="黑色像素">
+      <meta itemprop="description" content="活着就要继续前进">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Integrator">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          C++模板成员函数可以是虚函数吗
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2025-09-28 11:10:06" itemprop="dateCreated datePublished" datetime="2025-09-28T11:10:06+00:00">2025-09-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2025-12-12 06:59:05" itemprop="dateModified" datetime="2025-12-12T06:59:05+00:00">2025-12-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Development/" itemprop="url" rel="index"><span itemprop="name">Development</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Development/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="c模板成员函数可以是虚函数吗">C++模板成员函数可以是虚函数吗</h1>
+<h2 id="引言">引言</h2>
+<p>在C++编程中，虚函数和模板都是强大的特性，但它们不能结合使用。许多开发者都会疑惑：为什么不能声明虚函数模板？这个限制背后的技术原理是什么？本文将深入探讨这个问题，分析技术可行性，并讨论可能的解决方案。</p>
+<h2
+id="问题的起源头文件中的模板定义">问题的起源：头文件中的模板定义</h2>
+<h3 id="初始疑问">初始疑问</h3>
+<p>既然模板通常定义在头文件中，编译器在处理头文件时应该能看到模板的完整定义，为什么不能确定虚函数的所有形式呢？</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// MyTemplate.h - 编译器看到的模板定义</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MyTemplate</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> U&gt;</span></span><br><span class="line"><span class="function">    <span class="keyword">virtual</span> <span class="type">void</span> <span class="title">process</span><span class="params">(U data)</span> </span>&#123; &#125; <span class="comment">// 假设这是合法的</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="关键误解头文件-完整信息">关键误解：头文件 ≠ 完整信息</h3>
+<p>虽然模板定义在头文件中，但编译器处理头文件时看到的只是<strong>模板定义</strong>，而不是<strong>所有可能的实例化</strong>。</p>
+<h2 id="虚函数表构建的时机">虚函数表构建的时机</h2>
+<h3
+id="虚函数表不是在编译头文件时构建">虚函数表不是在编译头文件时构建</h3>
+<p>一个重要的澄清：虚函数表并<strong>不是</strong>在编译头文件时构建的，而是在<strong>类被完整实例化时</strong>构建的。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// MyClass.h - 编译这个头文件时，并不构建vtable</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MyClass</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">func1</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">func2</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">func3</span><span class="params">()</span></span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// MyClass.cpp - 在这里定义虚函数时，编译器构建vtable</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">MyClass::func1</span><span class="params">()</span> </span>&#123; &#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">MyClass::func2</span><span class="params">()</span> </span>&#123; &#125;  </span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">MyClass::func3</span><span class="params">()</span> </span>&#123; &#125;</span><br><span class="line"><span class="comment">// 编译器在这里为MyClass生成vtable，包含3个slot</span></span><br></pre></td></tr></table></figure>
+<h3 id="模板类的vtable构建困境">模板类的vtable构建困境</h3>
+<p>当编译器尝试为模板类的特定实例化构建vtable时，面临的核心问题是：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MyTemplate</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">normalFunc</span><span class="params">()</span></span>;        <span class="comment">// 确定的：vtable slot 0</span></span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> U&gt;</span></span><br><span class="line"><span class="function">    <span class="keyword">virtual</span> <span class="type">void</span> <span class="title">templateFunc</span><span class="params">(U u)</span></span>;   <span class="comment">// 问题：需要多少个slot？</span></span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">anotherFunc</span><span class="params">()</span></span>;       <span class="comment">// 应该在slot几？</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 实例化 MyTemplate&lt;int&gt; 时</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MyTemplate</span>&lt;<span class="type">int</span>&gt; &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">normalFunc</span><span class="params">()</span></span>;        <span class="comment">// vtable slot 0 ✓</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">// templateFunc需要多少个slot？</span></span><br><span class="line">    <span class="comment">// templateFunc&lt;int&gt;     - slot 1?</span></span><br><span class="line">    <span class="comment">// templateFunc&lt;double&gt;  - slot 2?  </span></span><br><span class="line">    <span class="comment">// templateFunc&lt;string&gt;  - slot 3?</span></span><br><span class="line">    <span class="comment">// templateFunc&lt;???&gt;     - slot ???</span></span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">anotherFunc</span><span class="params">()</span></span>;       <span class="comment">// 应该在slot几？</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="实例化发生在使用点">实例化发生在使用点</h2>
+<h3 id="分散的实例化问题">分散的实例化问题</h3>
+<p>模板实例化不是在头文件中发生，而是在每个使用点发生：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// file1.cpp</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;MyTemplate.h&quot;</span></span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">test1</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    MyTemplate&lt;<span class="type">int</span>&gt; obj;</span><br><span class="line">    obj.<span class="built_in">process</span>(<span class="number">42</span>);        <span class="comment">// 实例化 process&lt;int&gt;</span></span><br><span class="line">    obj.<span class="built_in">process</span>(<span class="number">3.14</span>);      <span class="comment">// 实例化 process&lt;double&gt;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// file2.cpp  </span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;MyTemplate.h&quot;</span></span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">test2</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    MyTemplate&lt;<span class="type">int</span>&gt; obj;    <span class="comment">// 同样的外层模板参数</span></span><br><span class="line">    obj.<span class="built_in">process</span>(<span class="string">&quot;hello&quot;</span>);   <span class="comment">// 但实例化了 process&lt;const char*&gt;</span></span><br><span class="line">    obj.<span class="built_in">process</span>(MyClass&#123;&#125;); <span class="comment">// 实例化 process&lt;MyClass&gt;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="vtable一致性要求">vtable一致性要求</h3>
+<p>关键矛盾在于：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 这种情况下，两个相同类型的对象可能需要不同的vtable布局</span></span><br><span class="line">MyTemplate&lt;<span class="type">int</span>&gt;* ptr1 = <span class="built_in">createInFile1</span>();  <span class="comment">// 可能有4个vtable slot</span></span><br><span class="line">MyTemplate&lt;<span class="type">int</span>&gt;* ptr2 = <span class="built_in">createInFile2</span>();  <span class="comment">// 可能有6个vtable slot</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 但ptr1和ptr2是相同类型，必须有相同的vtable布局！</span></span><br><span class="line"><span class="comment">// 这就是矛盾所在</span></span><br></pre></td></tr></table></figure>
+<h2 id="全局视角的技术可行性分析">“全局视角”的技术可行性分析</h2>
+<h3 id="单个工程的视角">单个工程的视角</h3>
+<p>对于单个工程来说，实例化参数确实是有限的，编译器理论上可以收集所有信息：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// main.cpp</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;MyTemplate.h&quot;</span></span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">TypeA</span> &#123;&#125;;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">TypeB</span> &#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    MyTemplate&lt;<span class="type">int</span>&gt; obj;</span><br><span class="line">    obj.<span class="built_in">process</span>(TypeA&#123;&#125;);     <span class="comment">// 实例化 process&lt;TypeA&gt;</span></span><br><span class="line">    obj.<span class="built_in">process</span>(TypeB&#123;&#125;);     <span class="comment">// 实例化 process&lt;TypeB&gt;</span></span><br><span class="line">    obj.<span class="built_in">process</span>(<span class="number">42</span>);          <span class="comment">// 实例化 process&lt;int&gt;</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 编译器可以确定：MyTemplate&lt;int&gt;的vtable需要4个slot：</span></span><br><span class="line">    <span class="comment">// slot 0: process&lt;TypeA&gt;</span></span><br><span class="line">    <span class="comment">// slot 1: process&lt;TypeB&gt;  </span></span><br><span class="line">    <span class="comment">// slot 2: process&lt;int&gt;</span></span><br><span class="line">    <span class="comment">// slot 3: (可能的其他虚函数)</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="技术障碍">技术障碍</h3>
+<h4 id="全程序分析的复杂性">1. 全程序分析的复杂性</h4>
+<p>这需要编译器进行”全程序分析”，需要： - 分析所有源文件 -
+追踪所有可能的代码路径 - 确定所有可能的模板实例化 - 统一构建vtable</p>
+<h4 id="与现有编译模型的冲突">2. 与现有编译模型的冲突</h4>
+<p>C++的传统编译流程： <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">源文件1.cpp → 目标文件1.o</span><br><span class="line">源文件2.cpp → 目标文件2.o</span><br><span class="line">源文件3.cpp → 目标文件3.o</span><br><span class="line">                ↓</span><br><span class="line">            链接器 → 可执行文件</span><br></pre></td></tr></table></figure></p>
+<p>全局视角方案需要： <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">所有源文件 → 全程序分析器 → 确定所有实例化 → 生成统一vtable → 可执行文件</span><br></pre></td></tr></table></figure></p>
+<h4 id="增量编译问题">3. 增量编译问题</h4>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 第一次编译：只有TypeA和TypeB</span></span><br><span class="line">MyTemplate&lt;<span class="type">int</span>&gt; obj;</span><br><span class="line">obj.<span class="built_in">process</span>(TypeA&#123;&#125;);</span><br><span class="line">obj.<span class="built_in">process</span>(TypeB&#123;&#125;);</span><br><span class="line"><span class="comment">// vtable: [process&lt;TypeA&gt;, process&lt;TypeB&gt;]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 第二次编译：用户添加了新代码</span></span><br><span class="line">obj.<span class="built_in">process</span>(TypeC&#123;&#125;);  <span class="comment">// 新增！</span></span><br><span class="line"><span class="comment">// vtable: [process&lt;TypeA&gt;, process&lt;TypeB&gt;, process&lt;TypeC&gt;]</span></span><br></pre></td></tr></table></figure>
+<p>vtable布局改变了！所有已编译的目标文件都需要重新编译。</p>
+<h2 id="模板库的分发形式">模板库的分发形式</h2>
+<h3 id="纯头文件库header-only">纯头文件库（Header-Only）</h3>
+<p>大多数模板库都是这种形式：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// boost库、STL、eigen等</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span>     <span class="comment">// 纯头文件</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span>  <span class="comment">// 纯头文件</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;boost/variant.hpp&gt;</span>  <span class="comment">// 纯头文件</span></span></span><br></pre></td></tr></table></figure>
+<p><strong>优点</strong>： - 使用简单，只需包含头文件 -
+编译器有完整信息，可以充分优化 - 没有链接问题</p>
+<p><strong>缺点</strong>： - 编译时间长 - 可执行文件可能变大</p>
+<h3 id="预实例化的静态动态库">预实例化的静态/动态库</h3>
+<p>可以将模板的特定实例化编译成库：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// MyTemplate.cpp - 显式实例化</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;MyTemplate.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> <span class="type">void</span> MyTemplate&lt;<span class="type">int</span>&gt;::<span class="built_in">process</span>(<span class="type">const</span> <span class="type">int</span>&amp;);</span><br><span class="line"><span class="keyword">template</span> <span class="type">void</span> MyTemplate&lt;<span class="type">double</span>&gt;::<span class="built_in">process</span>(<span class="type">const</span> <span class="type">double</span>&amp;);</span><br><span class="line"><span class="keyword">template</span> <span class="type">void</span> MyTemplate&lt;std::string&gt;::<span class="built_in">process</span>(<span class="type">const</span> std::string&amp;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用时</span></span><br><span class="line">MyTemplate&lt;<span class="type">int</span>&gt; obj;     <span class="comment">// OK，库中有实例化</span></span><br><span class="line">obj.<span class="built_in">process</span>(<span class="number">42</span>);</span><br><span class="line"></span><br><span class="line">MyTemplate&lt;<span class="type">float</span>&gt; obj2;  <span class="comment">// 编译错误！库中没有这个实例化</span></span><br></pre></td></tr></table></figure>
+<h3 id="为什么仍然缺乏全局视角">为什么仍然缺乏”全局视角”</h3>
+<p>即使模板在头文件中，编译器仍然缺乏全局视角：</p>
+<ol type="1">
+<li><strong>用户可以使用任意类型</strong>：库作者无法预知所有可能的用户类型</li>
+<li><strong>模板参数的组合爆炸</strong>：可能的组合数量是巨大的</li>
+<li><strong>条件编译和平台差异</strong>：不同平台可能有不同的实例化需求</li>
+<li><strong>动态库的挑战</strong>：运行时加载的代码可能使用新的模板参数</li>
+</ol>
+<h2 id="其他语言的解决方案">其他语言的解决方案</h2>
+<h3 id="c的泛型虚函数">C#的泛型虚函数</h3>
+<p>C#支持泛型虚函数，但它有不同的运行时模型：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">MyClass</span>&lt;<span class="title">T</span>&gt;</span> &#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">Process</span>&lt;<span class="title">U</span>&gt;(<span class="params">U data</span>)</span> &#123; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>C#可以这样做是因为： -
+<strong>JIT编译</strong>：在运行时才生成最终代码 -
+<strong>统一的对象模型</strong>：所有引用类型都是指针大小 -
+<strong>运行时类型信息</strong>：完整的反射支持</p>
+<h3 id="rust的单态化">Rust的单态化</h3>
+<p>Rust采用了全程序分析的方法：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">fn</span> <span class="title function_">generic_function</span>&lt;T&gt;(x: T) <span class="punctuation">-&gt;</span> T &#123;</span><br><span class="line">    x</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">fn</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">    <span class="title function_ invoke__">generic_function</span>(<span class="number">42i32</span>);     <span class="comment">// 生成 generic_function_i32</span></span><br><span class="line">    <span class="title function_ invoke__">generic_function</span>(<span class="string">&quot;hello&quot;</span>);   <span class="comment">// 生成 generic_function_str</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Rust编译器会： 1. 收集所有泛型使用 2. 为每种类型组合生成专门的函数 3.
+移除所有泛型痕迹</p>
+<h2 id="可能的技术方案及其问题">可能的技术方案及其问题</h2>
+<h3 id="方案1延迟vtable构建">方案1：延迟vtable构建</h3>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在第一次使用时动态扩展vtable</span></span><br><span class="line">MyTemplate&lt;<span class="type">int</span>&gt; obj;</span><br><span class="line">obj.<span class="built_in">process</span>(<span class="number">42</span>);      <span class="comment">// 此时为process&lt;int&gt;分配slot</span></span><br><span class="line">obj.<span class="built_in">process</span>(<span class="string">&quot;hello&quot;</span>); <span class="comment">// 此时为process&lt;const char*&gt;分配slot</span></span><br></pre></td></tr></table></figure>
+<p><strong>问题</strong>： - vtable地址会变化，破坏现有指针 -
+线程安全问题 - 性能严重下降</p>
+<h3 id="方案2间接调用">方案2：间接调用</h3>
+<p>通过函数指针映射表实现动态分发。</p>
+<p><strong>问题</strong>： - 性能开销巨大（查表 + 间接调用） -
+类型安全性问题 - 内存开销</p>
+<h3 id="方案3全程序分析">方案3：全程序分析</h3>
+<p>编译器分析整个程序，收集所有模板使用。</p>
+<p><strong>问题</strong>： - 与分离编译模型冲突 - 编译时间指数级增长 -
+无法处理动态库 - 增量编译困难</p>
+<h2 id="c的设计权衡">C++的设计权衡</h2>
+<p>C++选择禁止虚模板函数，主要考虑：</p>
+<h3 id="设计原则">设计原则</h3>
+<ol type="1">
+<li><strong>零开销抽象</strong>：模板不应该有运行时成本</li>
+<li><strong>分离编译</strong>：支持大型项目的模块化开发</li>
+<li><strong>向后兼容</strong>：新特性不能破坏现有代码</li>
+<li><strong>确定性</strong>：程序行为应该是可预测的</li>
+</ol>
+<h3 id="为什么没有采用全程序分析方案">为什么没有采用全程序分析方案</h3>
+<ol type="1">
+<li><strong>历史兼容性</strong>：C++必须保持与C和早期C++的兼容性</li>
+<li><strong>编译时间</strong>：全程序分析会显著增加编译时间</li>
+<li><strong>工具链复杂性</strong>：需要重新设计整个工具链</li>
+<li><strong>边际收益</strong>：现有替代方案已经足够好</li>
+</ol>
+<h2 id="现有的替代方案">现有的替代方案</h2>
+<p>虽然不能使用虚模板函数，但C++提供了多种替代方案：</p>
+<h3 id="类型擦除type-erasure">1. 类型擦除（Type Erasure）</h3>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">ProcessorInterface</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">virtual</span> ~<span class="built_in">ProcessorInterface</span>() = <span class="keyword">default</span>;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">process</span><span class="params">()</span> </span>= <span class="number">0</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ProcessorImpl</span> : <span class="keyword">public</span> ProcessorInterface &#123;</span><br><span class="line">    T data;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">ProcessorImpl</span>(T d) : <span class="built_in">data</span>(d) &#123;&#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">process</span><span class="params">()</span> <span class="keyword">override</span> </span>&#123; <span class="comment">/* 处理T类型数据 */</span> &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="crtp-curiously-recurring-template-pattern">2. CRTP (Curiously
+Recurring Template Pattern)</h3>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> Derived&gt;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Base</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">interface</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="built_in">static_cast</span>&lt;Derived*&gt;(<span class="keyword">this</span>)-&gt;<span class="built_in">implementation</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Derived</span> : <span class="keyword">public</span> Base&lt;Derived&gt; &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">implementation</span><span class="params">()</span> </span>&#123; <span class="comment">/* 具体实现 */</span> &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="stdfunction">3. std::function</h3>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">MyClass</span> &#123;</span><br><span class="line">    std::function&lt;<span class="type">void</span>()&gt; processor;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span></span><br><span class="line"><span class="function">    <span class="type">void</span> <span class="title">setProcessor</span><span class="params">(T callable)</span> </span>&#123;</span><br><span class="line">        processor = callable;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">process</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (processor) <span class="built_in">processor</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="结论">结论</h2>
+<p>虚函数模板在C++中不可行的根本原因是：</p>
+<ol type="1">
+<li><strong>vtable需要固定的、预先确定的布局</strong></li>
+<li><strong>模板函数的实例化是动态的、使用时才确定的</strong></li>
+<li><strong>不同编译单元可能产生不同的实例化组合</strong></li>
+<li><strong>相同的类必须在所有地方有相同的vtable布局</strong></li>
+</ol>
+<p>从纯技术角度看，通过全程序分析确实可以支持虚模板函数，但这需要根本性地改变C++的编译模型，代价过于巨大。</p>
+<p>C++选择了在表达能力和实用性之间的权衡，禁止虚模板函数，但提供了多种替代方案来解决实际问题。这体现了C++作为系统编程语言对性能和确定性的重视。</p>
+<p>理解这些技术细节不仅帮助我们更好地使用C++，也让我们认识到语言设计中的复杂权衡。每个看似简单的限制背后，往往都有深刻的技术和工程考虑。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Development/" rel="tag"># Development</a>
+              <a href="/tags/C/" rel="tag"># C++</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2025/09/22/SVD%E6%B1%82%E8%A7%A3%E9%85%8D%E5%87%86%E7%9A%84%E6%8E%A8%E5%AF%BC%E8%BF%87%E7%A8%8B/" rel="prev" title="SVD求解配准的推导过程">
+      <i class="fa fa-chevron-left"></i> SVD求解配准的推导过程
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2025/10/16/C-%E7%89%B9%E5%8C%96%E6%A8%A1%E6%9D%BF%E7%9A%84%E5%86%85%E9%83%A8%E5%8C%B9%E9%85%8D%E5%8F%82%E6%95%B0%E4%BB%A3%E7%A0%81%E8%A7%A3%E6%9E%90/" rel="next" title="C++特化模板的内部匹配参数代码解析">
+      C++特化模板的内部匹配参数代码解析 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#c%E6%A8%A1%E6%9D%BF%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0%E5%8F%AF%E4%BB%A5%E6%98%AF%E8%99%9A%E5%87%BD%E6%95%B0%E5%90%97"><span class="nav-number">1.</span> <span class="nav-text">C++模板成员函数可以是虚函数吗</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%95%E8%A8%80"><span class="nav-number">1.1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E7%9A%84%E8%B5%B7%E6%BA%90%E5%A4%B4%E6%96%87%E4%BB%B6%E4%B8%AD%E7%9A%84%E6%A8%A1%E6%9D%BF%E5%AE%9A%E4%B9%89"><span class="nav-number">1.2.</span> <span class="nav-text">问题的起源：头文件中的模板定义</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E7%96%91%E9%97%AE"><span class="nav-number">1.2.1.</span> <span class="nav-text">初始疑问</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E9%94%AE%E8%AF%AF%E8%A7%A3%E5%A4%B4%E6%96%87%E4%BB%B6-%E5%AE%8C%E6%95%B4%E4%BF%A1%E6%81%AF"><span class="nav-number">1.2.2.</span> <span class="nav-text">关键误解：头文件 ≠ 完整信息</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%99%9A%E5%87%BD%E6%95%B0%E8%A1%A8%E6%9E%84%E5%BB%BA%E7%9A%84%E6%97%B6%E6%9C%BA"><span class="nav-number">1.3.</span> <span class="nav-text">虚函数表构建的时机</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%99%9A%E5%87%BD%E6%95%B0%E8%A1%A8%E4%B8%8D%E6%98%AF%E5%9C%A8%E7%BC%96%E8%AF%91%E5%A4%B4%E6%96%87%E4%BB%B6%E6%97%B6%E6%9E%84%E5%BB%BA"><span class="nav-number">1.3.1.</span> <span class="nav-text">虚函数表不是在编译头文件时构建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E6%9D%BF%E7%B1%BB%E7%9A%84vtable%E6%9E%84%E5%BB%BA%E5%9B%B0%E5%A2%83"><span class="nav-number">1.3.2.</span> <span class="nav-text">模板类的vtable构建困境</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B%E5%8C%96%E5%8F%91%E7%94%9F%E5%9C%A8%E4%BD%BF%E7%94%A8%E7%82%B9"><span class="nav-number">1.4.</span> <span class="nav-text">实例化发生在使用点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E6%95%A3%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E9%97%AE%E9%A2%98"><span class="nav-number">1.4.1.</span> <span class="nav-text">分散的实例化问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vtable%E4%B8%80%E8%87%B4%E6%80%A7%E8%A6%81%E6%B1%82"><span class="nav-number">1.4.2.</span> <span class="nav-text">vtable一致性要求</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%A8%E5%B1%80%E8%A7%86%E8%A7%92%E7%9A%84%E6%8A%80%E6%9C%AF%E5%8F%AF%E8%A1%8C%E6%80%A7%E5%88%86%E6%9E%90"><span class="nav-number">1.5.</span> <span class="nav-text">“全局视角”的技术可行性分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%95%E4%B8%AA%E5%B7%A5%E7%A8%8B%E7%9A%84%E8%A7%86%E8%A7%92"><span class="nav-number">1.5.1.</span> <span class="nav-text">单个工程的视角</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8A%80%E6%9C%AF%E9%9A%9C%E7%A2%8D"><span class="nav-number">1.5.2.</span> <span class="nav-text">技术障碍</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%A8%E7%A8%8B%E5%BA%8F%E5%88%86%E6%9E%90%E7%9A%84%E5%A4%8D%E6%9D%82%E6%80%A7"><span class="nav-number">1.5.2.1.</span> <span class="nav-text">1. 全程序分析的复杂性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8E%E7%8E%B0%E6%9C%89%E7%BC%96%E8%AF%91%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%86%B2%E7%AA%81"><span class="nav-number">1.5.2.2.</span> <span class="nav-text">2. 与现有编译模型的冲突</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A2%9E%E9%87%8F%E7%BC%96%E8%AF%91%E9%97%AE%E9%A2%98"><span class="nav-number">1.5.2.3.</span> <span class="nav-text">3. 增量编译问题</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E6%9D%BF%E5%BA%93%E7%9A%84%E5%88%86%E5%8F%91%E5%BD%A2%E5%BC%8F"><span class="nav-number">1.6.</span> <span class="nav-text">模板库的分发形式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%AF%E5%A4%B4%E6%96%87%E4%BB%B6%E5%BA%93header-only"><span class="nav-number">1.6.1.</span> <span class="nav-text">纯头文件库（Header-Only）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E7%9A%84%E9%9D%99%E6%80%81%E5%8A%A8%E6%80%81%E5%BA%93"><span class="nav-number">1.6.2.</span> <span class="nav-text">预实例化的静态&#x2F;动态库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BB%8D%E7%84%B6%E7%BC%BA%E4%B9%8F%E5%85%A8%E5%B1%80%E8%A7%86%E8%A7%92"><span class="nav-number">1.6.3.</span> <span class="nav-text">为什么仍然缺乏”全局视角”</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E8%AF%AD%E8%A8%80%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="nav-number">1.7.</span> <span class="nav-text">其他语言的解决方案</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#c%E7%9A%84%E6%B3%9B%E5%9E%8B%E8%99%9A%E5%87%BD%E6%95%B0"><span class="nav-number">1.7.1.</span> <span class="nav-text">C#的泛型虚函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rust%E7%9A%84%E5%8D%95%E6%80%81%E5%8C%96"><span class="nav-number">1.7.2.</span> <span class="nav-text">Rust的单态化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%AF%E8%83%BD%E7%9A%84%E6%8A%80%E6%9C%AF%E6%96%B9%E6%A1%88%E5%8F%8A%E5%85%B6%E9%97%AE%E9%A2%98"><span class="nav-number">1.8.</span> <span class="nav-text">可能的技术方案及其问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%A1%881%E5%BB%B6%E8%BF%9Fvtable%E6%9E%84%E5%BB%BA"><span class="nav-number">1.8.1.</span> <span class="nav-text">方案1：延迟vtable构建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%A1%882%E9%97%B4%E6%8E%A5%E8%B0%83%E7%94%A8"><span class="nav-number">1.8.2.</span> <span class="nav-text">方案2：间接调用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%A1%883%E5%85%A8%E7%A8%8B%E5%BA%8F%E5%88%86%E6%9E%90"><span class="nav-number">1.8.3.</span> <span class="nav-text">方案3：全程序分析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#c%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%9D%83%E8%A1%A1"><span class="nav-number">1.9.</span> <span class="nav-text">C++的设计权衡</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99"><span class="nav-number">1.9.1.</span> <span class="nav-text">设计原则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E6%B2%A1%E6%9C%89%E9%87%87%E7%94%A8%E5%85%A8%E7%A8%8B%E5%BA%8F%E5%88%86%E6%9E%90%E6%96%B9%E6%A1%88"><span class="nav-number">1.9.2.</span> <span class="nav-text">为什么没有采用全程序分析方案</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8E%B0%E6%9C%89%E7%9A%84%E6%9B%BF%E4%BB%A3%E6%96%B9%E6%A1%88"><span class="nav-number">1.10.</span> <span class="nav-text">现有的替代方案</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B1%BB%E5%9E%8B%E6%93%A6%E9%99%A4type-erasure"><span class="nav-number">1.10.1.</span> <span class="nav-text">1. 类型擦除（Type Erasure）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#crtp-curiously-recurring-template-pattern"><span class="nav-number">1.10.2.</span> <span class="nav-text">2. CRTP (Curiously
+Recurring Template Pattern)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#stdfunction"><span class="nav-number">1.10.3.</span> <span class="nav-text">3. std::function</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%93%E8%AE%BA"><span class="nav-number">1.11.</span> <span class="nav-text">结论</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">黑色像素</p>
+  <div class="site-description" itemprop="description">活着就要继续前进</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">33</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">黑色像素</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+<!-- hexo injector body_end start -->
+<div id="imageModal" class="image-modal">
+  <span class="close">×</span>
+  <div class="image-modal-content">
+    <img id="modalImage" src="" alt="">
+  </div>
+</div>
+
+<script>
+function openImageModal(img) {
+  const modal = document.getElementById('imageModal');
+  const modalImg = document.getElementById('modalImage');
+  
+  modal.style.display = 'block';
+  modalImg.src = img.src;
+  modalImg.alt = img.alt;
+  
+  // 关闭事件
+  modal.onclick = function(e) {
+    if (e.target === modal) {
+      modal.style.display = 'none';
+    }
+  }
+  
+  document.querySelector('.image-modal .close').onclick = function() {
+    modal.style.display = 'none';
+  }
+  
+  document.onkeydown = function(event) {
+    if (event.key === 'Escape') {
+      modal.style.display = 'none';
+    }
+  }
+}
+</script>
+<!-- hexo injector body_end end --></body>
+</html>
