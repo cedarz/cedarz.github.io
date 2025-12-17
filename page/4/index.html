@@ -224,6 +224,139 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://darkpixel.top/2025/02/17/Render-line/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="黑色像素">
+      <meta itemprop="description" content="活着就要继续前进">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Integrator">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/02/17/Render-line/" class="post-title-link" itemprop="url">Render line</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2025-02-17 13:44:08" itemprop="dateCreated datePublished" datetime="2025-02-17T13:44:08+00:00">2025-02-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2025-12-17 08:24:38" itemprop="dateModified" datetime="2025-12-17T08:24:38+00:00">2025-12-17</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Computer-Graphics/" itemprop="url" rel="index"><span itemprop="name">Computer Graphics</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Computer-Graphics/OpenGL/" itemprop="url" rel="index"><span itemprop="name">OpenGL</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="渲染api对于线渲染的支持">渲染API对于线渲染的支持</h1>
+<table>
+<colgroup>
+<col style="width: 22%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 36%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>wireframe</th>
+<th>line mode</th>
+<th>line width</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>OpenGL</td>
+<td>glPolygonMode(GL_FRONT_AND_BACK, GL_LINE)</td>
+<td>glDrawArrays: GL_LINES/GL_LINE_STRIP/GL_LINE_LOOP</td>
+<td>glLineWidth</td>
+</tr>
+<tr class="even">
+<td>Vulkan</td>
+<td>VkPipelineRasterizationStateCreateInfo/VK_POLYGON_MODE_LINE</td>
+<td>VkPipelineInputAssemblyStateCreateInfo:
+VK_PRIMITIVE_TOPOLOGY_LINE_LIST/VK_PRIMITIVE_TOPOLOGY_LINE_STRIP</td>
+<td><a target="_blank" rel="noopener" href="https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetLineWidth.html">vkCmdSetLineWidth</a>,
+VkPipelineRasterizationStateCreateInfo::lineWidth</td>
+</tr>
+<tr class="odd">
+<td>DirectX 11</td>
+<td>D3D11_RASTERIZER_DESC/D3D11_FILL_WIREFRAME</td>
+<td>IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_LINELIST)</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>DirectX 12</td>
+<td>D3D12_GRAPHICS_PIPELINE_STATE_DESC/D3D12_FILL_WIREFRAME</td>
+<td>D3D12_GRAPHICS_PIPELINE_STATE_DESC/D3D12_PRIMITIVE_TOPOLOGY_TYPE_LINE,
+IASetPrimitiveTopology(D3D12_PRIMITIVE_TOPOLOGY_LINELIST)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>glLineWidth的<a target="_blank" rel="noopener" href="https://registry.khronos.org/OpenGL-Refpages/gl4/html/glLineWidth.xhtml">文档</a>中说只保证宽度1的设置，其他宽度依赖硬件实现。
+&gt; Only width 1 is guaranteed to be supported; others depend on the
+implementation.</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2025/02/17/Render-line/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://darkpixel.top/2025/02/14/%E5%88%A9%E7%94%A8%E4%BA%BA%E8%84%B8%E6%A3%80%E6%B5%8B%E5%85%B3%E9%94%AE%E7%82%B9%E7%AE%80%E5%8D%95%E5%88%86%E5%89%B2%E5%90%88%E5%B9%B6%E6%93%8D%E4%BD%9C/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -255,7 +388,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-12-17 06:27:25" itemprop="dateModified" datetime="2025-12-17T06:27:25+00:00">2025-12-17</time>
+                <time title="修改时间：2025-12-17 08:24:38" itemprop="dateModified" datetime="2025-12-17T08:24:38+00:00">2025-12-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -343,7 +476,7 @@ OpenCV</a>的操作安装MediaPipe并可视化关键点。 </p><figure class="hi
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-12-17 06:27:25" itemprop="dateModified" datetime="2025-12-17T06:27:25+00:00">2025-12-17</time>
+                <time title="修改时间：2025-12-17 08:24:38" itemprop="dateModified" datetime="2025-12-17T08:24:38+00:00">2025-12-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -431,7 +564,7 @@ OpenCV</a>的操作安装MediaPipe并可视化关键点。 </p><figure class="hi
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-12-17 06:27:25" itemprop="dateModified" datetime="2025-12-17T06:27:25+00:00">2025-12-17</time>
+                <time title="修改时间：2025-12-17 08:24:38" itemprop="dateModified" datetime="2025-12-17T08:24:38+00:00">2025-12-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -529,7 +662,7 @@ Overview</a></p></li>
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-12-17 06:27:25" itemprop="dateModified" datetime="2025-12-17T06:27:25+00:00">2025-12-17</time>
+                <time title="修改时间：2025-12-17 08:24:38" itemprop="dateModified" datetime="2025-12-17T08:24:38+00:00">2025-12-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -650,20 +783,20 @@ you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hex
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">34</span>
+          <span class="site-state-item-count">35</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-count">22</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-count">22</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
