@@ -51,7 +51,7 @@ DX11/12都没有明确的API和数据结构支持wide line的渲染。只发现[
 知道了线宽的单位是屏幕空间像素计量之后，使用`quad polygon`把线扩展成两个三角形的方法就比较明显了，以任何方法在屏幕空间把线段的两个顶点扩展成4个顶点，这个过程可以在CPU里计算，也可以在GPU的`VS`、`GS`等顶点处理阶段计算。如果在顶点处理阶段完成，输出的坐标是`clip space`裁剪空间坐标，而我们扩展四边形的操作是在屏幕空间完成的，就涉及到坐标变换的具体实现了。
 
 `quad`的生成[算法](https://github.com/mhalber/Lines?tab=readme-ov-file#methods)如下：
-> 1. Transform line segment end points p and q to normalized device space. At this point we work in 2D space, regardless of whether original line was specified as 2D or 3D line.
+1. Transform line segment end points p and q to normalized device space. At this point we work in 2D space, regardless of whether original line was specified as 2D or 3D line.
 2. Calculate direction d, corrected for viewport aspect ratio.
 3. Calculate unit normal vector n = {-d.y, d.x}
 4. Modulate n by approperiate line widths to get vectors n_a and n_b
