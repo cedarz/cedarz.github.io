@@ -23,23 +23,21 @@
     var CONFIG = {"hostname":"darkpixel.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="MediaPipe人脸关键点指南 人脸关键点的数量 根据Claude-Sonnet-4的介绍，标准版本是468个，优化版本是478个，添加左右眼虹膜关键点。看下面的关键点参考图能看到，虹膜关键点的起始序号正好是468。 &gt; 478个关键点是MediaPipe Face Mesh的最新升级版本的结果（通常称为 Refined Mesh Model）。相比于标准的468个关键点版本，新增的10个">
+  <meta name="description" content="在 StartupModule() 中添加调用栈输出的方法 方法 1：使用 FPlatformStackWalk::StackWalkAndDump 123456789101112131415161718192021#include &quot;HAL&#x2F;PlatformStackWalk.h&quot;  &#x2F;&#x2F; 需要添加这个头文件void FGPULightmassModule::StartupM">
 <meta property="og:type" content="article">
-<meta property="og:title" content="mediapipe人脸关键点序列">
-<meta property="og:url" content="https://darkpixel.top/2025/08/13/mediapipe%E4%BA%BA%E8%84%B8%E5%85%B3%E9%94%AE%E7%82%B9%E5%BA%8F%E5%88%97/index.html">
+<meta property="og:title" content="Unreal4: 打印当前调用栈">
+<meta property="og:url" content="https://darkpixel.top/2025/12/01/Unreal4-%E6%89%93%E5%8D%B0%E5%BD%93%E5%89%8D%E8%B0%83%E7%94%A8%E6%A0%88/index.html">
 <meta property="og:site_name" content="Integrator">
-<meta property="og:description" content="MediaPipe人脸关键点指南 人脸关键点的数量 根据Claude-Sonnet-4的介绍，标准版本是468个，优化版本是478个，添加左右眼虹膜关键点。看下面的关键点参考图能看到，虹膜关键点的起始序号正好是468。 &gt; 478个关键点是MediaPipe Face Mesh的最新升级版本的结果（通常称为 Refined Mesh Model）。相比于标准的468个关键点版本，新增的10个">
+<meta property="og:description" content="在 StartupModule() 中添加调用栈输出的方法 方法 1：使用 FPlatformStackWalk::StackWalkAndDump 123456789101112131415161718192021#include &quot;HAL&#x2F;PlatformStackWalk.h&quot;  &#x2F;&#x2F; 需要添加这个头文件void FGPULightmassModule::StartupM">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://darkpixel.top/images/mediapipe%E4%BA%BA%E8%84%B8%E5%85%B3%E9%94%AE%E7%82%B9%E5%BA%8F%E5%88%97/face_landmarker_keypoints.png">
-<meta property="article:published_time" content="2025-08-13T15:40:40.000Z">
+<meta property="article:published_time" content="2025-12-01T13:24:22.000Z">
 <meta property="article:modified_time" content="2026-01-07T07:18:14.928Z">
 <meta property="article:author" content="黑色像素">
-<meta property="article:tag" content="Development">
-<meta property="article:tag" content="Python">
+<meta property="article:tag" content="Computer Graphics">
+<meta property="article:tag" content="Unreal4">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://darkpixel.top/images/mediapipe%E4%BA%BA%E8%84%B8%E5%85%B3%E9%94%AE%E7%82%B9%E5%BA%8F%E5%88%97/face_landmarker_keypoints.png">
 
-<link rel="canonical" href="https://darkpixel.top/2025/08/13/mediapipe%E4%BA%BA%E8%84%B8%E5%85%B3%E9%94%AE%E7%82%B9%E5%BA%8F%E5%88%97/">
+<link rel="canonical" href="https://darkpixel.top/2025/12/01/Unreal4-%E6%89%93%E5%8D%B0%E5%BD%93%E5%89%8D%E8%B0%83%E7%94%A8%E6%A0%88/">
 
 
 <script id="page-configurations">
@@ -52,7 +50,7 @@
   };
 </script>
 
-  <title>mediapipe人脸关键点序列 | Integrator</title>
+  <title>Unreal4: 打印当前调用栈 | Integrator</title>
   
 
 
@@ -231,7 +229,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://darkpixel.top/2025/08/13/mediapipe%E4%BA%BA%E8%84%B8%E5%85%B3%E9%94%AE%E7%82%B9%E5%BA%8F%E5%88%97/">
+    <link itemprop="mainEntityOfPage" href="https://darkpixel.top/2025/12/01/Unreal4-%E6%89%93%E5%8D%B0%E5%BD%93%E5%89%8D%E8%B0%83%E7%94%A8%E6%A0%88/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -244,7 +242,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          mediapipe人脸关键点序列
+          Unreal4: 打印当前调用栈
         </h1>
 
         <div class="post-meta">
@@ -254,7 +252,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2025-08-13 15:40:40" itemprop="dateCreated datePublished" datetime="2025-08-13T15:40:40+00:00">2025-08-13</time>
+              <time title="创建时间：2025-12-01 13:24:22" itemprop="dateCreated datePublished" datetime="2025-12-01T13:24:22+00:00">2025-12-01</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -269,11 +267,11 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Development/" itemprop="url" rel="index"><span itemprop="name">Development</span></a>
+                  <a href="/categories/Computer-Graphics/" itemprop="url" rel="index"><span itemprop="name">Computer Graphics</span></a>
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Development/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+                  <a href="/categories/Computer-Graphics/Unreal4/" itemprop="url" rel="index"><span itemprop="name">Unreal4</span></a>
                 </span>
             </span>
 
@@ -288,32 +286,22 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="mediapipe人脸关键点指南">MediaPipe人脸关键点指南</h1>
-<p><strong>人脸关键点的数量</strong></p>
-<p>根据Claude-Sonnet-4的介绍，标准版本是468个，优化版本是478个，添加左右眼虹膜关键点。看下面的关键点参考图能看到，虹膜关键点的起始序号正好是468。
-&gt; 478个关键点是MediaPipe Face Mesh的最新升级版本的结果（通常称为
-Refined Mesh
-Model）。相比于标准的468个关键点版本，新增的10个关键点主要分布在
-虹膜（瞳孔）区域，用于更精确地描述眼睛的几何形状和运动。</p>
-<p>MediaPipe人脸关键点都在这张图里，密密麻麻，想不想街边看到的有些门店摆出来的穴位图。大图可看这里<a
-target="_blank" rel="noopener" href="https://storage.googleapis.com/mediapipe-assets/documentation/mediapipe_face_landmark_fullsize.png">传送门</a>。
-<img src="/images/mediapipe%E4%BA%BA%E8%84%B8%E5%85%B3%E9%94%AE%E7%82%B9%E5%BA%8F%E5%88%97/face_landmarker_keypoints.png" class="PBR-Reading-Notes&#x2F;7.2.discrepancy"></p>
-<p>有没有发现一个问题，大图上关键点的序号层层叠叠，无法很好分辨具体的序号。</p>
-<p><strong>关键点的序号</strong></p>
-<p>搜索了一圈，也就<a
-target="_blank" rel="noopener" href="https://github.com/tensorflow/tfjs-models/blob/838611c02f51159afdd77469ce67f0e26b7bbb23/face-landmarks-detection/src/mediapipe-facemesh/keypoints.ts">keypoints.ts</a>是记录的比较准确的，但是还不够完整，比如我想获取完整嘴唇部位的关键点序列，一共有80个4圈，但是这里只给了两圈轮廓。</p>
-<p>好在<a
-target="_blank" rel="noopener" href="https://github.com/google-ai-edge/mediapipe">google-ai-edge/mediapipe</a>给了标准人脸的网格，能够藉以确定所有关键点的序列，再也不用吭哧吭哧到处查找或者盯着关键点图片人肉识别了。</p>
-<p>贴一下嘴唇部位的所有关键点：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">LIPS_KEYPOINTS = [</span><br><span class="line">    <span class="number">61</span>, <span class="number">185</span>, <span class="number">40</span>, <span class="number">39</span>, <span class="number">37</span>, <span class="number">0</span>, <span class="number">267</span>, <span class="number">269</span>, <span class="number">270</span>, <span class="number">409</span>, <span class="number">291</span>,      <span class="comment"># lipsUpperOuter level 4</span></span><br><span class="line">    <span class="number">61</span>, <span class="number">146</span>, <span class="number">91</span>, <span class="number">181</span>, <span class="number">84</span>, <span class="number">17</span>, <span class="number">314</span>, <span class="number">405</span>, <span class="number">321</span>, <span class="number">375</span>, <span class="number">291</span>,    <span class="comment"># lipsLowerOuter level 4</span></span><br><span class="line"></span><br><span class="line">    <span class="number">76</span>, <span class="number">184</span>, <span class="number">74</span>, <span class="number">73</span>, <span class="number">72</span>, <span class="number">11</span>, <span class="number">302</span>, <span class="number">303</span>, <span class="number">304</span>, <span class="number">408</span>, <span class="number">306</span>,     <span class="comment"># lipsUpperOuter level 3</span></span><br><span class="line">    <span class="number">76</span>, <span class="number">77</span>, <span class="number">90</span>, <span class="number">180</span>, <span class="number">85</span>, <span class="number">16</span>, <span class="number">315</span>, <span class="number">404</span>, <span class="number">320</span>, <span class="number">307</span>, <span class="number">306</span>,     <span class="comment"># lipsLowerOuter level 3</span></span><br><span class="line"></span><br><span class="line">    <span class="number">62</span>, <span class="number">183</span>, <span class="number">42</span>, <span class="number">41</span>, <span class="number">38</span>, <span class="number">12</span>, <span class="number">268</span>, <span class="number">271</span>, <span class="number">272</span>, <span class="number">407</span>, <span class="number">292</span>,     <span class="comment"># lipsUpperOuter level 2</span></span><br><span class="line">    <span class="number">62</span>, <span class="number">96</span>, <span class="number">89</span>, <span class="number">179</span>, <span class="number">86</span>, <span class="number">15</span>, <span class="number">316</span>, <span class="number">403</span>, <span class="number">319</span>, <span class="number">325</span>, <span class="number">292</span>,     <span class="comment"># lipsLowerOuter level 2</span></span><br><span class="line"></span><br><span class="line">    <span class="number">78</span>, <span class="number">191</span>, <span class="number">80</span>, <span class="number">81</span>, <span class="number">82</span>, <span class="number">13</span>, <span class="number">312</span>, <span class="number">311</span>, <span class="number">310</span>, <span class="number">415</span>, <span class="number">308</span>,     <span class="comment"># lipsUpperOuter level 1</span></span><br><span class="line">    <span class="number">78</span>, <span class="number">95</span>, <span class="number">88</span>, <span class="number">178</span>, <span class="number">87</span>, <span class="number">14</span>, <span class="number">317</span>, <span class="number">402</span>, <span class="number">318</span>, <span class="number">324</span>, <span class="number">308</span>,     <span class="comment"># lipsLowerOuter level 1</span></span><br><span class="line">]</span><br></pre></td></tr></table></figure>
-<h1 id="参考">参考</h1>
-<ul>
-<li><a
-target="_blank" rel="noopener" href="https://ai.google.dev/edge/mediapipe/solutions/vision/face_landmarker?hl=zh-cn">人脸特征点检测指南</a></li>
-<li><a
-target="_blank" rel="noopener" href="https://github.com/google-ai-edge/mediapipe/blob/master/mediapipe/modules/face_geometry/data/canonical_face_model.obj">mediapipe
-canonical_face_model.obj</a></li>
-</ul>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>在 StartupModule() 中添加调用栈输出的方法 方法 1：使用
+FPlatformStackWalk::StackWalkAndDump <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;HAL/PlatformStackWalk.h&quot;</span>  <span class="comment">// 需要添加这个头文件</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">FGPULightmassModule::StartupModule</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">UE_LOG</span>(LogGPULightmass, Log, <span class="built_in">TEXT</span>(<span class="string">&quot;GPULightmass module is loaded&quot;</span>));</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 输出调用栈</span></span><br><span class="line">    ANSICHAR StackTrace[<span class="number">65536</span>] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">    <span class="keyword">constexpr</span> int32 NumStackFramesToIgnore = <span class="number">1</span>;  <span class="comment">// 忽略当前函数本身</span></span><br><span class="line">    FPlatformStackWalk::<span class="built_in">StackWalkAndDump</span>(StackTrace, <span class="built_in">UE_ARRAY_COUNT</span>(StackTrace), NumStackFramesToIgnore, <span class="literal">nullptr</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 将 ANSI 字符串转换为 FString 并输出</span></span><br><span class="line">    FString StackTraceString = <span class="built_in">ANSI_TO_TCHAR</span>(StackTrace);</span><br><span class="line">    <span class="built_in">UE_LOG</span>(LogGPULightmass, Log, <span class="built_in">TEXT</span>(<span class="string">&quot;Call Stack:\n%s&quot;</span>), *StackTraceString);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// Maps virtual shader source directory /Plugin/GPULightmass to the plugin&#x27;s actual Shaders directory.</span></span><br><span class="line">    FString PluginShaderDir = FPaths::<span class="built_in">Combine</span>(IPluginManager::<span class="built_in">Get</span>().<span class="built_in">FindPlugin</span>(<span class="built_in">TEXT</span>(<span class="string">&quot;GPULightmass&quot;</span>))-&gt;<span class="built_in">GetBaseDir</span>(), <span class="built_in">TEXT</span>(<span class="string">&quot;Shaders&quot;</span>));</span><br><span class="line">    <span class="built_in">AddShaderSourceDirectoryMapping</span>(<span class="built_in">TEXT</span>(<span class="string">&quot;/Plugin/GPULightmass&quot;</span>), PluginShaderDir);</span><br><span class="line"></span><br><span class="line">    FStaticLightingSystemInterface::<span class="built_in">Get</span>()-&gt;<span class="built_in">RegisterImplementation</span>(<span class="built_in">FName</span>(<span class="built_in">TEXT</span>(<span class="string">&quot;GPULightmass&quot;</span>)), <span class="keyword">this</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> 方法 2：使用
+CaptureStackBackTrace <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;HAL/PlatformStackWalk.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">FGPULightmassModule::StartupModule</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">UE_LOG</span>(LogGPULightmass, Log, <span class="built_in">TEXT</span>(<span class="string">&quot;GPULightmass module is loaded&quot;</span>));</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 捕获调用栈地址</span></span><br><span class="line">    <span class="keyword">constexpr</span> int32 MaxDepth = <span class="number">20</span>;</span><br><span class="line">    uint64 BackTrace[MaxDepth] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">    uint32 CapturedDepth = FPlatformStackWalk::<span class="built_in">CaptureStackBackTrace</span>(BackTrace, MaxDepth);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 输出调用栈</span></span><br><span class="line">    <span class="built_in">UE_LOG</span>(LogGPULightmass, Log, <span class="built_in">TEXT</span>(<span class="string">&quot;Call Stack (Depth: %d):&quot;</span>), CapturedDepth);</span><br><span class="line">    <span class="keyword">for</span> (uint32 i = <span class="number">0</span>; i &lt; CapturedDepth; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        FProgramCounterSymbolInfo SymbolInfo;</span><br><span class="line">        FPlatformStackWalk::<span class="built_in">ProgramCounterToSymbolInfo</span>(BackTrace[i], SymbolInfo);</span><br><span class="line">        </span><br><span class="line">        <span class="built_in">UE_LOG</span>(LogGPULightmass, Log, <span class="built_in">TEXT</span>(<span class="string">&quot;  [%d] %s!%s [%s:%d]&quot;</span>), </span><br><span class="line">            i,</span><br><span class="line">            <span class="built_in">ANSI_TO_TCHAR</span>(SymbolInfo.ModuleName),</span><br><span class="line">            <span class="built_in">ANSI_TO_TCHAR</span>(SymbolInfo.FunctionName),</span><br><span class="line">            <span class="built_in">ANSI_TO_TCHAR</span>(SymbolInfo.Filename),</span><br><span class="line">            SymbolInfo.LineNumber);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>方法3: 使用 UE4 的调试宏 ``` c++ #include
+“HAL/PlatformStackWalk.h”</p>
+<p>void FGPULightmassModule::StartupModule() { UE_LOG(LogGPULightmass,
+Log, TEXT(“GPULightmass module is loaded”));</p>
+<pre><code>// 使用 UE4 的调用栈输出
+ANSICHAR StackTrace[65536] = &#123;0&#125;;
+FPlatformStackWalk::StackWalkAndDump(StackTrace, UE_ARRAY_COUNT(StackTrace), 1, nullptr);
+
+// 直接输出到日志
+UE_LOG(LogGPULightmass, Warning, TEXT(&quot;=== StartupModule Call Stack ===\n%s&quot;), ANSI_TO_TCHAR(StackTrace));
+
+// ... 其余代码</code></pre>
+<p>}</p>
 
     </div>
 
@@ -323,8 +311,8 @@ canonical_face_model.obj</a></li>
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/Development/" rel="tag"># Development</a>
-              <a href="/tags/Python/" rel="tag"># Python</a>
+              <a href="/tags/Computer-Graphics/" rel="tag"># Computer Graphics</a>
+              <a href="/tags/Unreal4/" rel="tag"># Unreal4</a>
           </div>
 
         
@@ -333,12 +321,12 @@ canonical_face_model.obj</a></li>
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2025/07/22/A-Multiresolution-3D-Morphable-Face-Model-and-Fitting-Framework/" rel="prev" title="A Multiresolution 3D Morphable Face Model and Fitting Framework">
-      <i class="fa fa-chevron-left"></i> A Multiresolution 3D Morphable Face Model and Fitting Framework
+    <a href="/2025/11/23/Light-Unit-in-Graphics/" rel="prev" title="Light Unit in Graphics">
+      <i class="fa fa-chevron-left"></i> Light Unit in Graphics
     </a></div>
       <div class="post-nav-item">
-    <a href="/2025/08/26/%E5%A6%82%E4%BD%95%E5%85%A5%E9%97%A8%E5%A4%A7%E6%A8%A1%E5%9E%8B/" rel="next" title="如何入门大模型">
-      如何入门大模型 <i class="fa fa-chevron-right"></i>
+    <a href="/2025/12/17/%E6%96%B0%E6%89%8B%E5%8F%B8%E6%9C%BA%E5%80%92%E8%BD%A6%E6%8A%80%E5%B7%A7/" rel="next" title="新手司机倒车技巧">
+      新手司机倒车技巧 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -398,7 +386,6 @@ canonical_face_model.obj</a></li>
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#mediapipe%E4%BA%BA%E8%84%B8%E5%85%B3%E9%94%AE%E7%82%B9%E6%8C%87%E5%8D%97"><span class="nav-number">1.</span> <span class="nav-text">MediaPipe人脸关键点指南</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">2.</span> <span class="nav-text">参考</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
