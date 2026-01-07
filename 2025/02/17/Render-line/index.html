@@ -33,7 +33,7 @@
 <meta property="og:image" content="https://darkpixel.top/images/Render-line/line_width.png">
 <meta property="og:image" content="https://darkpixel.top/images/Render-line/defect.png">
 <meta property="article:published_time" content="2025-02-17T13:44:08.000Z">
-<meta property="article:modified_time" content="2025-12-30T09:38:13.518Z">
+<meta property="article:modified_time" content="2026-01-07T07:15:59.180Z">
 <meta property="article:author" content="黑色像素">
 <meta property="article:tag" content="Computer Graphics">
 <meta property="article:tag" content="OpenGL">
@@ -262,7 +262,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-12-30 09:38:13" itemprop="dateModified" datetime="2025-12-30T09:38:13+00:00">2025-12-30</time>
+                <time title="修改时间：2026-01-07 07:15:59" itemprop="dateModified" datetime="2026-01-07T07:15:59+00:00">2026-01-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -377,13 +377,13 @@ work.</p>
 <p>知道了线宽的单位是屏幕空间像素计量之后，使用<code>quad polygon</code>把线扩展成两个三角形的方法就比较明显了，以任何方法在屏幕空间把线段的两个顶点扩展成4个顶点，这个过程可以在CPU里计算，也可以在GPU的<code>VS</code>、<code>GS</code>等顶点处理阶段计算。如果在顶点处理阶段完成，输出的坐标是<code>clip space</code>裁剪空间坐标，而我们扩展四边形的操作是在屏幕空间完成的，就涉及到坐标变换的具体实现了。</p>
 <p><code>quad</code>的生成<a
 target="_blank" rel="noopener" href="https://github.com/mhalber/Lines?tab=readme-ov-file#methods">算法</a>如下：
-&gt; 1. Transform line segment end points p and q to normalized device
-space. At this point we work in 2D space, regardless of whether original
-line was specified as 2D or 3D line. 2. Calculate direction d, corrected
-for viewport aspect ratio. 3. Calculate unit normal vector n = {-d.y,
-d.x} 4. Modulate n by approperiate line widths to get vectors n_a and
-n_b 5. Create quad points a = p + n_a, b = p - n_a, c = q + n_b, d = q -
-n_b 6. Move points a, b, c, d back to clip space and pass them down the
+1. Transform line segment end points p and q to normalized device space.
+At this point we work in 2D space, regardless of whether original line
+was specified as 2D or 3D line. 2. Calculate direction d, corrected for
+viewport aspect ratio. 3. Calculate unit normal vector n = {-d.y, d.x}
+4. Modulate n by approperiate line widths to get vectors n_a and n_b 5.
+Create quad points a = p + n_a, b = p - n_a, c = q + n_b, d = q - n_b 6.
+Move points a, b, c, d back to clip space and pass them down the
 rasterization pipeline</p>
 <p><strong>具体实现</strong></p>
 <p>根据<a
@@ -554,7 +554,7 @@ a line in modern OpenGL</a></li>
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2025</span>
+  <span itemprop="copyrightYear">2026</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
