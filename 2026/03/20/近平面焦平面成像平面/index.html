@@ -23,15 +23,15 @@
     var CONFIG = {"hostname":"darkpixel.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="123456789101112float scale &#x3D; tan(camera.fov * 0.5);d.y *&#x3D; resolution.y &#x2F; resolution.x * scale;d.x *&#x3D; scale;vec3 rayDir &#x3D; normalize(d.x * camera.right + d.y * camera.up + camera.forward);vec3 focalPoi">
+  <meta name="description" content="GLSL-PathTracer 123456789101112float scale &#x3D; tan(camera.fov * 0.5);d.y *&#x3D; resolution.y &#x2F; resolution.x * scale;d.x *&#x3D; scale;vec3 rayDir &#x3D; normalize(d.x * camera.right + d.y * camera.up + camera.forwar">
 <meta property="og:type" content="article">
 <meta property="og:title" content="近平面焦平面成像平面">
 <meta property="og:url" content="https://darkpixel.top/2026/03/20/%E8%BF%91%E5%B9%B3%E9%9D%A2%E7%84%A6%E5%B9%B3%E9%9D%A2%E6%88%90%E5%83%8F%E5%B9%B3%E9%9D%A2/index.html">
 <meta property="og:site_name" content="Integrator">
-<meta property="og:description" content="123456789101112float scale &#x3D; tan(camera.fov * 0.5);d.y *&#x3D; resolution.y &#x2F; resolution.x * scale;d.x *&#x3D; scale;vec3 rayDir &#x3D; normalize(d.x * camera.right + d.y * camera.up + camera.forward);vec3 focalPoi">
+<meta property="og:description" content="GLSL-PathTracer 123456789101112float scale &#x3D; tan(camera.fov * 0.5);d.y *&#x3D; resolution.y &#x2F; resolution.x * scale;d.x *&#x3D; scale;vec3 rayDir &#x3D; normalize(d.x * camera.right + d.y * camera.up + camera.forwar">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-03-20T19:06:31.000Z">
-<meta property="article:modified_time" content="2026-05-07T02:43:43.350Z">
+<meta property="article:modified_time" content="2026-05-07T07:25:08.972Z">
 <meta property="article:author" content="黑色像素">
 <meta property="article:tag" content="Reading Notes">
 <meta property="article:tag" content="PBR">
@@ -259,7 +259,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-05-07 02:43:43" itemprop="dateModified" datetime="2026-05-07T02:43:43+00:00">2026-05-07</time>
+                <time title="修改时间：2026-05-07 07:25:08" itemprop="dateModified" datetime="2026-05-07T07:25:08+00:00">2026-05-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -287,18 +287,72 @@
 
       
         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><!-- https://github.com/knightcrawler25/GLSL-PathTracer/blob/master/src/shaders/tile.glsl -->
+<h2 id="glsl-pathtracer">GLSL-PathTracer</h2>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">float</span> scale = <span class="built_in">tan</span>(camera.fov * <span class="number">0.5</span>);</span><br><span class="line">d.y *= resolution.y / resolution.x * scale;</span><br><span class="line">d.x *= scale;</span><br><span class="line">vec3 rayDir = <span class="built_in">normalize</span>(d.x * camera.right + d.y * camera.up + camera.forward);</span><br><span class="line"></span><br><span class="line">vec3 focalPoint = camera.focalDist * rayDir;</span><br><span class="line"><span class="type">float</span> cam_r1 = <span class="built_in">rand</span>() * TWO_PI;</span><br><span class="line"><span class="type">float</span> cam_r2 = <span class="built_in">rand</span>() * camera.aperture;</span><br><span class="line">vec3 randomAperturePos = (<span class="built_in">cos</span>(cam_r1) * camera.right + <span class="built_in">sin</span>(cam_r1) * camera.up) * <span class="built_in">sqrt</span>(cam_r2);</span><br><span class="line">vec3 finalRayDir = <span class="built_in">normalize</span>(focalPoint - randomAperturePos);</span><br><span class="line"></span><br><span class="line">Ray ray = <span class="built_in">Ray</span>(camera.position + randomAperturePos, finalRayDir);</span><br></pre></td></tr></table></figure>
 <p>刚开始看这段代码的时候，没有想清楚代码里预设的内容，也即成像平面的距离是1；这里面注意两个地方，成像平面（的距离，z方向的位移）上的点来确定光线的方向，以及对焦距离确定对焦点。</p>
 <p>Near Plane（近平面） 是裁剪用的，距离相机很近（比如
 0.01），比它更近的物体不渲染。在光栅化管线中有意义，在 path tracing
 中通常不需要。</p>
-<p>Image Plane（成像平面） 是你代码中构造 <code>rayDir</code>
+<p>Image Plane（成像平面） 是代码中构造 <code>rayDir</code>
 的那个虚拟平面，距离相机为 1（因为 <code>camera.forward</code>
 是单位向量，<code>d.x</code> 和 <code>d.y</code>
 是在这个平面上的偏移）。它的作用是把像素坐标转换为光线方向，跟最终画面的”对焦”无关。</p>
 <p>focalDist（对焦距离）
 是摄影概念，表示相机到”焦平面”的距离。焦平面上的物体是完全清晰的，偏离焦平面越远的物体越模糊（景深效果）。这个值一般比较大，比如
 5.0、10.0，取决于你想对焦到场景中多远的位置，是针对于场景中的距离的概念。<code>focalPoint</code>计算这句，是在相机空间下计算的，其参与<code>finalRayDir</code>的计算为什么没有带上<code>camera.position</code>，因为一加一减，就不需要了。</p>
+<!-- https://www.kevinbeason.com/smallpt/forward.cpp
+https://github.com/wedusk101/smallpt/blob/master/smallpt.cpp -->
+<h2 id="smallpt">smallpt</h2>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> *argv[])</span></span>&#123; </span><br><span class="line">  <span class="type">int</span> w=<span class="number">1024</span>, h=<span class="number">768</span>, samps = argc==<span class="number">2</span> ? <span class="built_in">atoi</span>(argv[<span class="number">1</span>])/<span class="number">4</span> : <span class="number">1</span>; <span class="comment">// # samples </span></span><br><span class="line">  <span class="function">Ray <span class="title">cam</span><span class="params">(Vec(<span class="number">50</span>,<span class="number">52</span>,<span class="number">295.6</span>), Vec(<span class="number">0</span>,<span class="number">-0.042612</span>,<span class="number">-1</span>).norm())</span></span>; <span class="comment">// cam pos, dir </span></span><br><span class="line">  Vec cx=<span class="built_in">Vec</span>(w*<span class="number">.5135</span>/h), cy=(cx%cam.d).<span class="built_in">norm</span>()*<span class="number">.5135</span>, r, *c=<span class="keyword">new</span> Vec[w*h]; </span><br><span class="line"><span class="meta">#<span class="keyword">pragma</span> omp parallel for schedule(dynamic, 1) private(r)       <span class="comment">// OpenMP </span></span></span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> y=<span class="number">0</span>; y&lt;h; y++)&#123;                       <span class="comment">// Loop over image rows </span></span><br><span class="line">    <span class="built_in">fprintf</span>(stderr,<span class="string">&quot;\rRendering (%d spp) %5.2f%%&quot;</span>,samps*<span class="number">4</span>,<span class="number">100.</span>*y/(h<span class="number">-1</span>)); </span><br><span class="line">    <span class="keyword">for</span> (<span class="type">unsigned</span> <span class="type">short</span> x=<span class="number">0</span>, Xi[<span class="number">3</span>]=&#123;<span class="number">0</span>,<span class="number">0</span>,y*y*y&#125;; x&lt;w; x++)   <span class="comment">// Loop cols </span></span><br><span class="line">      <span class="keyword">for</span> (<span class="type">int</span> sy=<span class="number">0</span>, i=(h-y<span class="number">-1</span>)*w+x; sy&lt;<span class="number">2</span>; sy++)     <span class="comment">// 2x2 subpixel rows </span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> sx=<span class="number">0</span>; sx&lt;<span class="number">2</span>; sx++, r=<span class="built_in">Vec</span>())&#123;        <span class="comment">// 2x2 subpixel cols </span></span><br><span class="line">          <span class="keyword">for</span> (<span class="type">int</span> s=<span class="number">0</span>; s&lt;samps; s++)&#123; </span><br><span class="line">            <span class="type">double</span> r1=<span class="number">2</span>*<span class="built_in">erand48</span>(Xi), dx=r1&lt;<span class="number">1</span> ? <span class="built_in">sqrt</span>(r1)<span class="number">-1</span>: <span class="number">1</span>-<span class="built_in">sqrt</span>(<span class="number">2</span>-r1); </span><br><span class="line">            <span class="type">double</span> r2=<span class="number">2</span>*<span class="built_in">erand48</span>(Xi), dy=r2&lt;<span class="number">1</span> ? <span class="built_in">sqrt</span>(r2)<span class="number">-1</span>: <span class="number">1</span>-<span class="built_in">sqrt</span>(<span class="number">2</span>-r2); </span><br><span class="line">            Vec d = cx*( ( (sx<span class="number">+.5</span> + dx)/<span class="number">2</span> + x)/w - <span class="number">.5</span>) + </span><br><span class="line">                    cy*( ( (sy<span class="number">+.5</span> + dy)/<span class="number">2</span> + y)/h - <span class="number">.5</span>) + cam.d; </span><br><span class="line">            r = r + <span class="built_in">radiance</span>(<span class="built_in">Ray</span>(cam.o+d*<span class="number">140</span>,d.<span class="built_in">norm</span>()),<span class="number">0</span>,Xi)*(<span class="number">1.</span>/samps); </span><br><span class="line">          &#125; <span class="comment">// Camera rays are pushed ^^^^^ forward to start in interior </span></span><br><span class="line">          c[i] = c[i] + <span class="built_in">Vec</span>(<span class="built_in">clamp</span>(r.x),<span class="built_in">clamp</span>(r.y),<span class="built_in">clamp</span>(r.z))*<span class="number">.25</span>; </span><br><span class="line">        &#125; </span><br><span class="line">  &#125; </span><br><span class="line">  FILE *f = <span class="built_in">fopen</span>(<span class="string">&quot;image.ppm&quot;</span>, <span class="string">&quot;w&quot;</span>);         <span class="comment">// Write image to PPM file. </span></span><br><span class="line">  <span class="built_in">fprintf</span>(f, <span class="string">&quot;P3\n%d %d\n%d\n&quot;</span>, w, h, <span class="number">255</span>); </span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>; i&lt;w*h; i++) </span><br><span class="line">    <span class="built_in">fprintf</span>(f,<span class="string">&quot;%d %d %d &quot;</span>, <span class="built_in">toInt</span>(c[i].x), <span class="built_in">toInt</span>(c[i].y), <span class="built_in">toInt</span>(c[i].z)); </span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+<h3 id="光线计算">光线计算</h3>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Vec d = cx*(((sx<span class="number">+.5</span>+dx)/<span class="number">2</span>+x)/w<span class="number">-.5</span>) + cy*(((sy<span class="number">+.5</span>+dy)/<span class="number">2</span>+y)/h<span class="number">-.5</span>) + cam.d;</span><br></pre></td></tr></table></figure>
+<p><strong>像素的 2×2 子像素结构：</strong> 每个像素被分成 2×2
+的子像素（sx∈{0,1}，sy∈{0,1}）。对于子像素内的某一个采样点，它在像素内部的位置可以这样理解：</p>
+<p>以 x 方向为例，<code>(sx + 0.5 + dx) / 2</code>
+计算的是采样点在当前像素内的相对偏移（范围大致 [0, 1]）。其中
+<code>sx + 0.5</code> 是子像素的中心位置（sx=0 时为 0.5，sx=1 时为
+1.5），<code>dx</code> 是 tent filter 产生的随机抖动（范围 [-1,
+1]），除以 2 是因为一个像素被分成了 2 个子像素。所以当 sx=0
+时，采样中心在像素内偏移 0.25 处；sx=1 时在 0.75
+处，两个子像素的采样区域合理地覆盖了整个像素。</p>
+<p><strong>映射到归一化屏幕坐标：</strong> 加上像素坐标 <code>x</code>
+后除以图像宽度 <code>w</code>，再减去
+0.5，就得到了一个以图像中心为原点、范围约 [-0.5, 0.5] 的归一化坐标。y
+方向同理。</p>
+<p><strong>合成方向向量：</strong> <code>cx</code> 和 <code>cy</code>
+是相机的”右”和”上”方向基向量，它们的长度编码了视场角（FOV）。<code>cx = Vec(w * 0.5135 / h, 0, 0)</code>
+保证了宽高比正确，<code>cy</code> 的长度为
+0.5135，对应垂直方向的半视场角约为 ((0.5135/2) °)。将归一化坐标分别乘以
+<code>cx</code> 和 <code>cy</code>，再加上相机的朝向
+<code>cam.d</code>，就得到了这条采样光线的（未归一化的）方向向量
+<code>d</code>。</p>
+<p>本质上这就是一个<strong>针孔相机模型</strong>：<code>cam.d</code>
+指向图像中心，<code>cx</code> 和 <code>cy</code>
+控制偏离中心的程度。</p>
+<p>其中，<code>cam.d = Vec(0,-0.042612,-1)</code>，x分离是0；<code>Vec cx=Vec(w*.5135/h, 0, 0)</code>,cx的y、z分量也分别为0。<code>cam.d</code>和<code>cx</code>是正交的。相机到成像平面的距离是1，cam.d是归一化后的向量，<code>Vec d</code>的计算中，x/y方向上的偏移后直接加的<code>cam.d</code>，其实是省略了<code>cam.d * length</code>。从光线的方向d的计算中，可得cy的跨度是<code>0.5135</code>，因此<span
+class="math inline">\(\tan\frac{fov}{2} =
+\frac{0.5135}{2}\)</span>。</p>
+<h3 id="光照计算">光照计算</h3>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">r = r + <span class="built_in">radiance</span>(<span class="built_in">Ray</span>(cam.o + d*<span class="number">140</span>, d.<span class="built_in">norm</span>()), <span class="number">0</span>, Xi) * (<span class="number">1.</span>/samps);</span><br></pre></td></tr></table></figure>
+<p><strong>光线起点前推 (<code>cam.o + d * 140</code>)：</strong>
+相机实际位置在 ((50, 52, 295.6))，位于 Cornell Box
+的<strong>外面</strong>（场景大致在 (z )
+范围内）。如果光线从相机原点出发，需要先穿过盒子的开口才能进入场景内部。通过沿方向
+<code>d</code> 前推 140 个单位，光线起点被移到了大约 (z )
+的位置，也就是<strong>直接从盒子内部开始</strong>，避免了不必要的求交计算。代码注释
+<code>"Camera rays are pushed forward to start in interior"</code>
+说的就是这个意思。</p>
+<p><strong>采样平均 (<code>* (1./samps)</code>)：</strong>
+每个子像素内取 <code>samps</code> 个采样，每个采样的辐射贡献乘以 (1/)
+后累加到 <code>r</code> 中，实现蒙特卡洛积分的均值估计。外层还有
+<code>c[i] = c[i] + Vec(clamp(r.x),clamp(r.y),clamp(r.z))*.25</code>，即四个子像素各贡献
+1/4。</p>
+<h3 id="参考">参考</h3>
+<p><a
+target="_blank" rel="noopener" href="https://drive.google.com/file/d/0B8g97JkuSSBwUENiWTJXeGtTOHFmSm51UC01YWtCZw/view?resourcekey=0-BSMES1GmPEtIIcv6EgBTjw">smallpt代码解析ppt</a>
+<a
+target="_blank" rel="noopener" href="https://www.zhihu.com/question/50503187">smallpt中魔数的意义</a>
+<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/490551718">smallpt源码解读</a></p>
 
     </div>
 
@@ -380,6 +434,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#glsl-pathtracer"><span class="nav-number">1.</span> <span class="nav-text">GLSL-PathTracer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#smallpt"><span class="nav-number">2.</span> <span class="nav-text">smallpt</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%89%E7%BA%BF%E8%AE%A1%E7%AE%97"><span class="nav-number">2.1.</span> <span class="nav-text">光线计算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%89%E7%85%A7%E8%AE%A1%E7%AE%97"><span class="nav-number">2.2.</span> <span class="nav-text">光照计算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">2.3.</span> <span class="nav-text">参考</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
