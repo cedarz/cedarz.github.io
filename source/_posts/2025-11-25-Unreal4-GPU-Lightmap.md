@@ -112,9 +112,10 @@ IrradianceAndSampleCount[TexelIndexInPool].rgb += float3(RadianceValue * Tangent
 > project/Saved/ShaderDebugInfo/PCD3D_SM5/Global/FLightmapPathTracingRGS/0/LightmapPathTracing.usf
 
 
-# 参考
+## 参考
 
 - [Unity Bakery: baking artifact free lightmaps](https://ndotl.wordpress.com/2018/08/29/baking-artifact-free-lightmaps/)
 - [xatlas](https://github.com/jpcy/xatlas)
+- [GPU Lightmass全局光照](https://dev.epicgames.com/documentation/unreal-engine/gpu-lightmass-global-illumination?application_version=4.27&lang=zh-CN)
 - [Introducing Ray Tracing in Unreal Engine 4](https://developer.nvidia.com/blog/introducing-ray-tracing-in-unreal-engine-4/)
 <!-- - [NvRTX unreal-engine](https://developer.nvidia.com/game-engines/unreal-engine/rtx-branch#access-nvrtx) -->
