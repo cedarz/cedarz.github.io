@@ -17,10 +17,12 @@ UE4通过ightmapPathTracing.usf实现静态物体的lightmap烘焙。lightmap是
 Lightmap本质上存储的是表面的入射辐照度（irradiance），它隐含的假设是最终着色时该表面以 Lambertian 漫反射来使用这份光照数据，运行时乘以 diffuse albedo 得到出射颜色。UE4 lightmass在烘焙lightmap时，在计算间接光弹射时，所有中间弹射表面也被作为diffuse reflector处理，在中间弹射点做cosine-weighted半球采样，忽略材质的specular、roughness、metallic等属性，忽略特殊的光效，比如焦散（caustics，即 LSDE光照路径）。Lightmass 烘焙的整个光照传输链路中，每一次弹射都是diffuse的，Lightmass取Base Color作为弹射albedo，理论上金属化的表面（metallic = 1）在PBR中几乎没有diffuse分量，这样的处理可能会有不一致的问题。
 
 Lightmap是view-independent的，因为它只记录一个光照数值（也可能是Directional lightmaps，记录一个direction map，用来使用normal map）。但是间接光路的计算只考虑diffuse，可能更多源自于对工程和收益的权衡。
+
 - specular BRDF或glossy BRDF采样效率：按照brdf采样可能对不上实际光源，cosine半球采样可能效率差
 - 焦散路径本质上不适合路径追踪的 gathering 方式：业界公认的高效做法是从光源出发的 photon mapping 或双向路径追踪（BDPT）
 - Lightmap分辨率低：焦散、高光这种高频信息的存储
 - 工程复杂度与收益不成正比
+
 因此UE4中Lightmass的烘培是全diffuse处理，而specular部分则由运行时其他系统（Reflection Capture、SSR、Lumen 等）来实现。
 
 
