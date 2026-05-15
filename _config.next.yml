@@ -1,0 +1,79 @@
+# NexT v8 主题配置（Alternate Theme Config）
+# 参考: https://theme-next.js.org/docs/getting-started/configuration
+
+# ---------------------------------------------------------------
+# Custom File Paths
+# ---------------------------------------------------------------
+custom_file_path:
+  head: source/_data/head.njk
+  style: source/_data/styles.styl
+
+# ---------------------------------------------------------------
+# Scheme Settings
+# ---------------------------------------------------------------
+scheme: Pisces
+
+# ---------------------------------------------------------------
+# Menu Settings
+# ---------------------------------------------------------------
+menu:
+  home: / || fa fa-home
+  tags: /tags/ || fa fa-tags
+  categories: /categories/ || fa fa-th
+  archives: /archives/ || fa fa-archive
+  about: /about/ || fa fa-user
+
+menu_settings:
+  icons: true
+  badges: false
+
+# ---------------------------------------------------------------
+# Codeblock
+# ---------------------------------------------------------------
+codeblock:
+  theme:
+    light: github
+    dark: stackoverflow-dark
+  copy_button:
+    enable: true
+    show_result: true
+    style: flat
+
+# ---------------------------------------------------------------
+# Reading Progress
+# ---------------------------------------------------------------
+reading_progress:
+  enable: true
+  position: top
+  color: "#37c6c0"
+  height: 3px
+
+# ---------------------------------------------------------------
+# Math
+# ---------------------------------------------------------------
+math:
+  every_page: true
+  mathjax:
+    enable: true
+    tags: none
+
+# ---------------------------------------------------------------
+# Mermaid
+# ---------------------------------------------------------------
+mermaid:
+  enable: true
+  theme:
+    light: default
+    dark: dark
+
+# ---------------------------------------------------------------
+# busuanzi（访客统计，默认关闭）
+# ---------------------------------------------------------------
+busuanzi_count:
+  enable: false
+  total_visitors: true
+  total_visitors_icon: fa fa-user
+  total_views: true
+  total_views_icon: fa fa-eye
+  post_views: true
+  post_views_icon: far fa-eye

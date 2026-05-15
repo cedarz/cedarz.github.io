@@ -44,18 +44,18 @@ render_drafts: false
 post_asset_folder: false
 relative_link: false
 future: true
+syntax_highlighter: highlight.js
 highlight:
-  enable: true
   line_number: true
   auto_detect: false
   tab_replace: ''
   wrap: true
   hljs: false
 prismjs:
-  enable: false
   preprocess: true
   line_number: true
   tab_replace: ''
+  line_threshold: 0 
 
 # Home page setting
 # path: Root path for your blogs index page. (default = '')
@@ -103,56 +103,6 @@ plugins:
 ## Themes: https://hexo.io/themes/
 # theme: landscape
 theme: next
-theme_config:
-  scheme: Pisces
-  codeblock:
-    # Code Highlight theme
-    # Available values: normal | night | night eighties | night blue | night bright | solarized | solarized dark | galactic
-    # See: https://github.com/chriskempson/tomorrow-theme
-    highlight_theme: night bright
-    # Add copy button on codeblock
-    copy_button:
-      enable: true
-      # Show text copy result.
-      show_result: true
-      # Available values: default | flat | mac
-      style: mac
-  reading_process:
-    enable: true
-  # ---------------------------------------------------------------
-  # Menu Settings
-  # ---------------------------------------------------------------
-
-  # Usage: `Key: /link/ || icon`
-  # Key is the name of menu item. If the translation for this item is available, the translated text will be loaded, otherwise the Key name will be used. Key is case-senstive.
-  # Value before `||` delimiter is the target link, value after `||` delimiter is the name of Font Awesome icon.
-  # When running the site in a subdirectory (e.g. yoursite.com/blog), remove the leading slash from link value (/archives -> archives).
-  # External url should start with http:// or https://
-  menu:
-    home: / || fa fa-home
-    tags: /tags/ || fa fa-tags
-    categories: /categories/ || fa fa-th
-    archives: /archives/ || fa fa-archive
-    about: /about/ || fa fa-user
-    # schedule: /schedule/ || fa fa-calendar
-    # sitemap: /sitemap.xml || fa fa-sitemap
-    #commonweal: /404/ || fa fa-heartbeat
-
-  # Enable / Disable menu icons / item badges.
-  menu_settings:
-    icons: true
-    badges: false
-    
-  # Show Views / Visitors of the website / page with busuanzi.
-  # Get more information on http://ibruce.info/2015/04/04/busuanzi
-  busuanzi_count:
-    enable: false
-    total_visitors: true
-    total_visitors_icon: fa fa-user
-    total_views: true
-    total_views_icon: fa fa-eye
-    post_views: true
-    post_views_icon: fa fa-eye
 
 
 excerpt:

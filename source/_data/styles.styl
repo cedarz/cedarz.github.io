@@ -1,0 +1,42 @@
+// ---------------------------------------------------------------
+// 代码块：统一背景，消除方框感
+// figure.highlight 是 Hexo highlight.js 生成的外层容器
+// ---------------------------------------------------------------
+figure.highlight,
+figure.highlight table,
+figure.highlight tr,
+figure.highlight td.code,
+figure.highlight td.code pre {
+  background: #eaecef !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+figure.highlight td.gutter,
+figure.highlight td.gutter pre {
+  background: #eaecef !important;
+  border-right: 1px solid #dde1e5 !important;
+}
+
+// ---------------------------------------------------------------
+// 内联代码：独立灰色背景，不随代码块主题变化
+// ---------------------------------------------------------------
+:not(pre) > code {
+  background: #eaecef !important;
+  color: inherit !important;
+  border-radius: 3px;
+  padding: 2px 4px;
+}
+
+// ---------------------------------------------------------------
+// 文章正文超链接颜色
+// ---------------------------------------------------------------
+.post-body a:not(.btn) {
+  color: #0593d3;
+  border-bottom: none;
+  &:hover {
+    color: #0477ab;
+    text-decoration: underline;
+  }
+}
