@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.1.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"darkpixel.top","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"github","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"flat","show_result":true},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="记录一下渲染子进程中的截帧工具的使用，记录原因是，一开始并不顺利。目标程序是一个launcher进程，然后需要截帧的是子进程，渲染时OpenGL的，话说几个月前，通过RenderDoc的Capture Child Processes配置是成功截取过的，但是这次失效了，连同Nsight Graphics也遇到了问题。经过一些摸索，最终在两个工具中都能顺利截帧，在此记录一下。 RenderDoc Re">
+<meta property="og:type" content="article">
+<meta property="og:title" content="截帧工具在渲染子进程中的使用">
+<meta property="og:url" content="https://darkpixel.top/2026/06/01/%E6%88%AA%E5%B8%A7%E5%B7%A5%E5%85%B7%E5%9C%A8%E6%B8%B2%E6%9F%93%E5%AD%90%E8%BF%9B%E7%A8%8B%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8/index.html">
+<meta property="og:site_name" content="Integrator">
+<meta property="og:description" content="记录一下渲染子进程中的截帧工具的使用，记录原因是，一开始并不顺利。目标程序是一个launcher进程，然后需要截帧的是子进程，渲染时OpenGL的，话说几个月前，通过RenderDoc的Capture Child Processes配置是成功截取过的，但是这次失效了，连同Nsight Graphics也遇到了问题。经过一些摸索，最终在两个工具中都能顺利截帧，在此记录一下。 RenderDoc Re">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://darkpixel.top/images/%E6%88%AA%E5%B8%A7%E5%B7%A5%E5%85%B7/renderdoc_settings.png">
+<meta property="og:image" content="https://darkpixel.top/images/%E6%88%AA%E5%B8%A7%E5%B7%A5%E5%85%B7/nsight_settings.png">
+<meta property="article:published_time" content="2026-06-01T15:27:26.000Z">
+<meta property="article:modified_time" content="2026-06-01T09:02:10.190Z">
+<meta property="article:author" content="黑色像素">
+<meta property="article:tag" content="Computer Graphics">
+<meta property="article:tag" content="OpenGL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://darkpixel.top/images/%E6%88%AA%E5%B8%A7%E5%B7%A5%E5%85%B7/renderdoc_settings.png">
+
+
+<link rel="canonical" href="https://darkpixel.top/2026/06/01/%E6%88%AA%E5%B8%A7%E5%B7%A5%E5%85%B7%E5%9C%A8%E6%B8%B2%E6%9F%93%E5%AD%90%E8%BF%9B%E7%A8%8B%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://darkpixel.top/2026/06/01/%E6%88%AA%E5%B8%A7%E5%B7%A5%E5%85%B7%E5%9C%A8%E6%B8%B2%E6%9F%93%E5%AD%90%E8%BF%9B%E7%A8%8B%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8/","path":"2026/06/01/截帧工具在渲染子进程中的使用/","title":"截帧工具在渲染子进程中的使用"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>截帧工具在渲染子进程中的使用 | Integrator</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.10.1/mermaid.min.js","integrity":"sha256-BmQmdWDS8X2OTbrwELWK366LV6escyWhHHe0XCTU/Hk="}}</script>
+  <script src="/js/third-party/tags/mermaid.js" defer></script>
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+<link rel="stylesheet" href="/js/image-compare-viewer.min.css">
+<script src="/js/image-compare-viewer.min.js"></script>
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start -->
+<style>
+/* Enhanced Image 样式 */
+.enhanced-image:hover {
+  transform: scale(1.02);
+  transition: transform 0.3s ease;
+}
+
+/* 模态框样式 */
+.image-modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+  cursor: zoom-out;
+}
+
+.image-modal-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 90%;
+  max-height: 90%;
+  text-align: center;
+}
+
+.image-modal img {
+  max-width: 100%;
+  max-height: 80vh;
+  border-radius: 8px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+.image-modal .close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  color: #fff;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.image-modal .close:hover {
+  opacity: 0.7;
+}
+
+/* 响应式 */
+@media (max-width: 768px) {
+  img[style*="width"] {
+    width: 100% !important;
+  }
+}
+</style>
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Integrator</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#renderdoc"><span class="nav-number">1.</span> <span class="nav-text">RenderDoc</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#nsight-graphics"><span class="nav-number">2.</span> <span class="nav-text">Nsight Graphics</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">黑色像素</p>
+  <div class="site-description" itemprop="description">活着就要继续前进</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">43</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://darkpixel.top/2026/06/01/%E6%88%AA%E5%B8%A7%E5%B7%A5%E5%85%B7%E5%9C%A8%E6%B8%B2%E6%9F%93%E5%AD%90%E8%BF%9B%E7%A8%8B%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="黑色像素">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Integrator">
+      <meta itemprop="description" content="活着就要继续前进">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="截帧工具在渲染子进程中的使用 | Integrator">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          截帧工具在渲染子进程中的使用
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2026-06-01 15:27:26 / 修改时间：09:02:10" itemprop="dateCreated datePublished" datetime="2026-06-01T15:27:26+00:00">2026-06-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Computer-Graphics/" itemprop="url" rel="index"><span itemprop="name">Computer Graphics</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Computer-Graphics/OpenGL/" itemprop="url" rel="index"><span itemprop="name">OpenGL</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>记录一下渲染子进程中的截帧工具的使用，记录原因是，一开始并不顺利。目标程序是一个launcher进程，然后需要截帧的是子进程，渲染时OpenGL的，话说几个月前，通过RenderDoc的<code>Capture Child Processes</code>配置是成功截取过的，但是这次失效了，连同<code>Nsight Graphics</code>也遇到了问题。经过一些摸索，最终在两个工具中都能顺利截帧，在此记录一下。</p>
+<h2 id="renderdoc">RenderDoc</h2>
+<p>RenderDoc设置<code>Capture Child Processes</code>，但是启动子进程一直失败，先是尝试使用File&gt;Attach
+to runing Instance未奏效，然后尝试进程注入。</p>
+<p><img src="/images/截帧工具/renderdoc_settings.png" /></p>
+<p>RenderDoc提供了两种注入方式，一种是手动注入(Enable process
+injection)，通过File&gt;Inject into Process；第二种是全局hooking（Allow
+global process
+hooking)，界面上提示了这种方式的风险，但是成功了，设置了全局hook之后，直接启动可执行程序，然后通过Attach方式连接。</p>
+<h2 id="nsight-graphics">Nsight Graphics</h2>
+<p><code>Nsight Graphics</code>可能作为nVidia的工具，确实在启动程序上更胜一筹，但是子进程中截帧之后，截帧倒是能够截帧，但并没有顺利进入<code>API Inspector</code>窗口。最后查AI，虽然AI给的指引都是瞎编的，但是提醒了我可能需要通过Attach的方式连接。</p>
+<p><img src="/images/截帧工具/nsight_settings.png" /></p>
+<p>注意<code>Automatically Connect</code>要设置为No。启动目标进程，然后再通过Attach功能，连接进程，就能够顺利截帧分析了。</p>
+<h2 id="总结">总结</h2>
+<p><code>Nsight Graphics</code>虽然很强，RenderDoc也有很多可取之处，自我感觉RenderDoc的要简洁直观一些。比如Pixel
+History功能，在RenderDoc里就更可靠一些，且提示信息更简洁，<code>Nsight Graphics</code>显示好像UI里没有展示全部的pixel历史，如果我的操作没问题的话。网上有说Nsight
+Graphics 对 OpenGL 的 Pixel History 不如 D3D11/D3D12/Vulkan
+完善，可能OpenGL真到了快完全被抛弃的时候了。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Computer-Graphics/" rel="tag"># Computer Graphics</a>
+              <a href="/tags/OpenGL/" rel="tag"># OpenGL</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/05/15/%E6%96%87%E6%9C%AC%E7%94%9F%E6%88%90%E5%9B%BE%E8%A1%A8%E6%96%B9%E6%B3%95/" rel="prev" title="文本生成图表方法">
+                  <i class="fa fa-angle-left"></i> 文本生成图表方法
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">黑色像素</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+<!-- hexo injector body_end start -->
+<div id="imageModal" class="image-modal">
+  <span class="close">×</span>
+  <div class="image-modal-content">
+    <img id="modalImage" src="" alt="">
+  </div>
+</div>
+
+<script>
+function openImageModal(img) {
+  const modal = document.getElementById('imageModal');
+  const modalImg = document.getElementById('modalImage');
+  
+  modal.style.display = 'block';
+  modalImg.src = img.src;
+  modalImg.alt = img.alt;
+  
+  // 关闭事件
+  modal.onclick = function(e) {
+    if (e.target === modal) {
+      modal.style.display = 'none';
+    }
+  }
+  
+  document.querySelector('.image-modal .close').onclick = function() {
+    modal.style.display = 'none';
+  }
+  
+  document.onkeydown = function(event) {
+    if (event.key === 'Escape') {
+      modal.style.display = 'none';
+    }
+  }
+}
+</script>
+<!-- hexo injector body_end end --></body>
+</html>
