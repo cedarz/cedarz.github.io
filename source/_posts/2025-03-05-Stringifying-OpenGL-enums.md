@@ -65,7 +65,7 @@ typedef unsigned int GLenum;
 2. 合并数值相同的枚举值，在`switch`实现中只保留一个枚举值
 3. 对`0xFFFFFFFF`、`0xFFFFFFFFFFFFFFFF`这种，单独处理
    
-最终，完成了自动化生成`OpenGL`枚举值字符串化的头文件。
+最终，实现脚本来自动化生成`OpenGL`枚举值字符串化的头文件。
 {% include_code glenum.py lang:python glenum.py %}
 
 # 参考
