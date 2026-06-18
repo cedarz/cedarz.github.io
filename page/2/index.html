@@ -319,18 +319,18 @@ mjx-container[display="true"] + br {
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">44</span>
+          <span class="site-state-item-count">45</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-count">26</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-count">26</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -347,6 +347,113 @@ mjx-container[display="true"] + br {
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://darkpixel.top/2025/11/25/Unreal4-GPU-Lightmap/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="黑色像素">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Integrator">
+      <meta itemprop="description" content="活着就要继续前进">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | Integrator">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/11/25/Unreal4-GPU-Lightmap/" class="post-title-link" itemprop="url">Unreal4: GPU Lightmap</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-11-25 09:18:21" itemprop="dateCreated datePublished" datetime="2025-11-25T09:18:21+00:00">2025-11-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-06-18 02:15:54" itemprop="dateModified" datetime="2026-06-18T02:15:54+00:00">2026-06-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Computer-Graphics/" itemprop="url" rel="index"><span itemprop="name">Computer Graphics</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Computer-Graphics/Unreal4/" itemprop="url" rel="index"><span itemprop="name">Unreal4</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>UE4通过ightmapPathTracing.usf实现静态物体的lightmap烘焙。lightmap是把模型表面的光照情况预计算并缓存起来的一张贴图，首先讲模型表面展开到uv空间且不能uv覆盖，因为平常的uv贴图可以复用，但是模型上每一个点的光照情况可能都不一样；然后，对lightmap
+texel对应的模型表面点，做光照的半球积分。</p>
+<h2 id="lightmap的材质限定">lightmap的材质限定</h2>
+<p>Lightmap本质上存储的是表面的入射辐照度（irradiance），它隐含的假设是最终着色时该表面以
+Lambertian 漫反射来使用这份光照数据，运行时乘以 diffuse albedo
+得到出射颜色。UE4
+lightmass在烘焙lightmap时，在计算间接光弹射时，所有中间弹射表面也被作为diffuse
+reflector处理，在中间弹射点做cosine-weighted半球采样，忽略材质的specular、roughness、metallic等属性，忽略特殊的光效，比如焦散（caustics，即
+LSDE光照路径）。Lightmass
+烘焙的整个光照传输链路中，每一次弹射都是diffuse的，Lightmass取Base
+Color作为弹射albedo，理论上金属化的表面（metallic =
+1）在PBR中几乎没有diffuse分量，这样的处理可能会有不一致的问题。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2025/11/25/Unreal4-GPU-Lightmap/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -392,7 +499,7 @@ mjx-container[display="true"] + br {
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-06-15 09:52:11" itemprop="dateModified" datetime="2026-06-15T09:52:11+00:00">2026-06-15</time>
+      <time title="修改时间：2026-06-18 02:15:54" itemprop="dateModified" datetime="2026-06-18T02:15:54+00:00">2026-06-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -528,7 +635,7 @@ vs. Photometric Units</a></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-06-15 09:52:11" itemprop="dateModified" datetime="2026-06-15T09:52:11+00:00">2026-06-15</time>
+      <time title="修改时间：2026-06-18 02:15:54" itemprop="dateModified" datetime="2026-06-18T02:15:54+00:00">2026-06-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -628,7 +735,7 @@ Radiance, ray casting function <span class="math inline"><mjx-container class="M
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-06-15 09:52:11" itemprop="dateModified" datetime="2026-06-15T09:52:11+00:00">2026-06-15</time>
+      <time title="修改时间：2026-06-18 02:15:54" itemprop="dateModified" datetime="2026-06-18T02:15:54+00:00">2026-06-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -721,7 +828,7 @@ Radiance, ray casting function <span class="math inline"><mjx-container class="M
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-06-15 09:52:11" itemprop="dateModified" datetime="2026-06-15T09:52:11+00:00">2026-06-15</time>
+      <time title="修改时间：2026-06-18 02:15:54" itemprop="dateModified" datetime="2026-06-18T02:15:54+00:00">2026-06-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -819,7 +926,7 @@ Radiance, ray casting function <span class="math inline"><mjx-container class="M
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-06-15 09:52:11" itemprop="dateModified" datetime="2026-06-15T09:52:11+00:00">2026-06-15</time>
+      <time title="修改时间：2026-06-18 02:15:54" itemprop="dateModified" datetime="2026-06-18T02:15:54+00:00">2026-06-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -917,7 +1024,7 @@ Radiance, ray casting function <span class="math inline"><mjx-container class="M
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-06-15 09:52:11" itemprop="dateModified" datetime="2026-06-15T09:52:11+00:00">2026-06-15</time>
+      <time title="修改时间：2026-06-18 02:15:54" itemprop="dateModified" datetime="2026-06-18T02:15:54+00:00">2026-06-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1017,7 +1124,7 @@ Radiance, ray casting function <span class="math inline"><mjx-container class="M
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-06-15 09:52:11" itemprop="dateModified" datetime="2026-06-15T09:52:11+00:00">2026-06-15</time>
+      <time title="修改时间：2026-06-18 02:15:54" itemprop="dateModified" datetime="2026-06-18T02:15:54+00:00">2026-06-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1113,7 +1220,7 @@ Radiance, ray casting function <span class="math inline"><mjx-container class="M
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-06-15 09:52:11" itemprop="dateModified" datetime="2026-06-15T09:52:11+00:00">2026-06-15</time>
+      <time title="修改时间：2026-06-18 02:15:54" itemprop="dateModified" datetime="2026-06-18T02:15:54+00:00">2026-06-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1215,7 +1322,7 @@ Model）。相比于标准的468个关键点版本，新增的10个关键点主�
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-06-15 09:52:11" itemprop="dateModified" datetime="2026-06-15T09:52:11+00:00">2026-06-15</time>
+      <time title="修改时间：2026-06-18 02:15:54" itemprop="dateModified" datetime="2026-06-18T02:15:54+00:00">2026-06-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1251,104 +1358,6 @@ Model</a>，包括开源非商用版本和商用版本 - <a target="_blank" rel=
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2025/07/22/A-Multiresolution-3D-Morphable-Face-Model-and-Fitting-Framework/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://darkpixel.top/2025/07/16/OpenGL%E9%97%AE%E9%A2%98%E9%9B%86%E9%94%A6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="黑色像素">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Integrator">
-      <meta itemprop="description" content="活着就要继续前进">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | Integrator">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2025/07/16/OpenGL%E9%97%AE%E9%A2%98%E9%9B%86%E9%94%A6/" class="post-title-link" itemprop="url">OpenGL问题集锦</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2025-07-16 13:38:39" itemprop="dateCreated datePublished" datetime="2025-07-16T13:38:39+00:00">2025-07-16</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-06-15 09:52:11" itemprop="dateModified" datetime="2026-06-15T09:52:11+00:00">2026-06-15</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Computer-Graphics/" itemprop="url" rel="index"><span itemprop="name">Computer Graphics</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Computer-Graphics/OpenGL/" itemprop="url" rel="index"><span itemprop="name">OpenGL</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="清屏和color-mask的顺序">清屏和Color Mask的顺序</h1>
-<p>其实很好理解，<code>glColorMask</code>是写入的开关，glClear作为<code>rendering command</code>，也是要受到<code>glColorMask</code>的作用的。但是，
-</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">glColorMask</span>(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2025/07/16/OpenGL%E9%97%AE%E9%A2%98%E9%9B%86%E9%94%A6/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
