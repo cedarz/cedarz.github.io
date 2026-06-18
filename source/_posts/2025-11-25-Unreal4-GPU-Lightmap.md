@@ -63,8 +63,8 @@ MaterialEval.Pdf: $\frac{\cos\theta}{\pi}$
 *NEE 采样光照*
 
 $$\begin{align*}
-LightContrib &= \frac{L_i}{pdf_L} \cdot R \cdot \frac{\cos\theta}{\pi} \\
-&= \frac{L_i}{pdf_L} \cdot \frac{R}{\pi} \cdot \cos\theta \qquad \text{($\frac{R}{\pi}$为Lambert BRDF)}
+LightContrib &= PathThroughput \cdot \frac{L_i}{pdf_L} \cdot R \cdot \frac{\cos\theta}{\pi} \\
+&= PathThroughput \cdot \frac{L_i}{pdf_L} \cdot \frac{R}{\pi} \cdot \cos\theta \qquad \text{($\frac{R}{\pi}$为Lambert BRDF)}
 \end{align*}$$
 
 *Material 采样材质*
