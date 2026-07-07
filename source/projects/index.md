@@ -2,7 +2,8 @@
 title: Projects
 date: 2026-07-07 09:45:22
 comments: false
-# sidebar: false
+toc:
+  enable: false
 ---
 
 <div class="project-list">

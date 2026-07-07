@@ -75,26 +75,12 @@ figure.highlight td.gutter pre {
 }
 
 // ---------------------------------------------------------------
-// Projects 页面（参考 lisyarus：内容区 max-width 800px）
+// Projects 页面（参考 lisyarus：正文区 max-width 800px，保留 Pisces 侧栏间距）
 // ---------------------------------------------------------------
-.main:has(.project-list) {
-  justify-content: center;
-
-  .sidebar {
-    display: none;
-  }
-
-  .main-inner {
-    width: 100% !important;
-    margin-left: auto;
-    margin-right: auto;
-    float: none;
-  }
-
-  .footer-inner {
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-  }
+.main-inner.page:has(.project-list) .post-block {
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .project-list {
@@ -165,7 +151,7 @@ section.project-item:nth-of-type(even) .project-row:has(.project-thumb) {
 }
 
 @media (max-width: 767px) {
-  .main:has(.project-list) .main-inner {
+  .main-inner.page:has(.project-list) .post-block {
     max-width: 100%;
   }
 
