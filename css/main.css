@@ -1419,7 +1419,7 @@ pre code {
     vertical-align: middle;
   }
   .links-of-author a::before {
-    background: #c2b5ff;
+    background: #ff2fba;
     display: inline-block;
     margin-right: 3px;
     transform: translateY(-2px);
@@ -3065,8 +3065,5 @@ figure.highlight td.gutter pre {
   }
   .project-desc {
     text-align: left;
-  }
-  .project-image-placeholder {
-    display: none;
   }
 }
