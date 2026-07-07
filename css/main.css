@@ -1419,7 +1419,7 @@ pre code {
     vertical-align: middle;
   }
   .links-of-author a::before {
-    background: #ff2fba;
+    background: #b5e78b;
     display: inline-block;
     margin-right: 3px;
     transform: translateY(-2px);
@@ -2899,10 +2899,6 @@ body {
   .post-block {
     max-width: 100vw !important;
     box-sizing: border-box;
-  }
-  .sidebar {
-    width: 0 !important;
-    min-width: 0 !important;
   }
 }
 figure.highlight,
