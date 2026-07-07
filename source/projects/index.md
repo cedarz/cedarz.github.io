@@ -39,7 +39,9 @@ toc:
 </div>
 </div>
 </section>
-
+<hr class="project-divider">
 </div>
 
-<!-- 奇数项 project-row：文左图右；偶数项 project-row-reverse：图左文右；无图用 project-image-placeholder -->
+<!-- 添加项目：奇数项 project-row（文左图右），偶数项 project-row project-row-reverse（图左文右）
+无图用 <div class="project-image-placeholder" aria-hidden="true"></div>
+项目之间插入 <hr class="project-divider">，不要放在最后一个项目后面 -->
