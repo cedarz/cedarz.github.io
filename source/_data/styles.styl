@@ -63,19 +63,24 @@ figure.highlight td.gutter pre {
 }
 
 // ---------------------------------------------------------------
-// 文章正文超链接颜色
+// 文章正文超链接颜色（对齐 lisyarus：#cc6600 / #c60）
 // ---------------------------------------------------------------
 .post-body a:not(.btn) {
-  color: #0593d3;
+  color: #cc6600;
   border-bottom: none;
+  text-decoration: none;
+
   &:hover {
-    color: #0477ab;
+    color: #cc6600;
     text-decoration: underline;
   }
 }
 
+.post-body a:not(.btn) code {
+  color: #cc6600;
+}
 // ---------------------------------------------------------------
-// Projects 页面（参考 lisyarus：正文区 max-width 800px，保留 Pisces 侧栏间距）
+// Projects 页面（对齐 lisyarus.github.io/blog/projects.html）
 // ---------------------------------------------------------------
 .main-inner.page:has(.project-list) .post-block {
   max-width: 800px;
@@ -85,58 +90,69 @@ figure.highlight td.gutter pre {
 
 .project-list {
   margin-top: 0.5em;
-  padding: 0 4px;
+}
+
+// 分割线：仅作用于项目列表内，不影响其他页面 hr
+.project-list > hr.project-divider {
+  display: block;
+  box-sizing: content-box;
+  background: none !important;
+  background-image: none !important;
+  border: none !important;
+  border-top: 1px solid #ccc !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0;
+  overflow: visible;
 }
 
 .project-item {
-  margin-bottom: 0;
+  margin: 0;
+}
+
+.project-title-wrap {
+  text-align: center;
+  margin: 1.75em 0 0.25em;
+
+  p {
+    margin: 0;
+  }
 }
 
 .project-title {
-  margin: 0 0 1em;
+  display: inline-block;
+  font-family: monospace;
   font-size: 1.35em;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .project-row {
   display: flex;
   gap: 20px;
   align-items: flex-start;
+
+  // Pandoc 偶发把块级元素包进 <p>，需归零 margin 并参与 flex
+  > p:has(.project-media),
+  > p:has(.project-media-wrap) {
+    flex: 1;
+    min-width: 0;
+    margin: 0;
+    line-height: 0;
+  }
 }
 
-section.project-item:nth-of-type(even) .project-row:has(.project-thumb) {
+.project-row-reverse {
   flex-direction: row-reverse;
-}
-
-.project-thumb {
-  flex: 0 0 42%;
-  max-width: 360px;
-  display: block;
-  overflow: hidden;
-  border-radius: 10px;
-  line-height: 0;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
-
-  img {
-    width: 100%;
-    height: auto;
-    display: block;
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
-  }
-
-  &:hover img {
-    transform: translate(-3px, -3px);
-  }
 }
 
 .project-desc {
   flex: 1;
   min-width: 0;
   text-align: justify;
+  line-height: 1.5;
 
   p {
-    margin: 0 0 0.8em;
-    line-height: 1.65;
+    margin: 0 0 1em;
 
     &:last-child {
       margin-bottom: 0;
@@ -144,10 +160,44 @@ section.project-item:nth-of-type(even) .project-row:has(.project-thumb) {
   }
 }
 
-.project-divider {
-  margin: 2.5em 0;
-  border: none;
-  border-top: 1px solid #e0e0e0;
+.project-media-wrap {
+  flex: 1;
+  min-width: 0;
+  line-height: 0;
+  align-self: flex-start;
+
+  p {
+    margin: 0;
+    line-height: 0;
+  }
+}
+
+.project-media {
+  display: block;
+  line-height: 0;
+}
+
+.project-image {
+  display: block;
+  width: 100%;
+  margin: 0;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.project-media:hover .project-image {
+  transform: translate(-5px, -5px);
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.25);
+}
+
+.project-image-placeholder {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  border-radius: 10px;
+  background: #ececec;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
 }
 
 @media (max-width: 767px) {
@@ -156,17 +206,25 @@ section.project-item:nth-of-type(even) .project-row:has(.project-thumb) {
   }
 
   .project-row,
-  section.project-item:nth-of-type(even) .project-row:has(.project-thumb) {
+  .project-row-reverse {
     flex-direction: column;
   }
 
-  .project-thumb {
-    flex-basis: auto;
-    max-width: 100%;
+  .project-media-wrap,
+  .project-row > p:has(.project-media),
+  .project-row > p:has(.project-media-wrap) {
     width: 100%;
+  }
+
+  .project-image {
+    margin: 12px 0;
   }
 
   .project-desc {
     text-align: left;
+  }
+
+  .project-image-placeholder {
+    display: none;
   }
 }
