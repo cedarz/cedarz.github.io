@@ -21,6 +21,7 @@ menu:
   tags: /tags/ || fa fa-tags
   categories: /categories/ || fa fa-th
   archives: /archives/ || fa fa-archive
+  projects: /projects/ || fa fa-code
   about: /about/ || fa fa-user
 
 menu_settings:

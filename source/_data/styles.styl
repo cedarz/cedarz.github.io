@@ -73,3 +73,114 @@ figure.highlight td.gutter pre {
     text-decoration: underline;
   }
 }
+
+// ---------------------------------------------------------------
+// Projects 页面（参考 lisyarus：内容区 max-width 800px）
+// ---------------------------------------------------------------
+.main:has(.project-list) {
+  justify-content: center;
+
+  .sidebar {
+    display: none;
+  }
+
+  .main-inner {
+    width: 100% !important;
+    margin-left: auto;
+    margin-right: auto;
+    float: none;
+  }
+
+  .footer-inner {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+}
+
+.project-list {
+  margin-top: 0.5em;
+  padding: 0 4px;
+}
+
+.project-item {
+  margin-bottom: 0;
+}
+
+.project-title {
+  margin: 0 0 1em;
+  font-size: 1.35em;
+  font-weight: 600;
+}
+
+.project-row {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+section.project-item:nth-of-type(even) .project-row:has(.project-thumb) {
+  flex-direction: row-reverse;
+}
+
+.project-thumb {
+  flex: 0 0 42%;
+  max-width: 360px;
+  display: block;
+  overflow: hidden;
+  border-radius: 10px;
+  line-height: 0;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
+
+  img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  &:hover img {
+    transform: translate(-3px, -3px);
+  }
+}
+
+.project-desc {
+  flex: 1;
+  min-width: 0;
+  text-align: justify;
+
+  p {
+    margin: 0 0 0.8em;
+    line-height: 1.65;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.project-divider {
+  margin: 2.5em 0;
+  border: none;
+  border-top: 1px solid #e0e0e0;
+}
+
+@media (max-width: 767px) {
+  .main:has(.project-list) .main-inner {
+    max-width: 100%;
+  }
+
+  .project-row,
+  section.project-item:nth-of-type(even) .project-row:has(.project-thumb) {
+    flex-direction: column;
+  }
+
+  .project-thumb {
+    flex-basis: auto;
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .project-desc {
+    text-align: left;
+  }
+}
