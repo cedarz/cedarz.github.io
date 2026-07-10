@@ -15,6 +15,29 @@ body {
 .post-body {
   font-family: "Noto Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
 }
+
+// ---------------------------------------------------------------
+// {% poem %} 标签：居中诗歌排版
+// ---------------------------------------------------------------
+.post-body .poem {
+  text-align: center;
+  margin: 1.5em 0;
+}
+
+.post-body .poem--perline {
+  white-space: pre-line;
+}
+
+.post-body .poem--multiline {
+  p {
+    margin: 0 0 1em;
+    text-align: center;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
 // Pisces scheme 在移动端 sidebar 仍可能占用右侧空间
 @media (max-width: 991px) {
   .container,
