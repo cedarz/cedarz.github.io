@@ -1419,7 +1419,7 @@ pre code {
     vertical-align: middle;
   }
   .links-of-author a::before {
-    background: #75ff71;
+    background: #91ff38;
     display: inline-block;
     margin-right: 3px;
     transform: translateY(-2px);
@@ -2891,6 +2891,20 @@ body {
 }
 .post-body {
   font-family: "Noto Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+}
+.post-body .poem {
+  text-align: center;
+  margin: 1.5em 0;
+}
+.post-body .poem--perline {
+  white-space: pre-line;
+}
+.post-body .poem--multiline p {
+  margin: 0 0 1em;
+  text-align: center;
+}
+.post-body .poem--multiline p:last-child {
+  margin-bottom: 0;
 }
 @media (max-width: 991px) {
   .container,
