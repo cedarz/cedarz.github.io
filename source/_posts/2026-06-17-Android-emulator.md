@@ -2,9 +2,9 @@
 title: Android emulator
 date: 2026-06-17 15:25:50
 categories:
-- android
+- Android
 tags:
-- android
+- Android
 ---
 
 ## 步骤一：下载并放置 Command Line Tools
