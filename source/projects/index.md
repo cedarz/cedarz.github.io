@@ -6,8 +6,8 @@ toc:
   enable: false
 ---
 
-<div class="project-list">
-
+<section class="project-list">
+<hr class="project-divider">
 <!-- ******************** -->
 <section class="project-item">
 <div class="project-title-wrap">
@@ -79,6 +79,22 @@ toc:
 <!-- ******************** -->
 <section class="project-item">
 <div class="project-title-wrap">
+<span class="project-title">星空</span>
+</div>
+<div class="project-row project-row-reverse">
+<div class="project-desc">
+<p>“A good picture is equivalent to a good deed.”  —Vincent Van Gogh</p>
+</div>
+<div class="project-media-wrap">
+<a class="project-media" href="/images/projects/vango.jpg" data-fancybox="projects"><img class="project-image" src="/images/projects/vango.jpg" alt="Vincent Van Gogh"></a>
+</div>
+</div>
+</section>
+<hr class="project-divider">
+
+<!-- ******************** -->
+<!-- <section class="project-item">
+<div class="project-title-wrap">
 <a class="project-title" href="">Project Title PlaceHolder</a>
 </div>
 <div class="project-row project-row-reverse">
@@ -90,10 +106,10 @@ toc:
 </div>
 </div>
 </section>
-<hr class="project-divider">
+<hr class="project-divider"> -->
 
 
-</div>
+</section>
 
 <!-- 添加项目：奇数项 project-row（文左图右），偶数项 project-row project-row-reverse（图左文右）
 无图用 <div class="project-image-placeholder" aria-hidden="true"></div>
