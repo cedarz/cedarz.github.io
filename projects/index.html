@@ -17,22 +17,26 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.css" integrity="sha256-gkQVf8UKZgQ0HyuxL/VnacadJ+D2Kox2TCEBuNQg5+w=" crossorigin="anonymous">
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"darkpixel.top","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"github","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"flat","show_result":true},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js" defer></script>
 
-    <meta name="description" content="MSAA 与 GPU Ray Marching     记录 MSAA 多重采样与 GPU Ray Marching 在同一渲染管线中混用时产生的不兼容问题与排查思路。   详见博文 MSAA和GPU Ray Marching的不兼容问题。           OpenGL Enum Stringifier     受 Vulkan vk_enum_string_helper.h 启发，用">
+    <meta name="description" content="Volumetric Path Tracer     Volumetric Path Tracer实现医疗Dicom数据的体渲染。            Volumetric Lightmap     预计算医疗Dicom数据Path Tracer体渲染光照结果。            人脸重建网格处理      该算法流程主要为了解决人脸重建网格质量差的问题，并较大程度的改善了网格质量">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Projects">
 <meta property="og:url" content="https://darkpixel.top/projects/index.html">
 <meta property="og:site_name" content="Integrator">
-<meta property="og:description" content="MSAA 与 GPU Ray Marching     记录 MSAA 多重采样与 GPU Ray Marching 在同一渲染管线中混用时产生的不兼容问题与排查思路。   详见博文 MSAA和GPU Ray Marching的不兼容问题。           OpenGL Enum Stringifier     受 Vulkan vk_enum_string_helper.h 启发，用">
+<meta property="og:description" content="Volumetric Path Tracer     Volumetric Path Tracer实现医疗Dicom数据的体渲染。            Volumetric Lightmap     预计算医疗Dicom数据Path Tracer体渲染光照结果。            人脸重建网格处理      该算法流程主要为了解决人脸重建网格质量差的问题，并较大程度的改善了网格质量">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://darkpixel.top/images/MSAA%E5%92%8CGPU-Ray-Marching%E7%9A%84%E4%B8%8D%E5%85%BC%E5%AE%B9%E9%97%AE%E9%A2%98/msaa.png">
+<meta property="og:image" content="https://darkpixel.top/images/projects/teaser-pt.png">
+<meta property="og:image" content="https://darkpixel.top/images/projects/P_stitched.png">
+<meta property="og:image" content="https://darkpixel.top/images/projects/face_mesh.png">
+<meta property="og:image" content="https://darkpixel.top/images/projects/hair.png">
 <meta property="article:published_time" content="2026-07-07T09:45:22.000Z">
-<meta property="article:modified_time" content="2026-07-13T01:57:25.018Z">
+<meta property="article:modified_time" content="2026-07-16T07:05:03.952Z">
 <meta property="article:author" content="黑色像素">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://darkpixel.top/images/MSAA%E5%92%8CGPU-Ray-Marching%E7%9A%84%E4%B8%8D%E5%85%BC%E5%AE%B9%E9%97%AE%E9%A2%98/msaa.png">
+<meta name="twitter:image" content="https://darkpixel.top/images/projects/teaser-pt.png">
 
 
 <link rel="canonical" href="https://darkpixel.top/projects/">
@@ -54,6 +58,7 @@
 
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.umd.js" integrity="sha256-a+H7FYzJv6oU2hfsfDGM2Ohw/cR9v+hPfxHCLdmCrE8=" crossorigin="anonymous" defer></script>
 <script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
 
   
@@ -62,6 +67,7 @@
   <script src="/js/third-party/tags/mermaid.js" defer></script>
 
 
+  <script src="/js/third-party/fancybox.js" defer></script>
 
 
 
@@ -264,40 +270,87 @@
       <div class="post-body">
           <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><div class="project-list">
 
+<!-- ******************** -->
 <section class="project-item">
 <div class="project-title-wrap">
-<p><a class="project-title" href="/2026/06/25/MSAA和GPU-Ray-Marching的不兼容问题/">MSAA
-与 GPU Ray Marching</a></p>
-</div>
-<div class="project-row">
-<div class="project-desc">
-<p>
-记录 MSAA 多重采样与 GPU Ray Marching
-在同一渲染管线中混用时产生的不兼容问题与排查思路。
-</p>
-<p>
-详见博文 <a href="/2026/06/25/MSAA%E5%92%8CGPU-Ray-Marching%E7%9A%84%E4%B8%8D%E5%85%BC%E5%AE%B9%E9%97%AE%E9%A2%98/" title="MSAA和GPU Ray Marching的不兼容问题">MSAA和GPU Ray Marching的不兼容问题</a>。
-</p>
-</div>
-<div class="project-media-wrap">
-<p><a class="project-media" href="/2026/06/25/MSAA和GPU-Ray-Marching的不兼容问题/"><img class="project-image" src="/images/MSAA和GPU-Ray-Marching的不兼容问题/msaa.png" alt="MSAA 与 GPU Ray Marching"></a></p>
-</div>
-</div>
-</section>
-<hr class="project-divider">
-<section class="project-item">
-<div class="project-title-wrap">
-<p><a class="project-title" href="/2025/03/05/Stringifying-OpenGL-enums/">OpenGL
-Enum Stringifier</a></p>
+<p><a class="project-title" href="">Volumetric Path Tracer</a></p>
 </div>
 <div class="project-row project-row-reverse">
 <div class="project-desc">
 <p>
-受 Vulkan <code>vk_enum_string_helper.h</code> 启发，用 Python 从
-<code>glcorearb.h</code> 生成 OpenGL 枚举值到字符串的转换代码。
+Volumetric Path Tracer实现医疗Dicom数据的体渲染。
+</p>
+</div>
+<div class="project-media-wrap">
+<p><a class="project-media" href="/images/projects/teaser-pt.png" data-fancybox="projects"><img class="project-image" src="/images/projects/teaser-pt.png" alt="Volumetric Path Tracer"></a></p>
+</div>
+</div>
+</section>
+<hr class="project-divider">
+<!-- ******************** -->
+<section class="project-item">
+<div class="project-title-wrap">
+<p><a class="project-title" href="">Volumetric Lightmap</a></p>
+</div>
+<div class="project-row">
+<div class="project-desc">
+<p>
+预计算医疗Dicom数据Path Tracer体渲染光照结果。
+</p>
+</div>
+<div class="project-media-wrap">
+<p><a class="project-media" href="/images/projects/P_stitched.png" data-fancybox="projects"><img class="project-image" src="/images/projects/P_stitched.png" alt="Volumetric Lightmap"></a></p>
+</div>
+</div>
+</section>
+<hr class="project-divider">
+<!-- ******************** -->
+<section class="project-item">
+<div class="project-title-wrap">
+<p><a class="project-title" href="">人脸重建网格处理</a></p>
+</div>
+<div class="project-row project-row-reverse">
+<div class="project-desc">
+<!-- 粗模模型是关键点映射到重建脸坐标的人脸模型，由于重建质量查，导致坐标映射质量查且缺失 -->
+<p>
+该算法流程主要为了解决人脸重建网格质量差的问题，并较大程度的改善了网格质量，实现了自动化的修复流程。流程：粗模模型和标准脸的配准、问题网格的检测和移除、网格投影及边界提取和排序、边界的缝合和Z坐标的校正、问题区域的重网格化、关键点拼接附加模型。
 </p>
 <p>
-实现思路与脚本见博文 <a href="/2025/03/05/Stringifying-OpenGL-enums/" title="Stringifying OpenGL enums">Stringifying OpenGL enums</a>。
+存在的问题：粗模和标准脸的偏差过大，配准后差异依然存在，导致拼接处网格法线过渡生硬。
+</p>
+</div>
+<div class="project-media-wrap">
+<p><a class="project-media" href="/images/projects/face_mesh.png" data-fancybox="projects"><img class="project-image" src="/images/projects/face_mesh.png" alt="face mesh processing"></a></p>
+</div>
+</div>
+</section>
+<hr class="project-divider">
+<!-- ******************** -->
+<section class="project-item">
+<div class="project-title-wrap">
+<p><a class="project-title" href="">毛发渲染</a></p>
+</div>
+<div class="project-row">
+<div class="project-desc">
+<p>
+毛发渲染。
+</p>
+</div>
+<div class="project-media-wrap">
+<p><a class="project-media" href="/images/projects/hair.png" data-fancybox="projects"><img class="project-image" src="/images/projects/hair.png" alt="hair rendering"></a></p>
+</div>
+</div>
+</section>
+<hr class="project-divider">
+<!-- ******************** -->
+<section class="project-item">
+<div class="project-title-wrap">
+<p><a class="project-title" href="">Project Title PlaceHolder</a></p>
+</div>
+<div class="project-row project-row-reverse">
+<div class="project-desc">
+<p>
+“A good picture is equivalent to a good deed.” —Vincent Van Gogh
 </p>
 </div>
 <div class="project-media-wrap">
