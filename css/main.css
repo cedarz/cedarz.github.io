@@ -1419,7 +1419,7 @@ pre code {
     vertical-align: middle;
   }
   .links-of-author a::before {
-    background: #cbffba;
+    background: #ff1c00;
     display: inline-block;
     margin-right: 3px;
     transform: translateY(-2px);
@@ -2992,6 +2992,7 @@ figure.highlight td.gutter pre {
   font-family: inherit;
   font-size: 1.35em;
   font-weight: 700;
+  color: #c60;
 }
 .project-row {
   display: flex;
