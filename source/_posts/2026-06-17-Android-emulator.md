@@ -7,7 +7,9 @@ tags:
 - Android
 ---
 
-## 步骤一：下载并放置 Command Line Tools
+> 本文基于AI生成步骤和具体实践整理。
+
+## 步骤一：下载Command Line Tools
 
 1. 打开 `https://developer.android.com/studio?hl=zh-cn#command-line-tools-only`，下载 Windows 版的 command line tools 压缩包（名字类似 `commandlinetools-win-xxxxxxx_latest.zip`）。
 
