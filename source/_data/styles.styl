@@ -1,19 +1,35 @@
 // ---------------------------------------------------------------
-// 移动端水平溢出修复：防止任何元素撑开页面产生右侧空白
-// html+body 双层限制，消除 Pisces sidebar 遗留宽度
+// 水平溢出：只裁剪滚动，不强制正文拉满视口（避免挤掉左右留白）
 // ---------------------------------------------------------------
-html {
-  overflow-x: hidden;
-  max-width: 100vw;
-}
+html,
 body {
   overflow-x: hidden;
-  max-width: 100vw;
+}
+
+body {
   font-family: "Noto Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
 }
 
 .post-body {
   font-family: "Noto Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+}
+
+// 正文卡片左右留白（覆盖 NexT 默认桌面 40px / 移动端 20px）
+.main-inner {
+  padding: 48px;
+
+  @media (max-width: 991px) {
+    padding: 24px;
+  }
+}
+
+// 大屏/全屏：覆盖 Pisces 的 width:73%，避免正文行宽失控
+// （≥1200px 主题默认 1160px；≥1600px 原为视口 73%）
+.main {
+  @media (min-width: 1600px) {
+    width: 1200px;
+    max-width: calc(100% - 24px);
+  }
 }
 
 // ---------------------------------------------------------------
@@ -38,17 +54,7 @@ body {
     }
   }
 }
-// Pisces scheme 在移动端 sidebar 仍可能占用右侧空间
-@media (max-width: 991px) {
-  .container,
-  .main,
-  .content-wrap,
-  .post-block {
-    max-width: 100vw !important;
-    box-sizing: border-box;
-  }
-  // 勿将 .sidebar 设为 width:0 —— 会挡住 NexT 侧栏滑出，只剩蒙层
-}
+
 figure.highlight,
 pre,
 .mermaid {
