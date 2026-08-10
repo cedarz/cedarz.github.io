@@ -11,11 +11,12 @@ toc:
 <!-- ******************** -->
 <section class="project-item">
 <div class="project-title-wrap">
-<a class="project-title" href="">Volumetric Path Tracer</a>
+<a class="project-title" href="">Cinematic Rendering</a>
 </div>
 <div class="project-row project-row-reverse">
 <div class="project-desc">
-<p>Volumetric Path Tracer实现医疗Dicom数据的体渲染。</p>
+<p>Cinematic Rendering，也就是Volumetric Path Tracer，最开始是西门子提出来的词汇，用来实现医疗Dicom数据的体渲染。类似的商业软件还有<a href="https://www.mevislab.de">MeVis</a>，使用CUDA实现的节点式渲染，效果很好。我这里展示的是在片元着色器中实现的progressive体渲染，用来代替ray-marching实现更真实感的表现，是架构在VTK上的定制化渲染，在RTX4080上2560x1440, 1/2屏占比可以30+fps，完整屏占比可以15fps左右，都在正常的交互帧率之上。
+</p>
 </div>
 <div class="project-media-wrap">
 <a class="project-media" href="/images/projects/teaser-pt.png" data-fancybox="projects"><img class="project-image" src="/images/projects/teaser-pt.png" alt="Volumetric Path Tracer"></a>
@@ -31,7 +32,8 @@ toc:
 </div>
 <div class="project-row">
 <div class="project-desc">
-<p>预计算网格光照图。</p>
+<p>预计算网格光照图。医疗领域的场景很多是静态的，lightmap就很有用武之地。网格的烘焙有两个过程：（1）参数化，不同于texture的uv，lightmap的uv要满足不重叠，使用大名鼎鼎的<a href="https://github.com/jpcy/xatlas">xatlas</a>；（2）预计算,半球光线diffuse多次弹射的蒙特卡洛积分。
+</p>
 </div>
 <div class="project-media-wrap">
 <a class="project-media" href="/images/projects/L_stitched.png" data-fancybox="projects"><img class="project-image" src="/images/projects/L_stitched.png" alt="Mesh Lightmap"></a>
@@ -47,7 +49,8 @@ toc:
 </div>
 <div class="project-row  project-row-reverse">
 <div class="project-desc">
-<p>预计算医疗Dicom数据Path Tracer体渲染光照结果。</p>
+<p>预计算体数据体光照结果,每一个体素保存该处的Radiance分布。跟网格给光照图稍有异同，除去维度的差别，网格的光照图存储的是irradiance标量数据，Volume的光照图存储的是方向依赖的radiance数据，用SH来表达。
+</p>
 </div>
 <div class="project-media-wrap">
 <a class="project-media" href="/images/projects/P_stitched.png" data-fancybox="projects"><img class="project-image" src="/images/projects/P_stitched.png" alt="Volumetric Lightmap"></a>
@@ -82,7 +85,7 @@ toc:
 </div>
 <div class="project-row project-row-reverse">
 <div class="project-desc">
-<p>毛发渲染。</p>
+<p>基础的毛发渲染功能：（1）Kajiya-Kay光照模型；（2）GPAA毛发边缘的过渡实现抗锯齿；（3）PPLL解决半透明问题。</p>
 </div>
 <div class="project-media-wrap">
 <a class="project-media" href="/images/projects/hair.png" data-fancybox="projects"><img class="project-image" src="/images/projects/hair.png" alt="hair rendering"></a>
