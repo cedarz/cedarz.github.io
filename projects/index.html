@@ -21,12 +21,12 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"darkpixel.top","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"github","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"flat","show_result":true},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js" defer></script>
 
-    <meta name="description" content="Volumetric Path Tracer     Volumetric Path Tracer实现医疗Dicom数据的体渲染。            Mesh Lightmap     预计算网格光照图。            Volumetric Lightmap     预计算医疗Dicom数据Path Tracer体渲染光照结果。            人脸重建网格处理">
+    <meta name="description" content="Cinematic Rendering     Cinematic Rendering，也就是Volumetric Path Tracer，最开始是西门子提出来的词汇，用来实现医疗Dicom数据的体渲染。类似的商业软件还有MeVis，使用CUDA实现的节点式渲染，效果很好。我这里展示的是在片元着色器中实现的progressive体渲染，用来代替ray-marching实现更真实感的表现，">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Projects">
 <meta property="og:url" content="https://darkpixel.top/projects/index.html">
 <meta property="og:site_name" content="孤舟蓑笠翁">
-<meta property="og:description" content="Volumetric Path Tracer     Volumetric Path Tracer实现医疗Dicom数据的体渲染。            Mesh Lightmap     预计算网格光照图。            Volumetric Lightmap     预计算医疗Dicom数据Path Tracer体渲染光照结果。            人脸重建网格处理">
+<meta property="og:description" content="Cinematic Rendering     Cinematic Rendering，也就是Volumetric Path Tracer，最开始是西门子提出来的词汇，用来实现医疗Dicom数据的体渲染。类似的商业软件还有MeVis，使用CUDA实现的节点式渲染，效果很好。我这里展示的是在片元着色器中实现的progressive体渲染，用来代替ray-marching实现更真实感的表现，">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://darkpixel.top/images/projects/teaser-pt.png">
 <meta property="og:image" content="https://darkpixel.top/images/projects/L_stitched.png">
@@ -35,7 +35,7 @@
 <meta property="og:image" content="https://darkpixel.top/images/projects/hair.png">
 <meta property="og:image" content="https://darkpixel.top/images/projects/vango.jpg">
 <meta property="article:published_time" content="2026-07-07T09:45:22.000Z">
-<meta property="article:modified_time" content="2026-07-22T14:10:14.137Z">
+<meta property="article:modified_time" content="2026-08-10T05:52:15.325Z">
 <meta property="article:author" content="孤舟蓑笠翁">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://darkpixel.top/images/projects/teaser-pt.png">
@@ -275,12 +275,14 @@
 <!-- ******************** -->
 <section class="project-item">
 <div class="project-title-wrap">
-<p><a class="project-title" href="">Volumetric Path Tracer</a></p>
+<p><a class="project-title" href="">Cinematic Rendering</a></p>
 </div>
 <div class="project-row project-row-reverse">
 <div class="project-desc">
 <p>
-Volumetric Path Tracer实现医疗Dicom数据的体渲染。
+Cinematic Rendering，也就是Volumetric Path
+Tracer，最开始是西门子提出来的词汇，用来实现医疗Dicom数据的体渲染。类似的商业软件还有<a target="_blank" rel="noopener" href="https://www.mevislab.de">MeVis</a>，使用CUDA实现的节点式渲染，效果很好。我这里展示的是在片元着色器中实现的progressive体渲染，用来代替ray-marching实现更真实感的表现，是架构在VTK上的定制化渲染，在RTX4080上2560x1440,
+1/2屏占比可以30+fps，完整屏占比可以15fps左右，都在正常的交互帧率之上。
 </p>
 </div>
 <div class="project-media-wrap">
@@ -297,7 +299,7 @@ Volumetric Path Tracer实现医疗Dicom数据的体渲染。
 <div class="project-row">
 <div class="project-desc">
 <p>
-预计算网格光照图。
+预计算网格光照图。医疗领域的场景很多是静态的，lightmap就很有用武之地。网格的烘焙有两个过程：（1）参数化，不同于texture的uv，lightmap的uv要满足不重叠，使用大名鼎鼎的<a target="_blank" rel="noopener" href="https://github.com/jpcy/xatlas">xatlas</a>；（2）预计算,半球光线diffuse多次弹射的蒙特卡洛积分。
 </p>
 </div>
 <div class="project-media-wrap">
@@ -314,7 +316,7 @@ Volumetric Path Tracer实现医疗Dicom数据的体渲染。
 <div class="project-row project-row-reverse">
 <div class="project-desc">
 <p>
-预计算医疗Dicom数据Path Tracer体渲染光照结果。
+预计算体数据体光照结果,每一个体素保存该处的Radiance分布。跟网格给光照图稍有异同，除去维度的差别，网格的光照图存储的是irradiance标量数据，Volume的光照图存储的是方向依赖的radiance数据，用SH来表达。
 </p>
 </div>
 <div class="project-media-wrap">
@@ -352,7 +354,7 @@ Volumetric Path Tracer实现医疗Dicom数据的体渲染。
 <div class="project-row project-row-reverse">
 <div class="project-desc">
 <p>
-毛发渲染。
+基础的毛发渲染功能：（1）Kajiya-Kay光照模型；（2）GPAA毛发边缘的过渡实现抗锯齿；（3）PPLL解决半透明问题。
 </p>
 </div>
 <div class="project-media-wrap">
