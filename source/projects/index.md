@@ -105,8 +105,8 @@ toc:
 <ul>
     <li>RHI：DirectX 12/Vulkan</li>
     <li>资源依赖：<a href="https://github.com/skaarj1989/FrameGraph">framegraph</a></li>
-    <li>Rendering：Full Rasterization/Hybrid Rendering/Full RTRT</li>
-    <li>其它：Material/Medium/Rendering Algorithm/...</li>
+    <li>Rendering：全光栅化/Hybrid/全RTRT</li>
+    <li>其它：材质/介质/渲染算法/...</li>
 </ul>
 </div>
 <div class="project-media-wrap">
