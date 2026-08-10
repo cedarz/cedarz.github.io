@@ -110,7 +110,7 @@ toc:
 </ul>
 </div>
 <div class="project-media-wrap">
-<a class="project-media" href="/images/projects/protype_pbr.jpg" data-fancybox="projects"><img class="project-image" src="/images/projects/protype_pbr.jpg" alt="Vincent Van Gogh"></a>
+<a class="project-media" href="/images/projects/protype_pbr.png" data-fancybox="projects"><img class="project-image" src="/images/projects/protype_pbr.png" alt="Vincent Van Gogh"></a>
 </div>
 </div>
 </section>
