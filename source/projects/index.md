@@ -97,9 +97,31 @@ toc:
 <!-- ******************** -->
 <section class="project-item">
 <div class="project-title-wrap">
-<span class="project-title">星空</span>
+<span class="project-title">渲染原型（WIP）</span>
 </div>
 <div class="project-row">
+<div class="project-desc">
+<p>完全利用开源库，攒一套快速验证和实验的原型库。</p>
+<ul>
+    <li>RHI：DirectX 12/Vulkan</li>
+    <li>资源依赖：<a href="https://github.com/skaarj1989/FrameGraph">framegraph</a></li>
+    <li>Rendering：Full Rasterization/Hybrid Rendering/Full RTRT</li>
+    <li>其它：Material/Medium/Rendering Algorithm/...</li>
+</ul>
+</div>
+<div class="project-media-wrap">
+<a class="project-media" href="/images/projects/protype_pbr.jpg" data-fancybox="projects"><img class="project-image" src="/images/projects/protype_pbr.jpg" alt="Vincent Van Gogh"></a>
+</div>
+</div>
+</section>
+<hr class="project-divider">
+
+<!-- ******************** -->
+<section class="project-item">
+<div class="project-title-wrap">
+<span class="project-title">星空</span>
+</div>
+<div class="project-row project-row-reverse">
 <div class="project-desc">
 <p>“A good picture is equivalent to a good deed.”  —Vincent Van Gogh</p>
 </div>
