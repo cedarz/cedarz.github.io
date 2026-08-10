@@ -103,7 +103,7 @@ IrradianceAndSampleCount[TexelIndexInPool].rgb += float3(RadianceValue * Tangent
 - lightmass的diffuse interreflection积分算法
 
     $PathThroughput = 1.0$
-    $L_d = \frac{\cos\theta}{\pi} \cdot (\frac{L_i}{pdf_L} + PathThroughput \cdot \frac{L_i}{pdf_L} \cdot \frac{R}{\pi} \cdot \cos\theta \cdot MIS_{NEE} + PathThroughput \cdot R \cdot L_i) \cdot MIS_{Material}$
+    $L_d = \frac{\cos\theta}{\pi} \cdot (\frac{L_i}{pdf_L} + PathThroughput \cdot \frac{L_i}{pdf_L} \cdot \frac{R}{\pi} \cdot \cos\theta \cdot MIS_{NEE} + PathThroughput \cdot R \cdot L_i \cdot MIS_{Material})$
     $PathThroughput = PathThroughput \cdot R$
 
 
