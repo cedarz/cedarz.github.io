@@ -101,7 +101,7 @@ toc:
 </div>
 <div class="project-row">
 <div class="project-desc">
-<p>完全利用开源库，攒一套快速验证和实验的原型库。</p>
+<p>应用尽用开源库，攒一套快速验证和实验的渲染原型库。</p>
 <ul>
     <li>RHI：DirectX 12/Vulkan</li>
     <li>资源依赖：<a href="https://github.com/skaarj1989/FrameGraph">framegraph</a></li>
