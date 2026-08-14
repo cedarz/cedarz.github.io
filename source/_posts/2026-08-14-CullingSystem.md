@@ -104,7 +104,7 @@ if (W < W_CLIP)
     Flags|= EScreenVertexFlags::ClippedNear;
 }
 ```
-`W < W_CLIP`时，clip space坐标为$(_, _, n, w)$，其中`n = W_CLIP, w = z_{e}`，作透视除之后$z_{ndc} = W_CLIP / W > 1, 则该点在near plane的外侧，被视锥剔除。
+`W < W_CLIP`时，clip space坐标为$(\_, \_, n, w)$，其中`n = W_CLIP, w = z_{e}`，作透视除之后$z_{ndc} = W_CLIP / W > 1, 则该点在near plane的外侧，被视锥剔除。
 
 <!-- $$\left( \sum_{k=1}^n a_k b_k \right)^2 \leq \left( \sum_{k=1}^n a_k^2 \right) \left( \sum_{k=1}^n b_k^2 \right)$$ -->
 [^1]: Fast Extraction of Viewing Frustum Planes from the World-View-Projection Matrix
