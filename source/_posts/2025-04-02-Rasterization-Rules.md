@@ -3,10 +3,10 @@ title: Rasterization Rules
 date: 2025-04-02 15:38:00
 categories:
 - Computer Graphics
-- OpenGL
+- Rasterization
 tags: 
 - Computer Graphics
-- OpenGL
+- Rasterization
 ---
 
 # top-left rule
