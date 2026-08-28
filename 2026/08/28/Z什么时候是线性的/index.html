@@ -29,7 +29,7 @@
 <meta property="og:description" content="在看separable-sss的shader的时候，关注了一下其中点光源生成shadowmap的投影矩阵的处理，方法来自于Linearized Depth using Vertex Shaders，生成[0, 1]的线性深度。这也让我意识到，对于z在管线每一步的计算中，什么时候是线性的，什么时候变得不线性，我并没有掌握所有细节。 12345678910&#x2F;**     * This is for r">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-08-28T15:14:16.000Z">
-<meta property="article:modified_time" content="2026-08-28T09:34:11.495Z">
+<meta property="article:modified_time" content="2026-08-28T09:45:08.781Z">
 <meta property="article:author" content="孤舟蓑笠翁">
 <meta property="article:tag" content="Computer Graphics">
 <meta property="article:tag" content="Rasterization">
@@ -285,7 +285,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2026-08-28 15:14:16 / 修改时间：09:34:11" itemprop="dateCreated datePublished" datetime="2026-08-28T15:14:16+00:00">2026-08-28</time>
+      <time title="创建时间：2026-08-28 15:14:16 / 修改时间：09:45:08" itemprop="dateCreated datePublished" datetime="2026-08-28T15:14:16+00:00">2026-08-28</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -315,6 +315,7 @@ target="_blank" rel="noopener" href="https://www.mvps.org/directx/articles/linea
 Depth using Vertex Shaders</a>，生成[0,
 1]的线性深度。这也让我意识到，对于z在管线每一步的计算中，什么时候是线性的，什么时候变得不线性，我并没有掌握所有细节。
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     * This is for rendering linear values:</span></span><br><span class="line"><span class="comment">     * Check this: http://www.mvps.org/directx/articles/linear_z/linearz.htm</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    D3DXMATRIX linearProjection = projection;</span><br><span class="line">    <span class="type">float</span> Q = projection._33;</span><br><span class="line">    <span class="type">float</span> N = -projection._43 / projection._33;</span><br><span class="line">    <span class="type">float</span> F = -N * Q / (<span class="number">1</span> - Q);</span><br><span class="line">    linearProjection._33 /= F;</span><br><span class="line">    linearProjection._43 /= F;</span><br></pre></td></tr></table></figure></p>
+<p>同时需要vertex shader中配合，解除掉后续的透视除： <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">float4 <span class="title">ShadowMapVS</span><span class="params">(float4 position : POSITION0,</span></span></span><br><span class="line"><span class="params"><span class="function">                   uniform float4x4 worldViewProjection)</span> : SV_POSITION &#123;</span></span><br><span class="line">    float4 pos = <span class="built_in">mul</span>(position, worldViewProjection);</span><br><span class="line">    pos.z *= pos.w; <span class="comment">// We want linear positions</span></span><br><span class="line">    <span class="keyword">return</span> pos;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>不经过特殊处理，经过<code>透视投影</code>，最终管线输出的深度是非线性的。世界变换、相机变换和视口变换对于z的操作，自然结果还是线性的；透视除法后，z就不线性了；那么投影变换后的clip
 space（裁剪空间）坐标的z还是线性的吗？</p>
 <p><span class="math inline">\(z_{clip} = A \cdot z_{view} + B，w_{clip}
@@ -419,7 +420,11 @@ target="_blank" rel="noopener" href="https://learn.microsoft.com/zh-cn/windows/w
 0 &amp; 0 &amp; \frac{-n}{f-n} &amp; 1  \end{bmatrix}\]</span></p>
 <p>矩阵的<span
 class="math inline">\(P_{33}\)</span>元素才是1，导致正交变换后的<span
-class="math inline">\(w_clip\)</span>是1，那么透视除法就相当于没有了，正交投影矩阵中即完成了深度的变换，所以ndc仍然保持了裁剪坐标的z线性，最终的深度输出依然是线性。</p>
+class="math inline">\(w_clip\)</span>是1，那么透视除法就相当于没有了，正交投影矩阵中即完成了深度的变换，所以ndc仍然保持了裁剪坐标的z线性，最终的深度输出依然是线性，而且是[-1,1]的线性深度。就不需要像透视投影<a
+target="_blank" rel="noopener" href="https://www.mvps.org/directx/articles/linear_z/linearz.htm">Linearized
+Depth using Vertex Shaders</a>那样麻烦，在vertex
+shader和透视投影矩阵中同时做修改。正交投影下，直接用视口变换后的z输出，乘以<span
+class="math inline">\(f\)</span>平面，就得到separable-sss需要的距离了。</p>
 <h3 id="参考">参考</h3>
 <ul>
 <li><a
