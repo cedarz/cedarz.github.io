@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.1.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.css" integrity="sha256-gkQVf8UKZgQ0HyuxL/VnacadJ+D2Kox2TCEBuNQg5+w=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"darkpixel.top","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"github","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"flat","show_result":true},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="在看separable-sss的shader的时候，关注了一下其中点光源生成shadowmap的投影矩阵的处理，方法来自于Linearized Depth using Vertex Shaders，生成[0, 1]的线性深度。这也让我意识到，对于z在管线每一步的计算中，什么时候是线性的，什么时候变得不线性，我并没有掌握所有细节。 12345678910&#x2F;**     * This is for r">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Z什么时候是线性的">
+<meta property="og:url" content="https://darkpixel.top/2026/08/28/Z%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E6%98%AF%E7%BA%BF%E6%80%A7%E7%9A%84/index.html">
+<meta property="og:site_name" content="孤舟蓑笠翁">
+<meta property="og:description" content="在看separable-sss的shader的时候，关注了一下其中点光源生成shadowmap的投影矩阵的处理，方法来自于Linearized Depth using Vertex Shaders，生成[0, 1]的线性深度。这也让我意识到，对于z在管线每一步的计算中，什么时候是线性的，什么时候变得不线性，我并没有掌握所有细节。 12345678910&#x2F;**     * This is for r">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-08-28T15:14:16.000Z">
+<meta property="article:modified_time" content="2026-08-28T09:34:11.495Z">
+<meta property="article:author" content="孤舟蓑笠翁">
+<meta property="article:tag" content="Computer Graphics">
+<meta property="article:tag" content="Rasterization">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://darkpixel.top/2026/08/28/Z%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E6%98%AF%E7%BA%BF%E6%80%A7%E7%9A%84/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://darkpixel.top/2026/08/28/Z%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E6%98%AF%E7%BA%BF%E6%80%A7%E7%9A%84/","path":"2026/08/28/Z什么时候是线性的/","title":"Z什么时候是线性的"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Z什么时候是线性的 | 孤舟蓑笠翁</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.umd.js" integrity="sha256-a+H7FYzJv6oU2hfsfDGM2Ohw/cR9v+hPfxHCLdmCrE8=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.10.1/mermaid.min.js","integrity":"sha256-BmQmdWDS8X2OTbrwELWK366LV6escyWhHHe0XCTU/Hk="}}</script>
+  <script src="/js/third-party/tags/mermaid.js" defer></script>
+
+
+  <script src="/js/third-party/fancybox.js" defer></script>
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/js/image-compare-viewer.min.css">
+<script src="/js/image-compare-viewer.min.js"></script>
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start -->
+<style>
+/* Enhanced Image 样式 */
+.enhanced-image:hover {
+  transform: scale(1.02);
+  transition: transform 0.3s ease;
+}
+
+/* 模态框样式 */
+.image-modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+  cursor: zoom-out;
+}
+
+.image-modal-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 90%;
+  max-height: 90%;
+  text-align: center;
+}
+
+.image-modal img {
+  max-width: 100%;
+  max-height: 80vh;
+  border-radius: 8px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+.image-modal .close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  color: #fff;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.image-modal .close:hover {
+  opacity: 0.7;
+}
+
+/* 响应式 */
+@media (max-width: 768px) {
+  img[style*="width"] {
+    width: 100% !important;
+  }
+}
+</style>
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">孤舟蓑笠翁</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-projects"><a href="/projects/" rel="section"><i class="fa fa-code fa-fw"></i>projects</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">孤舟蓑笠翁</p>
+  <div class="site-description" itemprop="description">活着就要继续前进</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">50</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://darkpixel.top/2026/08/28/Z%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E6%98%AF%E7%BA%BF%E6%80%A7%E7%9A%84/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="孤舟蓑笠翁">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="孤舟蓑笠翁">
+      <meta itemprop="description" content="活着就要继续前进">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Z什么时候是线性的 | 孤舟蓑笠翁">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Z什么时候是线性的
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2026-08-28 15:14:16 / 修改时间：09:34:11" itemprop="dateCreated datePublished" datetime="2026-08-28T15:14:16+00:00">2026-08-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Computer-Graphics/" itemprop="url" rel="index"><span itemprop="name">Computer Graphics</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Computer-Graphics/Rasterization/" itemprop="url" rel="index"><span itemprop="name">Rasterization</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>在看separable-sss的shader的时候，关注了一下其中点光源生成shadowmap的投影矩阵的处理，方法来自于<a
+target="_blank" rel="noopener" href="https://www.mvps.org/directx/articles/linear_z/linearz.htm">Linearized
+Depth using Vertex Shaders</a>，生成[0,
+1]的线性深度。这也让我意识到，对于z在管线每一步的计算中，什么时候是线性的，什么时候变得不线性，我并没有掌握所有细节。
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     * This is for rendering linear values:</span></span><br><span class="line"><span class="comment">     * Check this: http://www.mvps.org/directx/articles/linear_z/linearz.htm</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    D3DXMATRIX linearProjection = projection;</span><br><span class="line">    <span class="type">float</span> Q = projection._33;</span><br><span class="line">    <span class="type">float</span> N = -projection._43 / projection._33;</span><br><span class="line">    <span class="type">float</span> F = -N * Q / (<span class="number">1</span> - Q);</span><br><span class="line">    linearProjection._33 /= F;</span><br><span class="line">    linearProjection._43 /= F;</span><br></pre></td></tr></table></figure></p>
+<p>不经过特殊处理，经过<code>透视投影</code>，最终管线输出的深度是非线性的。世界变换、相机变换和视口变换对于z的操作，自然结果还是线性的；透视除法后，z就不线性了；那么投影变换后的clip
+space（裁剪空间）坐标的z还是线性的吗？</p>
+<p><span class="math inline">\(z_{clip} = A \cdot z_{view} + B，w_{clip}
+= \pm z_{view}\)</span></p>
+<p><span class="math inline">\(A\)</span> 和 <span
+class="math inline">\(B\)</span> 是由近裁剪面 <span
+class="math inline">\(n\)</span> 和远裁剪面 <span
+class="math inline">\(f\)</span>
+决定的常数,这个线性函数对于相机空间的z只有平移和缩放操作，随意结果<span
+class="math inline">\(z_{clip}\)</span>依然保持线性。</p>
+<p>但是透视除法，<span class="math inline">\(z_{ndc} =
+\frac{z_{clip}}{w_{clip}} = \frac{A \cdot z_{view} + B}{-z_{view}} = -A
+- \frac{B}{z_{view}}\)</span>，就是线性函数了，导致z的非线性化。</p>
+<p>虽然有不同的手系，但是相机和投影的手系是一致的。</p>
+<h3 id="openglndc-深度区间为--1-1">1. OpenGL（NDC 深度区间为 <span
+class="math inline">\([-1, 1]\)</span>）</h3>
+<p>在右手坐标系中（摄像机看向 <span class="math inline">\(-Z\)</span>
+轴，即 <span class="math inline">\(z_{view} \in [-f,
+-n]\)</span>）：</p>
+<ul>
+<li>当 <span class="math inline">\(z_{view} = -n\)</span> 时，映射后的
+<span class="math inline">\(z_{ndc} = -1\)</span></li>
+<li>当 <span class="math inline">\(z_{view} = -f\)</span> 时，映射后的
+<span class="math inline">\(z_{ndc} = 1\)</span></li>
+</ul>
+<p><span class="math display">\[P_{\text{OpenGL}} =
+\begin{bmatrix}  \frac{\cot(\frac{\theta}{2})}{\text{aspect}} &amp; 0
+&amp; 0 &amp; 0 \\ 0 &amp; \cot(\frac{\theta}{2}) &amp; 0 &amp; 0 \\ 0
+&amp; 0 &amp; A &amp; B \\ 0 &amp; 0 &amp; -1 &amp; 0  \end{bmatrix} =
+\begin{bmatrix}  \frac{\cot(\frac{\theta}{2})}{\text{aspect}} &amp; 0
+&amp; 0 &amp; 0 \\ 0 &amp; \cot(\frac{\theta}{2}) &amp; 0 &amp; 0 \\ 0
+&amp; 0 &amp; -\frac{f+n}{f-n} &amp; -\frac{2fn}{f-n} \\ 0 &amp; 0 &amp;
+-1 &amp; 0  \end{bmatrix}\]</span></p>
+<p><span class="math display">\[A = -\frac{f + n}{f - n}, \quad B =
+-\frac{2fn}{f - n}\]</span></p>
+<blockquote>
+<p><span class="math inline">\(z_{clip} = A \cdot z_{view} +
+B\)</span>，<span class="math inline">\(w_{clip} =
+-z_{view}\)</span></p>
+<p>透视除法 <span class="math inline">\(z_{ndc} =
+\frac{z_{clip}}{w_{clip}} = \frac{A \cdot z_{view} +
+B}{-z_{view}}\)</span>：</p>
+<ul>
+<li>当顶点在近平面 <span class="math inline">\(z_{view} = -n\)</span>
+时：<span class="math inline">\(z_{ndc} = \frac{-\frac{f+n}{f-n}(-n) -
+\frac{2fn}{f-n}}{n} = \frac{n(f+n) - 2fn}{n(f-n)} =
+\frac{n(n-f)}{n(f-n)} = -1\)</span></li>
+<li>当顶点在远平面 <span class="math inline">\(z_{view} = -f\)</span>
+时：<span class="math inline">\(z_{ndc} = \frac{-\frac{f+n}{f-n}(-f) -
+\frac{2fn}{f-n}}{f} = \frac{f(f+n) - 2fn}{f(f-n)} =
+\frac{f(f-n)}{f(f-n)} = 1\)</span></li>
+</ul>
+</blockquote>
+<h3 id="directx-vulkanndc-深度区间为-0-1">2. DirectX / Vulkan（NDC
+深度区间为 <span class="math inline">\([0, 1]\)</span>）</h3>
+<p>在左手坐标系中（摄像机看向 <span class="math inline">\(+Z\)</span>
+轴，即 <span class="math inline">\(z_{view} \in [n, f]\)</span>）：</p>
+<ul>
+<li>当 <span class="math inline">\(z_{view} = n\)</span> 时，映射后的
+<span class="math inline">\(z_{ndc} = 0\)</span></li>
+<li>当 <span class="math inline">\(z_{view} = f\)</span> 时，映射后的
+<span class="math inline">\(z_{ndc} = 1\)</span></li>
+</ul>
+<!-- 
+* **为什么 $B$ 包含 $f \cdot n$ 乘积？**
+因为在经过透视除法后，$z_{ndc} = \frac{A \cdot z_{view} + B}{-z_{view}} = -A - \frac{B}{z_{view}}$，这个 $B$ 正好成为了双曲线项 $-\frac{B}{z_{view}}$ 的分子，从而确保了近面和远面能精确对应到 NDC 的边界值（如 $0$ 和 $1$ 或 $-1$ 和 $1$）。 -->
+<p><span class="math display">\[P_{\text{DX/VK}} =
+\begin{bmatrix}  \frac{\cot(\frac{\theta}{2})}{\text{aspect}} &amp; 0
+&amp; 0 &amp; 0 \\ 0 &amp; \cot(\frac{\theta}{2}) &amp; 0 &amp; 0 \\ 0
+&amp; 0 &amp; A &amp; B \\ 0 &amp; 0 &amp; 1 &amp; 0  \end{bmatrix} =
+\begin{bmatrix}  \frac{\cot(\frac{\theta}{2})}{\text{aspect}} &amp; 0
+&amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; \cot(\frac{\theta}{2}) &amp; 0 \\ 0
+&amp; 0 &amp; \frac{f}{f-n} &amp; -\frac{fn}{f-n} \\ 0 &amp; 0 &amp; 1
+&amp; 0  \end{bmatrix}\]</span></p>
+<p><span class="math display">\[A = \frac{f}{f - n}, \quad B =
+-\frac{fn}{f - n}\]</span></p>
+<blockquote>
+<ul>
+<li>当顶点在近平面 <span class="math inline">\(z_{view} = n\)</span>
+时：<span class="math inline">\(z_{ndc} = \frac{\frac{f}{f-n}(n) -
+\frac{fn}{f-n}}{n} = \frac{fn - fn}{n(f-n)} = 0\)</span></li>
+<li>当顶点在远平面 <span class="math inline">\(z_{view} = f\)</span>
+时：<span class="math inline">\(z_{ndc} = \frac{\frac{f}{f-n}(f) -
+\frac{fn}{f-n}}{f} = \frac{f^2 - fn}{f(f-n)} = \frac{f(f-n)}{f(f-n)} =
+1\)</span></li>
+</ul>
+</blockquote>
+<!-- * $\theta$：垂直视角（Vertical Field of View, FOV）。
+* $\text{aspect}$：宽高比（$\frac{\text{width}}{\text{height}}$）。
+* $n$ 与 $f$：分别为近裁剪面和远裁剪面的正距离（$n > 0, f > 0$）。 -->
+<p><a
+target="_blank" rel="noopener" href="https://github.com/microsoft/DirectXMath/blob/199d07056adc2ff5d9f9c9a9ce48a90cd8f656be/Inc/DirectXMathMatrix.inl#L2442-L2487">XMMatrixPerspectiveFovLH</a></p>
+<p>透视投影，在透视除法导致了非线性化，那么正交投影呢？</p>
+<p><a
+target="_blank" rel="noopener" href="https://github.com/microsoft/DirectXMath/blob/199d07056adc2ff5d9f9c9a9ce48a90cd8f656be/Inc/DirectXMathMatrix.inl#L2840-L2876">XMMatrixOrthographicLH</a></p>
+<h3 id="directx-正交矩阵-left-handed">DirectX 正交矩阵 Left-Handed</h3>
+<p><a
+target="_blank" rel="noopener" href="https://learn.microsoft.com/zh-cn/windows/win32/direct3d9/d3dxmatrixortholh">d3dxmatrixortholh</a>
+<span class="math display">\[P_{\text{DX}} =
+\begin{bmatrix}  \frac{2}{w} &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp;
+\frac{2}{h}  &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; \frac{1}{f-n} &amp; 0 \\
+0 &amp; 0 &amp; \frac{-n}{f-n} &amp; 1  \end{bmatrix}\]</span></p>
+<p>矩阵的<span
+class="math inline">\(P_{33}\)</span>元素才是1，导致正交变换后的<span
+class="math inline">\(w_clip\)</span>是1，那么透视除法就相当于没有了，正交投影矩阵中即完成了深度的变换，所以ndc仍然保持了裁剪坐标的z线性，最终的深度输出依然是线性。</p>
+<h3 id="参考">参考</h3>
+<ul>
+<li><a
+target="_blank" rel="noopener" href="https://www.mvps.org/directx/articles/linear_z/linearz.htm">Linearized
+Depth using Vertex Shaders</a></li>
+<li><a
+target="_blank" rel="noopener" href="https://perry.cz/articles/ProjectionMatrix.xhtml">Perspective
+projections in LH and RH systems</a>，这里的AR（aspect
+ratio）要么有问题，要么就是指的是<span
+class="math inline">\(h/w\)</span>，但是一般aspect
+ratio一般是宽高比;还存在一个问题，文章里说不同的手系，深度clear
+value和depth func是，这应该也是错的</li>
+<li><a
+target="_blank" rel="noopener" href="https://www.songho.ca/opengl/gl_projectionmatrix.html">OpenGL
+Projection Matrix</a></li>
+<li><a
+target="_blank" rel="noopener" href="https://blog.demofox.org/2017/03/31/orthogonal-projection-matrix-plainly-explained/">Orthogonal
+Projection Matrix Plainly Explained</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Computer-Graphics/" rel="tag"># Computer Graphics</a>
+              <a href="/tags/Rasterization/" rel="tag"># Rasterization</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/08/14/TemporalAA/" rel="prev" title="Temporal AA">
+                  <i class="fa fa-angle-left"></i> Temporal AA
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">孤舟蓑笠翁</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+<!-- hexo injector body_end start -->
+<div id="imageModal" class="image-modal">
+  <span class="close">×</span>
+  <div class="image-modal-content">
+    <img id="modalImage" src="" alt="">
+  </div>
+</div>
+
+<script>
+function openImageModal(img) {
+  const modal = document.getElementById('imageModal');
+  const modalImg = document.getElementById('modalImage');
+  
+  modal.style.display = 'block';
+  modalImg.src = img.src;
+  modalImg.alt = img.alt;
+  
+  // 关闭事件
+  modal.onclick = function(e) {
+    if (e.target === modal) {
+      modal.style.display = 'none';
+    }
+  }
+  
+  document.querySelector('.image-modal .close').onclick = function() {
+    modal.style.display = 'none';
+  }
+  
+  document.onkeydown = function(event) {
+    if (event.key === 'Escape') {
+      modal.style.display = 'none';
+    }
+  }
+}
+</script>
+<!-- hexo injector body_end end --></body>
+</html>
