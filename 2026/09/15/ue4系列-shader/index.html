@@ -21,31 +21,28 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"darkpixel.top","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"github","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"flat","show_result":true},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js" defer></script>
 
-    <meta name="description" content="记录一下渲染子进程中的截帧工具的使用，记录原因是，一开始并不顺利。目标程序是一个launcher进程，然后需要截帧的是子进程，渲染时OpenGL的，话说几个月前，通过RenderDoc的Capture Child Processes配置是成功截取过的，但是这次失效了，连同Nsight Graphics也遇到了问题。经过一些摸索，最终在两个工具中都能顺利截帧，在此记录一下。 RenderDoc Re">
+    <meta name="description" content="简单记录一下ue中global shader的注册、编译和使用。ue的shader里面各种宏乱飞，不得不说，宏是各种引擎里面，最恶心的地方了，尤其是uber shader的大一统写法，不过也算是有舍有得。 本文以PostProcessSubsurface.cpp&#x2F;PostProcessSubsurface.usf的MainIndirectDispatchCS为例。  global shader中宏">
 <meta property="og:type" content="article">
-<meta property="og:title" content="截帧工具在渲染子进程中的使用">
-<meta property="og:url" content="https://darkpixel.top/2026/06/01/%E6%88%AA%E5%B8%A7%E5%B7%A5%E5%85%B7%E5%9C%A8%E6%B8%B2%E6%9F%93%E5%AD%90%E8%BF%9B%E7%A8%8B%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8/index.html">
+<meta property="og:title" content="ue4系列: shader">
+<meta property="og:url" content="https://darkpixel.top/2026/09/15/ue4%E7%B3%BB%E5%88%97-shader/index.html">
 <meta property="og:site_name" content="孤舟蓑笠翁">
-<meta property="og:description" content="记录一下渲染子进程中的截帧工具的使用，记录原因是，一开始并不顺利。目标程序是一个launcher进程，然后需要截帧的是子进程，渲染时OpenGL的，话说几个月前，通过RenderDoc的Capture Child Processes配置是成功截取过的，但是这次失效了，连同Nsight Graphics也遇到了问题。经过一些摸索，最终在两个工具中都能顺利截帧，在此记录一下。 RenderDoc Re">
+<meta property="og:description" content="简单记录一下ue中global shader的注册、编译和使用。ue的shader里面各种宏乱飞，不得不说，宏是各种引擎里面，最恶心的地方了，尤其是uber shader的大一统写法，不过也算是有舍有得。 本文以PostProcessSubsurface.cpp&#x2F;PostProcessSubsurface.usf的MainIndirectDispatchCS为例。  global shader中宏">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://darkpixel.top/images/%E6%88%AA%E5%B8%A7%E5%B7%A5%E5%85%B7/renderdoc_settings.png">
-<meta property="og:image" content="https://darkpixel.top/images/%E6%88%AA%E5%B8%A7%E5%B7%A5%E5%85%B7/nsight_settings.png">
-<meta property="article:published_time" content="2026-06-01T15:27:26.000Z">
-<meta property="article:modified_time" content="2026-09-16T03:29:50.950Z">
+<meta property="article:published_time" content="2026-09-15T19:58:23.000Z">
+<meta property="article:modified_time" content="2026-09-16T03:29:50.951Z">
 <meta property="article:author" content="孤舟蓑笠翁">
 <meta property="article:tag" content="Computer Graphics">
-<meta property="article:tag" content="OpenGL">
+<meta property="article:tag" content="Unreal4">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://darkpixel.top/images/%E6%88%AA%E5%B8%A7%E5%B7%A5%E5%85%B7/renderdoc_settings.png">
 
 
-<link rel="canonical" href="https://darkpixel.top/2026/06/01/%E6%88%AA%E5%B8%A7%E5%B7%A5%E5%85%B7%E5%9C%A8%E6%B8%B2%E6%9F%93%E5%AD%90%E8%BF%9B%E7%A8%8B%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8/">
+<link rel="canonical" href="https://darkpixel.top/2026/09/15/ue4%E7%B3%BB%E5%88%97-shader/">
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://darkpixel.top/2026/06/01/%E6%88%AA%E5%B8%A7%E5%B7%A5%E5%85%B7%E5%9C%A8%E6%B8%B2%E6%9F%93%E5%AD%90%E8%BF%9B%E7%A8%8B%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8/","path":"2026/06/01/截帧工具在渲染子进程中的使用/","title":"截帧工具在渲染子进程中的使用"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://darkpixel.top/2026/09/15/ue4%E7%B3%BB%E5%88%97-shader/","path":"2026/09/15/ue4系列-shader/","title":"ue4系列: shader"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>截帧工具在渲染子进程中的使用 | 孤舟蓑笠翁</title>
+<title>ue4系列: shader | 孤舟蓑笠翁</title>
   
 
 
@@ -195,7 +192,7 @@
   
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+    <div class="sidebar-inner sidebar-overview-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -208,7 +205,6 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#renderdoc"><span class="nav-number">1.</span> <span class="nav-text">RenderDoc</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#nsight-graphics"><span class="nav-number">2.</span> <span class="nav-text">Nsight Graphics</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -259,7 +255,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://darkpixel.top/2026/06/01/%E6%88%AA%E5%B8%A7%E5%B7%A5%E5%85%B7%E5%9C%A8%E6%B8%B2%E6%9F%93%E5%AD%90%E8%BF%9B%E7%A8%8B%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8/">
+    <link itemprop="mainEntityOfPage" href="https://darkpixel.top/2026/09/15/ue4%E7%B3%BB%E5%88%97-shader/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -272,12 +268,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="截帧工具在渲染子进程中的使用 | 孤舟蓑笠翁">
+      <meta itemprop="name" content="ue4系列: shader | 孤舟蓑笠翁">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          截帧工具在渲染子进程中的使用
+          ue4系列: shader
         </h1>
 
         <div class="post-meta-container">
@@ -288,7 +284,7 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2026-06-01 15:27:26" itemprop="dateCreated datePublished" datetime="2026-06-01T15:27:26+00:00">2026-06-01</time>
+      <time title="创建时间：2026-09-15 19:58:23" itemprop="dateCreated datePublished" datetime="2026-09-15T19:58:23+00:00">2026-09-15</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -307,7 +303,7 @@
         </span>
           ，
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Computer-Graphics/OpenGL/" itemprop="url" rel="index"><span itemprop="name">OpenGL</span></a>
+          <a href="/categories/Computer-Graphics/Unreal4/" itemprop="url" rel="index"><span itemprop="name">Unreal4</span></a>
         </span>
     </span>
 
@@ -320,24 +316,29 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>记录一下渲染子进程中的截帧工具的使用，记录原因是，一开始并不顺利。目标程序是一个launcher进程，然后需要截帧的是子进程，渲染时OpenGL的，话说几个月前，通过RenderDoc的<code>Capture Child Processes</code>配置是成功截取过的，但是这次失效了，连同<code>Nsight Graphics</code>也遇到了问题。经过一些摸索，最终在两个工具中都能顺利截帧，在此记录一下。</p>
-<h2 id="renderdoc">RenderDoc</h2>
-<p>RenderDoc设置<code>Capture Child Processes</code>，但是启动子进程一直失败，先是尝试使用File&gt;Attach
-to runing Instance未奏效，然后尝试进程注入。</p>
-<p><img src="/images/截帧工具/renderdoc_settings.png" /></p>
-<p>RenderDoc提供了两种注入方式，一种是手动注入(Enable process
-injection)，通过File&gt;Inject into Process；第二种是全局hooking（Allow
-global process
-hooking)，界面上提示了这种方式的风险，但是成功了，设置了全局hook之后，直接启动可执行程序，然后通过Attach方式连接。</p>
-<h2 id="nsight-graphics">Nsight Graphics</h2>
-<p><code>Nsight Graphics</code>可能作为nVidia的工具，确实在启动程序上更胜一筹，但是子进程中截帧之后，截帧倒是能够截帧，但并没有顺利进入<code>API Inspector</code>窗口。最后查AI，虽然AI给的指引都是瞎编的，但是提醒了我可能需要通过Attach的方式连接。</p>
-<p><img src="/images/截帧工具/nsight_settings.png" /></p>
-<p>注意<code>Automatically Connect</code>要设置为No。启动目标进程，然后再通过Attach功能，连接进程，就能够顺利截帧分析了。</p>
-<h2 id="总结">总结</h2>
-<p><code>Nsight Graphics</code>虽然很强，RenderDoc也有很多可取之处，自我感觉RenderDoc的要简洁直观一些。比如Pixel
-History功能，在RenderDoc里就更可靠一些，且提示信息更简洁，<code>Nsight Graphics</code>显示好像UI里没有展示全部的pixel历史，如果我的操作没问题的话。网上有说Nsight
-Graphics 对 OpenGL 的 Pixel History 不如 D3D11/D3D12/Vulkan
-完善，可能OpenGL真到了快完全被抛弃的时候了。</p>
+    <div class="post-body" itemprop="articleBody"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>简单记录一下ue中global
+shader的注册、编译和使用。ue的shader里面各种宏乱飞，不得不说，宏是各种引擎里面，最恶心的地方了，尤其是uber
+shader的大一统写法，不过也算是有舍有得。</p>
+<p>本文以PostProcessSubsurface.cpp/PostProcessSubsurface.usf的MainIndirectDispatchCS为例。</p>
+<ol type="1">
+<li>global shader中宏的声明</li>
+</ol>
+<p>MainIndirectDispatchCS中使用的宏都在这里定义，利用ShaderPermutation.h把每一个宏包装为一个单独的类。
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">FSubsurfacePassFunction</span> : <span class="built_in">SHADER_PERMUTATION_ENUM_CLASS</span>(<span class="string">&quot;SUBSURFACE_PASS&quot;</span>, ESubsurfacePass);</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">FDimensionQuality</span> : <span class="built_in">SHADER_PERMUTATION_ENUM_CLASS</span>(<span class="string">&quot;SUBSURFACE_QUALITY&quot;</span>, EQuality);</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">FBilateralFilterKernelFunctionType</span> : <span class="built_in">SHADER_PERMUTATION_ENUM_CLASS</span>(<span class="string">&quot;BILATERAL_FILTER_KERNEL_FUNCTION_TYPE&quot;</span>, EBilateralFilterKernelFunctionType);</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">FSubsurfaceType</span> : <span class="built_in">SHADER_PERMUTATION_ENUM_CLASS</span>(<span class="string">&quot;SUBSURFACE_TYPE&quot;</span>, ESubsurfaceType);</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">FDimensionHalfRes</span> : <span class="built_in">SHADER_PERMUTATION_BOOL</span>(<span class="string">&quot;SUBSURFACE_HALF_RES&quot;</span>);</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">FRunningInSeparable</span> : <span class="built_in">SHADER_PERMUTATION_BOOL</span>(<span class="string">&quot;SUBSURFACE_FORCE_SEPARABLE&quot;</span>);</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">FDimensionEnableProfileIDCache</span> : <span class="built_in">SHADER_PERMUTATION_BOOL</span>(<span class="string">&quot;ENABLE_PROFILE_ID_CACHE&quot;</span>);</span><br><span class="line"><span class="keyword">using</span> FPermutationDomain = TShaderPermutationDomain&lt;FSubsurfacePassFunction, FDimensionQuality, </span><br><span class="line">	FBilateralFilterKernelFunctionType, FSubsurfaceType, FDimensionHalfRes, FRunningInSeparable, FDimensionEnableProfileIDCache&gt;;</span><br></pre></td></tr></table></figure></p>
+<ol start="2" type="1">
+<li>shader permutation</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">IMPLEMENT_GLOBAL_SHADER</span>(FSubsurfaceIndirectDispatchCS, <span class="string">&quot;/Engine/Private/PostProcessSubsurface.usf&quot;</span>, <span class="string">&quot;MainIndirectDispatchCS&quot;</span>, SF_Compute);</span><br></pre></td></tr></table></figure>
+<p>ue里面各种宏，看的眼晕。IMPLEMENT_GLOBAL_SHADER实例化一个静态对象（通过IMPLEMENT_SHADER_TYPE），渲染模块加载（FEngineLoop::LoadPreInitModules）时候就会执行，在FShaderType::FShaderType的构造（shader.cpp)中调用GlobalListLink.LinkHead把当前类型注册到全局shader链表中，并通过CompileGlobalShaderMap、VerifyGlobalShaders（遍历shader
+permutation）、FGlobalShaderTypeCompiler::BeginCompileShader编译。</p>
+<ol start="3" type="1">
+<li>使用</li>
+</ol>
+<p><code>Engine/Source/Runtime/RenderCore/Public/Shader.h L2105~L2122</code>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> ShaderType&gt;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">TShaderMapRef</span> : <span class="keyword">public</span> TShaderRef&lt;ShaderType&gt;</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="built_in">TShaderMapRef</span>(<span class="type">const</span> <span class="keyword">typename</span> ShaderType::ShaderMapType* ShaderIndex)</span><br><span class="line">		: <span class="built_in">TShaderRef</span>&lt;ShaderType&gt;(ShaderIndex-&gt;<span class="keyword">template</span> <span class="built_in">GetShader</span>&lt;ShaderType&gt;(<span class="comment">/* PermutationId = */</span> <span class="number">0</span>)) <span class="comment">// gcc3 needs the template quantifier so it knows the &lt; is not a less-than</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">static_assert</span>(</span><br><span class="line">			TIsSame&lt;<span class="keyword">typename</span> ShaderType::FPermutationDomain, FShaderPermutationNone&gt;::Value,</span><br><span class="line">			<span class="string">&quot;Missing permutation vector argument for shader that have a permutation domain.&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">TShaderMapRef</span>(</span><br><span class="line">		<span class="type">const</span> <span class="keyword">typename</span> ShaderType::ShaderMapType* ShaderIndex,</span><br><span class="line">		<span class="type">const</span> <span class="keyword">typename</span> ShaderType::FPermutationDomain&amp; PermutationVector)</span><br><span class="line">		: <span class="built_in">TShaderRef</span>&lt;ShaderType&gt;(ShaderIndex-&gt;<span class="keyword">template</span> <span class="built_in">GetShader</span>&lt;ShaderType&gt;(PermutationVector.<span class="built_in">ToDimensionValueId</span>())) <span class="comment">// gcc3 needs the template quantifier so it knows the &lt; is not a less-than</span></span><br><span class="line">	&#123; &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">   SHADER::FPermutationDomain ComputeShaderPermutationVector;</span><br><span class="line">ComputeShaderPermutationVector.<span class="built_in">Set</span>&lt;SHADER::FSubsurfacePassFunction&gt;(SubsurfacePassFunction);</span><br><span class="line">ComputeShaderPermutationVector.<span class="built_in">Set</span>&lt;SHADER::FDimensionQuality&gt;(SHADER::<span class="built_in">GetQuality</span>());</span><br><span class="line">   ComputeShaderPermutationVector.<span class="built_in">Set</span>&lt;SHADER::FBilateralFilterKernelFunctionType&gt;(SHADER::<span class="built_in">GetBilateralFilterKernelFunctionType</span>());</span><br><span class="line">ComputeShaderPermutationVector.<span class="built_in">Set</span>&lt;SHADER::FSubsurfaceType&gt;(SubsurfaceType);</span><br><span class="line">ComputeShaderPermutationVector.<span class="built_in">Set</span>&lt;SHADER::FDimensionHalfRes&gt;(bHalfRes);</span><br><span class="line">ComputeShaderPermutationVector.<span class="built_in">Set</span>&lt;SHADER::FRunningInSeparable&gt;(bForceRunningInSeparable);</span><br><span class="line">ComputeShaderPermutationVector.<span class="built_in">Set</span>&lt;SHADER::FDimensionEnableProfileIDCache&gt;(bUseProfileIdCache);</span><br><span class="line"><span class="function">TShaderMapRef&lt;SHADER&gt; <span class="title">ComputeShader</span><span class="params">(View.ShaderMap, ComputeShaderPermutationVector)</span></span>;</span><br><span class="line"></span><br><span class="line">   FComputeShaderUtils::<span class="built_in">AddPass</span>(GraphBuilder, <span class="built_in">FRDGEventName</span>(PassInfo.Name), ComputeShader, PassParameters, SubsurfaceBufferArgs[SubsurfaceTypeIndex], <span class="number">0</span>);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>TShaderMapRef<SHADER>构造中通过shader permutation
+id从shadermap中获取对应的shader实例，然后通过RenderGraph添加该pass。</p>
 
     </div>
 
@@ -348,21 +349,18 @@ Graphics 对 OpenGL 的 Pixel History 不如 D3D11/D3D12/Vulkan
     <footer class="post-footer">
           <div class="post-tags">
               <a href="/tags/Computer-Graphics/" rel="tag"># Computer Graphics</a>
-              <a href="/tags/OpenGL/" rel="tag"># OpenGL</a>
+              <a href="/tags/Unreal4/" rel="tag"># Unreal4</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2026/05/15/%E6%96%87%E6%9C%AC%E7%94%9F%E6%88%90%E5%9B%BE%E8%A1%A8%E6%96%B9%E6%B3%95/" rel="prev" title="文本生成图表方法">
-                  <i class="fa fa-angle-left"></i> 文本生成图表方法
+                <a href="/2026/09/10/mipmap-level/" rel="prev" title="mipmap level">
+                  <i class="fa fa-angle-left"></i> mipmap level
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2026/06/15/%E5%85%A8%E5%B1%8FPass%E7%9A%84%E6%95%88%E7%8E%87/" rel="next" title="全屏Pass的效率">
-                  全屏Pass的效率 <i class="fa fa-angle-right"></i>
-                </a>
             </div>
           </div>
     </footer>
